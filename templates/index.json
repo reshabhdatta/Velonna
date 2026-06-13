@@ -148,6 +148,14 @@
     "hello_world_bar": {
       "type": "hello-world-bar",
       "settings": {}
+    },
+    "all_products_section": {
+      "type": "all-products",
+      "settings": {
+        "heading": "All Products",
+        "products_limit": 24,
+        "show_view_all": true
+      }
     }
   },
   "order": [
@@ -156,12 +164,4 @@
     "collection_list_pwa6dE",
     "custom_liquid_AHGKtF",
     "custom_liquid_86744g",
-    "custom_liquid_8dyqaH",
-    "custom_liquid_KaMh7r",
-    "custom_liquid_RrBMby",
-    "custom_liquid_MThpMB",
-    "featured_collection_GKKnTJ",
-    "1775297975866b80f2",
-    "1775298089bb82b24f"
-  ]
-}
+    "custom_

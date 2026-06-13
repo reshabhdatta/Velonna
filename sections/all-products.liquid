@@ -1,0 +1,194 @@
+<div class="all-products-section">
+  <h2 class="all-products-heading">{{ section.settings.heading }}</h2>
+
+  <div class="all-products-grid">
+    {% for product in collections.all.products limit: section.settings.products_limit %}
+      <a href="{{ product.url }}" class="all-products-card">
+        <div class="all-products-img-wrap">
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | image_url: width: 600 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              loading="lazy"
+              width="600"
+              height="600"
+            >
+          {% else %}
+            <div class="all-products-no-img">No Image</div>
+          {% endif %}
+        </div>
+        <div class="all-products-info">
+          <p class="all-products-title">{{ product.title }}</p>
+          <p class="all-products-price">{{ product.price_min | money }}</p>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if section.settings.show_view_all %}
+    <div class="all-products-btn-wrap">
+      <a href="/collections/all" class="all-products-btn">View All Products</a>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+.all-products-section {
+  max-width: 1200px;
+  margin: 48px auto;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.all-products-heading {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+}
+
+.all-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.all-products-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.all-products-card:hover {
+  transform: translateY(-6px);
+}
+
+.all-products-img-wrap {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f5f5f5;
+}
+
+.all-products-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.all-products-card:hover .all-products-img-wrap img {
+  transform: scale(1.05);
+}
+
+.all-products-no-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.all-products-info {
+  padding: 10px 4px 0;
+  text-align: left;
+}
+
+.all-products-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.all-products-price {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.all-products-btn-wrap {
+  margin-top: 40px;
+}
+
+.all-products-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: #000;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.all-products-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .all-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .all-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .all-products-heading {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .all-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "All Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "All Products"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Number of products to show",
+      "min": 4,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show \"View All\" button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "All Products"
+    }
+  ]
+}
+{% endschema %}
