@@ -1,0 +1,931 @@
+{% doc %}
+  @prompt
+    Design a mobile-first “Offers For You” section for a premium jewelry brand Velonna, with interactive expandable behavior and multiple UI states.
+    
+    ⚠️ Important instruction:
+    Keep the entire design, layout, spacing, typography, and behavior EXACTLY the same as provided.
+    Do not change anything except the icon color.
+    
+    🎨 Icon Styling Update (Only Change Required)
+    All icons (tag/discount icons and any UI icons) must be changed from black to:
+    Soft pink / rose color (#e06a7a)
+    Maintain same icon style, size, stroke, and placement
+    Do NOT modify icon shape or layout
+    🧩 Header Section
+    Title: “Offers For You”
+    Subtitle: “(Can be applied at checkout)”
+    📦 Default State (Collapsed View)
+    Show only 2 offer cards
+    Display “+4 more offers” below
+    📦 Expanded State
+    Clicking “+4 more offers” reveals all offers
+    🎴 Offer Cards
+    Same layout and structure as provided
+    Arrow toggle behavior unchanged
+    🔄 Accordion Behavior
+    Same expand/collapse interaction
+    Same animation and rotation
+    🎯 Interactions
+    Copy code behavior unchanged
+    🧾 Footer
+    Same “Close” button behavior
+    🎨 Design Rules
+    Keep everything exactly the same
+    DO NOT modify spacing, fonts, layout, or structure
+    ONLY update icon color to #e06a7a (soft pink)
+    💎 Final Output Requirement
+    
+    The UI should look identical to the original design, with the only visible difference being pink icons instead of black, maintaining a premium jewelry brand aesthetic., Design a mobile-first “Offers For You” section for a premium jewelry brand Velonna, with interactive expandable offer cards.
+    
+    ⚠️ Important:
+    Keep the existing UI, layout, spacing, typography, and styling EXACTLY the same.
+    Do NOT redesign anything. Only fix functionality and visibility issues.
+    
+    🔴 Critical Fix Required (Main Issue)
+    When a user clicks the arrow icon, the offer card must expand
+    On expansion, the following MUST be visible:
+    Coupon code (e.g., SAVE10 / VELONNA15)
+    “Copy Code” button
+    
+    ✅ The coupon code MUST NOT be hidden
+    ✅ It must be clearly visible inside the expanded section
+    
+    🎴 Offer Card Behavior (Accordion)
+    
+    Each card must have 2 states:
+    
+    🔹 Closed State:
+    Show:
+    Icon (pink color #e06a7a)
+    Offer title/description
+    Arrow (downward)
+    Hide:
+    Coupon code
+    Copy button
+    🔹 Open State (on click):
+    Show:
+    Coupon code (styled pill or bold text like “SAVE10”)
+    “Copy Code” button
+    Arrow rotates upward
+    Smooth expand animation
+    🧪 Visibility Rules (VERY IMPORTANT)
+    Coupon code section must NOT have:
+    display: none when open
+    opacity: 0
+    visibility: hidden
+    Ensure proper class toggle like:
+    .active or .open state
+    Expanded content must be rendered inside DOM correctly
+    🎯 Copy Code Functionality
+    Clicking “Copy Code” should:
+    Copy coupon to clipboard
+    Show feedback → “Copied!”
+    🎨 Icon Styling
+    All icons must be soft pink (#e06a7a)
+    Do NOT use black icons
+    📦 Offer List Behavior
+    Default:
+    Show only 2 offers
+    Show “+4 more offers”
+    On Click:
+    Reveal all offers
+    🧾 Footer
+    “Close” button collapses list back to 2 offers
+    🚨 Expected Final Behavior
+    Clicking arrow → expands card
+    Coupon code becomes visible
+    Copy button works
+    Clicking again → collapses
+    💎 Final Requirement
+    
+    The UI should look identical to the current design, but with:
+    
+    ✅ Coupon codes visible on expand
+    ✅ Fully working accordion
+    ✅ Pink icons
+    ❌ No layout or style changes, Design a mobile-first “Offers For You” section for a premium jewelry brand Velonna, maintaining the existing UI and layout exactly as is.
+    
+    ⚠️ Important:
+    Do NOT change layout, spacing, typography, or structure.
+    Only apply the following 2 fixes.
+    
+    🔴 Fix 1: Coupon Code Styling
+    The coupon code (e.g., SAVE10, VELONNA15) must be displayed inside a pink bordered box
+    Style requirements:
+    Border: 1.5px solid #e06a7a
+    Text color: #e06a7a
+    Background: transparent or very light pink
+    Padding: 6px 12px
+    Border-radius: 6–8px
+    Font-weight: medium or semi-bold
+    The box should look clean and minimal (not filled dark like button)
+    🔴 Fix 2: Remove Unwanted Text
+    Remove the extra descriptive text shown above the “Copy Code” button:
+    Example: “Valid on minimum purchase…”
+    Example: “Cannot be combined…”
+    
+    ❌ This text must NOT be visible
+    ❌ Do not leave empty spacing
+    
+    🎴 Final Expanded Card Layout
+    
+    When a card is opened, it should show ONLY:
+    
+    Coupon code (pink bordered box)
+    “Copy Code” button below or aligned right
+    
+    No extra descriptions or helper text
+    
+    🎨 Keep Everything Else Same
+    Pink icons (#e06a7a)
+    Accordion behavior
+    Spacing and layout
+    Button styles
+    💎 Final Output Requirement
+    
+    The UI should look identical to the current version, except:
+    
+    ✅ Coupon code appears in a pink outlined box
+    ❌ No extra descriptive text above copy button
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-offers-container-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: 20px 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  .ai-offers-header-{{ ai_gen_id }} {
+    margin-bottom: 16px;
+  }
+
+  .ai-offers-title-{{ ai_gen_id }} {
+    font-size: 20px;
+    font-weight: 600;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+  }
+
+  .ai-offers-subtitle-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .ai-offers-list-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-offer-card-{{ ai_gen_id }} {
+    border: 1px solid {{ block.settings.card_border_color }};
+    border-radius: 8px;
+    background-color: {{ block.settings.card_background }};
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .ai-offer-card-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  .ai-offer-header-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 14px 16px;
+    cursor: pointer;
+    gap: 12px;
+  }
+
+  .ai-offer-left-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-offer-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+  }
+
+  .ai-offer-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    stroke: #e06a7a;
+    fill: none;
+  }
+
+  .ai-offer-info-{{ ai_gen_id }} {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-offer-title-{{ ai_gen_id }} {
+    font-size: 15px;
+    font-weight: 600;
+    color: {{ block.settings.code_color }};
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+  }
+
+  .ai-offer-description-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.description_color }};
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .ai-offer-toggle-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    margin-top: 2px;
+  }
+
+  .ai-offer-toggle-{{ ai_gen_id }} svg {
+    width: 16px;
+    height: 16px;
+    stroke: {{ block.settings.arrow_color }};
+    fill: none;
+  }
+
+  .ai-offer-card-{{ ai_gen_id }}.expanded .ai-offer-toggle-{{ ai_gen_id }} {
+    transform: rotate(180deg);
+  }
+
+  .ai-offer-details-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .ai-offer-card-{{ ai_gen_id }}.expanded .ai-offer-details-{{ ai_gen_id }} {
+    max-height: 500px;
+  }
+
+  .ai-offer-details-content-{{ ai_gen_id }} {
+    padding: 0 16px 14px 48px;
+  }
+
+  .ai-offer-code-display-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: transparent;
+    color: #e06a7a;
+    border: 1.5px solid #e06a7a;
+    padding: 6px 12px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-offer-copy-btn-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background-color: {{ block.settings.copy_button_bg }};
+    color: {{ block.settings.copy_button_text }};
+    border: 1px solid {{ block.settings.copy_button_border }};
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ai-offer-copy-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.copy_button_hover_bg }};
+  }
+
+  .ai-offer-copy-btn-{{ ai_gen_id }} svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+  }
+
+  .ai-offer-copy-btn-{{ ai_gen_id }}.copied {
+    background-color: {{ block.settings.copied_button_bg }};
+    color: {{ block.settings.copied_button_text }};
+    border-color: {{ block.settings.copied_button_border }};
+  }
+
+  .ai-show-more-{{ ai_gen_id }} {
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  .ai-show-more-btn-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: {{ block.settings.show_more_color }};
+    border: 1px solid {{ block.settings.show_more_border }};
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ai-show-more-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.show_more_hover_bg }};
+  }
+
+  .ai-show-more-btn-{{ ai_gen_id }}.hidden {
+    display: none;
+  }
+
+  .ai-offers-footer-{{ ai_gen_id }} {
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .ai-close-btn-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: {{ block.settings.close_btn_bg }};
+    color: {{ block.settings.close_btn_text }};
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ai-close-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.close_btn_hover_bg }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-offers-container-{{ ai_gen_id }} {
+      width: {{ block.settings.desktop_width_percent }}%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    .ai-offers-title-{{ ai_gen_id }} {
+      font-size: 22px;
+    }
+
+    .ai-offer-title-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+  }
+{% endstyle %}
+
+<offers-section-{{ ai_gen_id }} class="ai-offers-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-offers-header-{{ ai_gen_id }}">
+    <h2 class="ai-offers-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+    <p class="ai-offers-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+  </div>
+
+  <div class="ai-offers-list-{{ ai_gen_id }}">
+    {% for i in (1..6) %}
+      {% liquid
+        assign enabled_key = 'offer_' | append: i | append: '_enabled'
+        assign code_key = 'offer_' | append: i | append: '_code'
+        assign description_key = 'offer_' | append: i | append: '_description'
+
+        assign enabled = block.settings[enabled_key]
+        assign code = block.settings[code_key]
+        assign description = block.settings[description_key]
+      %}
+
+      {% if enabled and code != blank %}
+        <div class="ai-offer-card-{{ ai_gen_id }} {% if i > 2 %}hidden{% endif %}" data-offer-index="{{ i }}">
+          <div class="ai-offer-header-{{ ai_gen_id }}">
+            <div class="ai-offer-left-{{ ai_gen_id }}">
+              <div class="ai-offer-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                  <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+              </div>
+              <div class="ai-offer-info-{{ ai_gen_id }}">
+                {% if description != blank %}
+                  <p class="ai-offer-title-{{ ai_gen_id }}">{{ description }}</p>
+                {% else %}
+                  <p class="ai-offer-title-{{ ai_gen_id }}">{{ code }}</p>
+                {% endif %}
+              </div>
+            </div>
+            <div class="ai-offer-toggle-{{ ai_gen_id }}">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="ai-offer-details-{{ ai_gen_id }}">
+            <div class="ai-offer-details-content-{{ ai_gen_id }}">
+              <div class="ai-offer-code-display-{{ ai_gen_id }}">{{ code }}</div>
+              <button class="ai-offer-copy-btn-{{ ai_gen_id }}" data-code="{{ code }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span class="copy-text">Copy Code</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="ai-show-more-{{ ai_gen_id }}">
+    <button class="ai-show-more-btn-{{ ai_gen_id }}">
+      <span class="show-more-text">+4 more offers</span>
+    </button>
+  </div>
+
+  <div class="ai-offers-footer-{{ ai_gen_id }}">
+    <button class="ai-close-btn-{{ ai_gen_id }}">{{ block.settings.close_btn_label }}</button>
+  </div>
+</offers-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class OffersSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.cards = this.querySelectorAll('.ai-offer-card-{{ ai_gen_id }}');
+        this.showMoreBtn = this.querySelector('.ai-show-more-btn-{{ ai_gen_id }}');
+        this.showMoreText = this.showMoreBtn.querySelector('.show-more-text');
+        this.closeBtn = this.querySelector('.ai-close-btn-{{ ai_gen_id }}');
+        this.isExpanded = false;
+        this.visibleCount = 0;
+        this.totalCount = 0;
+      }
+
+      connectedCallback() {
+        this.countOffers();
+        this.setupEventListeners();
+        this.updateShowMoreButton();
+      }
+
+      countOffers() {
+        this.cards.forEach((card) => {
+          this.totalCount++;
+          if (!card.classList.contains('hidden')) {
+            this.visibleCount++;
+          }
+        });
+      }
+
+      setupEventListeners() {
+        this.cards.forEach((card) => {
+          const header = card.querySelector('.ai-offer-header-{{ ai_gen_id }}');
+          const copyBtn = card.querySelector('.ai-offer-copy-btn-{{ ai_gen_id }}');
+
+          header.addEventListener('click', (e) => {
+            if (!e.target.closest('.ai-offer-copy-btn-{{ ai_gen_id }}')) {
+              this.toggleCard(card);
+            }
+          });
+
+          if (copyBtn) {
+            copyBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.copyCode(copyBtn);
+            });
+          }
+        });
+
+        if (this.showMoreBtn) {
+          this.showMoreBtn.addEventListener('click', () => {
+            this.toggleShowMore();
+          });
+        }
+
+        if (this.closeBtn) {
+          this.closeBtn.addEventListener('click', () => {
+            this.closeOffers();
+          });
+        }
+      }
+
+      toggleCard(card) {
+        const wasExpanded = card.classList.contains('expanded');
+        
+        this.cards.forEach((c) => {
+          c.classList.remove('expanded');
+        });
+
+        if (!wasExpanded) {
+          card.classList.add('expanded');
+        }
+      }
+
+      toggleShowMore() {
+        this.isExpanded = !this.isExpanded;
+
+        if (this.isExpanded) {
+          this.cards.forEach((card) => {
+            card.classList.remove('hidden');
+          });
+          this.showMoreText.textContent = 'Show less';
+        } else {
+          this.cards.forEach((card, index) => {
+            if (index >= 2) {
+              card.classList.add('hidden');
+              card.classList.remove('expanded');
+            }
+          });
+          this.showMoreText.textContent = '+4 more offers';
+        }
+      }
+
+      updateShowMoreButton() {
+        if (this.totalCount <= 2) {
+          this.showMoreBtn.classList.add('hidden');
+        }
+      }
+
+      copyCode(button) {
+        const code = button.getAttribute('data-code');
+        const copyText = button.querySelector('.copy-text');
+        
+        navigator.clipboard.writeText(code).then(() => {
+          button.classList.add('copied');
+          copyText.textContent = 'Copied!';
+          
+          setTimeout(() => {
+            button.classList.remove('copied');
+            copyText.textContent = 'Copy Code';
+          }, 2000);
+        }).catch(() => {
+          const textArea = document.createElement('textarea');
+          textArea.value = code;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-999999px';
+          document.body.appendChild(textArea);
+          textArea.select();
+          
+          try {
+            document.execCommand('copy');
+            button.classList.add('copied');
+            copyText.textContent = 'Copied!';
+            
+            setTimeout(() => {
+              button.classList.remove('copied');
+              copyText.textContent = 'Copy Code';
+            }, 2000);
+          } catch (err) {
+            console.error('Failed to copy code');
+          }
+          
+          document.body.removeChild(textArea);
+        });
+      }
+
+      closeOffers() {
+        this.isExpanded = false;
+        this.cards.forEach((card, index) => {
+          if (index >= 2) {
+            card.classList.add('hidden');
+            card.classList.remove('expanded');
+          }
+        });
+        this.showMoreText.textContent = '+4 more offers';
+      }
+    }
+
+    customElements.define('offers-section-{{ ai_gen_id }}', OffersSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Offers for you",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Offers For You"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "(Can be applied at checkout)"
+    },
+    {
+      "type": "header",
+      "content": "Offer 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_1_enabled",
+      "label": "Enable offer 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_1_code",
+      "label": "Code",
+      "default": "SAVE10"
+    },
+    {
+      "type": "text",
+      "id": "offer_1_description",
+      "label": "Description",
+      "default": "Get 10% off on orders above ₹5000"
+    },
+    {
+      "type": "header",
+      "content": "Offer 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_2_enabled",
+      "label": "Enable offer 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_2_code",
+      "label": "Code",
+      "default": "FIRST15"
+    },
+    {
+      "type": "text",
+      "id": "offer_2_description",
+      "label": "Description",
+      "default": "15% off on your first purchase"
+    },
+    {
+      "type": "header",
+      "content": "Offer 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_3_enabled",
+      "label": "Enable offer 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_3_code",
+      "label": "Code",
+      "default": "FREESHIP"
+    },
+    {
+      "type": "text",
+      "id": "offer_3_description",
+      "label": "Description",
+      "default": "Free shipping on all orders"
+    },
+    {
+      "type": "header",
+      "content": "Offer 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_4_enabled",
+      "label": "Enable offer 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_4_code",
+      "label": "Code",
+      "default": "LUXURY20"
+    },
+    {
+      "type": "text",
+      "id": "offer_4_description",
+      "label": "Description",
+      "default": "20% off on premium collection"
+    },
+    {
+      "type": "header",
+      "content": "Offer 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_5_enabled",
+      "label": "Enable offer 5",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_5_code",
+      "label": "Code",
+      "default": "GIFT500"
+    },
+    {
+      "type": "text",
+      "id": "offer_5_description",
+      "label": "Description",
+      "default": "Get ₹500 off on orders above ₹8000"
+    },
+    {
+      "type": "header",
+      "content": "Offer 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_6_enabled",
+      "label": "Enable offer 6",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_6_code",
+      "label": "Code",
+      "default": "VELONNA25"
+    },
+    {
+      "type": "text",
+      "id": "offer_6_description",
+      "label": "Description",
+      "default": "Flat 25% off on entire store"
+    },
+    {
+      "type": "header",
+      "content": "Button text"
+    },
+    {
+      "type": "text",
+      "id": "close_btn_label",
+      "label": "Close button",
+      "default": "Close"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "code_color",
+      "label": "Offer title text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description text",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_bg",
+      "label": "Copy button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_text",
+      "label": "Copy button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_border",
+      "label": "Copy button border",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_hover_bg",
+      "label": "Copy button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "copied_button_bg",
+      "label": "Copied button background",
+      "default": "#4caf50"
+    },
+    {
+      "type": "color",
+      "id": "copied_button_text",
+      "label": "Copied button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "copied_button_border",
+      "label": "Copied button border",
+      "default": "#4caf50"
+    },
+    {
+      "type": "color",
+      "id": "show_more_color",
+      "label": "Show more text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "show_more_border",
+      "label": "Show more border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "show_more_hover_bg",
+      "label": "Show more hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "close_btn_bg",
+      "label": "Close button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "close_btn_text",
+      "label": "Close button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "close_btn_hover_bg",
+      "label": "Close button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offers for you"
+    }
+  ]
+}
+{% endschema %}

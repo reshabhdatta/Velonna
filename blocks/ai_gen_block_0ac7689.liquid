@@ -1,0 +1,334 @@
+{% doc %}
+  @prompt
+    Design a mobile-friendly CTA section for an eCommerce product page with two horizontally aligned buttons.
+    
+    The layout should include:
+    
+    Two buttons in a single row (50% width each)
+    Left button: “Buy Now” (outlined style)
+    Right button: “Add To Cart” (filled style)
+    
+    Design details:
+    
+    Rounded corners (border-radius ~12px)
+    Height: ~48–52px
+    Font: medium weight, clean sans-serif
+    Spacing between buttons: 12–16px
+    
+    Buy Now button (left):
+    
+    Background: transparent
+    Border: 2px solid soft pink (#e06a7a or similar)
+    Text color: same pink
+    
+    Add To Cart button (right):
+    
+    Background: soft pink (#e06a7a)
+    Text color: white
+    No border
+    
+    Mobile optimization:
+    
+    Full-width container with 16px padding
+    Buttons should be touch-friendly
+    Maintain equal width and alignment
+    
+    Behavior requirement:
+    
+    Clicking Buy Now should immediately redirect the user to the checkout page
+    Clicking Add To Cart should add the product to cart without redirecting
+    
+    Style should feel modern, clean, and premium (jewelry brand aesthetic).
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-cta-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 16px;
+  }
+
+  .ai-product-cta__container-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.button_gap }}px;
+    width: 100%;
+  }
+
+  .ai-product-cta__button-{{ ai_gen_id }} {
+    flex: 1;
+    height: {{ block.settings.button_height }}px;
+    border-radius: {{ block.settings.border_radius }}px;
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    touch-action: manipulation;
+  }
+
+  .ai-product-cta__button--buy-{{ ai_gen_id }} {
+    background-color: transparent;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.outline_color }};
+    color: {{ block.settings.outline_color }};
+  }
+
+  .ai-product-cta__button--buy-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.outline_color }};
+    color: {{ block.settings.outline_hover_text_color }};
+  }
+
+  .ai-product-cta__button--add-{{ ai_gen_id }} {
+    background-color: {{ block.settings.filled_bg_color }};
+    color: {{ block.settings.filled_text_color }};
+    border: none;
+  }
+
+  .ai-product-cta__button--add-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.filled_hover_bg_color }};
+  }
+
+  .ai-product-cta__button--add-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-cta-{{ ai_gen_id }} {
+      padding: {{ block.settings.mobile_padding }}px;
+    }
+  }
+{% endstyle %}
+
+<product-cta-{{ ai_gen_id }} class="ai-product-cta-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-product-cta__container-{{ ai_gen_id }}">
+    <a
+      href="/checkout?id={{ product.selected_or_first_available_variant.id }}:1"
+      class="ai-product-cta__button-{{ ai_gen_id }} ai-product-cta__button--buy-{{ ai_gen_id }}"
+      aria-label="{{ block.settings.buy_now_text }}"
+    >
+      {{ block.settings.buy_now_text }}
+    </a>
+
+    <button
+      type="button"
+      class="ai-product-cta__button-{{ ai_gen_id }} ai-product-cta__button--add-{{ ai_gen_id }}"
+      data-add-to-cart
+      {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+      aria-label="{{ block.settings.add_to_cart_text }}"
+    >
+      {{ block.settings.add_to_cart_text }}
+    </button>
+  </div>
+</product-cta-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductCta{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.addToCartButton = this.querySelector('[data-add-to-cart]');
+      }
+
+      connectedCallback() {
+        if (this.addToCartButton) {
+          this.addToCartButton.addEventListener('click', this.handleAddToCart.bind(this));
+        }
+      }
+
+      handleAddToCart(event) {
+        event.preventDefault();
+
+        const button = event.target;
+        const originalText = button.textContent;
+
+        if (button.disabled) return;
+
+        button.disabled = true;
+        button.textContent = '{{ block.settings.adding_text }}';
+
+        const variantId = {{ product.selected_or_first_available_variant.id | json }};
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: 1
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          button.textContent = '{{ block.settings.added_text }}';
+
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+
+          document.dispatchEvent(new CustomEvent('cart:refresh'));
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+          button.textContent = originalText;
+          button.disabled = false;
+        });
+      }
+    }
+
+    customElements.define('product-cta-{{ ai_gen_id }}', ProductCta{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product CTA buttons",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Button text"
+    },
+    {
+      "type": "text",
+      "id": "buy_now_text",
+      "label": "Buy now text",
+      "default": "Buy Now"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add to cart text",
+      "default": "Add To Cart"
+    },
+    {
+      "type": "text",
+      "id": "adding_text",
+      "label": "Adding text",
+      "default": "Adding..."
+    },
+    {
+      "type": "text",
+      "id": "added_text",
+      "label": "Added text",
+      "default": "Added!"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_height",
+      "label": "Button height",
+      "min": 40,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "button_gap",
+      "label": "Space between buttons",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Buy now button"
+    },
+    {
+      "type": "color",
+      "id": "outline_color",
+      "label": "Border and text color",
+      "default": "#e06a7a"
+    },
+    {
+      "type": "color",
+      "id": "outline_hover_text_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Add to cart button"
+    },
+    {
+      "type": "color",
+      "id": "filled_bg_color",
+      "label": "Background color",
+      "default": "#e06a7a"
+    },
+    {
+      "type": "color",
+      "id": "filled_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "filled_hover_bg_color",
+      "label": "Hover background color",
+      "default": "#d05566"
+    },
+    {
+      "type": "header",
+      "content": "Mobile settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "label": "Mobile padding",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product CTA buttons"
+    }
+  ]
+}
+{% endschema %}

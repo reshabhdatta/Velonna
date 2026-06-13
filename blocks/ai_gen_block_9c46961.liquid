@@ -1,0 +1,765 @@
+{% doc %}
+  @prompt
+    Design a mobile-friendly “Offers For You” section for a premium jewelry brand called Velonna.
+    
+    The section should appear as a rounded card container with a light gray background and soft shadow, giving a luxurious and elegant feel.
+    
+    At the top, include:
+    
+    Title: “Offers For You” (bold, prominent)
+    Subtitle: “(Can be applied at checkout)” in smaller, lighter text
+    
+    Below the header, display a list of offer cards, each styled as a separate rounded box with subtle elevation.
+    
+    Each offer card must include:
+    
+    Left side:
+    
+    A minimal tag/discount icon (line-style, elegant)
+    Offer description text (can wrap to multiple lines)
+    
+    Right side (top):
+    
+    A small dropdown/expand arrow icon
+    
+    Bottom row inside each card:
+    
+    Left: Coupon code inside a bordered pill/button
+    Right: A clickable “Copy Code” text (blue color)
+    
+    Example offers (Velonna codes):
+    
+    EXTRA 15% OFF on Silver Jewellery orders above ₹2999 → Code: VELONNA15
+    FLAT 5% OFF on Silver Jewellery orders above ₹499 → Code: VELONNA5
+    EXTRA 10% OFF on Silver Jewellery orders above ₹1799 → Code: VELONNA10
+    GET FREE Silver Jewellery worth ₹1899 on orders above ₹2499 → Code: VELONNA-GIFT
+    FLAT 15% OFF on your first order above ₹999 → Code: NEWVELONNA15
+    FLAT 20% OFF on Silver Jewellery orders above ₹4499 → Code: VELONNA20
+    
+    Design styling:
+    
+    Background: soft gray (#f5f5f5 or similar)
+    Cards: white or slightly elevated with soft shadow
+    Border radius: 12–16px
+    Spacing between cards: 12–16px
+    Font: modern, clean sans-serif
+    Accent color: soft pink / rose (#e06a7a or similar)
+    Coupon code box: bordered with accent color
+    “Copy Code”: blue text (interactive)
+    
+    Interactions:
+    
+    Clicking “Copy Code” copies the coupon code to clipboard
+    Show feedback like “Copied!” after click
+    Cards can expand/collapse (optional)
+    
+    Footer:
+    
+    A centered “Close” button at the bottom
+    Minimal and elegant style
+    
+    Mobile optimization:
+    
+    Full-width layout with 16px padding
+    Touch-friendly spacing
+    Clean readability
+    
+    The overall design should feel premium, elegant, and feminine, matching a high-end jewelry brand like Velonna.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-offers-container-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-offers-card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_radius }}px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .ai-offers-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-offers-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 6px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-offers-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .ai-offers-list-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.card_spacing }}px;
+    margin-bottom: 20px;
+  }
+
+  .ai-offer-item-{{ ai_gen_id }} {
+    background-color: {{ block.settings.offer_card_bg }};
+    border-radius: {{ block.settings.offer_card_radius }}px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .ai-offer-item-{{ ai_gen_id }}:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-offer-top-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .ai-offer-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: {{ block.settings.accent_color }};
+  }
+
+  .ai-offer-text-{{ ai_gen_id }} {
+    flex-grow: 1;
+    font-size: {{ block.settings.offer_text_size }}px;
+    color: {{ block.settings.offer_text_color }};
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .ai-offer-expand-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: {{ block.settings.icon_color }};
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-offer-bottom-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .ai-offer-code-pill-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border: 1.5px dashed {{ block.settings.accent_color }};
+    border-radius: 20px;
+    background-color: {{ block.settings.pill_bg }};
+    font-size: {{ block.settings.code_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.code_color }};
+    letter-spacing: 0.5px;
+  }
+
+  .ai-offer-copy-btn-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    color: {{ block.settings.copy_button_color }};
+    font-size: {{ block.settings.copy_text_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .ai-offer-copy-btn-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-offer-copy-btn-{{ ai_gen_id }}.copied {
+    color: {{ block.settings.copied_color }};
+  }
+
+  .ai-offers-footer-{{ ai_gen_id }} {
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-offers-close-btn-{{ ai_gen_id }} {
+    background: none;
+    border: 1px solid {{ block.settings.close_border_color }};
+    color: {{ block.settings.close_text_color }};
+    font-size: {{ block.settings.close_text_size }}px;
+    font-weight: 500;
+    padding: 10px 32px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-offers-close-btn-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.close_hover_bg }};
+    border-color: {{ block.settings.close_hover_border }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-offers-card-{{ ai_gen_id }} {
+      padding: 16px;
+    }
+
+    .ai-offer-bottom-{{ ai_gen_id }} {
+      flex-wrap: wrap;
+    }
+
+    .ai-offer-code-pill-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.code_size }}px - 1px);
+      padding: 7px 12px;
+    }
+
+    .ai-offer-copy-btn-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.copy_text_size }}px - 1px);
+    }
+  }
+{% endstyle %}
+
+<velonna-offers-{{ ai_gen_id }} class="ai-offers-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-offers-card-{{ ai_gen_id }}">
+    <div class="ai-offers-header-{{ ai_gen_id }}">
+      <h2 class="ai-offers-title-{{ ai_gen_id }}">{{ block.settings.main_title }}</h2>
+      <p class="ai-offers-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+    </div>
+
+    <div class="ai-offers-list-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign offer_enabled_key = 'offer_' | append: i | append: '_enabled'
+          assign offer_text_key = 'offer_' | append: i | append: '_text'
+          assign offer_code_key = 'offer_' | append: i | append: '_code'
+
+          assign offer_enabled = block.settings[offer_enabled_key]
+          assign offer_text = block.settings[offer_text_key]
+          assign offer_code = block.settings[offer_code_key]
+        %}
+
+        {% if offer_enabled and offer_text != blank and offer_code != blank %}
+          <div class="ai-offer-item-{{ ai_gen_id }}">
+            <div class="ai-offer-top-{{ ai_gen_id }}">
+              <svg class="ai-offer-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
+              <div class="ai-offer-text-{{ ai_gen_id }}">{{ offer_text }}</div>
+              <svg class="ai-offer-expand-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="ai-offer-bottom-{{ ai_gen_id }}">
+              <div class="ai-offer-code-pill-{{ ai_gen_id }}">{{ offer_code }}</div>
+              <button 
+                class="ai-offer-copy-btn-{{ ai_gen_id }}" 
+                data-code="{{ offer_code }}"
+                aria-label="Copy code {{ offer_code }}"
+              >
+                Copy Code
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if block.settings.show_close_button %}
+      <div class="ai-offers-footer-{{ ai_gen_id }}">
+        <button class="ai-offers-close-btn-{{ ai_gen_id }}" aria-label="Close offers">
+          {{ block.settings.close_button_text }}
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</velonna-offers-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class VelonnaOffers{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.copyButtons = this.querySelectorAll('.ai-offer-copy-btn-{{ ai_gen_id }}');
+        this.closeButton = this.querySelector('.ai-offers-close-btn-{{ ai_gen_id }}');
+        
+        this.setupCopyButtons();
+        if (this.closeButton) {
+          this.setupCloseButton();
+        }
+      }
+
+      setupCopyButtons() {
+        this.copyButtons.forEach((button) => {
+          button.addEventListener('click', (e) => {
+            const code = e.target.getAttribute('data-code');
+            const originalText = e.target.textContent;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(code).then(() => {
+                e.target.textContent = 'Copied!';
+                e.target.classList.add('copied');
+                
+                setTimeout(() => {
+                  e.target.textContent = originalText;
+                  e.target.classList.remove('copied');
+                }, 2000);
+              }).catch(() => {
+                this.fallbackCopy(code, e.target, originalText);
+              });
+            } else {
+              this.fallbackCopy(code, e.target, originalText);
+            }
+          });
+        });
+      }
+
+      fallbackCopy(text, button, originalText) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          button.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+        
+        document.body.removeChild(textArea);
+      }
+
+      setupCloseButton() {
+        this.closeButton.addEventListener('click', () => {
+          this.style.display = 'none';
+        });
+      }
+    }
+
+    customElements.define('velonna-offers-{{ ai_gen_id }}', VelonnaOffers{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Offers for you",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Main settings"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Title",
+      "default": "Offers For You"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "(Can be applied at checkout)"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Offer 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_1_enabled",
+      "label": "Enable offer 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_1_text",
+      "label": "Offer description",
+      "default": "EXTRA 15% OFF on Silver Jewellery orders above ₹2999"
+    },
+    {
+      "type": "text",
+      "id": "offer_1_code",
+      "label": "Coupon code",
+      "default": "VELONNA15"
+    },
+    {
+      "type": "header",
+      "content": "Offer 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_2_enabled",
+      "label": "Enable offer 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_2_text",
+      "label": "Offer description",
+      "default": "FLAT 5% OFF on Silver Jewellery orders above ₹499"
+    },
+    {
+      "type": "text",
+      "id": "offer_2_code",
+      "label": "Coupon code",
+      "default": "VELONNA5"
+    },
+    {
+      "type": "header",
+      "content": "Offer 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_3_enabled",
+      "label": "Enable offer 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_3_text",
+      "label": "Offer description",
+      "default": "EXTRA 10% OFF on Silver Jewellery orders above ₹1799"
+    },
+    {
+      "type": "text",
+      "id": "offer_3_code",
+      "label": "Coupon code",
+      "default": "VELONNA10"
+    },
+    {
+      "type": "header",
+      "content": "Offer 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_4_enabled",
+      "label": "Enable offer 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_4_text",
+      "label": "Offer description",
+      "default": "GET FREE Silver Jewellery worth ₹1899 on orders above ₹2499"
+    },
+    {
+      "type": "text",
+      "id": "offer_4_code",
+      "label": "Coupon code",
+      "default": "VELONNA-GIFT"
+    },
+    {
+      "type": "header",
+      "content": "Offer 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_5_enabled",
+      "label": "Enable offer 5",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_5_text",
+      "label": "Offer description",
+      "default": "FLAT 15% OFF on your first order above ₹999"
+    },
+    {
+      "type": "text",
+      "id": "offer_5_code",
+      "label": "Coupon code",
+      "default": "NEWVELONNA15"
+    },
+    {
+      "type": "header",
+      "content": "Offer 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_6_enabled",
+      "label": "Enable offer 6",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_6_text",
+      "label": "Offer description",
+      "default": "FLAT 20% OFF on Silver Jewellery orders above ₹4499"
+    },
+    {
+      "type": "text",
+      "id": "offer_6_code",
+      "label": "Coupon code",
+      "default": "VELONNA20"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "offer_card_bg",
+      "label": "Offer card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "offer_text_color",
+      "label": "Offer text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#e06a7a"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "code_color",
+      "label": "Code text",
+      "default": "#e06a7a"
+    },
+    {
+      "type": "color",
+      "id": "pill_bg",
+      "label": "Code pill background",
+      "default": "#fff5f7"
+    },
+    {
+      "type": "color",
+      "id": "copy_button_color",
+      "label": "Copy button",
+      "default": "#2563eb"
+    },
+    {
+      "type": "color",
+      "id": "copied_color",
+      "label": "Copied state",
+      "default": "#16a34a"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "offer_text_size",
+      "label": "Offer text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "code_size",
+      "label": "Code size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "copy_text_size",
+      "label": "Copy text size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card border radius",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "offer_card_radius",
+      "label": "Offer card radius",
+      "min": 6,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "card_spacing",
+      "label": "Space between offers",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Close button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close_button",
+      "label": "Show close button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "close_button_text",
+      "label": "Close button text",
+      "default": "Close"
+    },
+    {
+      "type": "range",
+      "id": "close_text_size",
+      "label": "Close text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "close_text_color",
+      "label": "Close text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "close_border_color",
+      "label": "Close border color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "close_hover_bg",
+      "label": "Close hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "close_hover_border",
+      "label": "Close hover border",
+      "default": "#999999"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offers for you"
+    }
+  ]
+}
+{% endschema %}

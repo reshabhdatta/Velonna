@@ -1,0 +1,472 @@
+{% doc %}
+  @prompt
+    Create a Shopify section that displays an "Estimated Delivery Time" input UI exactly like this:
+    
+    Design requirements:
+    
+    * A heading at the top: **"Estimated Delivery Time"**
+    * Below it, a rounded input container with:
+    
+      * A text input field with placeholder: **"Enter 6 digit pincode"**
+      * A button on the right labeled **"Check"**
+    * The input and button should appear as one combined rounded box (like a pill shape)
+    * The right side (button area) should have a slightly darker pink background
+    * The left side (input field) should have a light background
+    * Border radius: large (pill style, ~40px or more)
+    * Soft border with light pink tone
+    * Clean, modern UI spacing similar to Shopify Dawn theme
+    
+    Functional requirements:
+    
+    * Accept only 6-digit numeric input
+    * On clicking "Check", show a message below:
+    
+      * If valid: "Delivery available to this location"
+      * If invalid: "Please enter a valid 6-digit pincode"
+    * Add basic validation using JavaScript
+    
+    Technical requirements:
+    
+    * Use Shopify Liquid for section structure
+    * Use HTML + CSS (no external libraries)
+    * Use vanilla JavaScript for validation
+    * Make it responsive (mobile-friendly)
+    * Follow clean Shopify section schema so it can be added via theme editor
+    
+    Styling details:
+    
+    * Font: system or Shopify default
+    * Button hover effect (slightly darker shade)
+    * Smooth transitions (0.2s ease)
+    * Proper padding inside input (12–16px)
+    
+    Output:
+    
+    * Provide full Shopify section code (Liquid + HTML + CSS + JS in one file)
+    * Ensure it's copy-paste ready
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-delivery-checker-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.container_padding }}px;
+  }
+
+  .ai-delivery-checker__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-delivery-checker__form-{{ ai_gen_id }} {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    border: {{ block.settings.border_thickness }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+    background-color: {{ block.settings.input_bg_color }};
+    transition: all 0.2s ease;
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }} {
+    flex: 1;
+    padding: {{ block.settings.input_padding }}px;
+    border: none;
+    background-color: transparent;
+    font-size: {{ block.settings.input_font_size }}px;
+    color: {{ block.settings.input_text_color }};
+    outline: none;
+  }
+
+  .ai-delivery-checker__input-{{ ai_gen_id }}::placeholder {
+    color: {{ block.settings.placeholder_color }};
+    opacity: 0.7;
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }} {
+    padding: {{ block.settings.input_padding }}px {{ block.settings.button_padding }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .ai-delivery-checker__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+  }
+
+  .ai-delivery-checker__message-{{ ai_gen_id }} {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: {{ block.settings.message_border_radius }}px;
+    font-size: {{ block.settings.message_font_size }}px;
+    display: none;
+    transition: all 0.2s ease;
+  }
+
+  .ai-delivery-checker__message-{{ ai_gen_id }}.success {
+    display: block;
+    background-color: {{ block.settings.success_bg_color }};
+    color: {{ block.settings.success_text_color }};
+  }
+
+  .ai-delivery-checker__message-{{ ai_gen_id }}.error {
+    display: block;
+    background-color: {{ block.settings.error_bg_color }};
+    color: {{ block.settings.error_text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-delivery-checker-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-delivery-checker__heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.9);
+    }
+
+    .ai-delivery-checker__input-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.input_font_size }}px * 0.95);
+    }
+
+    .ai-delivery-checker__button-{{ ai_gen_id }} {
+      padding: {{ block.settings.input_padding }}px {{ block.settings.button_padding | times: 0.8 }}px;
+      font-size: calc({{ block.settings.button_font_size }}px * 0.95);
+    }
+  }
+{% endstyle %}
+
+<delivery-checker-{{ ai_gen_id }} class="ai-delivery-checker-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <h3 class="ai-delivery-checker__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h3>
+  
+  <div class="ai-delivery-checker__form-{{ ai_gen_id }}">
+    <input
+      type="text"
+      class="ai-delivery-checker__input-{{ ai_gen_id }}"
+      placeholder="{{ block.settings.placeholder }}"
+      maxlength="6"
+      inputmode="numeric"
+      aria-label="Enter pincode"
+      data-pincode-input
+    >
+    <button
+      type="button"
+      class="ai-delivery-checker__button-{{ ai_gen_id }}"
+      data-check-button
+    >
+      {{ block.settings.button_text }}
+    </button>
+  </div>
+
+  <div class="ai-delivery-checker__message-{{ ai_gen_id }}" data-message></div>
+</delivery-checker-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class DeliveryChecker{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.input = this.querySelector('[data-pincode-input]');
+        this.button = this.querySelector('[data-check-button]');
+        this.message = this.querySelector('[data-message]');
+        
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.input.addEventListener('input', (e) => {
+          e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+
+        this.input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            this.checkPincode();
+          }
+        });
+
+        this.button.addEventListener('click', () => {
+          this.checkPincode();
+        });
+      }
+
+      checkPincode() {
+        const pincode = this.input.value.trim();
+        
+        this.message.classList.remove('success', 'error');
+        
+        if (pincode.length === 6 && /^\d{6}$/.test(pincode)) {
+          this.message.textContent = '{{ block.settings.success_message }}';
+          this.message.classList.add('success');
+        } else {
+          this.message.textContent = '{{ block.settings.error_message }}';
+          this.message.classList.add('error');
+        }
+      }
+    }
+
+    customElements.define('delivery-checker-{{ ai_gen_id }}', DeliveryChecker{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Delivery checker",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Estimated Delivery Time"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter 6 digit pincode"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Check"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Delivery available to this location"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "Please enter a valid 6-digit pincode"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "label": "Container padding",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "message_border_radius",
+      "label": "Message border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Heading style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Input style"
+    },
+    {
+      "type": "range",
+      "id": "input_padding",
+      "label": "Padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "input_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "input_bg_color",
+      "label": "Background",
+      "default": "#fef5f5"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#ffc9d4"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_padding",
+      "label": "Horizontal padding",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#ffb3c6"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#ff99b8"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Message style"
+    },
+    {
+      "type": "range",
+      "id": "message_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "success_bg_color",
+      "label": "Success background",
+      "default": "#d4edda"
+    },
+    {
+      "type": "color",
+      "id": "success_text_color",
+      "label": "Success text",
+      "default": "#155724"
+    },
+    {
+      "type": "color",
+      "id": "error_bg_color",
+      "label": "Error background",
+      "default": "#f8d7da"
+    },
+    {
+      "type": "color",
+      "id": "error_text_color",
+      "label": "Error text",
+      "default": "#721c24"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Delivery checker"
+    }
+  ]
+}
+{% endschema %}

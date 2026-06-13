@@ -1,0 +1,99 @@
+{% doc %}
+  @prompt
+    Hide the black rounded rectangular boxes/overlays that appear at the bottom of product images in the featured collection section using CSS
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-hide-overlays-{{ ai_gen_id }} .card__badge,
+  .ai-hide-overlays-{{ ai_gen_id }} .card__information,
+  .ai-hide-overlays-{{ ai_gen_id }} .card-information,
+  .ai-hide-overlays-{{ ai_gen_id }} .card__content,
+  .ai-hide-overlays-{{ ai_gen_id }} .quick-add,
+  .ai-hide-overlays-{{ ai_gen_id }} .card-wrapper .card__inner .card__information,
+  .ai-hide-overlays-{{ ai_gen_id }} .card-wrapper .card__inner .card__content,
+  .ai-hide-overlays-{{ ai_gen_id }} .product-card-wrapper .card__inner .card__information,
+  .ai-hide-overlays-{{ ai_gen_id }} .product-card-wrapper .card__inner .card__content {
+    {% if block.settings.hide_overlays %}
+      display: none !important;
+    {% endif %}
+  }
+
+  .ai-hide-overlays-{{ ai_gen_id }} .card__badge {
+    {% if block.settings.hide_badges %}
+      display: none !important;
+    {% endif %}
+  }
+
+  .ai-hide-overlays-{{ ai_gen_id }} .quick-add {
+    {% if block.settings.hide_quick_add %}
+      display: none !important;
+    {% endif %}
+  }
+{% endstyle %}
+
+<div class="ai-hide-overlays-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <style>
+    body .card__badge,
+    body .card__information,
+    body .card-information,
+    body .card__content,
+    body .quick-add,
+    body .card-wrapper .card__inner .card__information,
+    body .card-wrapper .card__inner .card__content,
+    body .product-card-wrapper .card__inner .card__information,
+    body .product-card-wrapper .card__inner .card__content {
+      {% if block.settings.hide_overlays %}
+        display: none !important;
+      {% endif %}
+    }
+
+    body .card__badge {
+      {% if block.settings.hide_badges %}
+        display: none !important;
+      {% endif %}
+    }
+
+    body .quick-add {
+      {% if block.settings.hide_quick_add %}
+        display: none !important;
+      {% endif %}
+    }
+  </style>
+</div>
+
+{% schema %}
+{
+  "name": "Hide product overlays",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Overlay visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_overlays",
+      "label": "Hide product information overlays",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_badges",
+      "label": "Hide sale and sold out badges",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_quick_add",
+      "label": "Hide quick add button",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hide product overlays"
+    }
+  ]
+}
+{% endschema %}

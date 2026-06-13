@@ -1,0 +1,503 @@
+{% doc %}
+  @prompt
+    Create an exact pixel-perfect HTML and CSS layout for a Shopify product section.
+    
+    STRICT REQUIREMENTS:
+    - Do NOT change layout, spacing, or structure.
+    - Match the design EXACTLY as described.
+    
+    LAYOUT:
+    - A light grey background container (#f3f3f3)
+    - Inside it, there are 2 rows
+    - Each row uses a 3-column layout:
+      1. Left icon
+      2. Center text (center aligned, stacked vertically)
+      3. Right icon
+    
+    ROW 1:
+    - Left: circular outline icon with a right arrow inside (thin red stroke)
+    - Center text (stacked, centered):
+      Easy
+      15
+      Day
+      Return
+    - Right: vertical oval outline icon with a sparkle/star inside (thin red stroke)
+    
+    ROW 2:
+    - Left: rounded square outline icon with number "6" inside
+    - Center text (stacked):
+      6-Month
+      Warranty
+    - Right: vertical oval outline icon with "925" inside
+    
+    STYLE:
+    - Icon stroke color: muted red (#b94a55)
+    - Thin outline stroke (not filled)
+    - Icons must be SVG, not emoji or images
+    - Text color: dark grey (#444)
+    - Font: clean sans-serif (like Arial)
+    - Large font size (~36–40px)
+    - Perfect vertical alignment
+    - Even spacing between rows (~80–100px)
+    - Icons centered vertically with text
+    
+    IMPORTANT:
+    - Do NOT use flex incorrectly — use grid for 3-column alignment
+    - Do NOT stack icons or misalign them
+    - Do NOT approximate icons — create clean SVG line icons
+    
+    OUTPUT:
+    - Only HTML + CSS
+    - No explanation
+    - Clean, production-ready code, Create a pixel-perfect HTML and CSS component that exactly matches the provided UI design.
+    
+    STRICT INSTRUCTIONS:
+    - Do NOT change layout, spacing, alignment, or proportions.
+    - The output must visually match the design exactly.
+    - No approximations.
+    
+    LAYOUT:
+    - A full-width light grey background (#f3f3f3)
+    - Inside it, a 2-column grid layout
+    - 2 rows total (4 items)
+    
+    GRID STRUCTURE:
+    Row 1:
+      Left: Icon + "Easy 15 Day Return"
+      Right: Icon + "Lifetime Plating"
+    
+    Row 2:
+      Left: Icon + "6-Month Warranty"
+      Right: Icon + "Fine 925 Silver"
+    
+    EACH ITEM:
+    - Horizontal layout (icon on left, text on right)
+    - Vertically centered alignment
+    - Equal spacing between icon and text
+    - Consistent spacing between grid items
+    
+    ICONS (VERY IMPORTANT):
+    - Use inline SVG (no images, no emojis)
+    - Thin stroke line icons
+    - Color: muted red (#b94a55)
+    - Style: minimal outline icons
+    - Icons required:
+      1. Circular arrow box icon (return symbol)
+      2. Ring icon (for lifetime plating)
+      3. Warranty badge with "6"
+      4. Circular "925" silver stamp
+    
+    TYPOGRAPHY:
+    - Font: clean sans-serif (Arial or similar)
+    - Color: dark grey (#444)
+    - Font size: medium (~18–20px)
+    - Font weight: normal (not bold)
+    
+    SPACING:
+    - Balanced padding inside container (around 40–60px)
+    - Equal gap between columns
+    - Equal vertical spacing between rows
+    
+    TECHNICAL:
+    - Use CSS Grid for layout (NOT flex for main structure)
+    - Use flex ONLY for icon + text alignment inside each item
+    - Ensure pixel-perfect alignment and spacing
+    
+    OUTPUT:
+    - Only HTML and CSS
+    - No explanation
+    - Clean, production-ready code, Design a mobile-friendly feature highlights section for an eCommerce jewelry website.
+    
+    The section should display 4 key benefits in a 2x2 grid layout (two items per row).
+    
+    Each item must include:
+    
+    A minimal line-style icon inside a circular outline
+    A short label text next to the icon
+    
+    The 4 items are:
+    
+    Easy 15 Day Return
+    Lifetime Plating
+    6-Month Warranty
+    Fine 925 Silver
+    
+    Design requirements:
+    
+    Clean, minimal, modern UI
+    Use a light gray background (#f5f5f5 or similar)
+    Icons and accent color should be soft red / maroon tone
+    Text should be dark gray, medium weight
+    Maintain good spacing and padding for mobile screens
+    Icons should be aligned left with text on the right
+    Each row should have equal spacing between items
+    Ensure readability and touch-friendly spacing
+    
+    Mobile optimization:
+    
+    Responsive layout (stack into 2 columns on small screens)
+    Proper padding (16px–20px)
+    Font size around 14–16px
+    
+    Style should feel premium, elegant, and jewelry-brand appropriate.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-features-section-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding }}px;
+  }
+
+  .ai-features-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.grid_gap }}px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .ai-feature-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.icon_text_gap }}px;
+  }
+
+  .ai-feature-icon-wrapper-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_circle_size }}px;
+    height: {{ block.settings.icon_circle_size }}px;
+    border-radius: 50%;
+    border: {{ block.settings.circle_border_width }}px solid {{ block.settings.accent_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-feature-icon-wrapper-{{ ai_gen_id }} svg {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    stroke: {{ block.settings.accent_color }};
+    fill: none;
+    stroke-width: {{ block.settings.icon_stroke_width }};
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ai-feature-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    line-height: 1.3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-features-section-{{ ai_gen_id }} {
+      padding: {{ block.settings.mobile_padding }}px;
+    }
+
+    .ai-features-grid-{{ ai_gen_id }} {
+      gap: {{ block.settings.mobile_grid_gap }}px;
+    }
+
+    .ai-feature-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_font_size }}px;
+    }
+
+    .ai-feature-icon-wrapper-{{ ai_gen_id }} {
+      width: {{ block.settings.mobile_icon_circle_size }}px;
+      height: {{ block.settings.mobile_icon_circle_size }}px;
+    }
+
+    .ai-feature-icon-wrapper-{{ ai_gen_id }} svg {
+      width: {{ block.settings.mobile_icon_size }}px;
+      height: {{ block.settings.mobile_icon_size }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-features-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-features-grid-{{ ai_gen_id }}">
+    <div class="ai-feature-item-{{ ai_gen_id }}">
+      <div class="ai-feature-icon-wrapper-{{ ai_gen_id }}">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/>
+          <path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/>
+          <path d="M9 5V3"/>
+          <path d="M15 5V3"/>
+          <path d="M9 15l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="ai-feature-text-{{ ai_gen_id }}">{{ block.settings.feature_1 }}</div>
+    </div>
+
+    <div class="ai-feature-item-{{ ai_gen_id }}">
+      <div class="ai-feature-icon-wrapper-{{ ai_gen_id }}">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="2"/>
+          <path d="M12 10c-3.5 0-6 2-6 4.5V16h12v-1.5c0-2.5-2.5-4.5-6-4.5z"/>
+          <path d="M6 14.5c0-1.5 1-2.8 2.5-3.5"/>
+          <path d="M18 14.5c0-1.5-1-2.8-2.5-3.5"/>
+          <circle cx="12" cy="12" r="10"/>
+        </svg>
+      </div>
+      <div class="ai-feature-text-{{ ai_gen_id }}">{{ block.settings.feature_2 }}</div>
+    </div>
+
+    <div class="ai-feature-item-{{ ai_gen_id }}">
+      <div class="ai-feature-icon-wrapper-{{ ai_gen_id }}">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L4 6v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V6l-8-4z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="ai-feature-text-{{ ai_gen_id }}">{{ block.settings.feature_3 }}</div>
+    </div>
+
+    <div class="ai-feature-item-{{ ai_gen_id }}">
+      <div class="ai-feature-icon-wrapper-{{ ai_gen_id }}">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M8 10.5v3h1.5v-3H8z M10.5 10.5v3H12v-3h-1.5z M13 10.5v3h1.5l1.5-3v3"/>
+        </svg>
+      </div>
+      <div class="ai-feature-text-{{ ai_gen_id }}">{{ block.settings.feature_4 }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Feature highlights",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "text",
+      "id": "feature_1",
+      "label": "Feature 1",
+      "default": "Easy 15 Day Return"
+    },
+    {
+      "type": "text",
+      "id": "feature_2",
+      "label": "Feature 2",
+      "default": "Lifetime Plating"
+    },
+    {
+      "type": "text",
+      "id": "feature_3",
+      "label": "Feature 3",
+      "default": "6-Month Warranty"
+    },
+    {
+      "type": "text",
+      "id": "feature_4",
+      "label": "Feature 4",
+      "default": "Fine 925 Silver"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "label": "Mobile padding",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 15,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "mobile_grid_gap",
+      "label": "Mobile grid gap",
+      "min": 10,
+      "max": 25,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "icon_text_gap",
+      "label": "Icon to text gap",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#b94a55"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#444444"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "label": "Mobile font size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_circle_size",
+      "label": "Circle size",
+      "min": 35,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_circle_size",
+      "label": "Mobile circle size",
+      "min": 30,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_size",
+      "label": "Mobile icon size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "circle_border_width",
+      "label": "Circle border width",
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "icon_stroke_width",
+      "label": "Icon stroke width",
+      "min": 1,
+      "max": 2,
+      "step": 0.5,
+      "default": 1.5
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature highlights"
+    }
+  ]
+}
+{% endschema %}
