@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>VELONNA — Heirloom · Dawn Solitaire</title>
+    <meta name="description" content="VELONNA. Bespoke fine jewellery from Mumbai. Worn today. Worn a century from now." />
+    <meta name="theme-color" content="#0b0b0b" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="VELONNA — Heirloom · Dawn Solitaire" />
+    <meta property="og:description" content="Bespoke fine jewellery from Mumbai. Twelve numbered editions, hand-set, signed, and sworn to outlive their first wearer." />
+    <meta property="og:image" content="./assets/img/emerald-necklace-1.jpg" />
+
+    <script>document.documentElement.classList.add("js");</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css?v=12" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0b0b'/%3E%3Cpath d='M16 22 L32 50 L48 22' fill='none' stroke='%23e6b89a' stroke-width='3'/%3E%3C/svg%3E" />
+
+    <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "lenis": "https://unpkg.com/lenis@1.1.13/dist/lenis.mjs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- ============================== NAV ============================== -->
+    <nav class="nav">
+      <div class="nav-left">
+        <div class="nav-links">
+          <a href="#collection">Collection</a>
+          <a href="#heritage">Heritage</a>
+          <a href="#craftsmanship">Craftsmanship</a>
+        </div>
+      </div>
+      <div class="nav-center">
+        <a href="./" class="nav-logo-container" aria-label="Velonna home">
+          <img class="nav-logo-img" src="./assets/img/logo.png" alt="Velonna" />
+        </a>
+      </div>
+      <div class="nav-right">
+        <button class="nav-cta open-reserve-modal" type="button">Reserve</button>
+      </div>
+    </nav>
+
+    <!-- ============================== HERO ============================== -->
+    <section class="hero">
+      <div class="hero-bg">
+        <video
+          class="bg-image hero-video"
+          src="./assets/video/y-drop.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        ></video>
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-text-bg">HEIRLOOM</div>
+        <div class="hero-details">
+          <h1 class="hero-title">
+            <span class="line"><span class="line-inner">An Heirloom in</span></span>
+            <span class="line"><span class="line-inner accent">Light &amp; Diamonds</span></span>
+          </h1>
+          <p class="hero-subtitle">
+            Where heritage stones meet a quiet hand. One of twelve numbered editions, set by Helena Marsh at our Mumbai bench.
+          </p>
+          <div class="hero-cta-group">
+            <span class="limited-edition">No. 01 / 12</span>
+            <a class="primary-btn" href="#collection">Explore Edition</a>
+          </div>
+        </div>
+        <div class="hero-scroll-cue" aria-hidden="true">
+          <span class="scroll-cue-label">Scroll</span>
+          <span class="scroll-cue-line"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PRODUCT REVEAL ============================== -->
+    <section class="product-reveal">
+      <div class="product-reveal-bg">
+        <img
+          class="product-reveal-bg-img"
+          src="./assets/img/emerald-necklace-1.jpg"
+          alt=""
+          decoding="async"
+        />
+        <div class="product-reveal-overlay"></div>
+      </div>
+      <div class="product-reveal-content">
+        <div class="product-reveal-text-bg">EMERALD</div>
+        <div class="product-reveal-details">
+          <h2 class="product-reveal-title">
+            A Drop Of
+            <br />
+            <span class="accent-gold">Living Green</span>
+          </h2>
+          <p class="product-reveal-subtitle">
+            Forty-two Zambian emeralds and one hundred and ninety pear-cut brilliants, laid by hand on rose gold. Six hundred and twelve hours at the bench. One master jeweller, signature on the inside of the clasp.
+          </p>
+          <div class="product-reveal-cta-group">
+            <span class="edition-tag">V·EMR·001 / 012</span>
+            <a class="secondary-btn" href="#collection">View Specifications</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== HERITAGE ============================== -->
+    <section class="heritage" id="heritage">
+      <div class="heritage-bg">
+        <video
+          class="heritage-bg-img"
+          src="./assets/video/hand-pick.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        ></video>
+        <div class="heritage-overlay"></div>
+      </div>
+      <div class="heritage-content">
+        <div class="heritage-text">
+          <p class="heritage-eyebrow">Est. 2014 · Mumbai, India</p>
+          <h2 class="heritage-title">
+            A Decade<br />of <em>Mastery</em>
+          </h2>
+          <div class="heritage-divider"></div>
+          <p class="heritage-body">
+            Founded above a quiet street in Fort, Mumbai, Velonna has held to a single idea — that a jewel made by hand outlasts the trends that surround it. Every piece begins with a conversation, ends with a signature, and travels with the Book that records both.
+          </p>
+          <p class="heritage-body">
+            The Dawn Solitaire carries that legacy forward. Twelve numbered pieces, each one set by the same master jeweller, each one a different stone, each one signed and sworn to outlive its first wearer.
+          </p>
+          <a class="heritage-link" href="#craftsmanship">Discover the Atelier →</a>
+        </div>
+        <div class="heritage-stats">
+          <div class="heritage-stat"><span class="heritage-stat-num"><span class="stat-value" data-count="412">412</span></span><span class="heritage-stat-label">Hours per piece</span></div>
+          <div class="heritage-stat"><span class="heritage-stat-num"><span class="stat-value" data-count="22">22</span></span><span class="heritage-stat-label">Artisans, one bench</span></div>
+          <div class="heritage-stat"><span class="heritage-stat-num"><span class="stat-value" data-count="100">100</span>+</span><span class="heritage-stat-label">Year guarantee</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== COLLECTION ============================== -->
+    <section class="ethos" id="collection">
+      <div class="ethos-header">
+        <h2 class="ethos-section-title">THE COLLECTION</h2>
+      </div>
+
+      <div class="ethos-dynamic-bg" aria-hidden="true">
+        <img
+          class="ethos-bg-img ethos-bg-bl active"
+          src="./assets/img/blue-petals.jpg"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="ethos-bg-img ethos-bg-rs"
+          src="./assets/img/pink-rose.jpg"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div class="ethos-slider-container">
+        <!-- Variant 1 — Botanica -->
+        <div class="ethos-main variant-bl active">
+          <div class="ethos-text-side">
+            <h2 class="ethos-alt-title">VELONNA<br />BOTANICA</h2>
+            <p class="ethos-alt-subtitle">TWIN BLOOMS, ONE OATH</p>
+            <div class="ethos-description">
+              Carved enamel petals cradled on diamond-pavé branches. A pair of one-of-one rings — purple amethyst and Paraíba blue — set side by side, each one a season caught in platinum. Numbered, paired, signed inside.
+            </div>
+            <button class="ethos-next-btn" data-target="rs" type="button" aria-label="Next variant">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" />
+              </svg>
+            </button>
+          </div>
+          <div class="ethos-product-center">
+            <img
+              class="ethos-watch-img"
+              src="./assets/img/floral-rings.jpg"
+              alt="Velonna Botanica — twin floral rings"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+
+        <!-- Variant 2 — Rose en Pose -->
+        <div class="ethos-main variant-rs">
+          <div class="ethos-text-side">
+            <h2 class="ethos-alt-title">VELONNA<br />ROSE EN POSE</h2>
+            <p class="ethos-alt-subtitle">A BLOOM, SET IN LIGHT</p>
+            <div class="ethos-description">
+              A full rose carved in pink sapphire and rhodolite, cradled by pavé vines that wrap the finger. A single bloom for a single wearer — set in rose gold and platinum. One edition, signed at the root.
+            </div>
+            <button class="ethos-next-btn" data-target="bl" type="button" aria-label="Previous variant">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                <path d="M19 12H5M11 6L5 12l6 6" fill="none" stroke="currentColor" stroke-width="1.6" />
+              </svg>
+            </button>
+          </div>
+          <div class="ethos-product-center">
+            <img
+              class="ethos-watch-img"
+              src="./assets/img/pink-rose.jpg"
+              alt="Velonna Rose en Pose — sapphire bloom ring"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CRAFTSMANSHIP ============================== -->
+    <section class="dismantle" id="craftsmanship">
+      <div class="dismantle-container">
+        <div class="dismantle-header">
+          <h2 class="section-title">THE ANATOMY OF <span class="accent">LIGHT</span></h2>
+          <p class="section-subtitle">
+            Seventy-five components. Every prong shaped by a human eye, every stone seated without a jig. This is the mechanical soul of a Velonna piece.
+          </p>
+        </div>
+        <div class="dismantle-stage">
+          <video
+            class="dismantle-img"
+            id="dismantle-img"
+            src="./assets/video/rose-vines.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="metadata"
+            aria-hidden="true"
+          ></video>
+          <div class="dismantle-callouts">
+            <div class="dismantle-callout" data-step="1">
+              <span class="callout-num">01</span>
+              <span class="callout-label">Centre Stone · 1.42 ct · D · IF</span>
+            </div>
+            <div class="dismantle-callout" data-step="2">
+              <span class="callout-num">02</span>
+              <span class="callout-label">Setting · 4-prong cathedral · platinum</span>
+            </div>
+            <div class="dismantle-callout" data-step="3">
+              <span class="callout-num">03</span>
+              <span class="callout-label">Band · 950 platinum · hand-hammered</span>
+            </div>
+            <div class="dismantle-callout" data-step="4">
+              <span class="callout-num">04</span>
+              <span class="callout-label">Signature · master jeweller · inside band</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== SHOWCASE ============================== -->
+    <section class="showcase">
+      <div class="showcase-visual">
+        <video
+          class="showcase-bg-img"
+          src="./assets/video/extra.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        ></video>
+        <div class="showcase-gradient"></div>
+      </div>
+      <div class="showcase-text">
+        <p class="showcase-eyebrow">Limited to 12 Numbered Pieces</p>
+        <h2 class="showcase-headline">Beyond<br /><em>Ordinary.</em></h2>
+        <p class="showcase-body">
+          When a single stone of singular provenance meets a hand that will not be rushed — this is what the world looks like at its most extraordinary.
+        </p>
+        <a class="showcase-ig-link" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+          </svg>
+          <span>Follow @velonna</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================== MARQUEE ============================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>Hand-set in Mumbai</span><span class="marquee-dot">·</span>
+          <span>Twelve <em>numbered</em> editions</span><span class="marquee-dot">·</span>
+          <span>Signed inside the band</span><span class="marquee-dot">·</span>
+          <span>Guaranteed <em>a century</em></span><span class="marquee-dot">·</span>
+          <span>Hand-set in Mumbai</span><span class="marquee-dot">·</span>
+          <span>Twelve <em>numbered</em> editions</span><span class="marquee-dot">·</span>
+          <span>Signed inside the band</span><span class="marquee-dot">·</span>
+          <span>Guaranteed <em>a century</em></span><span class="marquee-dot">·</span>
+        </div>
+        <div class="marquee-group">
+          <span>Hand-set in Mumbai</span><span class="marquee-dot">·</span>
+          <span>Twelve <em>numbered</em> editions</span><span class="marquee-dot">·</span>
+          <span>Signed inside the band</span><span class="marquee-dot">·</span>
+          <span>Guaranteed <em>a century</em></span><span class="marquee-dot">·</span>
+          <span>Hand-set in Mumbai</span><span class="marquee-dot">·</span>
+          <span>Twelve <em>numbered</em> editions</span><span class="marquee-dot">·</span>
+          <span>Signed inside the band</span><span class="marquee-dot">·</span>
+          <span>Guaranteed <em>a century</em></span><span class="marquee-dot">·</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================== FOOTER ============================== -->
+    <footer class="footer" id="contact">
+      <div class="footer-top-rule"></div>
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand-col">
+            <img class="footer-logo" src="./assets/img/logo.png" alt="Velonna" loading="lazy" decoding="async" />
+            <p class="footer-tagline">Mumbai · Est. 2014</p>
+            <p class="footer-address">Velonna Atelier<br />12 Forbes St, Fort<br />Mumbai 400001, India</p>
+            <div class="footer-socials">
+              <a class="footer-social" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                </svg>
+              </a>
+              <a class="footer-social" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path d="M14 8h-2c-1 0-2 .8-2 2v2H8v3h2v6h3v-6h2.2L16 12h-3v-1.5c0-.4.3-.5.5-.5H16V7h-2z" fill="currentColor" />
+                </svg>
+              </a>
+              <a class="footer-social" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path d="M21.5 8.5a2.5 2.5 0 0 0-1.7-1.8C18.2 6.3 12 6.3 12 6.3s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.5 8.5C2.1 10 2.1 12 2.1 12s0 2 .4 3.5a2.5 2.5 0 0 0 1.7 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.7-1.8c.4-1.5.4-3.5.4-3.5s0-2-.4-3.5zM10 15v-6l5 3-5 3z" fill="currentColor" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-col-title">Collections</h5>
+            <a href="#collection">Emerald Suite</a>
+            <a href="#collection">Botanica</a>
+            <a href="#collection">Rose en Pose</a>
+            <a href="#collection">Bespoke</a>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-col-title">Maison</h5>
+            <a href="#heritage">The Atelier</a>
+            <a href="#heritage">Heritage</a>
+            <a href="#craftsmanship">Savoir-Faire</a>
+            <a href="#heritage">Journal</a>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-col-title">Boutiques</h5>
+            <a href="#contact">Mumbai</a>
+            <a href="#contact">London</a>
+            <a href="#contact">New York</a>
+            <a href="#contact">Tokyo</a>
+          </div>
+
+          <div class="footer-col footer-col-reserve">
+            <h5 class="footer-col-title">Dawn Solitaire</h5>
+            <p class="footer-col-desc">
+              One of twelve numbered pieces. Each one signed, numbered, and accompanied by the Book.
+            </p>
+            <button class="footer-reserve-btn open-reserve-modal" type="button">Reserve Your Piece</button>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="footer-legal">© 2026 Velonna Fine Jewellery. All rights reserved. Trademarks of Velonna Atelier Pvt. Ltd.</p>
+          <div class="footer-bottom-links">
+            <a href="#contact">Legal</a>
+            <a href="#contact">Privacy</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================== MODAL ============================== -->
+    <div class="modal-overlay" id="reserve-modal" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" id="modal-close" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </button>
+        <div class="modal-left">
+          <img
+            class="modal-watch-img"
+            src="./assets/img/emerald-necklace-2.jpg"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="modal-left-overlay"></div>
+          <div class="modal-left-text">
+            <p class="modal-left-tag">No. 01 / 12</p>
+            <h3 class="modal-left-title">The Velonna<br />Suite</h3>
+          </div>
+        </div>
+        <div class="modal-right">
+          <p class="modal-eyebrow">Private Reservation</p>
+          <h2 class="modal-title" id="modal-title">Secure Your <em>Piece</em></h2>
+          <p class="modal-subtitle">
+            One of twelve numbered editions. We will reply within forty-eight hours to arrange a private viewing or video consultation.
+          </p>
+          <form class="modal-form" id="reserve-form" name="reservation" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="reservation" />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-first">First Name</label>
+                <input id="f-first" name="first-name" type="text" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="f-last">Last Name</label>
+                <input id="f-last" name="last-name" type="text" required autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="f-email">Email Address</label>
+              <input id="f-email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="f-phone">Phone / WhatsApp</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label for="f-variant">Preferred Piece</label>
+              <select id="f-variant" name="variant" required>
+                <option value="emerald-suite">The Emerald Suite</option>
+                <option value="botanica">Velonna Botanica</option>
+                <option value="rose-en-pose">Rose en Pose</option>
+                <option value="bespoke">Bespoke — let's talk</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-message">Message (optional)</label>
+              <textarea id="f-message" name="message" rows="3"></textarea>
+            </div>
+            <button class="form-submit-btn" type="submit">Submit Reservation</button>
+            <p class="form-success" id="form-success">Thank you — we'll be in touch within 48 hours.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js?v=3"></script>
+  </body>
+</html>

@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>VELONNA — Fine Jewellery · Mumbai</title>
+    <meta name="description" content="Hand-set fine jewellery from our Mumbai atelier. Certified stones, numbered editions — every piece guaranteed a century." />
+    <meta name="theme-color" content="#0b0b0b" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="VELONNA — Fine Jewellery · Mumbai" />
+    <meta property="og:description" content="Hand-set fine jewellery from our Mumbai atelier. Certified stones, numbered editions — every piece guaranteed a century." />
+    <meta property="og:image" content="./assets/img/emerald-necklace-1.jpg" />
+
+    <script>document.documentElement.classList.add("js");</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css?v=12" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0b0b'/%3E%3Cpath d='M16 22 L32 50 L48 22' fill='none' stroke='%23e6b89a' stroke-width='3'/%3E%3C/svg%3E" />
+
+    <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "lenis": "https://unpkg.com/lenis@1.1.13/dist/lenis.mjs"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- ============================== HEADER ============================== -->
+    <div class="home-head">
+      <div class="announce">
+        <div class="announce-msgs" aria-live="polite">
+          <p class="announce-msg active">Complimentary insured shipping across India</p>
+          <p class="announce-msg">Every stone certified — report included</p>
+          <p class="announce-msg">New — the Toys collection has arrived</p>
+        </div>
+        <button class="announce-close" type="button" aria-label="Dismiss announcement">
+          <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+      <nav class="nav">
+        <div class="nav-left">
+          <div class="nav-links">
+            <div class="has-mega">
+              <a href="#collections">Shop</a>
+              <div class="mega">
+                <a href="#featured">All products</a>
+                <div class="mega-divider"></div>
+                <a href="#collections">Rings</a>
+                <a href="#collections">Earrings</a>
+                <a href="#collections">Pendants</a>
+                <a href="#collections">Bangles</a>
+                <a href="#collections">Toys<span class="mega-new">New</span></a>
+              </div>
+            </div>
+            <a href="#education">Journal</a>
+            <a href="#atelier">Our story</a>
+          </div>
+        </div>
+        <div class="nav-center">
+          <a href="#top" class="nav-logo-container" aria-label="Velonna home">
+            <img class="nav-logo-img" src="./assets/img/logo.png" alt="Velonna" />
+          </a>
+        </div>
+        <div class="nav-right">
+          <div class="nav-icons">
+            <a class="nav-icon" href="#featured" aria-label="Wishlist">
+              <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+                <path d="M12 20s-7-4.6-9-9a5 5 0 0 1 9-3.5A5 5 0 0 1 21 11c-2 4.4-9 9-9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+              </svg>
+              <span class="nav-count is-empty" id="wish-count">0</span>
+            </a>
+            <button class="nav-icon" id="cart-open" type="button" aria-label="Cart">
+              <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+                <path d="M6 8h12l-1 12H7L6 8z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                <path d="M9 8a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+            </button>
+          </div>
+          <button class="nav-cta open-reserve-modal" type="button">Book</button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- ============================== 1 · HERO ============================== -->
+    <section class="hero hero--home" id="top">
+      <div class="hero-bg">
+        <video
+          class="bg-image hero-video"
+          src="./assets/video/extra.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        ></video>
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-text-bg">VELONNA</div>
+        <div class="hero-details">
+          <h1 class="hero-title">
+            <span class="line"><span class="line-inner">Worn today.</span></span>
+            <span class="line"><span class="line-inner accent">Worn a century from now.</span></span>
+          </h1>
+          <p class="hero-subtitle">
+            Hand-set fine jewellery from our Fort atelier. Certified stones, numbered editions — every piece guaranteed a century.
+          </p>
+          <div class="hero-cta-group">
+            <span class="limited-edition">Est. 2014 · Mumbai</span>
+            <a class="primary-btn" href="#collections">Explore the collections</a>
+            <button class="secondary-btn open-reserve-modal" type="button">Book an appointment</button>
+          </div>
+        </div>
+        <div class="hero-scroll-cue" aria-hidden="true">
+          <span class="scroll-cue-label">Scroll</span>
+          <span class="scroll-cue-line"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== 2 · COLLECTIONS RAIL ============================== -->
+    <section class="shop-section reveal-group" id="collections">
+      <div class="section-head" data-reveal>
+        <div>
+          <p class="section-head-eyebrow">The collections</p>
+          <h2 class="section-head-title">Shop by collection</h2>
+        </div>
+        <a class="section-head-link" href="#featured">View all pieces →</a>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-card" href="#featured" data-reveal>
+          <img src="./assets/img/floral-rings.jpg" alt="Rings collection" loading="lazy" decoding="async" />
+          <span class="cat-label">Rings</span>
+          <svg class="cat-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+        </a>
+        <a class="cat-card" href="#featured" data-reveal>
+          <img src="./assets/img/emerald-necklace-2.jpg" alt="Earrings collection" loading="lazy" decoding="async" />
+          <span class="cat-label">Earrings</span>
+          <svg class="cat-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+        </a>
+        <a class="cat-card" href="#featured" data-reveal>
+          <img src="./assets/img/emerald-necklace-1.jpg" alt="Pendants collection" loading="lazy" decoding="async" />
+          <span class="cat-label">Pendants</span>
+          <svg class="cat-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+        </a>
+        <a class="cat-card" href="#featured" data-reveal>
+          <img src="./assets/img/blue-petals.jpg" alt="Bangles collection" loading="lazy" decoding="async" />
+          <span class="cat-label">Bangles</span>
+          <svg class="cat-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+        </a>
+        <a class="cat-card" href="#featured" data-reveal>
+          <img src="./assets/img/featured-rose.jpg" alt="Toys collection" loading="lazy" decoding="async" />
+          <span class="badge-new">New</span>
+          <span class="cat-label">Toys</span>
+          <svg class="cat-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================== 3 · FEATURED PIECES ============================== -->
+    <section class="shop-section reveal-group" id="featured" style="padding-top: 0">
+      <div class="section-head" data-reveal>
+        <div>
+          <p class="section-head-eyebrow">Hand-set · numbered · signed</p>
+          <h2 class="section-head-title">Featured pieces</h2>
+        </div>
+        <a class="section-head-link" href="#collections">All products →</a>
+      </div>
+      <div class="prod-grid">
+        <article class="prod-card" data-reveal>
+          <div class="prod-media">
+            <img src="./assets/img/floral-rings.jpg" alt="Botanica twin bloom rings" loading="lazy" decoding="async" />
+            <button class="prod-heart" type="button" aria-label="Add to wishlist" aria-pressed="false">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 20s-7-4.6-9-9a5 5 0 0 1 9-3.5A5 5 0 0 1 21 11c-2 4.4-9 9-9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            </button>
+            <span class="prod-cert">IGI certified</span>
+          </div>
+          <h3 class="prod-name">Botanica · Twin blooms</h3>
+          <p class="prod-spec">Amethyst &amp; Paraíba · platinum</p>
+          <p class="prod-price">₹ 2,10,000</p>
+        </article>
+        <article class="prod-card" data-reveal>
+          <div class="prod-media">
+            <img src="./assets/img/pink-rose.jpg" alt="Rose en Pose sapphire ring" loading="lazy" decoding="async" />
+            <button class="prod-heart" type="button" aria-label="Add to wishlist" aria-pressed="false">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 20s-7-4.6-9-9a5 5 0 0 1 9-3.5A5 5 0 0 1 21 11c-2 4.4-9 9-9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            </button>
+            <span class="prod-cert">IGI certified</span>
+          </div>
+          <h3 class="prod-name">Rose en Pose</h3>
+          <p class="prod-spec">Pink sapphire · rose gold</p>
+          <p class="prod-price">₹ 1,84,000</p>
+        </article>
+        <article class="prod-card" data-reveal>
+          <div class="prod-media">
+            <img src="./assets/img/emerald-necklace-1.jpg" alt="Emerald Y-drop necklace" loading="lazy" decoding="async" />
+            <button class="prod-heart" type="button" aria-label="Add to wishlist" aria-pressed="false">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 20s-7-4.6-9-9a5 5 0 0 1 9-3.5A5 5 0 0 1 21 11c-2 4.4-9 9-9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            </button>
+            <span class="prod-cert">IGI certified</span>
+          </div>
+          <h3 class="prod-name">Emerald Y-drop</h3>
+          <p class="prod-spec">Zambian emerald · rose gold</p>
+          <p class="prod-price">₹ 4,60,000</p>
+        </article>
+        <article class="prod-card" data-reveal>
+          <div class="prod-media">
+            <img src="./assets/img/featured-rose.jpg" alt="La Rose pavé ring" loading="lazy" decoding="async" />
+            <button class="prod-heart" type="button" aria-label="Add to wishlist" aria-pressed="false">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 20s-7-4.6-9-9a5 5 0 0 1 9-3.5A5 5 0 0 1 21 11c-2 4.4-9 9-9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            </button>
+            <span class="prod-cert">IGI certified</span>
+          </div>
+          <h3 class="prod-name">La Rose · No. 04</h3>
+          <p class="prod-spec">Pavé rose · white gold</p>
+          <p class="prod-price">₹ 1,24,000</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================== 4 · TRUST STRIP ============================== -->
+    <div class="trust" role="list" aria-label="Why buy from Velonna">
+      <div class="trust-item" role="listitem">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5" /><path d="M9.5 13.5 8 21l4-2.5L16 21l-1.5-7.5" /></svg>
+        <span class="trust-label">IGI certified</span>
+      </div>
+      <div class="trust-item" role="listitem">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" /><path d="M9 12l2 2 4-4.5" /></svg>
+        <span class="trust-label">Guaranteed a century</span>
+      </div>
+      <div class="trust-item" role="listitem">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="11" height="9" rx="1" /><path d="M13 10h4l3 3v3h-7" /><circle cx="6.5" cy="18" r="1.5" /><circle cx="16.5" cy="18" r="1.5" /></svg>
+        <span class="trust-label">Insured shipping</span>
+      </div>
+      <div class="trust-item" role="listitem">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l7-7" /><path d="M12 5l7 7 2.5-2.5a2 2 0 0 0 0-2.8L17.3 2.5a2 2 0 0 0-2.8 0z" /></svg>
+        <span class="trust-label">Hand-set in Mumbai</span>
+      </div>
+    </div>
+
+    <!-- ============================== 5 · LAB-GROWN, EXPLAINED ============================== -->
+    <section class="shop-section reveal-group" id="education">
+      <div class="edu-grid">
+        <div data-reveal>
+          <p class="section-head-eyebrow">The journal · Lab-grown, explained</p>
+          <h2 class="edu-title">Same carbon. Same fire. <em>Grown above ground.</em></h2>
+          <p class="edu-body">
+            Every Velonna stone is grown, cut, and certified to the same grading standards as a mined diamond — then seated by the same twenty-two hands at one bench. If you are deciding between the two, start with the three letters below.
+          </p>
+        </div>
+        <div>
+          <a class="edu-link" href="./journal/lgd-vs-mined.html" data-reveal>
+            <span>
+              <span class="edu-link-title">Lab-grown vs mined</span>
+              <span class="edu-link-sub" style="display:block">The honest comparison — chemistry, value, resale</span>
+            </span>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+          </a>
+          <a class="edu-link" href="./journal/4cs.html" data-reveal>
+            <span>
+              <span class="edu-link-title">The 4Cs, without the jargon</span>
+              <span class="edu-link-sub" style="display:block">Cut, colour, clarity, carat — what moves the price</span>
+            </span>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+          </a>
+          <a class="edu-link" href="./journal/igi-report.html" data-reveal>
+            <span>
+              <span class="edu-link-title">How to read an IGI report</span>
+              <span class="edu-link-sub" style="display:block">Your certificate, decoded line by line</span>
+            </span>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== 6 · ATELIER ============================== -->
+    <section class="heritage reveal-group" id="atelier">
+      <div class="heritage-bg">
+        <video
+          class="heritage-bg-img"
+          src="./assets/video/hand-pick.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        ></video>
+        <div class="heritage-overlay"></div>
+      </div>
+      <div class="heritage-content">
+        <div class="heritage-text">
+          <p class="heritage-eyebrow" data-reveal>Est. 2014 · Mumbai, India</p>
+          <h2 class="heritage-title" data-reveal>The bench behind<br /><em>every piece</em></h2>
+          <div class="heritage-divider" data-reveal></div>
+          <p class="heritage-body" data-reveal>
+            Above a quiet street in Fort, twenty-two artisans work one bench. Every piece begins with a conversation, ends with a signature inside the band, and travels with the Book that records both.
+          </p>
+          <a class="heritage-link" href="./campaign.html" data-reveal>Our full story →</a>
+        </div>
+        <div class="heritage-stats">
+          <div class="heritage-stat" data-reveal><span class="heritage-stat-num"><span class="stat-value" data-count="412">412</span></span><span class="heritage-stat-label">Hours per piece</span></div>
+          <div class="heritage-stat" data-reveal><span class="heritage-stat-num"><span class="stat-value" data-count="22">22</span></span><span class="heritage-stat-label">Artisans, one bench</span></div>
+          <div class="heritage-stat" data-reveal><span class="heritage-stat-num"><span class="stat-value" data-count="100">100</span>+</span><span class="heritage-stat-label">Year guarantee</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== 7 · CAMPAIGN SLOT ============================== -->
+    <section class="campaign reveal-group" id="campaign">
+      <div class="campaign-bg">
+        <img src="./assets/img/emerald-necklace-2.jpg" alt="" loading="lazy" decoding="async" />
+      </div>
+      <div class="campaign-overlay"></div>
+      <div class="campaign-content">
+        <p class="campaign-eyebrow" data-reveal>The current edition</p>
+        <h2 class="campaign-title" data-reveal>Dawn <em>Solitaire</em></h2>
+        <p class="campaign-line" data-reveal>Twelve numbered pieces. One bench. No. 01 has found its wearer.</p>
+        <a class="primary-btn" href="./campaign.html" data-reveal>Enter the campaign</a>
+      </div>
+    </section>
+
+    <!-- ============================== 8 · CUSTOMER STORIES ============================== -->
+    <section class="shop-section reveal-group testimonials" id="stories">
+      <div class="section-head" data-reveal>
+        <div>
+          <p class="section-head-eyebrow">Worn and loved</p>
+          <h2 class="section-head-title">In their words</h2>
+        </div>
+      </div>
+
+      <div class="cf" data-reveal>
+        <button class="cf-nav cf-prev" type="button" aria-label="Previous story">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+
+        <div class="cf-stage" tabindex="0" role="group" aria-label="Customer story carousel">
+          <article class="cf-card" data-author="Rhea M. · Delhi" data-quote="I booked a viewing on a whim. I left with an heirloom.">
+            <img src="./assets/img/blue-petals.jpg" alt="Customer story — Rhea M." loading="lazy" decoding="async" />
+            <span class="cf-views"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M1.5 12S5 5.5 12 5.5 22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12z" fill="none" stroke="currentColor" stroke-width="1.6" /><circle cx="12" cy="12" r="2.6" fill="currentColor" /></svg>507</span>
+            <span class="cf-play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg></span>
+          </article>
+          <article class="cf-card" data-author="Dev &amp; Meera · Pune" data-quote="We chose it together. It will outlive us both.">
+            <img src="./assets/img/pink-rose.jpg" alt="Customer story — Dev and Meera" loading="lazy" decoding="async" />
+            <span class="cf-views"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M1.5 12S5 5.5 12 5.5 22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12z" fill="none" stroke="currentColor" stroke-width="1.6" /><circle cx="12" cy="12" r="2.6" fill="currentColor" /></svg>1.3K</span>
+            <span class="cf-play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg></span>
+          </article>
+          <article class="cf-card" data-author="Aanya R. · Mumbai" data-quote="The clasp is signed. I didn't expect to be moved by a clasp.">
+            <img src="./assets/img/floral-rings.jpg" alt="Customer story — Aanya R." loading="lazy" decoding="async" />
+            <span class="cf-views"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M1.5 12S5 5.5 12 5.5 22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12z" fill="none" stroke="currentColor" stroke-width="1.6" /><circle cx="12" cy="12" r="2.6" fill="currentColor" /></svg>836</span>
+            <span class="cf-play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg></span>
+          </article>
+          <article class="cf-card" data-author="Kavya S. · Bengaluru" data-quote="Six hundred hours at the bench, and you can see every one.">
+            <img src="./assets/img/emerald-necklace-1.jpg" alt="Customer story — Kavya S." loading="lazy" decoding="async" />
+            <span class="cf-views"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M1.5 12S5 5.5 12 5.5 22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12z" fill="none" stroke="currentColor" stroke-width="1.6" /><circle cx="12" cy="12" r="2.6" fill="currentColor" /></svg>1.1K</span>
+            <span class="cf-play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg></span>
+          </article>
+          <article class="cf-card" data-author="The Iyer family · Chennai" data-quote="Three generations will wear this. It began with us.">
+            <img src="./assets/img/emerald-necklace-2.jpg" alt="Customer story — the Iyer family" loading="lazy" decoding="async" />
+            <span class="cf-views"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M1.5 12S5 5.5 12 5.5 22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12z" fill="none" stroke="currentColor" stroke-width="1.6" /><circle cx="12" cy="12" r="2.6" fill="currentColor" /></svg>659</span>
+            <span class="cf-play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg></span>
+          </article>
+          <article class="cf-card" data-author="Nikhil &amp; Sara · London" data-quote="Certified, numbered — and somehow still personal.">
+            <img src="./assets/img/featured-rose.jpg" alt="Customer story — Nikhil and Sara" loading="lazy" decoding="async" />
+            <span class="cf-views"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M1.5 12S5 5.5 12 5.5 22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12z" fill="none" stroke="currentColor" stroke-width="1.6" /><circle cx="12" cy="12" r="2.6" fill="currentColor" /></svg>920</span>
+            <span class="cf-play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg></span>
+          </article>
+        </div>
+
+        <button class="cf-nav cf-next" type="button" aria-label="Next story">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+      </div>
+
+      <div class="cf-caption" data-reveal aria-live="polite">
+        <p class="cf-quote">The clasp is signed. I didn't expect to be moved by a clasp.</p>
+        <p class="cf-author">Aanya R. · Mumbai</p>
+      </div>
+    </section>
+
+    <!-- ============================== 9 · APPOINTMENT BAND ============================== -->
+    <section class="visit reveal-group" id="visit">
+      <h2 class="visit-title" data-reveal>See it in person, <em>before it's yours.</em></h2>
+      <p class="visit-sub" data-reveal>
+        Private viewings at the Fort atelier, or a video consultation from anywhere. Forty-five minutes, no obligation — just the pieces and the bench they came from.
+      </p>
+      <div class="visit-ctas" data-reveal>
+        <button class="primary-btn open-reserve-modal" type="button">Book an appointment</button>
+        <a class="secondary-btn" href="https://wa.me/919900000000" target="_blank" rel="noopener">WhatsApp the atelier</a>
+      </div>
+    </section>
+
+    <!-- ============================== 10 · MARQUEE ============================== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>Hand-set in Mumbai</span><span class="marquee-dot">·</span>
+          <span>Certified <em>stones</em></span><span class="marquee-dot">·</span>
+          <span>Signed inside the band</span><span class="marquee-dot">·</span>
+          <span>Guaranteed <em>a century</em></span><span class="marquee-dot">·</span>
+          <span>Hand-set in Mumbai</span><span class="marquee-dot">·</span>
+          <span>Certified <em>stones</em></span><span class="marquee-dot">·</span>
+          <span>Signed inside the band</span><span class="marquee-dot">·</span>
+          <span>Guaranteed <em>a century</em></span><span class="marquee-dot">·</span>
+        </div>
+        <div class="marquee-group">
+          <span>Hand-set in Mumbai</span><span class="marquee-dot">·</span>
+          <span>Certified <em>stones</em></span><span class="marquee-dot">·</span>
+          <span>Signed inside the band</span><span class="marquee-dot">·</span>
+          <span>Guaranteed <em>a century</em></span><span class="marquee-dot">·</span>
+          <span>Hand-set in Mumbai</span><span class="marquee-dot">·</span>
+          <span>Certified <em>stones</em></span><span class="marquee-dot">·</span>
+          <span>Signed inside the band</span><span class="marquee-dot">·</span>
+          <span>Guaranteed <em>a century</em></span><span class="marquee-dot">·</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================== 11 · FOOTER ============================== -->
+    <footer class="footer" id="contact">
+      <div class="footer-top-rule"></div>
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand-col">
+            <img class="footer-logo" src="./assets/img/logo.png" alt="Velonna" loading="lazy" decoding="async" />
+            <p class="footer-tagline">Mumbai · Est. 2014</p>
+            <p class="footer-address">Velonna Atelier<br />12 Forbes St, Fort<br />Mumbai 400001, India</p>
+            <div class="footer-socials">
+              <a class="footer-social" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                </svg>
+              </a>
+              <a class="footer-social" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path d="M14 8h-2c-1 0-2 .8-2 2v2H8v3h2v6h3v-6h2.2L16 12h-3v-1.5c0-.4.3-.5.5-.5H16V7h-2z" fill="currentColor" />
+                </svg>
+              </a>
+              <a class="footer-social" href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path d="M21.5 8.5a2.5 2.5 0 0 0-1.7-1.8C18.2 6.3 12 6.3 12 6.3s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.5 8.5C2.1 10 2.1 12 2.1 12s0 2 .4 3.5a2.5 2.5 0 0 0 1.7 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.7-1.8c.4-1.5.4-3.5.4-3.5s0-2-.4-3.5zM10 15v-6l5 3-5 3z" fill="currentColor" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-col-title">Shop</h5>
+            <a href="#featured">All products</a>
+            <a href="#collections">Rings</a>
+            <a href="#collections">Earrings</a>
+            <a href="#collections">Pendants</a>
+            <a href="#collections">Bangles</a>
+            <a href="#collections">Toys</a>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-col-title">Maison</h5>
+            <a href="#atelier">Our story</a>
+            <a href="#education">The journal</a>
+            <a href="./campaign.html">The campaign</a>
+            <a href="#visit" class="open-reserve-modal">Book appointment</a>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-col-title">Help</h5>
+            <a href="#visit">Size guide</a>
+            <a href="#visit">Shipping</a>
+            <a href="#visit">Returns</a>
+            <a href="#visit">FAQ</a>
+          </div>
+
+          <div class="footer-col footer-col-reserve">
+            <h5 class="footer-col-title">Letters from the bench</h5>
+            <p class="footer-news-desc">
+              Occasional letters — new editions, atelier notes, care advice. Never noisy.
+            </p>
+            <form class="news-form" id="news-form" name="newsletter" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="newsletter" />
+              <input type="email" name="email" required placeholder="Email address" aria-label="Email address" autocomplete="email" />
+              <button class="footer-reserve-btn" type="submit">Subscribe</button>
+            </form>
+            <p class="news-success" id="news-success">Welcome to the Book. First letter soon.</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="footer-legal">© 2026 Velonna Fine Jewellery. All rights reserved. Trademarks of Velonna Atelier Pvt. Ltd.</p>
+          <div class="footer-bottom-links">
+            <a href="#visit">Legal</a>
+            <a href="#visit">Privacy</a>
+            <a href="#visit">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================== FLOATING CONTACT ============================== -->
+    <a class="fab" href="https://wa.me/919900000000" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+        <path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.6A8.4 8.4 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+        <circle cx="9" cy="11.6" r="1" fill="currentColor" />
+        <circle cx="12.5" cy="11.6" r="1" fill="currentColor" />
+        <circle cx="16" cy="11.6" r="1" fill="currentColor" />
+      </svg>
+    </a>
+
+    <!-- ============================== CART DRAWER ============================== -->
+    <div class="drawer-overlay" id="cart-drawer" aria-hidden="true">
+      <aside class="drawer" role="dialog" aria-modal="true" aria-label="Cart">
+        <div class="drawer-head">
+          <span class="drawer-title">Your cart</span>
+          <button class="drawer-close" id="drawer-close" type="button" aria-label="Close cart">
+            <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div class="drawer-empty">
+          <p class="drawer-empty-title">Your cart is empty.</p>
+          <p class="drawer-empty-sub">Twelve pieces exist. None of them are in here yet.</p>
+          <a class="primary-btn drawer-link" href="#collections">Explore the collections</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ============================== APPOINTMENT MODAL ============================== -->
+    <div class="modal-overlay" id="reserve-modal" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" id="modal-close" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </button>
+        <div class="modal-left">
+          <img
+            class="modal-watch-img"
+            src="./assets/img/featured-rose.jpg"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="modal-left-overlay"></div>
+          <div class="modal-left-text">
+            <p class="modal-left-tag">Fort · Mumbai</p>
+            <h3 class="modal-left-title">The Velonna<br />Atelier</h3>
+          </div>
+        </div>
+        <div class="modal-right">
+          <p class="modal-eyebrow">Private appointment</p>
+          <h2 class="modal-title" id="modal-title">See it <em>in person</em></h2>
+          <p class="modal-subtitle">
+            Forty-five minutes at the Fort atelier or over video — the pieces, the bench, no obligation. We confirm within twenty-four hours.
+          </p>
+          <form class="modal-form" id="reserve-form" name="appointment" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="appointment" />
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-first">First Name</label>
+                <input id="f-first" name="first-name" type="text" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="f-last">Last Name</label>
+                <input id="f-last" name="last-name" type="text" required autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="f-email">Email Address</label>
+              <input id="f-email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="f-phone">Phone / WhatsApp</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label for="f-variant">Interest</label>
+              <select id="f-variant" name="interest" required>
+                <option value="rings">Rings</option>
+                <option value="earrings">Earrings</option>
+                <option value="pendants">Pendants</option>
+                <option value="bangles">Bangles</option>
+                <option value="toys">Toys</option>
+                <option value="bespoke">A bespoke commission</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-message">Anything we should prepare? (optional)</label>
+              <textarea id="f-message" name="message" rows="3"></textarea>
+            </div>
+            <button class="form-submit-btn" type="submit">Request appointment</button>
+            <p class="form-success" id="form-success">Thank you — we'll confirm within 24 hours.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./home.js?v=2"></script>
+  </body>
+</html>
