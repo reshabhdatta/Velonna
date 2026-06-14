@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "custom_liquid_mmn7YL": {
@@ -145,10 +154,6 @@
       "type": "_blocks",
       "settings": {}
     },
-    "hello_world_bar": {
-      "type": "hello-world-bar",
-      "settings": {}
-    },
     "all_products_section": {
       "type": "all-products",
       "settings": {
@@ -159,7 +164,6 @@
     }
   },
   "order": [
-    "hello_world_bar",
     "custom_liquid_mmn7YL",
     "collection_list_pwa6dE",
     "custom_liquid_AHGKtF",
