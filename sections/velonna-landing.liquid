@@ -424,8 +424,8 @@
         <img class="vl-hero-img" src="{{ section.settings.hero_image | image_url: width: 2000 }}"
           alt="{{ section.settings.hero_image.alt }}" loading="eager" />
       {% else %}
-        <img class="vl-hero-img" src="{{ 'featured-rose.jpg' | asset_url }}"
-          alt="Velonna" loading="eager" />
+        <video class="vl-hero-video" src="{{ 'y-drop.mp4' | asset_url }}"
+          autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
       {% endif %}
     </div>
     <div class="vl-hero-overlay"></div>
@@ -544,7 +544,8 @@
       <img class="vl-bleed-bg" src="{{ section.settings.bleed_image | image_url: width: 2000 }}"
         alt="" aria-hidden="true" loading="lazy" />
     {% else %}
-      <img class="vl-bleed-bg" src="{{ 'pink-rose.jpg' | asset_url }}" alt="" aria-hidden="true" loading="lazy" />
+      <video class="vl-bleed-bg" src="{{ 'extra.mp4' | asset_url }}"
+        autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
     {% endif %}
     <div class="vl-bleed-ov"></div>
     <div class="vl-bleed-cnt">
@@ -787,8 +788,4 @@
     { "type": "text",   "id": "ed2_caption", "label": "Image caption", "default": "Velonna · Rose en Pose · 2026" },
 
     { "type": "header", "content": "Reservation form" },
-    { "type": "image_picker", "id": "form_image", "label": "Side image" }
-  ],
-  "presets": [{ "name": "Velonna Landing" }]
-}
-{% endschema %}
+    { "type": "image_picker", "id": "form_image", "label": "Si
