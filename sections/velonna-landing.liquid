@@ -1,0 +1,794 @@
+{% comment %} VELONNA — Bold editorial landing page section {% endcomment %}
+
+<style>
+  /* ─── RESET ──────────────────────────────────────────────────────── */
+  .vl *, .vl *::before, .vl *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --vl-bg:        #080808;
+    --vl-cream:     #f5f0e8;
+    --vl-gold:      #d4af7a;
+    --vl-blush:     #e6b89a;
+    --vl-text-dk:   #1a1714;
+    --vl-rule:      rgba(212,175,122,0.22);
+    --vl-rule-lt:   rgba(212,175,122,0.10);
+  }
+
+  .vl {
+    background: var(--vl-bg);
+    color: #fff;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .vl img, .vl video { display: block; max-width: 100%; }
+  .vl a { color: inherit; text-decoration: none; }
+
+  /* ─── HERO ─────────────────────────────────────────────────────────── */
+  .vl-hero {
+    position: relative;
+    height: 100svh; min-height: 600px;
+    overflow: hidden;
+    display: flex; align-items: flex-end;
+  }
+  .vl-hero-bg {
+    position: absolute; inset: 0;
+    background: #080808;
+  }
+  .vl-hero-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.06);
+  }
+  .vl-hero-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.06);
+  }
+  .vl-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(8,8,8,0.3)  0%,
+      rgba(8,8,8,0.08) 40%,
+      rgba(8,8,8,0.72) 80%,
+      rgba(8,8,8,0.97) 100%
+    );
+  }
+  .vl-hero-wm {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(88px, 17vw, 230px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(212,175,122,0.10);
+    white-space: nowrap;
+    user-select: none; pointer-events: none;
+    will-change: transform;
+  }
+  .vl-hero-content {
+    position: relative; z-index: 2;
+    width: 100%; padding: 0 48px 80px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: flex-end; gap: 40px;
+  }
+  .vl-hero-tag {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 20px;
+  }
+  .vl-hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(50px, 7.5vw, 104px);
+    font-weight: 400; line-height: 0.96; letter-spacing: -0.01em;
+  }
+  .vl-hero-title .ln { overflow: hidden; display: block; }
+  .vl-hero-title .ln-i { display: block; transform: translateY(110%); }
+  .vl-hero-title em { font-style: italic; color: var(--vl-blush); }
+  .vl-hero-title .ruled {
+    display: flex; align-items: center; gap: 18px;
+  }
+  .vl-hero-title .ruled::before {
+    content: ''; display: block; flex-shrink: 0;
+    width: 56px; height: 1px; background: var(--vl-gold);
+  }
+  .vl-hero-right { text-align: right; padding-bottom: 6px; }
+  .vl-edition-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(64px, 9.5vw, 128px);
+    font-weight: 700; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.18);
+    display: block;
+  }
+  .vl-edition-lbl {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.38); display: block; margin-top: 4px;
+  }
+  .vl-scroll-cue {
+    position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); z-index: 2;
+  }
+  .vl-scroll-line {
+    width: 1px; height: 44px;
+    background: linear-gradient(to bottom, var(--vl-gold), transparent);
+    animation: vlScrollPulse 1.9s ease-in-out infinite;
+  }
+  @keyframes vlScrollPulse {
+    0%,100% { opacity:0.35; transform:scaleY(0.55); transform-origin:top; }
+    50%      { opacity:1;    transform:scaleY(1);    transform-origin:top; }
+  }
+
+  /* ─── MARQUEE BAND ──────────────────────────────────────────────────── */
+  .vl-band {
+    border-top: 1px solid var(--vl-rule);
+    border-bottom: 1px solid var(--vl-rule);
+    overflow: hidden; white-space: nowrap;
+    background: var(--vl-bg);
+  }
+  .vl-band-track {
+    display: inline-flex;
+    animation: vlMarquee 24s linear infinite;
+  }
+  .vl-band-group { display: inline-flex; align-items: center; padding: 17px 0; }
+  .vl-band-item {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); padding: 0 26px;
+  }
+  .vl-band-dot { color: var(--vl-gold); font-size: 15px; line-height: 1; }
+  @keyframes vlMarquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ─── STATEMENT ─────────────────────────────────────────────────────── */
+  .vl-statement {
+    padding: 130px 48px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    position: relative; overflow: hidden; background: var(--vl-bg);
+  }
+  .vl-statement::before {
+    content: '';
+    position: absolute; left: 48px; right: 48px; top: 50%;
+    height: 1px; background: var(--vl-rule);
+  }
+  .vl-statement-inner {
+    position: relative; z-index: 1; background: var(--vl-bg);
+    padding: 0 40px; max-width: 860px;
+  }
+  .vl-statement-q {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(30px, 5vw, 68px);
+    font-weight: 400; font-style: italic;
+    line-height: 1.2; color: var(--vl-cream);
+  }
+  .vl-statement-src {
+    margin-top: 26px;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--vl-gold);
+  }
+
+  /* ─── HERITAGE ──────────────────────────────────────────────────────── */
+  .vl-heritage {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 88vh; background: var(--vl-cream); color: var(--vl-text-dk);
+  }
+  .vl-heritage-vis { position: relative; overflow: hidden; }
+  .vl-heritage-vis img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 9s cubic-bezier(0.77,0,0.18,1);
+  }
+  .vl-heritage-vis:hover img { transform: scale(1.05); }
+  .vl-heritage-num {
+    position: absolute; top: 36px; left: 36px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 150px; font-weight: 700; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(26,23,20,0.10);
+    user-select: none; pointer-events: none;
+  }
+  .vl-heritage-txt { padding: 100px 76px; display: flex; flex-direction: column; justify-content: center; }
+  .vl-heritage-issue {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(26,23,20,0.4); margin-bottom: 38px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .vl-heritage-issue::before { content:''; display:block; width:30px; height:1px; background:var(--vl-gold); }
+  .vl-heritage-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(36px, 4.2vw, 56px);
+    font-weight: 400; line-height: 1.1; margin-bottom: 28px; color: var(--vl-text-dk);
+  }
+  .vl-heritage-title em { font-style: italic; color: #5a4a3a; }
+  .vl-heritage-body {
+    font-size: 14px; line-height: 1.9; color: rgba(26,23,20,0.65);
+    max-width: 400px; margin-bottom: 18px;
+  }
+  .vl-heritage-stats {
+    margin-top: 56px;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    border-top: 1px solid rgba(26,23,20,0.12); padding-top: 36px;
+  }
+  .vl-stat { padding-right: 20px; }
+  .vl-stat + .vl-stat { padding-left: 20px; border-left: 1px solid rgba(26,23,20,0.12); }
+  .vl-stat-n {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 44px; font-weight: 400; line-height: 1;
+    color: var(--vl-text-dk); display: block;
+  }
+  .vl-stat-l {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(26,23,20,0.42); display: block; margin-top: 7px;
+  }
+
+  /* ─── EDITORIAL SPLIT ───────────────────────────────────────────────── */
+  .vl-editorial { display: grid; grid-template-columns: 1fr 1fr; min-height: 78vh; background: var(--vl-bg); }
+  .vl-editorial.rev { direction: rtl; }
+  .vl-editorial-txt {
+    direction: ltr; padding: 120px 76px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--vl-rule);
+  }
+  .vl-editorial.rev .vl-editorial-txt { border-right: none; border-left: 1px solid var(--vl-rule); }
+  .vl-editorial-issue {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 36px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .vl-editorial-issue::before { content:''; display:block; width:30px; height:1px; background:var(--vl-gold); }
+  .vl-idx {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(72px, 9.5vw, 130px);
+    font-weight: 700; line-height: 0.9;
+    color: transparent; -webkit-text-stroke: 1px rgba(212,175,122,0.18);
+    margin-bottom: 14px; display: block;
+  }
+  .vl-editorial-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(34px, 3.8vw, 50px);
+    font-weight: 400; line-height: 1.1; margin-bottom: 24px;
+  }
+  .vl-editorial-title em { font-style: italic; color: var(--vl-blush); }
+  .vl-editorial-body {
+    font-size: 13px; line-height: 1.95;
+    color: rgba(255,255,255,0.5); max-width: 360px; margin-bottom: 44px;
+  }
+  .vl-editorial-lnk {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--vl-gold); display: flex; align-items: center; gap: 12px;
+    align-self: flex-start; transition: gap 0.3s;
+  }
+  .vl-editorial-lnk::after { content:'→'; font-family:'Inter',sans-serif; }
+  .vl-editorial-lnk:hover { gap: 22px; }
+  .vl-editorial-vis { direction: ltr; position: relative; overflow: hidden; }
+  .vl-editorial-vis img { width:100%; height:100%; object-fit:cover; }
+  .vl-editorial-cap {
+    position: absolute; bottom: 28px; right: 28px;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+    writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
+  }
+
+  /* ─── BLEED QUOTE ───────────────────────────────────────────────────── */
+  .vl-bleed {
+    position: relative; min-height: 68vh;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .vl-bleed-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .vl-bleed-ov { position: absolute; inset: 0; background: rgba(8,8,8,0.70); }
+  .vl-bleed-cnt {
+    position: relative; z-index: 1; text-align: center;
+    padding: 80px 48px; max-width: 780px;
+  }
+  .vl-bleed-ey {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 32px;
+  }
+  .vl-bleed-q {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(26px, 4.2vw, 54px);
+    font-weight: 400; font-style: italic; line-height: 1.28;
+    color: var(--vl-cream);
+  }
+  .vl-bleed-rule { width: 56px; height: 1px; background: var(--vl-gold); margin: 36px auto; }
+  .vl-bleed-cap {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+  }
+
+  /* ─── RESERVATION ───────────────────────────────────────────────────── */
+  .vl-reserve {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 88vh; background: var(--vl-cream); color: var(--vl-text-dk);
+  }
+  .vl-reserve-vis { position: relative; overflow: hidden; }
+  .vl-reserve-vis img { width: 100%; height: 100%; object-fit: cover; }
+  .vl-reserve-vis-ov {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(8,8,8,0), rgba(8,8,8,0.28));
+  }
+  .vl-reserve-vis-tag {
+    position: absolute; bottom: 44px; left: 44px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic; font-size: 19px;
+    color: rgba(255,255,255,0.82); line-height: 1.45;
+  }
+  .vl-reserve-vis-tag strong {
+    display: block; font-style: normal;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 6px; font-weight: 400;
+  }
+  .vl-reserve-form { padding: 80px 68px; display: flex; flex-direction: column; justify-content: center; }
+  .vl-reserve-ey {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(26,23,20,0.42); margin-bottom: 14px;
+  }
+  .vl-reserve-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 3.2vw, 46px);
+    font-weight: 400; line-height: 1.15; margin-bottom: 12px; color: var(--vl-text-dk);
+  }
+  .vl-reserve-title em { font-style: italic; }
+  .vl-reserve-sub {
+    font-size: 13px; line-height: 1.85;
+    color: rgba(26,23,20,0.58); max-width: 380px; margin-bottom: 44px;
+  }
+  .vl-form { display: flex; flex-direction: column; gap: 16px; }
+  .vl-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .vl-form-g { display: flex; flex-direction: column; gap: 6px; }
+  .vl-form-g label {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(26,23,20,0.46);
+  }
+  .vl-form-g input,
+  .vl-form-g select,
+  .vl-form-g textarea {
+    background: transparent; border: none;
+    border-bottom: 1px solid rgba(26,23,20,0.18);
+    padding: 10px 0; font-family: 'Inter', sans-serif;
+    font-size: 14px; color: var(--vl-text-dk);
+    width: 100%; outline: none; transition: border-color 0.25s;
+    -webkit-appearance: none; appearance: none; border-radius: 0;
+  }
+  .vl-form-g textarea { resize: none; min-height: 68px; }
+  .vl-form-g input:focus,
+  .vl-form-g select:focus,
+  .vl-form-g textarea:focus { border-bottom-color: var(--vl-gold); }
+  .vl-form-g input::placeholder,
+  .vl-form-g textarea::placeholder { color: rgba(26,23,20,0.28); }
+  .vl-submit {
+    margin-top: 6px; background: var(--vl-text-dk); color: var(--vl-cream);
+    padding: 15px 36px; font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    align-self: flex-start; cursor: pointer;
+    border: 1px solid var(--vl-text-dk); transition: background 0.25s, color 0.25s;
+  }
+  .vl-submit:hover { background: transparent; color: var(--vl-text-dk); }
+  .vl-form-note { margin-top: 14px; font-size: 11px; color: rgba(26,23,20,0.38); line-height: 1.6; }
+  .vl-form-success {
+    display: none; margin-top: 12px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic; font-size: 15px; color: #5a7a5a;
+  }
+  .vl-form-success.shown { display: block; }
+
+  /* ─── RESPONSIVE ────────────────────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .vl-hero-content { grid-template-columns: 1fr; padding: 0 24px 60px; }
+    .vl-hero-right { display: none; }
+    .vl-statement { padding: 80px 24px; }
+    .vl-heritage, .vl-editorial, .vl-reserve { grid-template-columns: 1fr; }
+    .vl-heritage-vis, .vl-editorial-vis, .vl-reserve-vis { min-height: 55vw; }
+    .vl-heritage-txt { padding: 56px 28px; }
+    .vl-editorial-txt { padding: 60px 28px; border-right: none !important; border-left: none !important; border-bottom: 1px solid var(--vl-rule); }
+    .vl-editorial.rev { direction: ltr; }
+    .vl-reserve-form { padding: 56px 28px; }
+    .vl-form-row { grid-template-columns: 1fr; }
+    .vl-bleed-cnt { padding: 60px 24px; }
+    .vl-band-item { padding: 0 18px; }
+  }
+</style>
+
+<div class="vl" id="vl-root">
+
+  <!-- HERO -->
+  <section class="vl-hero">
+    <div class="vl-hero-bg">
+      {% if section.settings.hero_video != blank %}
+        <video class="vl-hero-video" src="{{ section.settings.hero_video }}"
+          autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+      {% elsif section.settings.hero_image != blank %}
+        <img class="vl-hero-img" src="{{ section.settings.hero_image | image_url: width: 2000 }}"
+          alt="{{ section.settings.hero_image.alt }}" loading="eager" />
+      {% else %}
+        <img class="vl-hero-img" src="{{ 'featured-rose.jpg' | asset_url }}"
+          alt="Velonna" loading="eager" />
+      {% endif %}
+    </div>
+    <div class="vl-hero-overlay"></div>
+    <div class="vl-hero-wm" aria-hidden="true">VELONNA</div>
+    <div class="vl-hero-content">
+      <div>
+        <p class="vl-hero-tag" id="vl-hero-tag">{{ section.settings.hero_tag }}</p>
+        <h1 class="vl-hero-title">
+          <span class="ln"><span class="ln-i" id="vl-ln1">{{ section.settings.hero_line1 }}</span></span>
+          <span class="ln"><span class="ln-i" id="vl-ln2"><em>{{ section.settings.hero_line2 }}</em></span></span>
+          <span class="ln"><span class="ln-i ruled" id="vl-ln3">{{ section.settings.hero_line3 }}</span></span>
+        </h1>
+      </div>
+      <div class="vl-hero-right">
+        <span class="vl-edition-num">{{ section.settings.edition_number }}</span>
+        <span class="vl-edition-lbl">{{ section.settings.edition_label }}</span>
+      </div>
+    </div>
+    <div class="vl-scroll-cue" aria-hidden="true">
+      <span class="vl-scroll-line"></span>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE BAND -->
+  <div class="vl-band" aria-hidden="true">
+    <div class="vl-band-track">
+      <div class="vl-band-group">
+        <span class="vl-band-item">Hand-set in Mumbai</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">Twelve numbered editions</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">Signed inside the band</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">Guaranteed a century</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">IGI certified stones</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">Master jeweller Helena Marsh</span><span class="vl-band-dot">·</span>
+      </div>
+      <div class="vl-band-group">
+        <span class="vl-band-item">Hand-set in Mumbai</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">Twelve numbered editions</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">Signed inside the band</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">Guaranteed a century</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">IGI certified stones</span><span class="vl-band-dot">·</span>
+        <span class="vl-band-item">Master jeweller Helena Marsh</span><span class="vl-band-dot">·</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATEMENT -->
+  <section class="vl-statement">
+    <div class="vl-statement-inner">
+      <p class="vl-statement-q">"{{ section.settings.statement_quote }}"</p>
+      <p class="vl-statement-src">{{ section.settings.statement_source }}</p>
+    </div>
+  </section>
+
+  <!-- HERITAGE -->
+  <section class="vl-heritage" id="vl-heritage">
+    <div class="vl-heritage-vis">
+      {% if section.settings.heritage_image != blank %}
+        <img src="{{ section.settings.heritage_image | image_url: width: 1400 }}"
+          alt="{{ section.settings.heritage_image.alt }}" loading="lazy" />
+      {% else %}
+        <img src="{{ 'emerald-necklace-1.jpg' | asset_url }}" alt="Velonna atelier" loading="lazy" />
+      {% endif %}
+      <span class="vl-heritage-num" aria-hidden="true">12</span>
+    </div>
+    <div class="vl-heritage-txt">
+      <p class="vl-heritage-issue">{{ section.settings.heritage_location }}</p>
+      <h2 class="vl-heritage-title">
+        {{ section.settings.heritage_title | newline_to_br }}
+      </h2>
+      <p class="vl-heritage-body">{{ section.settings.heritage_body1 }}</p>
+      <p class="vl-heritage-body">{{ section.settings.heritage_body2 }}</p>
+      <div class="vl-heritage-stats">
+        <div class="vl-stat">
+          <span class="vl-stat-n">{{ section.settings.stat1_num }}</span>
+          <span class="vl-stat-l">{{ section.settings.stat1_label }}</span>
+        </div>
+        <div class="vl-stat">
+          <span class="vl-stat-n">{{ section.settings.stat2_num }}</span>
+          <span class="vl-stat-l">{{ section.settings.stat2_label }}</span>
+        </div>
+        <div class="vl-stat">
+          <span class="vl-stat-n">{{ section.settings.stat3_num }}</span>
+          <span class="vl-stat-l">{{ section.settings.stat3_label }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL 1 -->
+  <section class="vl-editorial" id="vl-craft">
+    <div class="vl-editorial-txt">
+      <p class="vl-editorial-issue">{{ section.settings.ed1_issue }}</p>
+      <span class="vl-idx" aria-hidden="true">01</span>
+      <h2 class="vl-editorial-title">{{ section.settings.ed1_title | newline_to_br }}</h2>
+      <p class="vl-editorial-body">{{ section.settings.ed1_body }}</p>
+      <a class="vl-editorial-lnk" href="#vl-reserve">{{ section.settings.ed1_cta }}</a>
+    </div>
+    <div class="vl-editorial-vis">
+      {% if section.settings.ed1_image != blank %}
+        <img src="{{ section.settings.ed1_image | image_url: width: 1200 }}"
+          alt="{{ section.settings.ed1_image.alt }}" loading="lazy" />
+      {% else %}
+        <img src="{{ 'floral-rings.jpg' | asset_url }}" alt="Velonna craftsmanship" loading="lazy" />
+      {% endif %}
+      <span class="vl-editorial-cap">{{ section.settings.ed1_caption }}</span>
+    </div>
+  </section>
+
+  <!-- FULL-BLEED INTERLUDE -->
+  <section class="vl-bleed">
+    {% if section.settings.bleed_video != blank %}
+      <video class="vl-bleed-bg" src="{{ section.settings.bleed_video }}"
+        autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
+    {% elsif section.settings.bleed_image != blank %}
+      <img class="vl-bleed-bg" src="{{ section.settings.bleed_image | image_url: width: 2000 }}"
+        alt="" aria-hidden="true" loading="lazy" />
+    {% else %}
+      <img class="vl-bleed-bg" src="{{ 'pink-rose.jpg' | asset_url }}" alt="" aria-hidden="true" loading="lazy" />
+    {% endif %}
+    <div class="vl-bleed-ov"></div>
+    <div class="vl-bleed-cnt">
+      <p class="vl-bleed-ey">{{ section.settings.bleed_eyebrow }}</p>
+      <p class="vl-bleed-q">"{{ section.settings.bleed_quote }}"</p>
+      <div class="vl-bleed-rule"></div>
+      <p class="vl-bleed-cap">{{ section.settings.bleed_caption }}</p>
+    </div>
+  </section>
+
+  <!-- EDITORIAL 2 (reversed) -->
+  <section class="vl-editorial rev" id="vl-collection">
+    <div class="vl-editorial-txt">
+      <p class="vl-editorial-issue">{{ section.settings.ed2_issue }}</p>
+      <span class="vl-idx" aria-hidden="true">02</span>
+      <h2 class="vl-editorial-title">{{ section.settings.ed2_title | newline_to_br }}</h2>
+      <p class="vl-editorial-body">{{ section.settings.ed2_body }}</p>
+      <a class="vl-editorial-lnk" href="#vl-reserve">{{ section.settings.ed2_cta }}</a>
+    </div>
+    <div class="vl-editorial-vis">
+      {% if section.settings.ed2_image != blank %}
+        <img src="{{ section.settings.ed2_image | image_url: width: 1200 }}"
+          alt="{{ section.settings.ed2_image.alt }}" loading="lazy" />
+      {% else %}
+        <img src="{{ 'pink-rose.jpg' | asset_url }}" alt="Velonna Rose en Pose" loading="lazy" />
+      {% endif %}
+      <span class="vl-editorial-cap">{{ section.settings.ed2_caption }}</span>
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section class="vl-reserve" id="vl-reserve">
+    <div class="vl-reserve-vis">
+      {% if section.settings.form_image != blank %}
+        <img src="{{ section.settings.form_image | image_url: width: 1200 }}"
+          alt="{{ section.settings.form_image.alt }}" loading="lazy" />
+      {% else %}
+        <img src="{{ 'featured-rose.jpg' | asset_url }}" alt="" loading="lazy" />
+      {% endif %}
+      <div class="vl-reserve-vis-ov"></div>
+      <div class="vl-reserve-vis-tag">
+        <strong>Private Viewing</strong>
+        Twelve pieces,<br />one conversation.
+      </div>
+    </div>
+    <div class="vl-reserve-form">
+      <p class="vl-reserve-ey">Velonna Atelier</p>
+      <h2 class="vl-reserve-title">Secure Your<br /><em>Piece</em></h2>
+      <p class="vl-reserve-sub">
+        One of twelve numbered editions. We'll reply within forty-eight hours to arrange a private viewing or video consultation at our Mumbai atelier.
+      </p>
+      <form class="vl-form" id="vl-reserve-form" action="/contact#vl-reserve" method="POST">
+        <input type="hidden" name="form_type" value="contact" />
+        <input type="hidden" name="utf8" value="✓" />
+        <div class="vl-form-row">
+          <div class="vl-form-g">
+            <label for="vl-first">First name</label>
+            <input id="vl-first" name="contact[first_name]" type="text" required placeholder="Helena" autocomplete="given-name" />
+          </div>
+          <div class="vl-form-g">
+            <label for="vl-last">Last name</label>
+            <input id="vl-last" name="contact[last_name]" type="text" required placeholder="Marsh" autocomplete="family-name" />
+          </div>
+        </div>
+        <div class="vl-form-g">
+          <label for="vl-email">Email address</label>
+          <input id="vl-email" name="contact[email]" type="email" required placeholder="you@example.com" autocomplete="email" />
+        </div>
+        <div class="vl-form-g">
+          <label for="vl-phone">Phone / WhatsApp</label>
+          <input id="vl-phone" name="contact[phone]" type="tel" placeholder="+91 98000 00000" autocomplete="tel" />
+        </div>
+        <div class="vl-form-g">
+          <label for="vl-piece">Preferred piece</label>
+          <select id="vl-piece" name="contact[piece]">
+            <option value="">— Select —</option>
+            <option>The Emerald Suite</option>
+            <option>Velonna Botanica</option>
+            <option>Rose en Pose</option>
+            <option>Dawn Solitaire</option>
+            <option>Bespoke — let's talk</option>
+          </select>
+        </div>
+        <div class="vl-form-g">
+          <label for="vl-msg">Message <span style="opacity:0.5">(optional)</span></label>
+          <textarea id="vl-msg" name="contact[body]" rows="3" placeholder="Tell us about the occasion..."></textarea>
+        </div>
+        <button class="vl-submit" type="submit">Submit Reservation</button>
+        <p class="vl-form-note">Handled personally by Helena Marsh. We never share your details.</p>
+        <p class="vl-form-success" id="vl-success">Thank you — we'll be in touch within 48 hours.</p>
+      </form>
+    </div>
+  </section>
+
+</div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+
+<script>
+(function() {
+  function init() {
+    var gsap = window.gsap;
+    var ST   = window.ScrollTrigger;
+    if (!gsap || !ST) { setTimeout(init, 80); return; }
+    gsap.registerPlugin(ST);
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    // Hero entrance
+    var lines = document.querySelectorAll('.vl-hero-title .ln-i');
+    gsap.set(lines, { yPercent: 112 });
+    gsap.set('#vl-hero-tag', { opacity: 0, y: 16 });
+    gsap.set('.vl-hero-wm', { opacity: 0 });
+
+    gsap.timeline({ defaults: { ease: 'power4.out' } })
+      .to('.vl-hero-video, .vl-hero-img', { scale: 1, duration: 2.4, ease: 'power3.out' }, 0)
+      .to('.vl-hero-wm', { opacity: 1, duration: 1.8 }, 0.2)
+      .to(lines, { yPercent: 0, duration: 1.25, stagger: 0.13 }, 0.55)
+      .to('#vl-hero-tag', { opacity: 1, y: 0, duration: 1.0 }, 0.9);
+
+    // Watermark parallax
+    gsap.to('.vl-hero-wm', {
+      yPercent: 28,
+      scrollTrigger: { trigger: '.vl-hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+
+    // Bleed bg parallax
+    gsap.to('.vl-bleed-bg', {
+      scale: 1.1,
+      scrollTrigger: { trigger: '.vl-bleed', start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+
+    // Heritage image parallax
+    gsap.to('.vl-heritage-vis img', {
+      scale: 1.07,
+      scrollTrigger: { trigger: '.vl-heritage', start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+
+    // Generic scroll reveals
+    document.querySelectorAll('.vl-heritage-issue, .vl-heritage-title, .vl-heritage-body, .vl-heritage-stats, .vl-statement-inner, .vl-editorial-issue, .vl-idx, .vl-editorial-title, .vl-editorial-body, .vl-editorial-lnk, .vl-bleed-ey, .vl-bleed-q, .vl-bleed-rule, .vl-bleed-cap, .vl-reserve-title, .vl-reserve-sub').forEach(function(el) {
+      gsap.from(el, {
+        opacity: 0, y: 32, duration: 1.1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 84%', toggleActions: 'play none none reverse' }
+      });
+    });
+
+    setTimeout(function() { ST.refresh(); }, 700);
+    window.addEventListener('load', function() { ST.refresh(); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Video pause offscreen
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        e.isIntersecting ? e.target.play().catch(function(){}) : e.target.pause();
+      });
+    }, { rootMargin: '120px' });
+    document.querySelectorAll('.vl video').forEach(function(v) { io.observe(v); });
+  });
+
+  // Form success flash
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('vl-reserve-form');
+    var ok   = document.getElementById('vl-success');
+    if (!form) return;
+    // Show success if Shopify redirected back with ?form_success
+    if (window.location.search.indexOf('form_success') !== -1 && ok) {
+      ok.classList.add('shown');
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Velonna Landing",
+  "tag": "div",
+  "class": "vl-section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "url",    "id": "hero_video",   "label": "Hero video URL (paste Shopify Files CDN link)" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero fallback image" },
+    { "type": "text",   "id": "hero_tag",     "label": "Hero tag line",  "default": "Mumbai · Est. 2014 · Limited Edition" },
+    { "type": "text",   "id": "hero_line1",   "label": "Title line 1",   "default": "An Heirloom" },
+    { "type": "text",   "id": "hero_line2",   "label": "Title line 2 (italic)", "default": "In Light" },
+    { "type": "text",   "id": "hero_line3",   "label": "Title line 3",   "default": "& Stone" },
+    { "type": "text",   "id": "edition_number", "label": "Edition number", "default": "12" },
+    { "type": "text",   "id": "edition_label",  "label": "Edition label",  "default": "Numbered Editions" },
+
+    { "type": "header", "content": "Statement" },
+    { "type": "text",   "id": "statement_quote",  "label": "Quote",  "default": "Worn today. Worn a century from now." },
+    { "type": "text",   "id": "statement_source", "label": "Source", "default": "The Velonna Atelier · 2014" },
+
+    { "type": "header", "content": "Heritage" },
+    { "type": "image_picker", "id": "heritage_image",    "label": "Heritage image" },
+    { "type": "text",   "id": "heritage_location", "label": "Location tag", "default": "The Atelier · 12 Forbes St, Fort, Mumbai" },
+    { "type": "textarea","id": "heritage_title",   "label": "Title (use newlines)", "default": "A Decade\nof Quiet\nMastery" },
+    { "type": "textarea","id": "heritage_body1",   "label": "Body paragraph 1", "default": "Founded above a quiet street in Fort, Mumbai, Velonna has held to a single conviction — that a jewel made slowly by hand will outlast every trend surrounding it." },
+    { "type": "textarea","id": "heritage_body2",   "label": "Body paragraph 2", "default": "Every piece begins with a stone selected in person, ends with a master jeweller's signature on the inside, and travels with the Book that records both. There are no batches, no seasons. Only twelve." },
+    { "type": "text",   "id": "stat1_num",   "label": "Stat 1 number", "default": "412" },
+    { "type": "text",   "id": "stat1_label", "label": "Stat 1 label",  "default": "Hours per piece" },
+    { "type": "text",   "id": "stat2_num",   "label": "Stat 2 number", "default": "12" },
+    { "type": "text",   "id": "stat2_label", "label": "Stat 2 label",  "default": "Numbered pieces" },
+    { "type": "text",   "id": "stat3_num",   "label": "Stat 3 number", "default": "100yr" },
+    { "type": "text",   "id": "stat3_label", "label": "Stat 3 label",  "default": "Guarantee" },
+
+    { "type": "header", "content": "Editorial section 1" },
+    { "type": "text",   "id": "ed1_issue",   "label": "Eyebrow",  "default": "Savoir-faire · The Edition" },
+    { "type": "textarea","id": "ed1_title",  "label": "Title",    "default": "The Anatomy\nof Light" },
+    { "type": "textarea","id": "ed1_body",   "label": "Body",     "default": "Seventy-five components. Every prong shaped by a human eye, every stone seated without a jig. What you hold is not a product — it is a record of decisions made by a single pair of hands across more than four hundred hours." },
+    { "type": "text",   "id": "ed1_cta",     "label": "CTA text", "default": "Book a private viewing" },
+    { "type": "image_picker", "id": "ed1_image", "label": "Image" },
+    { "type": "text",   "id": "ed1_caption", "label": "Image caption", "default": "Velonna · Botanica · Edition 2026" },
+
+    { "type": "header", "content": "Full-bleed interlude" },
+    { "type": "url",    "id": "bleed_video",   "label": "Bleed video URL" },
+    { "type": "image_picker", "id": "bleed_image", "label": "Bleed fallback image" },
+    { "type": "text",   "id": "bleed_eyebrow", "label": "Eyebrow",  "default": "The Rose Collection · Dawn Solitaire" },
+    { "type": "textarea","id": "bleed_quote",  "label": "Quote",    "default": "Not for the world to see. For the one who wears it to feel." },
+    { "type": "text",   "id": "bleed_caption", "label": "Caption",  "default": "No. 01 / 12 · Helena Marsh · Mumbai" },
+
+    { "type": "header", "content": "Editorial section 2" },
+    { "type": "text",   "id": "ed2_issue",   "label": "Eyebrow",  "default": "The Rose Collection" },
+    { "type": "textarea","id": "ed2_title",  "label": "Title",    "default": "Rose\nen Pose" },
+    { "type": "textarea","id": "ed2_body",   "label": "Body",     "default": "Pink-pavé sapphire petals. White-diamond thorny vines wrapping the shank twice. Two closed buds on slim rose-gold stems. One ring. One wearer. Signed at the root." },
+    { "type": "text",   "id": "ed2_cta",     "label": "CTA text", "default": "Reserve this piece" },
+    { "type": "image_picker", "id": "ed2_image", "label": "Image" },
+    { "type": "text",   "id": "ed2_caption", "label": "Image caption", "default": "Velonna · Rose en Pose · 2026" },
+
+    { "type": "header", "content": "Reservation form" },
+    { "type": "image_picker", "id": "form_image", "label": "Side image" }
+  ],
+  "presets": [{ "name": "Velonna Landing" }]
+}
+{% endschema %}
