@@ -9,6 +9,23 @@
  */
 {
   "sections": {
+    "velonna_entry": {
+      "type": "velonna-entry",
+      "settings": {
+        "eyebrow": "The Velonna Atelier · Est. 2014",
+        "headline": "How would you like\nto treat yourself\ntoday?",
+        "silver_label": "Silver",
+        "silver_sub": "For the everyday ritual",
+        "silver_cta": "Explore",
+        "diamond_label": "Lab-Grown Diamonds",
+        "diamond_sub": "Light, held forever",
+        "diamond_cta": "Explore",
+        "both_label": "The Full Atelier",
+        "both_sub": "Show me everything",
+        "both_cta": "Enter",
+        "skip_label": "Enter the atelier"
+      }
+    },
     "velonna_landing": {
       "type": "velonna-landing",
       "settings": {
@@ -23,7 +40,7 @@
         "heritage_location": "The Atelier · 12 Forbes St, Fort, Mumbai",
         "heritage_title": "A Decade\nof Quiet\nMastery",
         "heritage_body1": "Founded above a quiet street in Fort, Mumbai, Velonna has held to a single conviction — that a jewel made slowly by hand will outlast every trend surrounding it.",
-        "heritage_body2": "Every piece begins with a stone selected in person, ends with a master jeweller’s signature on the inside, and travels with the Book that records both. There are no batches, no seasons. Only twelve.",
+        "heritage_body2": "Every piece begins with a stone selected in person, ends with a master jeweller's signature on the inside, and travels with the Book that records both. There are no batches, no seasons. Only twelve.",
         "stat1_num": "412",
         "stat1_label": "Hours per piece",
         "stat2_num": "12",
@@ -47,6 +64,7 @@
     }
   },
   "order": [
+    "velonna_entry",
     "velonna_landing"
   ]
 }
