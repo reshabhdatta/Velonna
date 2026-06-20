@@ -557,6 +557,49 @@
     .vl-watch-right { display: none; }
     .vl-watch-specs { grid-template-columns: 1fr; }
   }
+  
+  .vl-watch-tagline {
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(200,169,110,0.65); margin: 8px 0 0;
+  }
+  .vl-watch-specs-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 20px;
+    margin: 24px 0 28px; border-top: 1px solid rgba(200,169,110,0.15);
+    padding-top: 24px;
+  }
+  .vl-watch-spec-block { }
+  .vl-wspec-label {
+    display: block; font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #c8a96e; margin-bottom: 5px;
+  }
+  .vl-wspec-val {
+    display: block; font-size: 16px; font-weight: 300;
+    color: #f5efe6; letter-spacing: 0.04em;
+  }
+  .vl-watch-materials { margin-bottom: 24px; }
+  .vl-watch-mat-title {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(200,169,110,0.6); margin: 0 0 12px;
+  }
+  .vl-watch-mat-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px;
+  }
+  .vl-watch-mat {
+    font-size: 11px; line-height: 1.55; color: rgba(245,239,230,0.55);
+    border-left: 1px solid rgba(200,169,110,0.3); padding-left: 10px;
+  }
+  .vl-watch-mat strong {
+    display: block; color: rgba(245,239,230,0.85); font-weight: 400;
+    margin-bottom: 2px;
+  }
+  .vl-watch-features {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
+  }
+  .vl-watch-feat {
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(200,169,110,0.75); border: 1px solid rgba(200,169,110,0.25);
+    padding: 5px 10px;
+  }
   </style>
 
 <div class="vl" id="vl-root">
@@ -917,10 +960,8 @@
 
 </div><!-- /vl -->
 
-
-
   <!-- WATCH LANDING OVERLAY -->
-  <div class="vl-watch-overlay" id="vl-watch-overlay" aria-modal="true" role="dialog" aria-label="Watch Collection">
+  <div class="vl-watch-overlay" id="vl-watch-overlay" aria-modal="true" role="dialog" aria-label="Velonna Solstice">
     <video class="vl-watch-bg" src="{{ 'rose-gold-watch.mp4' | asset_url }}"
       autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
     <div class="vl-watch-bg-ov"></div>
@@ -931,44 +972,93 @@
 
     <div class="vl-watch-inner">
 
+      <!-- LEFT: Identity + Story + Specs -->
       <div class="vl-watch-left">
-        <p class="vl-watch-eyebrow">Velonna Haute Horlogerie · 2026</p>
-        <h1 class="vl-watch-title">The&nbsp;Rose<br><em>Chronograph</em></h1>
+        <p class="vl-watch-eyebrow">Velonna Haute Horlogerie · Limited to 18 Pieces</p>
+        <h1 class="vl-watch-title">Velonna<br><em>Solstice</em></h1>
+        <p class="vl-watch-tagline">Time Is Energy</p>
         <div class="vl-watch-rule"></div>
+
         <p class="vl-watch-body">
-          Eighteen-carat rose gold. A dial paved in pink sapphires cut to mirror the
-          bloom you saw on the ring. Forty hours of power reserve, hand-wound. The
-          crown is a single cabochon ruby — placed where a thorn would be.
+          Three concentric rings orbit a floating sapphire core held aloft by magnetic
+          levitation — no hands, no traditional complications. The outer ring marks
+          hours completing one rotation every 12 hours; the inner ring marks minutes
+          in 60. A single diamond marker aligns with the scale to tell the time.
         </p>
         <p class="vl-watch-body">
-          This is not a watch for every wrist. It is for the one who already owns
-          the ring, and wants time itself to match.
+          The case is Nano Carbon Titanium — ultra-light at 48 grams — clad in
+          18-carat rose gold, contoured and hand-polished. The crystal is sapphire
+          with anti-reflective coating. The diamonds are lab-grown, VS clarity.
         </p>
-        <ul class="vl-watch-specs">
-          <li><span>Case</span> 38 mm · 18ct Rose Gold</li>
-          <li><span>Movement</span> In-house Cal. VL-01 · Hand-wound</li>
-          <li><span>Dial</span> Pink Sapphire Pavé · 312 stones</li>
-          <li><span>Strap</span> Blush alligator · deployant clasp</li>
-          <li><span>Edition</span> 6 pieces worldwide</li>
-          <li><span>Guarantee</span> 100 years</li>
-        </ul>
+
+        <!-- Specs grid -->
+        <div class="vl-watch-specs-grid">
+          <div class="vl-watch-spec-block">
+            <span class="vl-wspec-label">Diameter</span>
+            <span class="vl-wspec-val">44.10 mm</span>
+          </div>
+          <div class="vl-watch-spec-block">
+            <span class="vl-wspec-label">Thickness</span>
+            <span class="vl-wspec-val">13.70 mm</span>
+          </div>
+          <div class="vl-watch-spec-block">
+            <span class="vl-wspec-label">Weight</span>
+            <span class="vl-wspec-val">48 g</span>
+          </div>
+          <div class="vl-watch-spec-block">
+            <span class="vl-wspec-label">Water Resistant</span>
+            <span class="vl-wspec-val">30 M</span>
+          </div>
+          <div class="vl-watch-spec-block">
+            <span class="vl-wspec-label">Power Reserve</span>
+            <span class="vl-wspec-val">72 Hours</span>
+          </div>
+          <div class="vl-watch-spec-block">
+            <span class="vl-wspec-label">Edition</span>
+            <span class="vl-wspec-val">18 Pieces</span>
+          </div>
+        </div>
+
+        <!-- Materials -->
+        <div class="vl-watch-materials">
+          <p class="vl-watch-mat-title">Material Innovation</p>
+          <div class="vl-watch-mat-row">
+            <div class="vl-watch-mat"><strong>Nano Carbon Titanium</strong> Ultra Light &amp; Extremely Strong</div>
+            <div class="vl-watch-mat"><strong>18K Rose Gold</strong> Contoured &amp; Hand Polished</div>
+            <div class="vl-watch-mat"><strong>Sapphire Crystal</strong> Anti Reflective Coating</div>
+            <div class="vl-watch-mat"><strong>Lab Grown Diamonds</strong> VS Clarity</div>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="vl-watch-features">
+          <div class="vl-watch-feat">Floating Orbital Tourbillon</div>
+          <div class="vl-watch-feat">360° Rotation</div>
+          <div class="vl-watch-feat">Solar Energy Capture Ring</div>
+          <div class="vl-watch-feat">Real Time Energy Indicator</div>
+          <div class="vl-watch-feat">Integrated Flex Strap</div>
+          <div class="vl-watch-feat">Hand Finished Details</div>
+        </div>
+
         <div class="vl-watch-price-row">
           <span class="vl-watch-price">Price on request</span>
           <a href="#vl-reserve" class="vl-watch-cta" id="vl-watch-cta">Reserve a Private Viewing</a>
         </div>
       </div>
 
+      <!-- RIGHT: Stats -->
       <div class="vl-watch-right">
         <div class="vl-watch-stat-col">
-          <div class="vl-watch-stat"><strong>6</strong><span>Pieces</span></div>
-          <div class="vl-watch-stat"><strong>312</strong><span>Sapphires</span></div>
-          <div class="vl-watch-stat"><strong>40h</strong><span>Reserve</span></div>
+          <div class="vl-watch-stat"><strong>18</strong><span>Pieces<br>Worldwide</span></div>
+          <div class="vl-watch-stat"><strong>72h</strong><span>Power<br>Reserve</span></div>
+          <div class="vl-watch-stat"><strong>3</strong><span>Orbital<br>Rings</span></div>
           <div class="vl-watch-stat"><strong>100yr</strong><span>Guarantee</span></div>
         </div>
       </div>
 
     </div>
   </div>
+
 
 {% schema %}
 {
