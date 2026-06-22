@@ -457,6 +457,28 @@
   [data-section-type="localization"] { display: none !important; }
 </style>
 
+
+<style>
+  /* Hide Gold nav item */
+  .header__menu-item[href*="gold"]:not([href*="lab"]),
+  .menu-drawer__menu-item[href*="gold"]:not([href*="lab"]) { display: none !important; }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a.header__menu-item, a.menu-drawer__menu-item, summary').forEach(function(el) {
+      if (el.textContent.trim().toLowerCase() === 'gold') {
+        var parent = el.closest('li, details');
+        if (parent) parent.style.display = 'none';
+      }
+      if (el.textContent.trim().toLowerCase() === 'lab grown') {
+        el.textContent = 'Created Diamonds';
+        var span = el.querySelector('span');
+        if (span && span.textContent.trim().toLowerCase() === 'lab grown') span.textContent = 'Created Diamonds';
+      }
+    });
+  });
+</script>
+
 {% schema %}
 {
   "name": "t:sections.header.name",
