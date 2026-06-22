@@ -321,6 +321,25 @@
   </div>
 </footer>
 
+<style>
+  /* Logo pushed left */
+  .footer__brand,
+  .footer-block--brand,
+  .footer__logo-wrapper,
+  .footer-content__item:first-child,
+  .footer__column:first-child {
+    margin-right: auto !important;
+    padding-right: 4rem !important;
+  }
+  .footer__logo,
+  .footer-brand__image,
+  .site-footer__logo img,
+  .footer__brand img {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+</style>
+
 {% schema %}
 {
   "name": "t:sections.footer.name",
