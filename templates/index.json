@@ -12,21 +12,17 @@
     "velonna_entry": {
       "type": "velonna-entry",
       "settings": {
-        "eyebrow": "The Velonna Atelier · Est. 2014",
-        "headline": "What would you like\nto discover\ntoday?",
+        "eyebrow": "The Velonna Atelier",
+        "headline": "Two materials.\\nOne atelier.",
         "silver_label": "Silver",
         "silver_sub": "For the everyday ritual",
         "silver_cta": "Explore",
-        "silver_url": "/pages/silver",
-        "both_label": "Explore\nAll",
+        "both_label": "Explore\\nAll",
         "both_sub": "The full Velonna atelier",
         "both_cta": "Enter",
-        "both_url": "/",
-        "diamond_label": "Created\nDiamonds",
+        "diamond_label": "Created\\nDiamonds",
         "diamond_sub": "Light, made by science",
-        "diamond_cta": "Explore",
-        "diamond_url": "/pages/lab-grown",
-        "skip_label": "Enter the atelier"
+        "diamond_cta": "Explore"
       }
     },
     "velonna_landing": {
