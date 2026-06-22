@@ -13,14 +13,14 @@
       "type": "velonna-entry",
       "settings": {
         "eyebrow": "The Velonna Atelier",
-        "headline": "Two materials.\\nOne atelier.",
+        "headline": "Two materials.\nOne atelier.",
         "silver_label": "Silver",
         "silver_sub": "For the everyday ritual",
         "silver_cta": "Explore",
-        "both_label": "Explore\\nAll",
+        "both_label": "Explore\nAll",
         "both_sub": "The full Velonna atelier",
         "both_cta": "Enter",
-        "diamond_label": "Created\\nDiamonds",
+        "diamond_label": "Created\nDiamonds",
         "diamond_sub": "Light, made by science",
         "diamond_cta": "Explore"
       }
