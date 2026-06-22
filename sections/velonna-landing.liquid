@@ -600,6 +600,115 @@
     color: rgba(200,169,110,0.75); border: 1px solid rgba(200,169,110,0.25);
     padding: 5px 10px;
   }
+  
+  /* WATCH OVERLAY */
+  .vl-cs { cursor: pointer; }
+  .vl-cs::after {
+    content: 'Discover more →';
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #c8a96e; z-index: 3;
+  }
+  .vl-watch-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transform: translateY(60px);
+    transition: opacity 0.55s cubic-bezier(.4,0,.2,1), transform 0.55s cubic-bezier(.4,0,.2,1);
+  }
+  .vl-watch-overlay.open {
+    opacity: 1; pointer-events: all; transform: translateY(0);
+  }
+  .vl-watch-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+  }
+  .vl-watch-bg-ov {
+    position: absolute; inset: 0;
+    background: rgba(6,6,6,0.82); z-index: 1;
+  }
+  .vl-watch-close {
+    position: absolute; top: 28px; right: 32px; z-index: 10;
+    width: 44px; height: 44px; background: none; border: 1px solid rgba(200,169,110,0.4);
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 6px;
+    transition: border-color 0.2s;
+  }
+  .vl-watch-close:hover { border-color: #c8a96e; }
+  .vl-watch-close span {
+    display: block; width: 18px; height: 1px; background: #f5efe6;
+    transform-origin: center;
+    transition: transform 0.25s;
+  }
+  .vl-watch-close span:first-child { transform: rotate(45deg) translate(0, 3.5px); }
+  .vl-watch-close span:last-child  { transform: rotate(-45deg) translate(0, -3.5px); }
+  .vl-watch-inner {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 100%; padding: 80px clamp(24px, 7vw, 120px);
+    gap: 60px; overflow-y: auto;
+  }
+  .vl-watch-left { max-width: 560px; color: #f5efe6; }
+  .vl-watch-eyebrow {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #c8a96e; margin: 0 0 24px;
+  }
+  .vl-watch-title {
+    font-size: clamp(42px, 6vw, 80px); font-weight: 300;
+    line-height: 1.05; letter-spacing: 0.04em;
+    text-transform: uppercase; margin: 0;
+  }
+  .vl-watch-title em { font-style: italic; color: #c8a96e; }
+  .vl-watch-rule { width: 48px; height: 1px; background: #c8a96e; margin: 28px 0; }
+  .vl-watch-body {
+    font-size: 15px; line-height: 1.75; color: rgba(245,239,230,0.75);
+    margin: 0 0 18px; font-weight: 300;
+  }
+  .vl-watch-specs {
+    list-style: none; padding: 0; margin: 28px 0 36px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px;
+  }
+  .vl-watch-specs li {
+    font-size: 12px; letter-spacing: 0.08em; color: rgba(245,239,230,0.6);
+    border-bottom: 1px solid rgba(200,169,110,0.18); padding-bottom: 10px;
+  }
+  .vl-watch-specs li span {
+    display: block; color: #c8a96e; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .vl-watch-price-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .vl-watch-price {
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(245,239,230,0.5);
+  }
+  .vl-watch-cta {
+    display: inline-block; padding: 14px 32px;
+    background: #c8a96e; color: #080808;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; transition: background 0.25s, color 0.25s;
+  }
+  .vl-watch-cta:hover { background: transparent; color: #c8a96e; outline: 1px solid #c8a96e; }
+  .vl-watch-right {
+    flex-shrink: 0; display: flex; align-items: center;
+  }
+  .vl-watch-stat-col {
+    display: flex; flex-direction: column; gap: 40px;
+    border-left: 1px solid rgba(200,169,110,0.25); padding-left: 48px;
+  }
+  .vl-watch-stat { color: #f5efe6; }
+  .vl-watch-stat strong {
+    display: block; font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; letter-spacing: 0.04em; line-height: 1; color: #c8a96e;
+  }
+  .vl-watch-stat span {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(245,239,230,0.45); margin-top: 4px; display: block;
+  }
+  @media (max-width: 768px) {
+    .vl-watch-inner { flex-direction: column; padding: 80px 24px 40px; }
+    .vl-watch-right { display: none; }
+    .vl-watch-specs { grid-template-columns: 1fr; }
+  }
   </style>
 
 <div class="vl" id="vl-root">
@@ -959,13 +1068,6 @@
   </section>
 
 </div><!-- /vl -->
-
-  <!-- WATCH LANDING OVERLAY -->
-  <div class="vl-watch-overlay" id="vl-watch-overlay" aria-modal="true" role="dialog" aria-label="Velonna Solstice">
-    <video class="vl-watch-bg" src="{{ 'rose-gold-watch.mp4' | asset_url }}"
-      autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
-    <div class="vl-watch-bg-ov"></div>
-
     <button class="vl-watch-close" id="vl-watch-close" aria-label="Close">
       <span></span><span></span>
     </button>
@@ -1059,6 +1161,59 @@
     </div>
   </div>
 
+
+
+
+  <!-- WATCH LANDING OVERLAY -->
+  <div class="vl-watch-overlay" id="vl-watch-overlay" aria-modal="true" role="dialog" aria-label="Watch Collection">
+    <video class="vl-watch-bg" src="{{ 'rose-gold-watch.mp4' | asset_url }}"
+      autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+    <div class="vl-watch-bg-ov"></div>
+
+    <button class="vl-watch-close" id="vl-watch-close" aria-label="Close">
+      <span></span><span></span>
+    </button>
+
+    <div class="vl-watch-inner">
+
+      <div class="vl-watch-left">
+        <p class="vl-watch-eyebrow">Velonna Haute Horlogerie · 2026</p>
+        <h1 class="vl-watch-title">The&nbsp;Rose<br><em>Chronograph</em></h1>
+        <div class="vl-watch-rule"></div>
+        <p class="vl-watch-body">
+          Eighteen-carat rose gold. A dial paved in pink sapphires cut to mirror the
+          bloom you saw on the ring. Forty hours of power reserve, hand-wound. The
+          crown is a single cabochon ruby — placed where a thorn would be.
+        </p>
+        <p class="vl-watch-body">
+          This is not a watch for every wrist. It is for the one who already owns
+          the ring, and wants time itself to match.
+        </p>
+        <ul class="vl-watch-specs">
+          <li><span>Case</span> 38 mm · 18ct Rose Gold</li>
+          <li><span>Movement</span> In-house Cal. VL-01 · Hand-wound</li>
+          <li><span>Dial</span> Pink Sapphire Pavé · 312 stones</li>
+          <li><span>Strap</span> Blush alligator · deployant clasp</li>
+          <li><span>Edition</span> 6 pieces worldwide</li>
+          <li><span>Guarantee</span> 100 years</li>
+        </ul>
+        <div class="vl-watch-price-row">
+          <span class="vl-watch-price">Price on request</span>
+          <a href="#vl-reserve" class="vl-watch-cta" id="vl-watch-cta">Reserve a Private Viewing</a>
+        </div>
+      </div>
+
+      <div class="vl-watch-right">
+        <div class="vl-watch-stat-col">
+          <div class="vl-watch-stat"><strong>6</strong><span>Pieces</span></div>
+          <div class="vl-watch-stat"><strong>312</strong><span>Sapphires</span></div>
+          <div class="vl-watch-stat"><strong>40h</strong><span>Reserve</span></div>
+          <div class="vl-watch-stat"><strong>100yr</strong><span>Guarantee</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 {% schema %}
 {
