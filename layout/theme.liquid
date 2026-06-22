@@ -296,7 +296,141 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
-  </head>
+  
+  {%- comment -%} Velonna SEO — meta, OG, Twitter, JSON-LD {%- endcomment -%}
+
+  {%- assign page_title_seo = page_title | escape -%}
+  {%- assign site_name = 'Velonna' -%}
+  {%- assign site_tagline = 'Fine Silver & Created Diamond Jewellery' -%}
+  {%- assign site_desc_default = 'Velonna is a fine jewellery atelier from Jammu & Kashmir, Est. 2014. Specialising in 925 sterling silver and GIA-certified created diamond jewellery — ethically made, hallmarked, and signed by the artisan.' -%}
+  {%- assign site_keywords = '925 silver jewellery India, sterling silver rings, created diamond jewellery India, lab grown diamond rings, ethical diamond jewellery, fine jewellery Jammu Kashmir, silver earrings online India, GIA certified diamonds' -%}
+
+  {%- if template.name == 'index' -%}
+    {%- assign seo_title = site_name | append: ' — ' | append: site_tagline -%}
+    {%- assign seo_desc = site_desc_default -%}
+  {%- elsif template.name == 'product' -%}
+    {%- assign seo_title = product.title | append: ' | ' | append: site_name -%}
+    {%- assign seo_desc = product.description | strip_html | truncate: 155 -%}
+    {%- if seo_desc == blank -%}{%- assign seo_desc = site_desc_default -%}{%- endif -%}
+  {%- elsif template.name == 'collection' -%}
+    {%- assign seo_title = collection.title | append: ' | ' | append: site_name -%}
+    {%- assign seo_desc = collection.description | strip_html | truncate: 155 -%}
+    {%- if seo_desc == blank -%}{%- assign seo_desc = 'Shop Velonna's ' | append: collection.title | append: ' — fine jewellery crafted in sterling silver and created diamonds. Hallmarked, ethically made, and shipped across India.' -%}{%- endif -%}
+  {%- elsif template.name == 'page' -%}
+    {%- assign seo_title = page.title | append: ' | ' | append: site_name -%}
+    {%- assign seo_desc = page.content | strip_html | truncate: 155 -%}
+    {%- if seo_desc == blank -%}{%- assign seo_desc = site_desc_default -%}{%- endif -%}
+  {%- elsif template.name == 'blog' -%}
+    {%- assign seo_title = blog.title | append: ' | ' | append: site_name -%}
+    {%- assign seo_desc = site_desc_default -%}
+  {%- elsif template.name == 'article' -%}
+    {%- assign seo_title = article.title | append: ' | ' | append: site_name -%}
+    {%- assign seo_desc = article.excerpt_or_content | strip_html | truncate: 155 -%}
+  {%- else -%}
+    {%- assign seo_title = page_title_seo | append: ' | ' | append: site_name -%}
+    {%- assign seo_desc = site_desc_default -%}
+  {%- endif -%}
+
+  {%- assign seo_image = '' -%}
+  {%- if template.name == 'product' and product.featured_image -%}
+    {%- assign seo_image = product.featured_image | image_url: width: 1200 -%}
+  {%- elsif template.name == 'collection' and collection.image -%}
+    {%- assign seo_image = collection.image | image_url: width: 1200 -%}
+  {%- else -%}
+    {%- assign seo_image = 'https://velonnajewellers.myshopify.com/cdn/shop/files/og-default.jpg' -%}
+  {%- endif -%}
+
+  <!-- Primary meta -->
+  <title>{{ seo_title }}</title>
+  <meta name="description" content="{{ seo_desc | escape }}">
+  <meta name="keywords" content="{{ site_keywords }}">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Velonna">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Velonna">
+  <meta property="og:title" content="{{ seo_title | escape }}">
+  <meta property="og:description" content="{{ seo_desc | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:type" content="{% if template.name == 'product' %}product{% else %}website{% endif %}">
+  <meta property="og:image" content="{{ seo_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ seo_title | escape }}">
+  <meta name="twitter:description" content="{{ seo_desc | escape }}">
+  <meta name="twitter:image" content="{{ seo_image }}">
+
+  <!-- JSON-LD: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "JewelryStore",
+    "name": "Velonna",
+    "alternateName": "Velonna Jewellers",
+    "description": "Fine jewellery atelier specialising in 925 sterling silver and GIA-certified created diamonds. Est. 2014, Jammu & Kashmir, India.",
+    "url": "https://velonnajewellers.myshopify.com",
+    "foundingDate": "2014",
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Jammu & Kashmir, India"
+    },
+    "areaServed": "IN",
+    "priceRange": "£££",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Velonna Fine Jewellery",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Sterling Silver Jewellery" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Created Diamond Jewellery" } }
+      ]
+    },
+    "sameAs": []
+  }
+  </script>
+
+  <!-- JSON-LD: WebSite with SearchAction -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Velonna",
+    "url": "https://velonnajewellers.myshopify.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://velonnajewellers.myshopify.com/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  {%- if template.name == 'product' -%}
+  <!-- JSON-LD: Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "description": {{ product.description | strip_html | json }},
+    "brand": { "@type": "Brand", "name": "Velonna" },
+    "image": [{% for image in product.images limit:3 %}"{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "{{ cart.currency.iso_code }}",
+      "price": "{{ product.price | money_without_currency }}",
+      "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+      "seller": { "@type": "Organization", "name": "Velonna" }
+    }
+  }
+  </script>
+  {%- endif -%}
+</head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
