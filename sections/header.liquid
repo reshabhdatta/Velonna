@@ -1,14 +1,17 @@
-{%- comment -%}VELONNA: hide localization/translation button{%- endcomment -%}
 <style>
-  .desktop-localization-wrapper,
-  .mobile-localization-wrapper,
-  .header__icon--localization,
-  localization-form,
-  .localization-form,
-  .disclosure--localization,
-  [id*="localization"],
-  [class*="localization"] { display: none !important; }
+/* VELONNA: hide localization */
+.desktop-localization-wrapper,
+.mobile-localization-wrapper,
+.header__icon--localization,
+localization-form,
+.localization-form,
+noscript.localization-form,
+.disclosure--localization,
+[data-localization],
+.header__icons > .header__icon:last-child,
+[class*="localization"] { display: none !important; }
 </style>
+
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
