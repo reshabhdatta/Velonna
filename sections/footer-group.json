@@ -1,1 +1,72 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer","blocks":{"image_hVnmBb":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Untitled_-_24_April_2026_at_21.14.45_10_595f52dd-88b2-45bd-b4d5-5ea9cad72754.png","image_width":550,"alignment":"center"}},"link_list_hwzLGq":{"type":"link_list","settings":{"heading":"Quick links","menu":"quick-links"}},"link_list_fHebdf":{"type":"link_list","settings":{"heading":"Info","menu":"info"}},"link_list_epbdfH":{"type":"link_list","settings":{"heading":"Contact us","menu":"contact-us"}}},"block_order":["image_hVnmBb","link_list_hwzLGq","link_list_fHebdf","link_list_epbdfH"],"settings":{"color_scheme":"scheme-1","newsletter_enable":false,"newsletter_heading":"","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "image_hVnmBb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_-_24_April_2026_at_21.14.45_10_595f52dd-88b2-45bd-b4d5-5ea9cad72754.png",
+            "image_width": 550,
+            "alignment": "center"
+          }
+        },
+        "link_list_hwzLGq": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "quick-links"
+          }
+        },
+        "link_list_fHebdf": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Info",
+            "menu": "info"
+          }
+        },
+        "text_velonna_contact": {
+          "type": "text",
+          "settings": {
+            "heading": "Contact",
+            "subtext": "<p>For enquiries about pieces, custom orders, or anything else — <a href=\"/pages/contact-us\">send us a message</a>.</p><p>We reply within 24 hours.</p><p>Est. 2014 · Jammu & Kashmir, India</p>"
+          }
+        }
+      },
+      "block_order": [
+        "image_hVnmBb",
+        "link_list_hwzLGq",
+        "link_list_fHebdf",
+        "text_velonna_contact"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
