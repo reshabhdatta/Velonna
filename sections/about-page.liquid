@@ -1,0 +1,360 @@
+<style>
+  .velonna-about {
+    background: #0a0a0a;
+    color: #f5f0eb;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  /* ── HERO ── */
+  .about-hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 5vw 8vw;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(245,240,235,0.1);
+  }
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #0a0a0a 40%, #1a1208 100%);
+  }
+  .about-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+  .about-eyebrow {
+    font-size: clamp(10px, 1vw, 12px);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(245,240,235,0.4);
+    margin-bottom: 2.5rem;
+  }
+  .about-headline {
+    font-size: clamp(48px, 8vw, 110px);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0 0 2rem;
+  }
+  .about-headline em {
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(245,240,235,0.5);
+  }
+  .about-lead {
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.65;
+    color: rgba(245,240,235,0.7);
+    max-width: 560px;
+  }
+
+  /* ── STATS STRIP ── */
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid rgba(245,240,235,0.1);
+  }
+  .about-stat {
+    padding: 4rem 5vw;
+    border-right: 1px solid rgba(245,240,235,0.1);
+  }
+  .about-stat:last-child { border-right: none; }
+  .stat-number {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,235,0.4);
+  }
+
+  /* ── STORY BODY ── */
+  .about-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid rgba(245,240,235,0.1);
+  }
+  .about-col-left {
+    padding: 8vw 5vw;
+    border-right: 1px solid rgba(245,240,235,0.1);
+  }
+  .about-col-right {
+    padding: 8vw 5vw;
+  }
+  .about-section-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(245,240,235,0.3);
+    margin-bottom: 2.5rem;
+  }
+  .about-section-heading {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .about-section-text {
+    font-size: clamp(14px, 1.4vw, 16px);
+    line-height: 1.75;
+    color: rgba(245,240,235,0.65);
+  }
+  .about-section-text p { margin-bottom: 1.25rem; }
+  .about-section-text p:last-child { margin-bottom: 0; }
+
+  /* ── QUOTE BLOCK ── */
+  .about-quote-block {
+    padding: 8vw 10vw;
+    border-bottom: 1px solid rgba(245,240,235,0.1);
+    text-align: center;
+  }
+  .about-quote-mark {
+    font-size: 80px;
+    line-height: 0.5;
+    color: rgba(245,240,235,0.1);
+    font-family: Georgia, serif;
+    margin-bottom: 2rem;
+    display: block;
+  }
+  .about-quote-text {
+    font-size: clamp(20px, 3vw, 36px);
+    font-weight: 300;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: rgba(245,240,235,0.9);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  .about-quote-attr {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,240,235,0.35);
+  }
+
+  /* ── FOUNDER ── */
+  .about-founder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid rgba(245,240,235,0.1);
+  }
+  .about-founder-image {
+    background: #111;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(245,240,235,0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  .founder-placeholder {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,235,0.15);
+  }
+  .about-founder-text {
+    padding: 8vw 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .founder-name {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .founder-title {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,240,235,0.35);
+    margin-bottom: 3rem;
+  }
+  .founder-bio {
+    font-size: clamp(14px, 1.4vw, 16px);
+    line-height: 1.75;
+    color: rgba(245,240,235,0.65);
+  }
+  .founder-bio p { margin-bottom: 1.25rem; }
+
+  /* ── CTA STRIP ── */
+  .about-cta-strip {
+    padding: 6rem 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .about-cta-heading {
+    font-size: clamp(24px, 3.5vw, 44px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .about-cta-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .about-cta-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(245,240,235,0.3);
+    color: #f5f0eb;
+    transition: all 0.2s;
+  }
+  .about-cta-btn:hover {
+    background: #f5f0eb;
+    color: #0a0a0a;
+    border-color: #f5f0eb;
+  }
+  .about-cta-btn.primary {
+    background: #f5f0eb;
+    color: #0a0a0a;
+    border-color: #f5f0eb;
+  }
+  .about-cta-btn.primary:hover {
+    background: transparent;
+    color: #f5f0eb;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .about-stats { grid-template-columns: 1fr; }
+    .about-stat { border-right: none; border-bottom: 1px solid rgba(245,240,235,0.1); }
+    .about-body { grid-template-columns: 1fr; }
+    .about-col-left { border-right: none; border-bottom: 1px solid rgba(245,240,235,0.1); }
+    .about-founder { grid-template-columns: 1fr; }
+    .about-founder-image { min-height: 300px; border-right: none; border-bottom: 1px solid rgba(245,240,235,0.1); }
+    .about-quote-block { padding: 12vw 6vw; }
+    .about-cta-strip { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<div class="velonna-about">
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="about-hero-content">
+      <p class="about-eyebrow">Est. 2024 · Jammu & Kashmir & Indore</p>
+      <h1 class="about-headline">
+        Tapping<br>
+        the <em>silver</em><br>
+        luxury gap
+      </h1>
+      <p class="about-lead">
+        International couture aesthetics. Contemporary materials. Accessible price points. Velonna exists because no one else was doing it properly.
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="about-stats">
+    <div class="about-stat">
+      <div class="stat-number">₹5.5Cr</div>
+      <div class="stat-label">Revenue, first year</div>
+    </div>
+    <div class="about-stat">
+      <div class="stat-number">102</div>
+      <div class="stat-label">Years of jewellery heritage</div>
+    </div>
+    <div class="about-stat">
+      <div class="stat-number">18–38</div>
+      <div class="stat-label">Age of our customer</div>
+    </div>
+  </div>
+
+  <!-- STORY BODY -->
+  <div class="about-body">
+    <div class="about-col-left">
+      <div class="about-section-label">The Gap We Saw</div>
+      <h2 class="about-section-heading">Global Couture.<br>Indian Craft.</h2>
+      <div class="about-section-text">
+        <p>On one side: traditional retail. On the other: high-priced international luxury brands like Bvlgari or Cartier. In the middle, a generation of consumers aged 18 to 38 who want international couture-like designs and globally inspired jewellery — at prices that make sense.</p>
+        <p>That is where Velonna was built to live.</p>
+        <p>We work with silver, lab-grown stones, and Swarovski crystals — without using cheap materials. The design language is contemporary and luxury-led. We also offer heavy, occasion-wear statement pieces that move between traditional and modern settings.</p>
+      </div>
+    </div>
+    <div class="about-col-right">
+      <div class="about-section-label">The Heritage</div>
+      <h2 class="about-section-heading">102 Years<br>in Retail.</h2>
+      <div class="about-section-text">
+        <p>Velonna is backed by Khushaal Shyam Narayan Jewellers, a family business with over a century in the jewellery trade — dealing in gold, kundan, polki, diamond jewellery, and traditional Indian and Jammu designs since 1924.</p>
+        <p>Velonna was created to tap an entirely new customer base: first nationally, then globally. Built under the Khushaal Shah Amar Nath Jewellers group, it is the contemporary, globally-minded face of that legacy.</p>
+        <p>Scaling through a metro-first, franchise-led model — the brand is now expanding city by city across India.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="about-quote-block">
+    <span class="about-quote-mark">&ldquo;</span>
+    <p class="about-quote-text">
+      There is a large segment of consumers aged 18 to 38 who want two things: international couture-like designs, and jewellery inspired by global brands — both with good materials and accessible price points. That is where Velonna fits in.
+    </p>
+    <p class="about-quote-attr">Arkit Jain — Founder, Velonna · The Retail Jeweller, March–April 2026</p>
+  </div>
+
+  <!-- FOUNDER -->
+  <div class="about-founder">
+    <div class="about-founder-image">
+      <span class="founder-placeholder">Arkit Jain · Founder</span>
+    </div>
+    <div class="about-founder-text">
+      <div class="about-section-label">The Founder</div>
+      <div class="founder-name">Arkit<br>Jain</div>
+      <div class="founder-title">Founder, Velonna</div>
+      <div class="founder-bio">
+        <p>Arkit Jain built Velonna to serve a customer the Indian jewellery market was ignoring: young, globally aware, and unwilling to choose between quality and price.</p>
+        <p>Growing up in a family with 102 years of jewellery heritage — Khushaal Shyam Narayan Jewellers, dealing in gold, kundan, polki and diamond since 1924 — Arkit saw the same market gap others had overlooked.</p>
+        <p>The popularity of duplicate fashion pieces from global houses like Bvlgari or Cartier proved the demand. Velonna was the answer: real materials, contemporary design, global inspiration — built in India.</p>
+        <p>In its first year, the brand clocked ₹5.5 crore in revenue. The next phase: metro-first, franchise-led expansion across India.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA STRIP -->
+  <div class="about-cta-strip">
+    <div class="about-cta-heading">
+      Explore<br>the atelier.
+    </div>
+    <div class="about-cta-links">
+      <a href="/collections/silver" class="about-cta-btn primary">Silver</a>
+      <a href="/collections/lab-grown-diamonds" class="about-cta-btn">Created Diamonds</a>
+      <a href="/pages/contact-us" class="about-cta-btn">Contact</a>
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "About Page",
+  "settings": []
+}
+{% endschema %}
