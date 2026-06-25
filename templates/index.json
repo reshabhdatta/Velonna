@@ -28,13 +28,28 @@
     "velonna_landing": {
       "type": "velonna-landing",
       "settings": {
+        "hero_eyebrow": "The Velonna Atelier · Est. 2024",
+        "hero_title": "Contemporary\nLuxury,\nAccessible.",
+        "hero_sub": "Silver, lab-grown stones, and Swarovski crystals. International couture aesthetics at prices that make sense.",
+        "hero_cta_label": "Explore the collections",
+        "hero_cta_url": "/collections/all",
         "statement_quote": "International couture-like designs and jewellery inspired by global brands — both with good materials and accessible price points.",
+        "statement_attr": "Arkit Jain, Founder · The Retail Jeweller, March–April 2026",
+        "ed1_eyebrow": "The Silver Collection",
         "ed1_title": "Everyday\nRitual",
         "ed1_body": "Sterling silver pieces with a contemporary, luxury-led design language. From delicate everyday wear to bold statement pieces — crafted for the woman who moves between modern and traditional settings.",
         "ed1_cta": "Explore Silver",
+        "ed1_url": "/collections/silver",
+        "feature_eyebrow": "Created Diamonds · IGI Certified",
+        "feature_quote": "Light, made by science. Set by hand.",
+        "feature_cta": "Shop Created Diamonds",
+        "feature_cta_url": "/collections/lab-grown-diamonds",
+        "ed2_eyebrow": "Created Diamonds",
         "ed2_title": "For the\nExceptional\nMoment",
         "ed2_body": "Lab-grown diamonds and Swarovski crystals — physically and chemically identical to mined stones, set into designs inspired by the world's great jewellery houses. Identical light. A fraction of the price.",
-        "ed2_cta": "Explore Created Diamonds"
+        "ed2_cta": "Explore Created Diamonds",
+        "ed2_url": "/collections/lab-grown-diamonds",
+        "products_title": "New\nArrivals"
       }
     }
   },

@@ -1,911 +1,747 @@
-{% comment %} VELONNA — Bold editorial landing page section {% endcomment %}
+{% comment %} VELONNA — Cartier-inspired editorial landing {% endcomment %}
 
 <style>
-  /* ─── RESET ──────────────────────────────────────────────────────── */
   .vl *, .vl *::before, .vl *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --vl-bg:        #080808;
-    --vl-cream:     #f5f0e8;
-    --vl-gold:      #d4af7a;
-    --vl-blush:     #e6b89a;
-    --vl-text-dk:   #1a1714;
-    --vl-rule:      rgba(212,175,122,0.22);
-    --vl-rule-lt:   rgba(212,175,122,0.10);
+    --vl-ink:    #080808;
+    --vl-cream:  #f5f0e8;
+    --vl-warm:   #ede8df;
+    --vl-gold:   #c8a96e;
+    --vl-mist:   rgba(245,240,232,0.55);
+    --vl-rule:   rgba(200,169,110,0.18);
+    --vl-rule-d: rgba(26,22,18,0.12);
   }
 
   .vl {
-    background: var(--vl-bg);
-    color: #fff;
-    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--vl-ink);
+    color: var(--vl-cream);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 300;
-    line-height: 1.6;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-
-  .vl img, .vl video { display: block; max-width: 100%; }
   .vl a { color: inherit; text-decoration: none; }
+  .vl img, .vl video { display: block; max-width: 100%; }
 
-  /* ─── HERO ─────────────────────────────────────────────────────────── */
+  /* ── HERO ─────────────────────────────────────────────── */
   .vl-hero {
     position: relative;
-    height: 100svh; min-height: 600px;
-    overflow: hidden;
+    height: 100svh; min-height: 560px;
     display: flex; align-items: flex-end;
+    overflow: hidden;
   }
-  .vl-hero-bg {
-    position: absolute; inset: 0;
-    background: #080808;
-  }
-  .vl-hero-video {
+  .vl-hero-media {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    transform: scale(1.06);
-  }
-  .vl-hero-img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transform: scale(1.06);
   }
   .vl-hero-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(8,8,8,0.3)  0%,
-      rgba(8,8,8,0.08) 40%,
-      rgba(8,8,8,0.72) 80%,
-      rgba(8,8,8,0.97) 100%
+      rgba(8,8,8,0.15) 0%,
+      rgba(8,8,8,0.05) 30%,
+      rgba(8,8,8,0.60) 75%,
+      rgba(8,8,8,0.95) 100%
     );
-  }
-  .vl-hero-wm {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(88px, 17vw, 230px);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(212,175,122,0.10);
-    white-space: nowrap;
-    user-select: none; pointer-events: none;
-    will-change: transform;
   }
   .vl-hero-content {
     position: relative; z-index: 2;
-    width: 100%; padding: 0 48px 80px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: flex-end; gap: 40px;
+    width: 100%; padding: 0 6vw 8vh;
   }
-  .vl-hero-tag {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--vl-gold); margin-bottom: 20px;
+  .vl-hero-eyebrow {
+    font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 1.5rem;
   }
   .vl-hero-title {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(50px, 7.5vw, 104px);
-    font-weight: 400; line-height: 0.96; letter-spacing: -0.01em;
+    font-size: clamp(48px, 8vw, 108px);
+    font-weight: 400; line-height: 0.95;
+    letter-spacing: -0.01em;
+    max-width: 700px;
   }
-  .vl-hero-title .ln { overflow: hidden; display: block; }
-  .vl-hero-title .ln-i { display: block; transform: translateY(110%); }
-  .vl-hero-title em { font-style: italic; color: var(--vl-blush); }
-  .vl-hero-title .ruled {
-    display: flex; align-items: center; gap: 18px;
+  .vl-hero-title em { font-style: italic; color: var(--vl-mist); }
+  .vl-hero-sub {
+    margin-top: 2rem;
+    font-size: clamp(12px, 1.2vw, 14px);
+    letter-spacing: 0.08em;
+    color: rgba(245,240,232,0.5);
+    max-width: 320px;
+    line-height: 1.7;
   }
-  .vl-hero-title .ruled::before {
-    content: ''; display: block; flex-shrink: 0;
-    width: 56px; height: 1px; background: var(--vl-gold);
+  .vl-hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 2.5rem;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--vl-cream);
+    border-bottom: 1px solid rgba(245,240,232,0.3);
+    padding-bottom: 4px;
+    transition: border-color 0.25s, gap 0.25s;
   }
-  .vl-hero-right { text-align: right; padding-bottom: 6px; }
-  .vl-edition-num {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(64px, 9.5vw, 128px);
-    font-weight: 700; line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.18);
-    display: block;
-  }
-  .vl-edition-lbl {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.38); display: block; margin-top: 4px;
-  }
-  .vl-scroll-cue {
-    position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.3); z-index: 2;
-  }
-  .vl-scroll-line {
-    width: 1px; height: 44px;
-    background: linear-gradient(to bottom, var(--vl-gold), transparent);
-    animation: vlScrollPulse 1.9s ease-in-out infinite;
-  }
-  @keyframes vlScrollPulse {
-    0%,100% { opacity:0.35; transform:scaleY(0.55); transform-origin:top; }
-    50%      { opacity:1;    transform:scaleY(1);    transform-origin:top; }
-  }
+  .vl-hero-cta::after { content: '→'; }
+  .vl-hero-cta:hover { border-color: var(--vl-gold); gap: 18px; }
 
-  /* ─── MARQUEE BAND ──────────────────────────────────────────────────── */
+  /* ── MARQUEE ──────────────────────────────────────────── */
   .vl-band {
     border-top: 1px solid var(--vl-rule);
     border-bottom: 1px solid var(--vl-rule);
     overflow: hidden; white-space: nowrap;
-    background: var(--vl-bg);
   }
   .vl-band-track {
     display: inline-flex;
-    animation: vlMarquee 24s linear infinite;
+    animation: vlMarquee 32s linear infinite;
   }
-  .vl-band-group { display: inline-flex; align-items: center; padding: 17px 0; }
+  .vl-band-group { display: inline-flex; align-items: center; padding: 14px 0; }
   .vl-band-item {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); padding: 0 26px;
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(245,240,232,0.38); padding: 0 28px;
   }
-  .vl-band-dot { color: var(--vl-gold); font-size: 15px; line-height: 1; }
+  .vl-band-dot { color: var(--vl-gold); font-size: 14px; line-height: 1; }
   @keyframes vlMarquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-  /* ─── STATEMENT ─────────────────────────────────────────────────────── */
-  .vl-statement {
-    padding: 130px 48px;
-    display: flex; flex-direction: column; align-items: center; text-align: center;
-    position: relative; overflow: hidden; background: var(--vl-bg);
+  /* ── COLLECTION TILES (Cartier-inspired 3-col) ─────────── */
+  .vl-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--vl-cream);
   }
-  .vl-statement::before {
-    content: '';
-    position: absolute; left: 48px; right: 48px; top: 50%;
-    height: 1px; background: var(--vl-rule);
+  .vl-tile {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+  }
+  .vl-tile + .vl-tile {
+    border-left: 1px solid var(--vl-rule-d);
+  }
+  .vl-tile-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .vl-tile:hover .vl-tile-img { transform: scale(1.06); }
+  .vl-tile-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(8,8,8,0.65) 100%
+    );
+  }
+  .vl-tile-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2.5rem 2rem 2rem;
+    color: #fff;
+  }
+  .vl-tile-eyebrow {
+    font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 0.4rem;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.35s, transform 0.35s;
+  }
+  .vl-tile:hover .vl-tile-eyebrow { opacity: 1; transform: translateY(0); }
+  .vl-tile-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+  .vl-tile-discover {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 0.85rem;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 3px;
+    transition: color 0.25s, border-color 0.25s, gap 0.25s;
+  }
+  .vl-tile-discover::after { content: '→'; }
+  .vl-tile:hover .vl-tile-discover {
+    color: var(--vl-gold);
+    border-color: var(--vl-gold);
+    gap: 14px;
+  }
+  /* Placeholder when no image */
+  .vl-tile-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #111 0%, #1a1714 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .vl-tile-placeholder span {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(245,240,232,0.12);
+  }
+
+  /* ── STATEMENT ────────────────────────────────────────── */
+  .vl-statement {
+    padding: 10rem 6vw;
+    background: var(--vl-ink);
+    border-bottom: 1px solid var(--vl-rule);
   }
   .vl-statement-inner {
-    position: relative; z-index: 1; background: var(--vl-bg);
-    padding: 0 40px; max-width: 860px;
+    max-width: 800px; margin: 0 auto; text-align: center;
+  }
+  .vl-statement-rule {
+    width: 40px; height: 1px;
+    background: var(--vl-gold);
+    margin: 0 auto 3rem;
   }
   .vl-statement-q {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(30px, 5vw, 68px);
+    font-size: clamp(24px, 4vw, 52px);
     font-weight: 400; font-style: italic;
-    line-height: 1.2; color: var(--vl-cream);
+    line-height: 1.25; color: var(--vl-cream);
   }
-  .vl-statement-src {
-    margin-top: 26px;
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  .vl-statement-attr {
+    margin-top: 2rem;
+    font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
     color: var(--vl-gold);
   }
 
-  /* ─── HERITAGE ──────────────────────────────────────────────────────── */
-  .vl-heritage {
+  /* ── EDITORIAL SPLIT ──────────────────────────────────── */
+  .vl-editorial {
     display: grid; grid-template-columns: 1fr 1fr;
-    min-height: 88vh; background: var(--vl-cream); color: var(--vl-text-dk);
+    min-height: 80vh;
   }
-  .vl-heritage-vis { position: relative; overflow: hidden; }
-  .vl-heritage-vis img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 9s cubic-bezier(0.77,0,0.18,1);
+  .vl-editorial.cream { background: var(--vl-cream); color: #1a1612; }
+  .vl-editorial.dark  { background: var(--vl-ink);   color: var(--vl-cream); }
+  .vl-editorial.rev   { direction: rtl; }
+  .vl-editorial.rev > * { direction: ltr; }
+
+  .vl-editorial-vis {
+    position: relative; overflow: hidden;
   }
-  .vl-heritage-vis:hover img { transform: scale(1.05); }
-  .vl-heritage-num {
-    position: absolute; top: 36px; left: 36px;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 150px; font-weight: 700; line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(26,23,20,0.10);
-    user-select: none; pointer-events: none;
+  .vl-editorial-vis img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .vl-heritage-txt { padding: 100px 76px; display: flex; flex-direction: column; justify-content: center; }
-  .vl-heritage-issue {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(26,23,20,0.4); margin-bottom: 38px;
+  .vl-editorial-vis:hover img { transform: scale(1.04); }
+
+  .vl-editorial-txt {
+    padding: 8vw 6vw;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .cream .vl-editorial-txt { border-left: 1px solid var(--vl-rule-d); }
+  .dark  .vl-editorial-txt { border-left: 1px solid var(--vl-rule);   }
+  .rev.cream .vl-editorial-txt { border-left: none; border-right: 1px solid var(--vl-rule-d); }
+  .rev.dark  .vl-editorial-txt { border-left: none; border-right: 1px solid var(--vl-rule);   }
+
+  .vl-ed-eyebrow {
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    margin-bottom: 2.5rem;
     display: flex; align-items: center; gap: 14px;
   }
-  .vl-heritage-issue::before { content:''; display:block; width:30px; height:1px; background:var(--vl-gold); }
-  .vl-heritage-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(36px, 4.2vw, 56px);
-    font-weight: 400; line-height: 1.1; margin-bottom: 28px; color: var(--vl-text-dk);
-  }
-  .vl-heritage-title em { font-style: italic; color: #5a4a3a; }
-  .vl-heritage-body {
-    font-size: 14px; line-height: 1.9; color: rgba(26,23,20,0.65);
-    max-width: 400px; margin-bottom: 18px;
-  }
-  .vl-heritage-stats {
-    margin-top: 56px;
-    display: grid; grid-template-columns: repeat(3,1fr);
-    border-top: 1px solid rgba(26,23,20,0.12); padding-top: 36px;
-  }
-  .vl-stat { padding-right: 20px; }
-  .vl-stat + .vl-stat { padding-left: 20px; border-left: 1px solid rgba(26,23,20,0.12); }
-  .vl-stat-n {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 44px; font-weight: 400; line-height: 1;
-    color: var(--vl-text-dk); display: block;
-  }
-  .vl-stat-l {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(26,23,20,0.42); display: block; margin-top: 7px;
+  .cream .vl-ed-eyebrow { color: rgba(26,22,18,0.4); }
+  .dark  .vl-ed-eyebrow { color: var(--vl-gold); }
+  .vl-ed-eyebrow::before {
+    content: ''; display: block; flex-shrink: 0;
+    width: 28px; height: 1px; background: var(--vl-gold);
   }
 
-  /* ─── EDITORIAL SPLIT ───────────────────────────────────────────────── */
-  .vl-editorial { display: grid; grid-template-columns: 1fr 1fr; min-height: 78vh; background: var(--vl-bg); }
-  .vl-editorial.rev { direction: rtl; }
-  .vl-editorial-txt {
-    direction: ltr; padding: 120px 76px;
-    display: flex; flex-direction: column; justify-content: center;
+  .vl-ed-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 3.8vw, 52px);
+    font-weight: 400; line-height: 1.08;
+    margin-bottom: 1.75rem;
+  }
+  .vl-ed-title em { font-style: italic; }
+  .cream .vl-ed-title em { color: #5a4a38; }
+  .dark  .vl-ed-title em { color: var(--vl-mist); }
+
+  .vl-ed-body {
+    font-size: 14px; line-height: 1.85; max-width: 380px;
+    margin-bottom: 3rem;
+  }
+  .cream .vl-ed-body { color: rgba(26,22,18,0.58); }
+  .dark  .vl-ed-body { color: rgba(245,240,232,0.5); }
+
+  .vl-ed-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    border-bottom: 1px solid;
+    padding-bottom: 4px;
+    transition: gap 0.25s;
+    align-self: flex-start;
+  }
+  .vl-ed-link::after { content: '→'; }
+  .vl-ed-link:hover { gap: 20px; }
+  .cream .vl-ed-link { color: #1a1612; border-color: rgba(26,22,18,0.3); }
+  .dark  .vl-ed-link { color: var(--vl-gold); border-color: rgba(200,169,110,0.4); }
+
+  /* ── FULL-BLEED FEATURE ──────────────────────────────── */
+  .vl-feature {
+    position: relative;
+    min-height: 70vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .vl-feature-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .vl-feature-ov {
+    position: absolute; inset: 0;
+    background: rgba(8,8,8,0.62);
+  }
+  .vl-feature-content {
+    position: relative; z-index: 1;
+    text-align: center; padding: 6rem 6vw;
+    max-width: 680px;
+  }
+  .vl-feature-eyebrow {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 2rem;
+  }
+  .vl-feature-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 4.5vw, 58px);
+    font-weight: 400; font-style: italic;
+    line-height: 1.22; color: var(--vl-cream);
+  }
+  .vl-feature-rule {
+    width: 40px; height: 1px;
+    background: var(--vl-gold);
+    margin: 2.5rem auto;
+  }
+  .vl-feature-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--vl-cream);
+    border-bottom: 1px solid rgba(245,240,232,0.3);
+    padding-bottom: 4px;
+    transition: border-color 0.25s, gap 0.25s;
+  }
+  .vl-feature-cta::after { content: '→'; }
+  .vl-feature-cta:hover { border-color: var(--vl-gold); gap: 18px; }
+
+  /* ── FEATURED PRODUCTS ────────────────────────────────── */
+  .vl-products {
+    background: var(--vl-cream);
+    padding: 8rem 6vw;
+    border-top: 1px solid var(--vl-rule-d);
+  }
+  .vl-products-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--vl-rule-d);
+  }
+  .vl-products-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400; color: #1a1612;
+    line-height: 1.1;
+  }
+  .vl-products-title em { font-style: italic; }
+  .vl-products-viewall {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #1a1612;
+    border-bottom: 1px solid rgba(26,22,18,0.25);
+    padding-bottom: 3px;
+    white-space: nowrap;
+    transition: gap 0.25s;
+  }
+  .vl-products-viewall::after { content: '→'; }
+  .vl-products-viewall:hover { gap: 18px; }
+
+  .vl-product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .vl-product-card {
+    background: #fff;
+    cursor: pointer;
+  }
+  .vl-product-card a { display: block; }
+  .vl-product-img-wrap {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3/4;
+    background: #f0ece5;
+  }
+  .vl-product-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .vl-product-card:hover .vl-product-img { transform: scale(1.07); }
+  .vl-product-info {
+    padding: 1.25rem 1rem 1.5rem;
+  }
+  .vl-product-collection {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 0.35rem;
+  }
+  .vl-product-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px; font-weight: 400;
+    color: #1a1612; line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+  .vl-product-price {
+    font-size: 13px; color: rgba(26,22,18,0.55);
+  }
+  /* Empty product placeholder */
+  .vl-product-placeholder {
+    background: linear-gradient(135deg, #e8e3db, #ddd8ce);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .vl-product-placeholder span {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(26,22,18,0.2);
+  }
+
+  /* ── ENQUIRE STRIP ────────────────────────────────────── */
+  .vl-enquire {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+    background: var(--vl-ink);
+    border-top: 1px solid var(--vl-rule);
+  }
+  .vl-enquire-vis {
+    position: relative; overflow: hidden;
     border-right: 1px solid var(--vl-rule);
   }
-  .vl-editorial.rev .vl-editorial-txt { border-right: none; border-left: 1px solid var(--vl-rule); }
-  .vl-editorial-issue {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--vl-gold); margin-bottom: 36px;
-    display: flex; align-items: center; gap: 14px;
+  .vl-enquire-vis img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .vl-editorial-issue::before { content:''; display:block; width:30px; height:1px; background:var(--vl-gold); }
-  .vl-idx {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(72px, 9.5vw, 130px);
-    font-weight: 700; line-height: 0.9;
-    color: transparent; -webkit-text-stroke: 1px rgba(212,175,122,0.18);
-    margin-bottom: 14px; display: block;
-  }
-  .vl-editorial-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(34px, 3.8vw, 50px);
-    font-weight: 400; line-height: 1.1; margin-bottom: 24px;
-  }
-  .vl-editorial-title em { font-style: italic; color: var(--vl-blush); }
-  .vl-editorial-body {
-    font-size: 13px; line-height: 1.95;
-    color: rgba(255,255,255,0.5); max-width: 360px; margin-bottom: 44px;
-  }
-  .vl-editorial-lnk {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--vl-gold); display: flex; align-items: center; gap: 12px;
-    align-self: flex-start; transition: gap 0.3s;
-  }
-  .vl-editorial-lnk::after { content:'→'; font-family:'Inter',sans-serif; }
-  .vl-editorial-lnk:hover { gap: 22px; }
-  .vl-editorial-vis { direction: ltr; position: relative; overflow: hidden; }
-  .vl-editorial-vis img { width:100%; height:100%; object-fit:cover; }
-  .vl-editorial-cap {
-    position: absolute; bottom: 28px; right: 28px;
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.38);
-    writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
-  }
-
-  /* ─── BLEED QUOTE ───────────────────────────────────────────────────── */
-  .vl-bleed {
-    position: relative; min-height: 68vh;
-    display: flex; align-items: center; justify-content: center; overflow: hidden;
-  }
-  .vl-bleed-bg {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  }
-  .vl-bleed-ov { position: absolute; inset: 0; background: rgba(8,8,8,0.70); }
-  .vl-bleed-cnt {
-    position: relative; z-index: 1; text-align: center;
-    padding: 80px 48px; max-width: 780px;
-  }
-  .vl-bleed-ey {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--vl-gold); margin-bottom: 32px;
-  }
-  .vl-bleed-q {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(26px, 4.2vw, 54px);
-    font-weight: 400; font-style: italic; line-height: 1.28;
-    color: var(--vl-cream);
-  }
-  .vl-bleed-rule { width: 56px; height: 1px; background: var(--vl-gold); margin: 36px auto; }
-  .vl-bleed-cap {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.38);
-  }
-
-  /* ─── RESERVATION ───────────────────────────────────────────────────── */
-  .vl-reserve {
-    display: grid; grid-template-columns: 1fr 1fr;
-    min-height: 88vh; background: var(--vl-cream); color: var(--vl-text-dk);
-  }
-  .vl-reserve-vis { position: relative; overflow: hidden; }
-  .vl-reserve-vis img { width: 100%; height: 100%; object-fit: cover; }
-  .vl-reserve-vis-ov {
+  .vl-enquire-vis:hover img { transform: scale(1.04); }
+  .vl-enquire-vis-ov {
     position: absolute; inset: 0;
-    background: linear-gradient(to right, rgba(8,8,8,0), rgba(8,8,8,0.28));
+    background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 60%);
   }
-  .vl-reserve-vis-tag {
-    position: absolute; bottom: 44px; left: 44px;
+  .vl-enquire-vis-caption {
+    position: absolute; bottom: 2.5rem; left: 2.5rem;
+  }
+  .vl-enquire-vis-caption strong {
+    display: block;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 0.5rem; font-weight: 400;
+  }
+  .vl-enquire-vis-caption p {
     font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic; font-size: 19px;
-    color: rgba(255,255,255,0.82); line-height: 1.45;
+    font-style: italic; font-size: 18px;
+    color: rgba(245,240,232,0.82); line-height: 1.4;
   }
-  .vl-reserve-vis-tag strong {
-    display: block; font-style: normal;
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--vl-gold); margin-bottom: 6px; font-weight: 400;
+
+  .vl-enquire-form {
+    padding: 7rem 6vw;
+    display: flex; flex-direction: column; justify-content: center;
   }
-  .vl-reserve-form { padding: 80px 68px; display: flex; flex-direction: column; justify-content: center; }
-  .vl-reserve-ey {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(26,23,20,0.42); margin-bottom: 14px;
+  .vl-enquire-eyebrow {
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 1rem;
   }
-  .vl-reserve-title {
+  .vl-enquire-title {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(32px, 3.2vw, 46px);
-    font-weight: 400; line-height: 1.15; margin-bottom: 12px; color: var(--vl-text-dk);
+    font-size: clamp(30px, 3.2vw, 44px);
+    font-weight: 400; line-height: 1.1;
+    margin-bottom: 0.8rem;
   }
-  .vl-reserve-title em { font-style: italic; }
-  .vl-reserve-sub {
+  .vl-enquire-sub {
     font-size: 13px; line-height: 1.85;
-    color: rgba(26,23,20,0.58); max-width: 380px; margin-bottom: 44px;
+    color: rgba(245,240,232,0.5);
+    max-width: 360px; margin-bottom: 3rem;
   }
-  .vl-form { display: flex; flex-direction: column; gap: 16px; }
-  .vl-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .vl-form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .vl-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   .vl-form-g { display: flex; flex-direction: column; gap: 6px; }
   .vl-form-g label {
-    font-family: 'Outfit', system-ui, sans-serif;
     font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(26,23,20,0.46);
+    color: rgba(245,240,232,0.35);
   }
   .vl-form-g input,
   .vl-form-g select,
   .vl-form-g textarea {
     background: transparent; border: none;
-    border-bottom: 1px solid rgba(26,23,20,0.18);
-    padding: 10px 0; font-family: 'Inter', sans-serif;
-    font-size: 14px; color: var(--vl-text-dk);
-    width: 100%; outline: none; transition: border-color 0.25s;
-    -webkit-appearance: none; appearance: none; border-radius: 0;
+    border-bottom: 1px solid rgba(245,240,232,0.15);
+    padding: 10px 0;
+    font-size: 14px; font-family: inherit;
+    color: var(--vl-cream);
+    width: 100%; outline: none;
+    -webkit-appearance: none; border-radius: 0;
+    transition: border-color 0.25s;
   }
-  .vl-form-g textarea { resize: none; min-height: 68px; }
+  .vl-form-g select option { background: #1a1612; }
+  .vl-form-g textarea { resize: none; min-height: 64px; }
   .vl-form-g input:focus,
   .vl-form-g select:focus,
   .vl-form-g textarea:focus { border-bottom-color: var(--vl-gold); }
   .vl-form-g input::placeholder,
-  .vl-form-g textarea::placeholder { color: rgba(26,23,20,0.28); }
+  .vl-form-g textarea::placeholder { color: rgba(245,240,232,0.2); }
   .vl-submit {
-    margin-top: 6px; background: var(--vl-text-dk); color: var(--vl-cream);
-    padding: 15px 36px; font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    align-self: flex-start; cursor: pointer;
-    border: 1px solid var(--vl-text-dk); transition: background 0.25s, color 0.25s;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    background: var(--vl-cream); color: var(--vl-ink);
+    padding: 14px 36px;
+    font-size: 10px; font-family: inherit;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    border: 1px solid var(--vl-cream); cursor: pointer;
+    transition: background 0.25s, color 0.25s;
   }
-  .vl-submit:hover { background: transparent; color: var(--vl-text-dk); }
-  .vl-form-note { margin-top: 14px; font-size: 11px; color: rgba(26,23,20,0.38); line-height: 1.6; }
-  .vl-form-success {
-    display: none; margin-top: 12px;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic; font-size: 15px; color: #5a7a5a;
+  .vl-submit:hover { background: transparent; color: var(--vl-cream); }
+  .vl-form-note {
+    margin-top: 1rem;
+    font-size: 11px; color: rgba(245,240,232,0.25);
+    line-height: 1.6;
   }
-  .vl-form-success.shown { display: block; }
 
-  /* ─── RESPONSIVE ────────────────────────────────────────────────────── */
-  @media (max-width: 860px) {
-    .vl-hero-content { grid-template-columns: 1fr; padding: 0 24px 60px; }
-    .vl-hero-right { display: none; }
-    .vl-statement { padding: 80px 24px; }
-    .vl-heritage, .vl-editorial, .vl-reserve { grid-template-columns: 1fr; }
-    .vl-heritage-vis, .vl-editorial-vis, .vl-reserve-vis { min-height: 55vw; }
-    .vl-heritage-txt { padding: 56px 28px; }
-    .vl-editorial-txt { padding: 60px 28px; border-right: none !important; border-left: none !important; border-bottom: 1px solid var(--vl-rule); }
+  /* ── RESPONSIVE ───────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .vl-tiles { grid-template-columns: 1fr; }
+    .vl-tile  { aspect-ratio: 4/3; }
+    .vl-tile + .vl-tile { border-left: none; border-top: 1px solid var(--vl-rule-d); }
+    .vl-editorial, .vl-enquire { grid-template-columns: 1fr; }
+    .vl-editorial-vis, .vl-enquire-vis { min-height: 55vw; border-right: none !important; }
+    .vl-editorial-txt { border-left: none !important; border-right: none !important; border-top: 1px solid var(--vl-rule-d); padding: 4rem 6vw; }
     .vl-editorial.rev { direction: ltr; }
-    .vl-reserve-form { padding: 56px 28px; }
+    .vl-product-grid { grid-template-columns: repeat(2, 1fr); }
+    .vl-products-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .vl-enquire-form { padding: 4rem 6vw; }
     .vl-form-row { grid-template-columns: 1fr; }
-    .vl-bleed-cnt { padding: 60px 24px; }
-    .vl-band-item { padding: 0 18px; }
+    .vl-enquire-vis-caption { bottom: 1.5rem; left: 1.5rem; }
+    .dark .vl-editorial-txt { border-top: 1px solid var(--vl-rule); }
   }
+  @media (max-width: 540px) {
+    .vl-product-grid { grid-template-columns: 1fr 1fr; gap: 1px; }
+    .vl-hero-content { padding: 0 5vw 6vh; }
+  }
+</style>
 
-  /* COMING SOON */
-  .vl-cs {
-    position: relative; width: 100%; min-height: 80vh;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; background: #080808;
-  }
-  .vl-cs-video {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; z-index: 0;
-  }
-  .vl-cs-overlay {
-    position: absolute; inset: 0;
-    background: rgba(8, 8, 8, 0.40);
-    z-index: 1;
-  }
-  .vl-cs-content {
-    position: relative; z-index: 2;
-    text-align: center; color: #f5efe6;
-    padding: 40px 24px;
-  }
-  .vl-cs-eyebrow {
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: #c8a96e; margin: 0 0 20px;
-  }
-  .vl-cs-title {
-    font-size: clamp(52px, 8vw, 96px);
-    font-weight: 300; letter-spacing: 0.08em;
-    text-transform: uppercase; margin: 0; line-height: 1;
-  }
-  .vl-cs-rule {
-    width: 56px; height: 1px; background: #c8a96e;
-    margin: 32px auto;
-  }
-  .vl-cs-sub {
-    font-size: 14px; letter-spacing: 0.12em;
-    color: rgba(245,239,230,0.65); margin: 0;
-  }
+<div class="vl">
 
-  /* WATCH OVERLAY */
-  .vl-cs { cursor: pointer; }
-  .vl-cs::after {
-    content: 'Discover more →';
-    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: #c8a96e; z-index: 3;
-  }
-  .vl-watch-overlay {
-    position: fixed; inset: 0; z-index: 9999;
-    display: flex; flex-direction: column;
-    opacity: 0; pointer-events: none;
-    transform: translateY(60px);
-    transition: opacity 0.55s cubic-bezier(.4,0,.2,1), transform 0.55s cubic-bezier(.4,0,.2,1);
-  }
-  .vl-watch-overlay.open {
-    opacity: 1; pointer-events: all; transform: translateY(0);
-  }
-  .vl-watch-bg {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; z-index: 0;
-  }
-  .vl-watch-bg-ov {
-    position: absolute; inset: 0;
-    background: rgba(6,6,6,0.82); z-index: 1;
-  }
-  .vl-watch-close {
-    position: absolute; top: 28px; right: 32px; z-index: 10;
-    width: 44px; height: 44px; background: none; border: 1px solid rgba(200,169,110,0.4);
-    cursor: pointer; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 6px;
-    transition: border-color 0.2s;
-  }
-  .vl-watch-close:hover { border-color: #c8a96e; }
-  .vl-watch-close span {
-    display: block; width: 18px; height: 1px; background: #f5efe6;
-    transform-origin: center;
-    transition: transform 0.25s;
-  }
-  .vl-watch-close span:first-child { transform: rotate(45deg) translate(0, 3.5px); }
-  .vl-watch-close span:last-child  { transform: rotate(-45deg) translate(0, -3.5px); }
-  .vl-watch-inner {
-    position: relative; z-index: 2;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 100%; padding: 80px clamp(24px, 7vw, 120px);
-    gap: 60px; overflow-y: auto;
-  }
-  .vl-watch-left { max-width: 560px; color: #f5efe6; }
-  .vl-watch-eyebrow {
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: #c8a96e; margin: 0 0 24px;
-  }
-  .vl-watch-title {
-    font-size: clamp(42px, 6vw, 80px); font-weight: 300;
-    line-height: 1.05; letter-spacing: 0.04em;
-    text-transform: uppercase; margin: 0;
-  }
-  .vl-watch-title em { font-style: italic; color: #c8a96e; }
-  .vl-watch-rule { width: 48px; height: 1px; background: #c8a96e; margin: 28px 0; }
-  .vl-watch-body {
-    font-size: 15px; line-height: 1.75; color: rgba(245,239,230,0.75);
-    margin: 0 0 18px; font-weight: 300;
-  }
-  .vl-watch-specs {
-    list-style: none; padding: 0; margin: 28px 0 36px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px;
-  }
-  .vl-watch-specs li {
-    font-size: 12px; letter-spacing: 0.08em; color: rgba(245,239,230,0.6);
-    border-bottom: 1px solid rgba(200,169,110,0.18); padding-bottom: 10px;
-  }
-  .vl-watch-specs li span {
-    display: block; color: #c8a96e; font-size: 10px;
-    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;
-  }
-  .vl-watch-price-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-  .vl-watch-price {
-    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(245,239,230,0.5);
-  }
-  .vl-watch-cta {
-    display: inline-block; padding: 14px 32px;
-    background: #c8a96e; color: #080808;
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    text-decoration: none; transition: background 0.25s, color 0.25s;
-  }
-  .vl-watch-cta:hover { background: transparent; color: #c8a96e; outline: 1px solid #c8a96e; }
-  .vl-watch-right {
-    flex-shrink: 0; display: flex; align-items: center;
-  }
-  .vl-watch-stat-col {
-    display: flex; flex-direction: column; gap: 40px;
-    border-left: 1px solid rgba(200,169,110,0.25); padding-left: 48px;
-  }
-  .vl-watch-stat { color: #f5efe6; }
-  .vl-watch-stat strong {
-    display: block; font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300; letter-spacing: 0.04em; line-height: 1; color: #c8a96e;
-  }
-  .vl-watch-stat span {
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(245,239,230,0.45); margin-top: 4px; display: block;
-  }
-  @media (max-width: 768px) {
-    .vl-watch-inner { flex-direction: column; padding: 80px 24px 40px; }
-    .vl-watch-right { display: none; }
-    .vl-watch-specs { grid-template-columns: 1fr; }
-  }
-  
-  .vl-watch-tagline {
-    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
-    color: rgba(200,169,110,0.65); margin: 8px 0 0;
-  }
-  .vl-watch-specs-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 20px;
-    margin: 24px 0 28px; border-top: 1px solid rgba(200,169,110,0.15);
-    padding-top: 24px;
-  }
-  .vl-watch-spec-block { }
-  .vl-wspec-label {
-    display: block; font-size: 9px; letter-spacing: 0.2em;
-    text-transform: uppercase; color: #c8a96e; margin-bottom: 5px;
-  }
-  .vl-wspec-val {
-    display: block; font-size: 16px; font-weight: 300;
-    color: #f5efe6; letter-spacing: 0.04em;
-  }
-  .vl-watch-materials { margin-bottom: 24px; }
-  .vl-watch-mat-title {
-    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(200,169,110,0.6); margin: 0 0 12px;
-  }
-  .vl-watch-mat-row {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px;
-  }
-  .vl-watch-mat {
-    font-size: 11px; line-height: 1.55; color: rgba(245,239,230,0.55);
-    border-left: 1px solid rgba(200,169,110,0.3); padding-left: 10px;
-  }
-  .vl-watch-mat strong {
-    display: block; color: rgba(245,239,230,0.85); font-weight: 400;
-    margin-bottom: 2px;
-  }
-  .vl-watch-features {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
-  }
-  .vl-watch-feat {
-    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: rgba(200,169,110,0.75); border: 1px solid rgba(200,169,110,0.25);
-    padding: 5px 10px;
-  }
-  
-  /* WATCH OVERLAY */
-  .vl-cs { cursor: pointer; }
-  .vl-cs::after {
-    content: 'Discover more →';
-    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: #c8a96e; z-index: 3;
-  }
-  .vl-watch-overlay {
-    position: fixed; inset: 0; z-index: 9999;
-    display: flex; flex-direction: column;
-    opacity: 0; pointer-events: none;
-    transform: translateY(60px);
-    transition: opacity 0.55s cubic-bezier(.4,0,.2,1), transform 0.55s cubic-bezier(.4,0,.2,1);
-  }
-  .vl-watch-overlay.open {
-    opacity: 1; pointer-events: all; transform: translateY(0);
-  }
-  .vl-watch-bg {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; z-index: 0;
-  }
-  .vl-watch-bg-ov {
-    position: absolute; inset: 0;
-    background: rgba(6,6,6,0.82); z-index: 1;
-  }
-  .vl-watch-close {
-    position: absolute; top: 28px; right: 32px; z-index: 10;
-    width: 44px; height: 44px; background: none; border: 1px solid rgba(200,169,110,0.4);
-    cursor: pointer; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 6px;
-    transition: border-color 0.2s;
-  }
-  .vl-watch-close:hover { border-color: #c8a96e; }
-  .vl-watch-close span {
-    display: block; width: 18px; height: 1px; background: #f5efe6;
-    transform-origin: center;
-    transition: transform 0.25s;
-  }
-  .vl-watch-close span:first-child { transform: rotate(45deg) translate(0, 3.5px); }
-  .vl-watch-close span:last-child  { transform: rotate(-45deg) translate(0, -3.5px); }
-  .vl-watch-inner {
-    position: relative; z-index: 2;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 100%; padding: 80px clamp(24px, 7vw, 120px);
-    gap: 60px; overflow-y: auto;
-  }
-  .vl-watch-left { max-width: 560px; color: #f5efe6; }
-  .vl-watch-eyebrow {
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: #c8a96e; margin: 0 0 24px;
-  }
-  .vl-watch-title {
-    font-size: clamp(42px, 6vw, 80px); font-weight: 300;
-    line-height: 1.05; letter-spacing: 0.04em;
-    text-transform: uppercase; margin: 0;
-  }
-  .vl-watch-title em { font-style: italic; color: #c8a96e; }
-  .vl-watch-rule { width: 48px; height: 1px; background: #c8a96e; margin: 28px 0; }
-  .vl-watch-body {
-    font-size: 15px; line-height: 1.75; color: rgba(245,239,230,0.75);
-    margin: 0 0 18px; font-weight: 300;
-  }
-  .vl-watch-specs {
-    list-style: none; padding: 0; margin: 28px 0 36px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px;
-  }
-  .vl-watch-specs li {
-    font-size: 12px; letter-spacing: 0.08em; color: rgba(245,239,230,0.6);
-    border-bottom: 1px solid rgba(200,169,110,0.18); padding-bottom: 10px;
-  }
-  .vl-watch-specs li span {
-    display: block; color: #c8a96e; font-size: 10px;
-    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;
-  }
-  .vl-watch-price-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-  .vl-watch-price {
-    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(245,239,230,0.5);
-  }
-  .vl-watch-cta {
-    display: inline-block; padding: 14px 32px;
-    background: #c8a96e; color: #080808;
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    text-decoration: none; transition: background 0.25s, color 0.25s;
-  }
-  .vl-watch-cta:hover { background: transparent; color: #c8a96e; outline: 1px solid #c8a96e; }
-  .vl-watch-right {
-    flex-shrink: 0; display: flex; align-items: center;
-  }
-  .vl-watch-stat-col {
-    display: flex; flex-direction: column; gap: 40px;
-    border-left: 1px solid rgba(200,169,110,0.25); padding-left: 48px;
-  }
-  .vl-watch-stat { color: #f5efe6; }
-  .vl-watch-stat strong {
-    display: block; font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300; letter-spacing: 0.04em; line-height: 1; color: #c8a96e;
-  }
-  .vl-watch-stat span {
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(245,239,230,0.45); margin-top: 4px; display: block;
-  }
-  @media (max-width: 768px) {
-    .vl-watch-inner { flex-direction: column; padding: 80px 24px 40px; }
-    .vl-watch-right { display: none; }
-    .vl-watch-specs { grid-template-columns: 1fr; }
-  }
-  </style>
-
-<div class="vl" id="vl-root">
-
-  <!-- HERO -->
+  {%- comment -%} ── HERO ── {%- endcomment -%}
   <section class="vl-hero">
-    <div class="vl-hero-bg">
-      {% if section.settings.hero_video != blank %}
-        <video class="vl-hero-video" src="{{ section.settings.hero_video }}"
-          autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
-      {% elsif section.settings.hero_image != blank %}
-        <img class="vl-hero-img" src="{{ section.settings.hero_image | image_url: width: 2000 }}"
-          alt="{{ section.settings.hero_image.alt }}" loading="eager" />
-      {% else %}
-        <img class="vl-hero-img" src="{{ 'featured-rose.jpg' | asset_url }}"
-          alt="Velonna" loading="eager" />
-      {% endif %}
-    </div>
+    {%- if section.settings.hero_video != blank -%}
+      <video class="vl-hero-media" src="{{ section.settings.hero_video }}"
+        autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+    {%- elsif section.settings.hero_image != blank -%}
+      <img class="vl-hero-media"
+        src="{{ section.settings.hero_image | image_url: width: 2000 }}"
+        alt="{{ section.settings.hero_image.alt | escape }}"
+        loading="eager" fetchpriority="high" />
+    {%- else -%}
+      <video class="vl-hero-media" src="{{ 'y-drop.mp4' | asset_url }}"
+        autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+    {%- endif -%}
     <div class="vl-hero-overlay"></div>
-    <div class="vl-hero-wm" aria-hidden="true">VELONNA</div>
     <div class="vl-hero-content">
-      <div>
-        <p class="vl-hero-tag" id="vl-hero-tag">{{ section.settings.hero_tag }}</p>
-        <h1 class="vl-hero-title">
-          <span class="ln"><span class="ln-i" id="vl-ln1">{{ section.settings.hero_line1 }}</span></span>
-          <span class="ln"><span class="ln-i" id="vl-ln2"><em>{{ section.settings.hero_line2 }}</em></span></span>
-          <span class="ln"><span class="ln-i ruled" id="vl-ln3">{{ section.settings.hero_line3 }}</span></span>
-        </h1>
-      </div>
-      <div class="vl-hero-right">
-        <span class="vl-edition-num">{{ section.settings.edition_number }}</span>
-        <span class="vl-edition-lbl">{{ section.settings.edition_label }}</span>
-      </div>
-    </div>
-    <div class="vl-scroll-cue" aria-hidden="true">
-      <span class="vl-scroll-line"></span>
-      <span>Scroll</span>
+      <p class="vl-hero-eyebrow">{{ section.settings.hero_eyebrow }}</p>
+      <h1 class="vl-hero-title">
+        {{ section.settings.hero_title | newline_to_br }}
+      </h1>
+      <p class="vl-hero-sub">{{ section.settings.hero_sub }}</p>
+      <a class="vl-hero-cta" href="{{ section.settings.hero_cta_url | default: '/collections/all' }}">{{ section.settings.hero_cta_label }}</a>
     </div>
   </section>
 
-  <!-- MARQUEE BAND -->
+  {%- comment -%} ── MARQUEE ── {%- endcomment -%}
   <div class="vl-band" aria-hidden="true">
     <div class="vl-band-track">
+      {%- assign band_items = "Sterling silver · Lab-grown stones · Swarovski crystals · Contemporary luxury · Occasion wear · IGI certified · Created diamonds · Metro-first · Est. 2024" | split: " · " -%}
+      {%- for n in (1..2) -%}
       <div class="vl-band-group">
-        <span class="vl-band-item">Hand-set in Jammu & Kashmir</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">Twelve numbered editions</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">Signed inside the band</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">Guaranteed a century</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">IGI certified stones</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">Master jeweller Helena Marsh</span><span class="vl-band-dot">·</span>
+        {%- for item in band_items -%}
+          <span class="vl-band-item">{{ item }}</span><span class="vl-band-dot" aria-hidden="true">·</span>
+        {%- endfor -%}
       </div>
-      <div class="vl-band-group">
-        <span class="vl-band-item">Hand-set in Jammu & Kashmir</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">Twelve numbered editions</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">Signed inside the band</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">Guaranteed a century</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">IGI certified stones</span><span class="vl-band-dot">·</span>
-        <span class="vl-band-item">Master jeweller Helena Marsh</span><span class="vl-band-dot">·</span>
-      </div>
+      {%- endfor -%}
     </div>
   </div>
 
-  <!-- STATEMENT -->
+  {%- comment -%} ── COLLECTION TILES (Cartier-style 3-col) ── {%- endcomment -%}
+  <div class="vl-tiles">
+
+    <a class="vl-tile" href="/collections/silver">
+      {%- if section.settings.tile1_image != blank -%}
+        <img class="vl-tile-img"
+          src="{{ section.settings.tile1_image | image_url: width: 800 }}"
+          alt="Silver collection" loading="lazy" />
+      {%- else -%}
+        <div class="vl-tile-placeholder"><span>Silver</span></div>
+      {%- endif -%}
+      <div class="vl-tile-overlay"></div>
+      <div class="vl-tile-label">
+        <p class="vl-tile-eyebrow">Explore the collection</p>
+        <p class="vl-tile-name">Silver</p>
+        <span class="vl-tile-discover">Discover</span>
+      </div>
+    </a>
+
+    <a class="vl-tile" href="/collections/lab-grown-diamonds">
+      {%- if section.settings.tile2_image != blank -%}
+        <img class="vl-tile-img"
+          src="{{ section.settings.tile2_image | image_url: width: 800 }}"
+          alt="Created Diamonds collection" loading="lazy" />
+      {%- else -%}
+        <div class="vl-tile-placeholder"><span>Created Diamonds</span></div>
+      {%- endif -%}
+      <div class="vl-tile-overlay"></div>
+      <div class="vl-tile-label">
+        <p class="vl-tile-eyebrow">Explore the collection</p>
+        <p class="vl-tile-name">Created<br>Diamonds</p>
+        <span class="vl-tile-discover">Discover</span>
+      </div>
+    </a>
+
+    <a class="vl-tile" href="/collections/all">
+      {%- if section.settings.tile3_image != blank -%}
+        <img class="vl-tile-img"
+          src="{{ section.settings.tile3_image | image_url: width: 800 }}"
+          alt="All collections" loading="lazy" />
+      {%- else -%}
+        <div class="vl-tile-placeholder"><span>All Pieces</span></div>
+      {%- endif -%}
+      <div class="vl-tile-overlay"></div>
+      <div class="vl-tile-label">
+        <p class="vl-tile-eyebrow">The full atelier</p>
+        <p class="vl-tile-name">All<br>Collections</p>
+        <span class="vl-tile-discover">Discover</span>
+      </div>
+    </a>
+
+  </div>
+
+  {%- comment -%} ── STATEMENT ── {%- endcomment -%}
   <section class="vl-statement">
     <div class="vl-statement-inner">
+      <div class="vl-statement-rule"></div>
       <p class="vl-statement-q">"{{ section.settings.statement_quote }}"</p>
-      <p class="vl-statement-src">{{ section.settings.statement_source }}</p>
+      <p class="vl-statement-attr">{{ section.settings.statement_attr }}</p>
     </div>
   </section>
 
-  <!-- HERITAGE -->
-  <section class="vl-heritage" id="vl-heritage">
-    <div class="vl-heritage-vis">
-      {% if section.settings.heritage_image != blank %}
-        <img src="{{ section.settings.heritage_image | image_url: width: 1400 }}"
-          alt="{{ section.settings.heritage_image.alt }}" loading="lazy" />
-      {% else %}
-        <img src="{{ 'emerald-necklace-1.jpg' | asset_url }}" alt="Velonna atelier" loading="lazy" />
-      {% endif %}
-      <span class="vl-heritage-num" aria-hidden="true">12</span>
-    </div>
-    <div class="vl-heritage-txt">
-      <p class="vl-heritage-issue">{{ section.settings.heritage_location }}</p>
-      <h2 class="vl-heritage-title">
-        {{ section.settings.heritage_title | newline_to_br }}
-      </h2>
-      <p class="vl-heritage-body">{{ section.settings.heritage_body1 }}</p>
-      <p class="vl-heritage-body">{{ section.settings.heritage_body2 }}</p>
-      <div class="vl-heritage-stats">
-        <div class="vl-stat">
-          <span class="vl-stat-n">{{ section.settings.stat1_num }}</span>
-          <span class="vl-stat-l">{{ section.settings.stat1_label }}</span>
-        </div>
-        <div class="vl-stat">
-          <span class="vl-stat-n">{{ section.settings.stat2_num }}</span>
-          <span class="vl-stat-l">{{ section.settings.stat2_label }}</span>
-        </div>
-        <div class="vl-stat">
-          <span class="vl-stat-n">{{ section.settings.stat3_num }}</span>
-          <span class="vl-stat-l">{{ section.settings.stat3_label }}</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EDITORIAL 1 -->
-  <section class="vl-editorial" id="vl-craft">
-    <div class="vl-editorial-txt">
-      <p class="vl-editorial-issue">{{ section.settings.ed1_issue }}</p>
-      <span class="vl-idx" aria-hidden="true">01</span>
-      <h2 class="vl-editorial-title">{{ section.settings.ed1_title | newline_to_br }}</h2>
-      <p class="vl-editorial-body">{{ section.settings.ed1_body }}</p>
-      <a class="vl-editorial-lnk" href="#vl-reserve">{{ section.settings.ed1_cta }}</a>
-    </div>
+  {%- comment -%} ── EDITORIAL: SILVER (cream section) ── {%- endcomment -%}
+  <section class="vl-editorial cream">
     <div class="vl-editorial-vis">
-      {% if section.settings.ed1_image != blank %}
+      {%- if section.settings.ed1_image != blank -%}
         <img src="{{ section.settings.ed1_image | image_url: width: 1200 }}"
-          alt="{{ section.settings.ed1_image.alt }}" loading="lazy" />
-      {% else %}
-        <img src="{{ 'floral-rings.jpg' | asset_url }}" alt="Velonna craftsmanship" loading="lazy" />
-      {% endif %}
-      <span class="vl-editorial-cap">{{ section.settings.ed1_caption }}</span>
+          alt="{{ section.settings.ed1_image.alt | escape }}" loading="lazy" />
+      {%- else -%}
+        <div class="vl-tile-placeholder" style="height:100%;"><span>Silver Collection</span></div>
+      {%- endif -%}
     </div>
-  </section>
-
-  <!-- FULL-BLEED INTERLUDE -->
-  <section class="vl-bleed">
-    {% if section.settings.bleed_video != blank %}
-      <video class="vl-bleed-bg" src="{{ section.settings.bleed_video }}"
-        autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
-    {% elsif section.settings.bleed_image != blank %}
-      <img class="vl-bleed-bg" src="{{ section.settings.bleed_image | image_url: width: 2000 }}"
-        alt="" aria-hidden="true" loading="lazy" />
-    {% else %}
-      <img class="vl-bleed-bg" src="{{ 'hero-ring.jpg' | asset_url }}" alt="" aria-hidden="true" loading="lazy" />
-    {% endif %}
-    <div class="vl-bleed-ov"></div>
-    <div class="vl-bleed-cnt">
-      <p class="vl-bleed-ey">{{ section.settings.bleed_eyebrow }}</p>
-      <p class="vl-bleed-q">"{{ section.settings.bleed_quote }}"</p>
-      <div class="vl-bleed-rule"></div>
-      <p class="vl-bleed-cap">{{ section.settings.bleed_caption }}</p>
-    </div>
-  </section>
-
-  <!-- EDITORIAL 2 (reversed) -->
-  <section class="vl-editorial rev" id="vl-collection">
     <div class="vl-editorial-txt">
-      <p class="vl-editorial-issue">{{ section.settings.ed2_issue }}</p>
-      <span class="vl-idx" aria-hidden="true">02</span>
-      <h2 class="vl-editorial-title">{{ section.settings.ed2_title | newline_to_br }}</h2>
-      <p class="vl-editorial-body">{{ section.settings.ed2_body }}</p>
-      <a class="vl-editorial-lnk" href="#vl-reserve">{{ section.settings.ed2_cta }}</a>
-    </div>
-    <div class="vl-editorial-vis">
-      {% if section.settings.ed2_image != blank %}
-        <img src="{{ section.settings.ed2_image | image_url: width: 1200 }}"
-          alt="{{ section.settings.ed2_image.alt }}" loading="lazy" />
-      {% else %}
-        <img src="{{ 'hero-ring.jpg' | asset_url }}" alt="Velonna Rose en Pose" loading="lazy" />
-      {% endif %}
-      <span class="vl-editorial-cap">{{ section.settings.ed2_caption }}</span>
+      <p class="vl-ed-eyebrow">{{ section.settings.ed1_eyebrow }}</p>
+      <h2 class="vl-ed-title">{{ section.settings.ed1_title | newline_to_br }}</h2>
+      <p class="vl-ed-body">{{ section.settings.ed1_body }}</p>
+      <a class="vl-ed-link" href="{{ section.settings.ed1_url | default: '/collections/silver' }}">{{ section.settings.ed1_cta }}</a>
     </div>
   </section>
 
-  <!-- RESERVATION -->
-  <section class="vl-reserve" id="vl-reserve">
-    <div class="vl-reserve-vis">
-      {% if section.settings.form_image != blank %}
-        <img src="{{ section.settings.form_image | image_url: width: 1200 }}"
-          alt="{{ section.settings.form_image.alt }}" loading="lazy" />
-      {% else %}
-        <img src="{{ 'featured-rose.jpg' | asset_url }}" alt="" loading="lazy" />
-      {% endif %}
-      <div class="vl-reserve-vis-ov"></div>
-      <div class="vl-reserve-vis-tag">
-        <strong>Private Viewing</strong>
-        Twelve pieces,<br />one conversation.
+  {%- comment -%} ── FULL-BLEED FEATURE ── {%- endcomment -%}
+  <section class="vl-feature">
+    {%- if section.settings.feature_image != blank -%}
+      <img class="vl-feature-bg"
+        src="{{ section.settings.feature_image | image_url: width: 2000 }}"
+        alt="" aria-hidden="true" loading="lazy" />
+    {%- else -%}
+      <video class="vl-feature-bg" src="{{ 'extra.mp4' | asset_url }}"
+        autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
+    {%- endif -%}
+    <div class="vl-feature-ov"></div>
+    <div class="vl-feature-content">
+      <p class="vl-feature-eyebrow">{{ section.settings.feature_eyebrow }}</p>
+      <p class="vl-feature-title">"{{ section.settings.feature_quote }}"</p>
+      <div class="vl-feature-rule"></div>
+      <a class="vl-feature-cta" href="{{ section.settings.feature_cta_url | default: '/collections/lab-grown-diamonds' }}">{{ section.settings.feature_cta }}</a>
+    </div>
+  </section>
+
+  {%- comment -%} ── EDITORIAL: CREATED DIAMONDS (dark section, reversed) ── {%- endcomment -%}
+  <section class="vl-editorial dark rev">
+    <div class="vl-editorial-vis">
+      {%- if section.settings.ed2_image != blank -%}
+        <img src="{{ section.settings.ed2_image | image_url: width: 1200 }}"
+          alt="{{ section.settings.ed2_image.alt | escape }}" loading="lazy" />
+      {%- else -%}
+        <div class="vl-tile-placeholder" style="height:100%;"><span>Created Diamonds</span></div>
+      {%- endif -%}
+    </div>
+    <div class="vl-editorial-txt">
+      <p class="vl-ed-eyebrow">{{ section.settings.ed2_eyebrow }}</p>
+      <h2 class="vl-ed-title">{{ section.settings.ed2_title | newline_to_br }}</h2>
+      <p class="vl-ed-body">{{ section.settings.ed2_body }}</p>
+      <a class="vl-ed-link" href="{{ section.settings.ed2_url | default: '/collections/lab-grown-diamonds' }}">{{ section.settings.ed2_cta }}</a>
+    </div>
+  </section>
+
+  {%- comment -%} ── FEATURED PRODUCTS ── {%- endcomment -%}
+  {%- assign fp_collection = collections[section.settings.featured_collection] -%}
+  {%- if fp_collection != blank and fp_collection.products.size > 0 -%}
+  <section class="vl-products">
+    <div class="vl-products-header">
+      <h2 class="vl-products-title">
+        {{ section.settings.products_title | newline_to_br }}
+      </h2>
+      <a class="vl-products-viewall" href="/collections/{{ fp_collection.handle }}">View all</a>
+    </div>
+    <div class="vl-product-grid">
+      {%- for product in fp_collection.products limit: 4 -%}
+      <div class="vl-product-card">
+        <a href="{{ product.url }}">
+          <div class="vl-product-img-wrap">
+            {%- if product.featured_image -%}
+              <img class="vl-product-img"
+                src="{{ product.featured_image | image_url: width: 600 }}"
+                alt="{{ product.featured_image.alt | escape }}"
+                loading="lazy" />
+            {%- else -%}
+              <div class="vl-product-placeholder" style="height:100%;">
+                <span>{{ product.title }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="vl-product-info">
+            <p class="vl-product-collection">{{ product.collections.first.title }}</p>
+            <p class="vl-product-name">{{ product.title }}</p>
+            <p class="vl-product-price">{{ product.price | money }}</p>
+          </div>
+        </a>
+      </div>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ── ENQUIRE ── {%- endcomment -%}
+  <section class="vl-enquire" id="vl-enquire">
+    <div class="vl-enquire-vis">
+      {%- if section.settings.enquire_image != blank -%}
+        <img src="{{ section.settings.enquire_image | image_url: width: 1200 }}"
+          alt="" loading="lazy" />
+      {%- else -%}
+        <div class="vl-tile-placeholder" style="height:100%;"><span>Velonna Atelier</span></div>
+      {%- endif -%}
+      <div class="vl-enquire-vis-ov"></div>
+      <div class="vl-enquire-vis-caption">
+        <strong>The Velonna Atelier</strong>
+        <p>Contemporary luxury,<br>accessible price points.</p>
       </div>
     </div>
-    <div class="vl-reserve-form">
-      <p class="vl-reserve-ey">Velonna Atelier</p>
-      <h2 class="vl-reserve-title">Secure Your<br /><em>Piece</em></h2>
-      <p class="vl-reserve-sub">
-        One of twelve numbered editions. We'll reply within forty-eight hours to arrange a private viewing or video consultation at our Jammu & Kashmir atelier.
+    <div class="vl-enquire-form">
+      <p class="vl-enquire-eyebrow">Velonna</p>
+      <h2 class="vl-enquire-title">Enquire About<br><em>a Piece</em></h2>
+      <p class="vl-enquire-sub">
+        Questions about a piece, custom orders, or anything else — we reply within 24 hours.
       </p>
-      <form class="vl-form" id="vl-reserve-form" action="/contact#vl-reserve" method="POST">
+      <form class="vl-form" action="/contact#vl-enquire" method="POST">
         <input type="hidden" name="form_type" value="contact" />
         <input type="hidden" name="utf8" value="✓" />
         <div class="vl-form-row">
           <div class="vl-form-g">
-            <label for="vl-first">First name</label>
-            <input id="vl-first" name="contact[first_name]" type="text" required placeholder="Helena" autocomplete="given-name" />
+            <label for="vl-fname">First name</label>
+            <input id="vl-fname" name="contact[first_name]" type="text" required placeholder="Your name" autocomplete="given-name" />
           </div>
           <div class="vl-form-g">
-            <label for="vl-last">Last name</label>
-            <input id="vl-last" name="contact[last_name]" type="text" required placeholder="Marsh" autocomplete="family-name" />
+            <label for="vl-lname">Last name</label>
+            <input id="vl-lname" name="contact[last_name]" type="text" required placeholder="Last name" autocomplete="family-name" />
           </div>
         </div>
         <div class="vl-form-g">
@@ -917,23 +753,23 @@
           <input id="vl-phone" name="contact[phone]" type="tel" placeholder="+91 98000 00000" autocomplete="tel" />
         </div>
         <div class="vl-form-g">
-          <label for="vl-piece">Preferred piece</label>
-          <select id="vl-piece" name="contact[piece]">
+          <label for="vl-interest">I'm interested in</label>
+          <select id="vl-interest" name="contact[interest]">
             <option value="">— Select —</option>
-            <option>The Emerald Suite</option>
-            <option>Velonna Botanica</option>
-            <option>Rose en Pose</option>
-            <option>Dawn Solitaire</option>
-            <option>Bespoke — let's talk</option>
+            <option>Silver jewellery</option>
+            <option>Created diamond pieces</option>
+            <option>Occasion wear / statement pieces</option>
+            <option>Swarovski crystal designs</option>
+            <option>Custom / bespoke order</option>
+            <option>Franchise enquiry</option>
           </select>
         </div>
         <div class="vl-form-g">
-          <label for="vl-msg">Message <span style="opacity:0.5">(optional)</span></label>
-          <textarea id="vl-msg" name="contact[body]" rows="3" placeholder="Tell us about the occasion..."></textarea>
+          <label for="vl-msg">Message <span style="opacity:0.4">(optional)</span></label>
+          <textarea id="vl-msg" name="contact[body]" rows="3" placeholder="Tell us more..."></textarea>
         </div>
-        <button class="vl-submit" type="submit">Submit Reservation</button>
-        <p class="vl-form-note">Handled personally by Helena Marsh. We never share your details.</p>
-        <p class="vl-form-success" id="vl-success">Thank you — we'll be in touch within 48 hours.</p>
+        <button class="vl-submit" type="submit">Send Enquiry</button>
+        <p class="vl-form-note">We reply within 24 hours. Your details stay private.</p>
       </form>
     </div>
   </section>
@@ -942,278 +778,43 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet" />
-<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js" defer></script>
-<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
 
 <script>
-(function() {
-  function init() {
-    var gsap = window.gsap;
-    var ST   = window.ScrollTrigger;
-    if (!gsap || !ST) { setTimeout(init, 80); return; }
-    gsap.registerPlugin(ST);
+(function () {
+  // Simple fade-in on scroll for editorial elements
+  if (!('IntersectionObserver' in window)) return;
 
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
+  var targets = document.querySelectorAll(
+    '.vl-statement-inner, .vl-ed-eyebrow, .vl-ed-title, .vl-ed-body, .vl-ed-link, ' +
+    '.vl-feature-content, .vl-enquire-title, .vl-enquire-sub, ' +
+    '.vl-products-header, .vl-product-card'
+  );
 
-    // Hero entrance
-    var lines = document.querySelectorAll('.vl-hero-title .ln-i');
-    gsap.set(lines, { yPercent: 112 });
-    gsap.set('#vl-hero-tag', { opacity: 0, y: 16 });
-    gsap.set('.vl-hero-wm', { opacity: 0 });
-
-    gsap.timeline({ defaults: { ease: 'power4.out' } })
-      .to('.vl-hero-video, .vl-hero-img', { scale: 1, duration: 2.4, ease: 'power3.out' }, 0)
-      .to('.vl-hero-wm', { opacity: 1, duration: 1.8 }, 0.2)
-      .to(lines, { yPercent: 0, duration: 1.25, stagger: 0.13 }, 0.55)
-      .to('#vl-hero-tag', { opacity: 1, y: 0, duration: 1.0 }, 0.9);
-
-    // Watermark parallax
-    gsap.to('.vl-hero-wm', {
-      yPercent: 28,
-      scrollTrigger: { trigger: '.vl-hero', start: 'top top', end: 'bottom top', scrub: 1 }
-    });
-
-    // Bleed bg parallax
-    gsap.to('.vl-bleed-bg', {
-      scale: 1.1,
-      scrollTrigger: { trigger: '.vl-bleed', start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-
-    // Heritage image parallax
-    gsap.to('.vl-heritage-vis img', {
-      scale: 1.07,
-      scrollTrigger: { trigger: '.vl-heritage', start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-
-    // Generic scroll reveals
-    document.querySelectorAll('.vl-heritage-issue, .vl-heritage-title, .vl-heritage-body, .vl-heritage-stats, .vl-statement-inner, .vl-editorial-issue, .vl-idx, .vl-editorial-title, .vl-editorial-body, .vl-editorial-lnk, .vl-bleed-ey, .vl-bleed-q, .vl-bleed-rule, .vl-bleed-cap, .vl-reserve-title, .vl-reserve-sub').forEach(function(el) {
-      gsap.from(el, {
-        opacity: 0, y: 32, duration: 1.1, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 84%', toggleActions: 'play none none reverse' }
-      });
-    });
-
-    setTimeout(function() { ST.refresh(); }, 700);
-    window.addEventListener('load', function() { ST.refresh(); });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-
-  // Video pause offscreen
-  document.addEventListener('DOMContentLoaded', function() {
-    if (!('IntersectionObserver' in window)) return;
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        e.isIntersecting ? e.target.play().catch(function(){}) : e.target.pause();
-      });
-    }, { rootMargin: '120px' });
-    document.querySelectorAll('.vl video').forEach(function(v) { io.observe(v); });
+  targets.forEach(function (el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
   });
 
-  // Form success flash
-  document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('vl-reserve-form');
-    var ok   = document.getElementById('vl-success');
-    if (!form) return;
-    // Show success if Shopify redirected back with ?form_success
-    if (window.location.search.indexOf('form_success') !== -1 && ok) {
-      ok.classList.add('shown');
-    }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+
+  targets.forEach(function (el) { io.observe(el); });
+
+  // Stagger product cards
+  document.querySelectorAll('.vl-product-card').forEach(function (card, i) {
+    card.style.transitionDelay = (i * 0.08) + 's';
   });
 })();
-
-  // Watch overlay
-  (function() {
-    var overlay = document.getElementById('vl-watch-overlay');
-    var closeBtn = document.getElementById('vl-watch-close');
-    var csCta    = document.getElementById('vl-watch-cta');
-    var cs       = document.querySelector('.vl-cs');
-    if (!overlay || !cs) return;
-    function openOverlay() {
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeOverlay() {
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    cs.addEventListener('click', openOverlay);
-    if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
-    if (csCta) csCta.addEventListener('click', function() { closeOverlay(); });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeOverlay();
-    });
-  })();
 </script>
-
-
-
-  <!-- COMING SOON -->
-  <section class="vl-cs">
-    <video class="vl-cs-video" src="{{ 'rose-gold-watch.mp4' | asset_url }}"
-      autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
-    <div class="vl-cs-overlay"></div>
-    <div class="vl-cs-content">
-      <p class="vl-cs-eyebrow">The Next Chapter</p>
-      <h2 class="vl-cs-title">Coming Soon</h2>
-      <div class="vl-cs-rule"></div>
-      <p class="vl-cs-sub">Something extraordinary is being crafted.</p>
-    </div>
-  </section>
-
-</div><!-- /vl -->
-    <button class="vl-watch-close" id="vl-watch-close" aria-label="Close">
-      <span></span><span></span>
-    </button>
-
-    <div class="vl-watch-inner">
-
-      <!-- LEFT: Identity + Story + Specs -->
-      <div class="vl-watch-left">
-        <p class="vl-watch-eyebrow">Velonna Haute Horlogerie · Limited to 18 Pieces</p>
-        <h1 class="vl-watch-title">Velonna<br><em>Solstice</em></h1>
-        <p class="vl-watch-tagline">Time Is Energy</p>
-        <div class="vl-watch-rule"></div>
-
-        <p class="vl-watch-body">
-          Three concentric rings orbit a floating sapphire core held aloft by magnetic
-          levitation — no hands, no traditional complications. The outer ring marks
-          hours completing one rotation every 12 hours; the inner ring marks minutes
-          in 60. A single diamond marker aligns with the scale to tell the time.
-        </p>
-        <p class="vl-watch-body">
-          The case is Nano Carbon Titanium — ultra-light at 48 grams — clad in
-          18-carat rose gold, contoured and hand-polished. The crystal is sapphire
-          with anti-reflective coating. The diamonds are created diamonds, VS clarity.
-        </p>
-
-        <!-- Specs grid -->
-        <div class="vl-watch-specs-grid">
-          <div class="vl-watch-spec-block">
-            <span class="vl-wspec-label">Diameter</span>
-            <span class="vl-wspec-val">44.10 mm</span>
-          </div>
-          <div class="vl-watch-spec-block">
-            <span class="vl-wspec-label">Thickness</span>
-            <span class="vl-wspec-val">13.70 mm</span>
-          </div>
-          <div class="vl-watch-spec-block">
-            <span class="vl-wspec-label">Weight</span>
-            <span class="vl-wspec-val">48 g</span>
-          </div>
-          <div class="vl-watch-spec-block">
-            <span class="vl-wspec-label">Water Resistant</span>
-            <span class="vl-wspec-val">30 M</span>
-          </div>
-          <div class="vl-watch-spec-block">
-            <span class="vl-wspec-label">Power Reserve</span>
-            <span class="vl-wspec-val">72 Hours</span>
-          </div>
-          <div class="vl-watch-spec-block">
-            <span class="vl-wspec-label">Edition</span>
-            <span class="vl-wspec-val">18 Pieces</span>
-          </div>
-        </div>
-
-        <!-- Materials -->
-        <div class="vl-watch-materials">
-          <p class="vl-watch-mat-title">Material Innovation</p>
-          <div class="vl-watch-mat-row">
-            <div class="vl-watch-mat"><strong>Nano Carbon Titanium</strong> Ultra Light &amp; Extremely Strong</div>
-            <div class="vl-watch-mat"><strong>18K Rose Gold</strong> Contoured &amp; Hand Polished</div>
-            <div class="vl-watch-mat"><strong>Sapphire Crystal</strong> Anti Reflective Coating</div>
-            <div class="vl-watch-mat"><strong>created diamonds</strong> VS Clarity</div>
-          </div>
-        </div>
-
-        <!-- Features -->
-        <div class="vl-watch-features">
-          <div class="vl-watch-feat">Floating Orbital Tourbillon</div>
-          <div class="vl-watch-feat">360° Rotation</div>
-          <div class="vl-watch-feat">Solar Energy Capture Ring</div>
-          <div class="vl-watch-feat">Real Time Energy Indicator</div>
-          <div class="vl-watch-feat">Integrated Flex Strap</div>
-          <div class="vl-watch-feat">Hand Finished Details</div>
-        </div>
-
-        <div class="vl-watch-price-row">
-          <span class="vl-watch-price">Price on request</span>
-          <a href="#vl-reserve" class="vl-watch-cta" id="vl-watch-cta">Reserve a Private Viewing</a>
-        </div>
-      </div>
-
-      <!-- RIGHT: Stats -->
-      <div class="vl-watch-right">
-        <div class="vl-watch-stat-col">
-          <div class="vl-watch-stat"><strong>18</strong><span>Pieces<br>Worldwide</span></div>
-          <div class="vl-watch-stat"><strong>72h</strong><span>Power<br>Reserve</span></div>
-          <div class="vl-watch-stat"><strong>3</strong><span>Orbital<br>Rings</span></div>
-          <div class="vl-watch-stat"><strong>100yr</strong><span>Guarantee</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-
-
-  <!-- WATCH LANDING OVERLAY -->
-  <div class="vl-watch-overlay" id="vl-watch-overlay" aria-modal="true" role="dialog" aria-label="Watch Collection">
-    <video class="vl-watch-bg" src="{{ 'rose-gold-watch.mp4' | asset_url }}"
-      autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
-    <div class="vl-watch-bg-ov"></div>
-
-    <button class="vl-watch-close" id="vl-watch-close" aria-label="Close">
-      <span></span><span></span>
-    </button>
-
-    <div class="vl-watch-inner">
-
-      <div class="vl-watch-left">
-        <p class="vl-watch-eyebrow">Velonna Haute Horlogerie · 2026</p>
-        <h1 class="vl-watch-title">The&nbsp;Rose<br><em>Chronograph</em></h1>
-        <div class="vl-watch-rule"></div>
-        <p class="vl-watch-body">
-          Eighteen-carat rose gold. A dial paved in pink sapphires cut to mirror the
-          bloom you saw on the ring. Forty hours of power reserve, hand-wound. The
-          crown is a single cabochon ruby — placed where a thorn would be.
-        </p>
-        <p class="vl-watch-body">
-          This is not a watch for every wrist. It is for the one who already owns
-          the ring, and wants time itself to match.
-        </p>
-        <ul class="vl-watch-specs">
-          <li><span>Case</span> 38 mm · 18ct Rose Gold</li>
-          <li><span>Movement</span> In-house Cal. VL-01 · Hand-wound</li>
-          <li><span>Dial</span> Pink Sapphire Pavé · 312 stones</li>
-          <li><span>Strap</span> Blush alligator · deployant clasp</li>
-          <li><span>Edition</span> 6 pieces worldwide</li>
-          <li><span>Guarantee</span> 100 years</li>
-        </ul>
-        <div class="vl-watch-price-row">
-          <span class="vl-watch-price">Price on request</span>
-          <a href="#vl-reserve" class="vl-watch-cta" id="vl-watch-cta">Reserve a Private Viewing</a>
-        </div>
-      </div>
-
-      <div class="vl-watch-right">
-        <div class="vl-watch-stat-col">
-          <div class="vl-watch-stat"><strong>6</strong><span>Pieces</span></div>
-          <div class="vl-watch-stat"><strong>312</strong><span>Sapphires</span></div>
-          <div class="vl-watch-stat"><strong>40h</strong><span>Reserve</span></div>
-          <div class="vl-watch-stat"><strong>100yr</strong><span>Guarantee</span></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
 {% schema %}
 {
@@ -1222,57 +823,52 @@
   "class": "vl-section",
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "url",    "id": "hero_video",   "label": "Hero video URL (paste Shopify Files CDN link)" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero fallback image" },
-    { "type": "text",   "id": "hero_tag",     "label": "Hero tag line",  "default": "Jammu & Kashmir · Est. 2014 · Limited Edition" },
-    { "type": "text",   "id": "hero_line1",   "label": "Title line 1",   "default": "An Heirloom" },
-    { "type": "text",   "id": "hero_line2",   "label": "Title line 2 (italic)", "default": "In Light" },
-    { "type": "text",   "id": "hero_line3",   "label": "Title line 3",   "default": "& Stone" },
-    { "type": "text",   "id": "edition_number", "label": "Edition number", "default": "12" },
-    { "type": "text",   "id": "edition_label",  "label": "Edition label",  "default": "Numbered Editions" },
+    { "type": "url",          "id": "hero_video",    "label": "Hero video URL" },
+    { "type": "image_picker", "id": "hero_image",    "label": "Hero image (fallback)" },
+    { "type": "text",         "id": "hero_eyebrow",  "label": "Eyebrow", "default": "The Velonna Atelier · Est. 2024" },
+    { "type": "textarea",     "id": "hero_title",    "label": "Title (use newlines)", "default": "Contemporary\nLuxury,\nAccessible." },
+    { "type": "text",         "id": "hero_sub",      "label": "Subtitle", "default": "Silver, lab-grown stones, and Swarovski crystals. International couture aesthetics at prices that make sense." },
+    { "type": "text",         "id": "hero_cta_label","label": "CTA label", "default": "Explore the collections" },
+    { "type": "url",          "id": "hero_cta_url",  "label": "CTA URL" },
+
+    { "type": "header", "content": "Collection Tiles" },
+    { "type": "image_picker", "id": "tile1_image", "label": "Tile 1 — Silver image" },
+    { "type": "image_picker", "id": "tile2_image", "label": "Tile 2 — Created Diamonds image" },
+    { "type": "image_picker", "id": "tile3_image", "label": "Tile 3 — All Collections image" },
 
     { "type": "header", "content": "Statement" },
-    { "type": "text",   "id": "statement_quote",  "label": "Quote",  "default": "Worn today. Worn a century from now." },
-    { "type": "text",   "id": "statement_source", "label": "Source", "default": "The Velonna Atelier · 2014" },
+    { "type": "textarea", "id": "statement_quote", "label": "Quote", "default": "International couture-like designs and jewellery inspired by global brands — both with good materials and accessible price points." },
+    { "type": "text",     "id": "statement_attr",  "label": "Attribution", "default": "Arkit Jain, Founder · The Retail Jeweller, March–April 2026" },
 
-    { "type": "header", "content": "Heritage" },
-    { "type": "image_picker", "id": "heritage_image",    "label": "Heritage image" },
-    { "type": "text",   "id": "heritage_location", "label": "Location tag", "default": "The Atelier · 12 Forbes St, Fort, Jammu & Kashmir" },
-    { "type": "textarea","id": "heritage_title",   "label": "Title (use newlines)", "default": "A Decade\nof Quiet\nMastery" },
-    { "type": "textarea","id": "heritage_body1",   "label": "Body paragraph 1", "default": "Founded above a quiet street in Fort, Jammu & Kashmir, Velonna has held to a single conviction — that a jewel made slowly by hand will outlast every trend surrounding it." },
-    { "type": "textarea","id": "heritage_body2",   "label": "Body paragraph 2", "default": "Every piece begins with a stone selected in person, ends with a master jeweller's signature on the inside, and travels with the Book that records both. There are no batches, no seasons. Only twelve." },
-    { "type": "text",   "id": "stat1_num",   "label": "Stat 1 number", "default": "412" },
-    { "type": "text",   "id": "stat1_label", "label": "Stat 1 label",  "default": "Hours per piece" },
-    { "type": "text",   "id": "stat2_num",   "label": "Stat 2 number", "default": "12" },
-    { "type": "text",   "id": "stat2_label", "label": "Stat 2 label",  "default": "Numbered pieces" },
-    { "type": "text",   "id": "stat3_num",   "label": "Stat 3 number", "default": "100yr" },
-    { "type": "text",   "id": "stat3_label", "label": "Stat 3 label",  "default": "Guarantee" },
+    { "type": "header", "content": "Editorial — Silver" },
+    { "type": "image_picker", "id": "ed1_image",   "label": "Image" },
+    { "type": "text",   "id": "ed1_eyebrow", "label": "Eyebrow",  "default": "The Silver Collection" },
+    { "type": "textarea","id": "ed1_title",  "label": "Title",    "default": "Everyday\n<em>Ritual</em>" },
+    { "type": "textarea","id": "ed1_body",   "label": "Body",     "default": "Sterling silver pieces with a contemporary, luxury-led design language. From delicate everyday wear to bold statement pieces — crafted for the woman who moves between modern and traditional settings." },
+    { "type": "text",   "id": "ed1_cta",    "label": "CTA",      "default": "Explore Silver" },
+    { "type": "url",    "id": "ed1_url",    "label": "CTA URL" },
 
-    { "type": "header", "content": "Editorial section 1" },
-    { "type": "text",   "id": "ed1_issue",   "label": "Eyebrow",  "default": "Savoir-faire · The Edition" },
-    { "type": "textarea","id": "ed1_title",  "label": "Title",    "default": "The Anatomy\nof Light" },
-    { "type": "textarea","id": "ed1_body",   "label": "Body",     "default": "Seventy-five components. Every prong shaped by a human eye, every stone seated without a jig. What you hold is not a product — it is a record of decisions made by a single pair of hands across more than four hundred hours." },
-    { "type": "text",   "id": "ed1_cta",     "label": "CTA text", "default": "Book a private viewing" },
-    { "type": "image_picker", "id": "ed1_image", "label": "Image" },
-    { "type": "text",   "id": "ed1_caption", "label": "Image caption", "default": "Velonna · Botanica · Edition 2026" },
+    { "type": "header", "content": "Full-bleed Feature" },
+    { "type": "image_picker", "id": "feature_image",   "label": "Background image" },
+    { "type": "text",   "id": "feature_eyebrow",  "label": "Eyebrow",  "default": "Created Diamonds · IGI Certified" },
+    { "type": "textarea","id": "feature_quote",   "label": "Quote",    "default": "Light, made by science. Set by hand." },
+    { "type": "text",   "id": "feature_cta",     "label": "CTA",      "default": "Shop Created Diamonds" },
+    { "type": "url",    "id": "feature_cta_url", "label": "CTA URL" },
 
-    { "type": "header", "content": "Full-bleed interlude" },
-    { "type": "url",    "id": "bleed_video",   "label": "Bleed video URL" },
-    { "type": "image_picker", "id": "bleed_image", "label": "Bleed fallback image" },
-    { "type": "text",   "id": "bleed_eyebrow", "label": "Eyebrow",  "default": "The Rose Collection · Dawn Solitaire" },
-    { "type": "textarea","id": "bleed_quote",  "label": "Quote",    "default": "Not for the world to see. For the one who wears it to feel." },
-    { "type": "text",   "id": "bleed_caption", "label": "Caption",  "default": "No. 01 / 12 · Helena Marsh · Jammu & Kashmir" },
+    { "type": "header", "content": "Editorial — Created Diamonds" },
+    { "type": "image_picker", "id": "ed2_image",   "label": "Image" },
+    { "type": "text",   "id": "ed2_eyebrow", "label": "Eyebrow",  "default": "Created Diamonds" },
+    { "type": "textarea","id": "ed2_title",  "label": "Title",    "default": "For the\n<em>Exceptional</em>\nMoment" },
+    { "type": "textarea","id": "ed2_body",   "label": "Body",     "default": "Lab-grown diamonds and Swarovski crystals — physically and chemically identical to mined stones, set into designs inspired by the world's great jewellery houses. Identical light. A fraction of the price." },
+    { "type": "text",   "id": "ed2_cta",    "label": "CTA",      "default": "Explore Created Diamonds" },
+    { "type": "url",    "id": "ed2_url",    "label": "CTA URL" },
 
-    { "type": "header", "content": "Editorial section 2" },
-    { "type": "text",   "id": "ed2_issue",   "label": "Eyebrow",  "default": "The Rose Collection" },
-    { "type": "textarea","id": "ed2_title",  "label": "Title",    "default": "Rose\nen Pose" },
-    { "type": "textarea","id": "ed2_body",   "label": "Body",     "default": "Pink-pavé sapphire petals. White-diamond thorny vines wrapping the shank twice. Two closed buds on slim rose-gold stems. One ring. One wearer. Signed at the root." },
-    { "type": "text",   "id": "ed2_cta",     "label": "CTA text", "default": "Reserve this piece" },
-    { "type": "image_picker", "id": "ed2_image", "label": "Image" },
-    { "type": "text",   "id": "ed2_caption", "label": "Image caption", "default": "Velonna · Rose en Pose · 2026" },
+    { "type": "header", "content": "Featured Products" },
+    { "type": "collection", "id": "featured_collection", "label": "Collection to feature" },
+    { "type": "textarea", "id": "products_title", "label": "Section title", "default": "New\n<em>Arrivals</em>" },
 
-    { "type": "header", "content": "Reservation form" },
-    { "type": "image_picker", "id": "form_image", "label": "Side image" }
+    { "type": "header", "content": "Enquiry Form" },
+    { "type": "image_picker", "id": "enquire_image", "label": "Side image" }
   ],
   "presets": [{ "name": "Velonna Landing" }]
 }
