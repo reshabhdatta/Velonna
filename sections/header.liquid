@@ -1,17 +1,3 @@
-<style>
-/* VELONNA: hide localization */
-.desktop-localization-wrapper,
-.mobile-localization-wrapper,
-.header__icon--localization,
-localization-form,
-.localization-form,
-noscript.localization-form,
-.disclosure--localization,
-[data-localization],
-.header__icons > .header__icon:last-child,
-[class*="localization"] { display: none !important; }
-</style>
-
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -30,6 +16,20 @@ noscript.localization-form,
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
+  }
+
+  /* Invert logo to black for white theme */
+  .header__heading-logo {
+    filter: invert(1);
+  }
+
+  /* Translucent frosted-glass header */
+  .header {
+    background: rgba(250, 249, 246, 0.82) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    box-shadow: 0 1px 0 rgba(26,22,18,0.07), 0 4px 24px rgba(26,22,18,0.06) !important;
+    border-bottom: none !important;
   }
 
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
@@ -459,39 +459,6 @@ noscript.localization-form,
     }
   </script>
 {%- endif -%}
-
-
-<style>
-  .desktop-localization-wrapper,
-  .header__icon--localization,
-  localization-form,
-  .localization-form,
-  .disclosure--localization,
-  .mobile-localization-wrapper,
-  [data-section-type="localization"] { display: none !important; }
-</style>
-
-
-<style>
-  /* Hide Gold nav item */
-  .header__menu-item[href*="gold"]:not([href*="lab"]),
-  .menu-drawer__menu-item[href*="gold"]:not([href*="lab"]) { display: none !important; }
-</style>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('a.header__menu-item, a.menu-drawer__menu-item, summary').forEach(function(el) {
-      if (el.textContent.trim().toLowerCase() === 'gold') {
-        var parent = el.closest('li, details');
-        if (parent) parent.style.display = 'none';
-      }
-      if (el.textContent.trim().toLowerCase() === 'lab grown') {
-        el.textContent = 'Created Diamonds';
-        var span = el.querySelector('span');
-        if (span && span.textContent.trim().toLowerCase() === 'lab grown') span.textContent = 'Created Diamonds';
-      }
-    });
-  });
-</script>
 
 {% schema %}
 {
