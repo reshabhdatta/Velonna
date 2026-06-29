@@ -6,9 +6,15 @@
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
+  /* Black logo in footer */
+  .footer-block__image-wrapper img {
+    content: url({{ 'velonna-logo-black.png' | asset_url }});
+  }
+
   .footer {
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
   }
+
 
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;

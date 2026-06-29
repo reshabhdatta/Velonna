@@ -18,9 +18,11 @@
     margin-left: -1.2rem;
   }
 
-  /* Invert logo to black for white theme */
+  /* Black logo override */
   .header__heading-logo {
-    filter: invert(1);
+    content: url({{ 'velonna-logo-black.png' | asset_url }});
+    width: 160px;
+    height: auto;
   }
 
   /* Translucent frosted-glass header */
