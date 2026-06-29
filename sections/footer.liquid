@@ -299,55 +299,11 @@
     </div>
     <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
       <div class="footer__copyright caption">
-        <small class="copyright__content"
-          >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
-        </small>
-        <small class="copyright__content">{{ powered_by_link }}</small>
-        {%- if section.settings.show_policy -%}
-          <ul class="policies list-unstyled">
-            {%- for policy in shop.policies -%}
-              {%- if policy != blank -%}
-                <li>
-                  <small class="copyright__content"
-                    ><a href="{{ policy.url }}">{{ policy.title | escape }}</a></small
-                  >
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
+        <small class="copyright__content">&copy; {{ 'now' | date: '%Y' }}, Velonna Jewellers</small>
       </div>
     </div>
   </div>
 </footer>
-
-<style>
-  /* Logo pushed left */
-  .footer__brand,
-  .footer-block--brand,
-  .footer__logo-wrapper,
-  .footer-content__item:first-child,
-  .footer__column:first-child {
-    margin-right: auto !important;
-    padding-right: 4rem !important;
-  }
-  .footer__logo,
-  .footer-brand__image,
-  .site-footer__logo img,
-  .footer__brand img {
-    margin-left: 0 !important;
-    padding-left: 0 !important;
-  }
-
-/* Footer logo alignment fix */
-.footer__brand { padding-right: 3rem !important; min-width: 220px; }
-.footer__brand-image-wrapper,
-.footer__brand img,
-.footer-block--brand .footer__brand { margin-left: 0 !important; padding-left: 0 !important; }
-.footer__content-top .footer__column:first-child,
-.footer-block--brand { margin-right: auto !important; padding-right: 5rem !important; }
-
-</style>
 
 {% schema %}
 {
