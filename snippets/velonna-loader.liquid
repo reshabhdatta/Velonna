@@ -1,0 +1,86 @@
+{% comment %}
+  Velonna branded page loader.
+  Ivory overlay, serif wordmark fade-in, gold line draw.
+  Hides as soon as the page is ready (min 500ms, failsafe 2.5s).
+{% endcomment %}
+<div id="velonna-loader" aria-hidden="true">
+  <div class="velonna-loader__inner">
+    <span class="velonna-loader__mark">VELONNA</span>
+    <span class="velonna-loader__line"></span>
+  </div>
+</div>
+
+<style>
+  #velonna-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #faf9f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  #velonna-loader.is-done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .velonna-loader__inner {
+    text-align: center;
+  }
+  .velonna-loader__mark {
+    display: block;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(26px, 5vw, 40px);
+    letter-spacing: 0.42em;
+    text-indent: 0.42em; /* optically center the tracked text */
+    color: #1a1612;
+    opacity: 0;
+    animation: velonna-mark-in 1.1s ease forwards;
+  }
+  .velonna-loader__line {
+    display: block;
+    height: 1px;
+    width: 0;
+    margin: 18px auto 0;
+    background: #c8a96e;
+    animation: velonna-line-draw 1.4s ease 0.25s forwards;
+  }
+  @keyframes velonna-mark-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes velonna-line-draw {
+    to { width: min(220px, 50vw); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .velonna-loader__mark, .velonna-loader__line { animation: none; opacity: 1; }
+    .velonna-loader__line { width: min(220px, 50vw); }
+    #velonna-loader { transition: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    var loader = document.getElementById('velonna-loader');
+    if (!loader) return;
+    var start = Date.now();
+    var MIN = 500;   // let the animation register
+    var MAX = 2500;  // never block longer than this
+    var hide = function () {
+      var wait = Math.max(0, MIN - (Date.now() - start));
+      setTimeout(function () { loader.classList.add('is-done'); }, wait);
+    };
+    if (document.readyState === 'complete') {
+      hide();
+    } else {
+      window.addEventListener('load', hide);
+    }
+    setTimeout(hide, MAX); // failsafe: slow network, blocked resources
+  })();
+</script>
+
+<noscript>
+  <style>#velonna-loader { display: none; }</style>
+</noscript>

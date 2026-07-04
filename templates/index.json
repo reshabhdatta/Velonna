@@ -24,11 +24,81 @@
         "ed2_body": "Lab-grown diamonds and Swarovski crystals — physically and chemically identical to mined stones, set into designs inspired by the world's great jewellery houses. Identical light. A fraction of the price.",
         "ed2_cta": "Explore Created Diamonds",
         "ed2_url": "/collections/lab-grown-diamonds",
-        "products_title": "New\nArrivals"
+        "products_title": "New\nArrivals",
+        "featured_collection": "silver"
+      }
+    },
+    "velonna_social": {
+      "type": "velonna-social-proof",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The craftsmanship is stunning — my ring looks far more expensive than it was. The packaging alone felt like a gift.",
+            "author": "Priya S. · Mumbai"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Ordered earrings for my sister’s wedding. Delivery was quick, and the sparkle on the created diamonds is unreal.",
+            "author": "Ananya R. · Delhi"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I was hesitant about buying jewellery online, but the 15-day return policy convinced me. Kept everything.",
+            "author": "Meera K. · Bangalore"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "heading": "Loved by our customers"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "nh": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Velonna List",
+            "heading_size": "h1"
+          }
+        },
+        "np": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "<p>New collections, private previews, and members-only offers. No noise.</p>"
+          }
+        },
+        "ne": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "nh",
+        "np",
+        "ne"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
   "order": [
-    "velonna_landing"
+    "velonna_landing",
+    "velonna_social",
+    "newsletter"
   ]
 }
