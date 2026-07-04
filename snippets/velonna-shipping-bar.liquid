@@ -1,0 +1,26 @@
+{% comment %}
+  Velonna free-shipping progress bar for the cart drawer.
+  Change `threshold` below to your free-shipping minimum in the smallest
+  currency unit (paise): 99900 = Rs. 999.
+{% endcomment %}
+{%- liquid
+  assign threshold = 99900
+  assign remaining = threshold | minus: cart.total_price
+  assign progress = cart.total_price | times: 100.0 | divided_by: threshold | at_most: 100
+-%}
+{%- if cart != empty -%}
+  <div class="velonna-ship-bar" role="status" aria-live="polite">
+    {%- if remaining > 0 -%}
+      <p class="velonna-ship-bar__text">
+        You're <strong>{{ remaining | money }}</strong> away from <strong>FREE shipping</strong>
+      </p>
+    {%- else -%}
+      <p class="velonna-ship-bar__text velonna-ship-bar__text--done">
+        &#10003; Congrats! You've unlocked <strong>FREE shipping</strong>
+      </p>
+    {%- endif -%}
+    <div class="velonna-ship-bar__track">
+      <div class="velonna-ship-bar__fill" style="width: {{ progress }}%"></div>
+    </div>
+  </div>
+{%- endif -%}

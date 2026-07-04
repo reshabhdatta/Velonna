@@ -685,6 +685,7 @@
     </div>
 
     {% render 'product-media-modal', variant_images: variant_images %}
+    {% render 'velonna-sticky-atc', product: product, section_id: section.id %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}

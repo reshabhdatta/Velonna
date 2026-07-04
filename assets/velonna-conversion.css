@@ -1,0 +1,127 @@
+/* Velonna conversion styles: buy buttons, sticky ATC, shipping bar, trust badges */
+:root {
+  --velonna-accent: #e06a7a;
+  --velonna-accent-dark: #c9515f;
+}
+
+/* ---- Product page buy buttons (native form, brand-styled) ---- */
+.product-form__submit.button {
+  background: var(--velonna-accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.product-form__submit.button:hover {
+  background: var(--velonna-accent-dark);
+}
+.product-form__submit.button--secondary:after,
+.product-form__submit.button--primary:after {
+  box-shadow: none;
+}
+.shopify-payment-button__button--unbranded {
+  background: transparent !important;
+  color: var(--velonna-accent) !important;
+  border: 2px solid var(--velonna-accent) !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+}
+.shopify-payment-button__button--unbranded:hover {
+  background: rgba(224, 106, 122, 0.08) !important;
+}
+
+/* ---- Sticky add-to-cart bar (mobile) ---- */
+.velonna-sticky-atc {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(100%);
+  transition: transform 0.25s ease;
+}
+.velonna-sticky-atc.is-active {
+  transform: translateY(0);
+}
+@media screen and (max-width: 749px) {
+  .velonna-sticky-atc {
+    display: flex;
+  }
+}
+.velonna-sticky-atc__img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.velonna-sticky-atc__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.velonna-sticky-atc__title {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.velonna-sticky-atc__price {
+  font-size: 14px;
+  font-weight: 700;
+}
+.velonna-sticky-atc__btn {
+  background: var(--velonna-accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  height: 44px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.velonna-sticky-atc__btn:disabled {
+  background: #c9c9c9;
+  cursor: not-allowed;
+}
+
+/* ---- Cart drawer free-shipping bar ---- */
+.velonna-ship-bar {
+  padding: 12px 0 4px;
+}
+.velonna-ship-bar__text {
+  margin: 0 0 8px;
+  font-size: 13px;
+  text-align: center;
+}
+.velonna-ship-bar__text--done {
+  color: #1a7f37;
+}
+.velonna-ship-bar__track {
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.velonna-ship-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--velonna-accent), var(--velonna-accent-dark));
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* ---- Trust badges (icon-with-text block) polish ---- */
+.product .icon-with-text--horizontal .icon-with-text__item {
+  font-size: 12px;
+}

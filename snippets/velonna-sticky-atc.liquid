@@ -1,0 +1,65 @@
+{% comment %}
+  Velonna sticky add-to-cart bar (mobile).
+  Proxies the real product form submit button, so variant selection,
+  sold-out state and the cart drawer all behave correctly.
+  Accepts: product, section_id
+{% endcomment %}
+{%- if product.available -%}
+  <div class="velonna-sticky-atc" id="VelonnaStickyAtc-{{ section_id }}" aria-hidden="true">
+    {%- if product.featured_media -%}
+      <img
+        src="{{ product.featured_media | image_url: width: 120 }}"
+        alt="{{ product.featured_media.alt | escape }}"
+        width="48"
+        height="48"
+        loading="lazy"
+        class="velonna-sticky-atc__img"
+      >
+    {%- endif -%}
+    <div class="velonna-sticky-atc__info">
+      <span class="velonna-sticky-atc__title">{{ product.title | escape }}</span>
+      <span class="velonna-sticky-atc__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+    </div>
+    <button type="button" class="velonna-sticky-atc__btn">
+      {{ 'products.product.add_to_cart' | t }}
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      var bar = document.getElementById('VelonnaStickyAtc-{{ section_id }}');
+      if (!bar) return;
+      var realBtn = document.getElementById('ProductSubmitButton-{{ section_id }}');
+      if (!realBtn) return;
+      var proxyBtn = bar.querySelector('.velonna-sticky-atc__btn');
+
+      proxyBtn.addEventListener('click', function () {
+        realBtn.click();
+      });
+
+      // Mirror sold-out / unavailable state
+      var sync = function () {
+        proxyBtn.disabled = realBtn.disabled;
+        proxyBtn.textContent = realBtn.disabled
+          ? realBtn.textContent.trim()
+          : {{ 'products.product.add_to_cart' | t | json }};
+      };
+      new MutationObserver(sync).observe(realBtn, { attributes: true, childList: true, subtree: true });
+      sync();
+
+      // Show the bar only when the real button is off-screen
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(
+          function (entries) {
+            var visible = entries[0].isIntersecting;
+            bar.classList.toggle('is-active', !visible);
+            bar.setAttribute('aria-hidden', visible ? 'true' : 'false');
+          },
+          { threshold: 0 }
+        ).observe(realBtn);
+      } else {
+        bar.classList.add('is-active');
+      }
+    })();
+  </script>
+{%- endif -%}
