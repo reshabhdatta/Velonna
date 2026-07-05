@@ -1,7 +1,7 @@
 {
   "sections": {
     "velonna_landing": {
-      "type": "velonna-landing",
+      "type": "velonna-home",
       "settings": {
         "hero_eyebrow": "The Velonna Atelier · Est. 1924",
         "hero_title": "Contemporary\nLuxury,\nAccessible.",
