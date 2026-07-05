@@ -107,18 +107,62 @@
 
   /* ── COLLECTION TILES (Cartier-inspired 3-col) ─────────── */
   .vl-tiles {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     background: var(--vl-bg);
+    padding: 4.5rem 0 3.5rem;
+    overflow: hidden;
+  }
+  .vl-tiles-stage {
+    position: relative;
+    height: min(62vh, 600px);
+    min-height: 420px;
+    perspective: 1200px;
+    touch-action: pan-y;
+    outline: none;
   }
   .vl-tile {
-    position: relative;
-    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 92%;
     aspect-ratio: 3/4;
+    overflow: hidden;
     cursor: pointer;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px rgba(26, 22, 18, 0.28);
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%)
+      translateX(calc(var(--off, 0) * min(300px, 26vw)))
+      translateZ(calc(var(--abs, 0) * -150px))
+      rotateZ(calc(var(--off, 0) * 8deg))
+      translateY(calc(var(--abs, 0) * 16px - var(--lift, 0px)))
+      scale(var(--sc, 1));
+    z-index: calc(100 - var(--abs, 0));
+    transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.4s ease;
   }
-  .vl-tile + .vl-tile {
-    border-left: 1px solid var(--vl-rule);
+  .vl-tile:not(.is-active) {
+    filter: brightness(0.72) saturate(0.85);
+  }
+  .vl-tile img, .vl-tile video { pointer-events: none; }
+  .vl-tiles-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2.2rem;
+  }
+  .vl-tiles-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(26, 22, 18, 0.22);
+    border: none; padding: 0;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .vl-tiles-dot.is-on {
+    background: var(--vl-gold);
+    transform: scale(1.3);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vl-tile { transition: none; }
   }
   .vl-tile-img {
     width: 100%; height: 100%;
@@ -508,9 +552,8 @@
 
   /* ── RESPONSIVE ───────────────────────────────────────── */
   @media (max-width: 900px) {
-    .vl-tiles { grid-template-columns: 1fr; }
-    .vl-tile  { aspect-ratio: 4/3; }
-    .vl-tile + .vl-tile { border-left: none; border-top: 1px solid var(--vl-rule); }
+    .vl-tiles-stage { height: min(56vh, 480px); min-height: 360px; }
+    .vl-tile { height: 88%; }
     .vl-editorial, .vl-enquire { grid-template-columns: 1fr; }
     .vl-editorial-vis, .vl-enquire-vis { min-height: 55vw; border-right: none !important; }
     .vl-editorial-txt { border-left: none !important; border-right: none !important; border-top: 1px solid var(--vl-rule); padding: 4rem 6vw; }
@@ -569,8 +612,9 @@
     </div>
   </div>
 
-  {%- comment -%} ── COLLECTION TILES (Cartier-style 3-col) ── {%- endcomment -%}
+  {%- comment -%} ── COLLECTION TILES (3D card stack) ── {%- endcomment -%}
   <div class="vl-tiles">
+  <div class="vl-tiles-stage" tabindex="0" role="region" aria-label="Collections carousel">
 
     <a class="vl-tile" href="/collections/silver">
       {%- if section.settings.tile1_image != blank -%}
@@ -622,6 +666,12 @@
       </div>
     </a>
 
+  </div>
+  <div class="vl-tiles-dots" aria-hidden="false">
+    <button class="vl-tiles-dot" type="button" aria-label="Silver"></button>
+    <button class="vl-tiles-dot" type="button" aria-label="Created Diamonds"></button>
+    <button class="vl-tiles-dot" type="button" aria-label="All Collections"></button>
+  </div>
   </div>
 
   {%- comment -%} ── STATEMENT ── {%- endcomment -%}
@@ -829,6 +879,74 @@
   document.querySelectorAll('.vl-product-card').forEach(function (card, i) {
     card.style.transitionDelay = (i * 0.08) + 's';
   });
+
+  // Card stack: fan layout, swipe/drag, dots, gentle auto-advance
+  (function () {
+    var stage = document.querySelector('.vl-tiles-stage');
+    if (!stage) return;
+    var cards = [].slice.call(stage.querySelectorAll('.vl-tile'));
+    var dots = [].slice.call(document.querySelectorAll('.vl-tiles-dot'));
+    var len = cards.length;
+    if (len < 2) return;
+    var active = 1; // start on Created Diamonds
+    var dragMoved = false;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function offsetOf(i) {
+      var raw = i - active;
+      var alt = raw > 0 ? raw - len : raw + len;
+      return Math.abs(alt) < Math.abs(raw) ? alt : raw;
+    }
+    function render() {
+      cards.forEach(function (c, i) {
+        var o = offsetOf(i), a = Math.abs(o);
+        c.style.setProperty('--off', o);
+        c.style.setProperty('--abs', a);
+        c.style.setProperty('--lift', o === 0 ? '20px' : '0px');
+        c.style.setProperty('--sc', o === 0 ? '1.03' : '0.92');
+        c.classList.toggle('is-active', o === 0);
+        c.setAttribute('aria-hidden', o === 0 ? 'false' : 'true');
+      });
+      dots.forEach(function (d, i) { d.classList.toggle('is-on', i === active); });
+    }
+    function go(i) { active = ((i % len) + len) % len; render(); }
+
+    cards.forEach(function (c, i) {
+      c.addEventListener('click', function (e) {
+        if (dragMoved) { e.preventDefault(); return; }
+        if (offsetOf(i) !== 0) { e.preventDefault(); go(i); } // side card: focus it
+        // active card: link navigates normally
+      });
+    });
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
+
+    var startX = null;
+    stage.addEventListener('pointerdown', function (e) { startX = e.clientX; dragMoved = false; });
+    stage.addEventListener('pointermove', function (e) {
+      if (startX !== null && Math.abs(e.clientX - startX) > 12) dragMoved = true;
+    });
+    stage.addEventListener('pointerup', function (e) {
+      if (startX === null) return;
+      var dx = e.clientX - startX;
+      if (dx > 48) { go(active - 1); } else if (dx < -48) { go(active + 1); }
+      startX = null;
+      setTimeout(function () { dragMoved = false; }, 60);
+    });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') go(active - 1);
+      if (e.key === 'ArrowRight') go(active + 1);
+    });
+
+    var hovering = false;
+    stage.addEventListener('mouseenter', function () { hovering = true; });
+    stage.addEventListener('mouseleave', function () { hovering = false; });
+    if (!reduce) {
+      setInterval(function () {
+        if (!hovering && document.visibilityState === 'visible') go(active + 1);
+      }, 4500);
+    }
+    render();
+  })();
 
   // Tile video: hover to play on desktop, play-while-in-view on touch devices
   document.querySelectorAll('.vl-tile-video').forEach(function (tv) {
