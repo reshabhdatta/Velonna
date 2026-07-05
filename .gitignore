@@ -1,5 +1,7 @@
 # Secrets — never commit
 new_token.txt
+dev_app_credentials.txt
+get_new_token.js
 
 # One-off maintenance scripts & logs (local only)
 *.log
@@ -20,6 +22,7 @@ update_watch_info.js
 create_products.js
 assign_collections.js
 setup_pages_menus.js
+fix_titles_vendor.js
 extract_*.bat
 push_*.bat
 dump_*.json
