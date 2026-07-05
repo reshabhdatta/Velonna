@@ -78,11 +78,11 @@
           "settings": {
             "layout": "horizontal",
             "icon_1": "check_mark",
-            "heading_1": "<p>925 Sterling Silver</p>",
+            "heading_1": "925 Sterling Silver",
             "icon_2": "truck",
-            "heading_2": "<p>Free Insured Shipping</p>",
+            "heading_2": "Free Insured Shipping",
             "icon_3": "return",
-            "heading_3": "<p>15-Day Easy Returns</p>"
+            "heading_3": "15-Day Easy Returns"
           }
         },
         "complementary": {
