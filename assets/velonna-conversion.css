@@ -125,11 +125,11 @@
 .header-wrapper {
   /* fine diamond crosshatch, like patterned privacy glass */
   background:
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 5px),
-    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 5px),
-    rgba(6, 5, 4, 0.32) !important;
-  backdrop-filter: blur(20px) saturate(1.15);
-  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.06) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.06) 0 1px, transparent 1px 5px),
+    rgba(0, 0, 0, 0.22) !important;
+  backdrop-filter: blur(20px) brightness(0.62);
+  -webkit-backdrop-filter: blur(20px) brightness(0.62);
 }
 .header-wrapper.header-wrapper--border-bottom {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
