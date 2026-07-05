@@ -582,8 +582,9 @@
           src="{{ section.settings.tile2_image | image_url: width: 800 }}"
           alt="Created Diamonds collection" loading="lazy" />
       {%- else -%}
-        <video class="vl-tile-img" src="{{ 'velonna-tile-diamonds.mp4' | asset_url }}"
-          autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="vl-tile-img vl-tile-video" src="{{ 'velonna-tile-diamonds.mp4' | asset_url }}"
+          poster="{{ 'velonna-tile-diamonds-poster.jpg' | asset_url }}"
+          loop muted playsinline preload="metadata" aria-hidden="true"></video>
       {%- endif -%}
       <div class="vl-tile-overlay"></div>
       <div class="vl-tile-label">
@@ -815,6 +816,22 @@
   // Stagger product cards
   document.querySelectorAll('.vl-product-card').forEach(function (card, i) {
     card.style.transitionDelay = (i * 0.08) + 's';
+  });
+
+  // Tile video: hover to play on desktop, play-while-in-view on touch devices
+  document.querySelectorAll('.vl-tile-video').forEach(function (tv) {
+    tv.playbackRate = 0.75; // slow it down
+    var tile = tv.closest('.vl-tile') || tv;
+    if (window.matchMedia('(hover: hover)').matches) {
+      tile.addEventListener('mouseenter', function () { tv.play().catch(function () {}); });
+      tile.addEventListener('mouseleave', function () { tv.pause(); });
+    } else {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { tv.play().catch(function () {}); } else { tv.pause(); }
+        });
+      }, { threshold: 0.35 }).observe(tv);
+    }
   });
 })();
 </script>
