@@ -4,17 +4,20 @@
   --velonna-accent-dark: #c9515f;
 }
 
-/* ---- Product page buy buttons (native form, brand-styled) ---- */
+/* ---- Product page buy buttons (JURI-style black) ---- */
 .product-form__submit.button {
-  background: var(--velonna-accent);
+  background: #141414;
   color: #fff;
   border: none;
-  border-radius: 12px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  border-radius: 0;
+  min-height: 56px;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 .product-form__submit.button:hover {
-  background: var(--velonna-accent-dark);
+  background: #000;
 }
 .product-form__submit.button--secondary:after,
 .product-form__submit.button--primary:after {
@@ -22,13 +25,68 @@
 }
 .shopify-payment-button__button--unbranded {
   background: transparent !important;
-  color: var(--velonna-accent) !important;
-  border: 2px solid var(--velonna-accent) !important;
-  border-radius: 12px !important;
-  font-weight: 600 !important;
+  color: #141414 !important;
+  border: 1px solid #141414 !important;
+  border-radius: 0 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
 }
 .shopify-payment-button__button--unbranded:hover {
-  background: rgba(224, 106, 122, 0.08) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ---- JURI-style product page layout ---- */
+/* serif editorial title */
+.product__title h1,
+.product__title .h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(32px, 3.4vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+/* vendor line like "BERRYWARE" */
+.product__text.caption-with-letter-spacing {
+  letter-spacing: 0.22em;
+  color: rgba(20, 20, 20, 0.55);
+}
+/* price */
+.price--large {
+  font-size: 20px;
+  font-weight: 600;
+}
+/* sticky info column with breathing room */
+.product__info-wrapper {
+  padding-left: 4vw;
+}
+.product__info-container > * + * {
+  margin-top: 1.1rem;
+}
+/* minimal accordions: hairline rules + plus icon feel */
+.product__accordion .accordion {
+  border-top: 1px solid rgba(20, 20, 20, 0.12);
+  border-bottom: none;
+  margin: 0;
+}
+.product__accordion .accordion + .accordion {
+  border-top: 1px solid rgba(20, 20, 20, 0.12);
+}
+.product__accordion .accordion__title {
+  font-size: 15px;
+  font-weight: 400;
+}
+.product__accordion .summary__title {
+  padding: 6px 0;
+}
+/* stacked gallery: images flush, generous size */
+.product--stacked .product__media-item {
+  margin-bottom: 4px;
+}
+@media screen and (min-width: 990px) {
+  .product--stacked .product__media-wrapper {
+    padding-right: 0;
+  }
 }
 
 /* ---- Sticky add-to-cart bar (mobile) ---- */
@@ -80,10 +138,10 @@
   font-weight: 700;
 }
 .velonna-sticky-atc__btn {
-  background: var(--velonna-accent);
+  background: #141414;
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 0;
   height: 44px;
   padding: 0 20px;
   font-size: 15px;

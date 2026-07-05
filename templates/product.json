@@ -5,7 +5,6 @@
       "blocks": {
         "vendor": {
           "type": "text",
-          "disabled": true,
           "settings": {
             "text": "{{ product.vendor }}",
             "text_style": "uppercase"
@@ -30,7 +29,8 @@
           "type": "custom_liquid",
           "settings": {
             "custom_liquid": "<!-- Feature Highlights - Pixel Perfect -->\n<div class=\"fh-exact\">\n  <img \n    src=\"https://cdn.shopify.com/s/files/1/0811/2603/1578/files/Untitled_design_43.png?v=1775298801\" \n    alt=\"Feature Highlights\"\n  />\n</div>\n\n<style>\n.fh-exact {\n  background: #FFFFFF;\n  padding: px;\n}\n\n.fh-exact img {\n  width: 100%;\n  height: auto;\n  display: block;\n}\n</style>"
-          }
+          },
+          "disabled": true
         },
         "custom_liquid_7y7Xzj": {
           "type": "custom_liquid",
@@ -97,34 +97,72 @@
             "image_ratio": "square",
             "enable_quick_add": true
           }
+        },
+        "tab_info": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product information",
+            "icon": "none",
+            "content": "<p>Crafted in certified 925 sterling silver, hallmarked, and finished by hand. Created-diamond pieces are IGI certified — physically and chemically identical to mined stones. Each piece ships in Velonna signature packaging.</p>",
+            "page": ""
+          }
+        },
+        "tab_care": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product care",
+            "icon": "none",
+            "content": "<p>Keep away from perfume, water, and household chemicals. Wipe gently with the included polishing cloth after wear, and store in the provided pouch. Silver naturally develops patina — a soft polish restores its shine.</p>",
+            "page": ""
+          }
+        },
+        "tab_shipping": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & Delivery",
+            "icon": "none",
+            "content": "<p>Free insured shipping on orders above ₹999. Dispatched within 48 hours; delivered in 4–6 business days. 15-day no-questions returns. <a href=\"/pages/shipping-returns\">Read the full policy</a>.</p>",
+            "page": ""
+          }
+        },
+        "contact_line": {
+          "type": "text",
+          "settings": {
+            "text": "For more information, <a href=\"/pages/contact-us\">send us a message</a> — we reply within 24 hours.",
+            "text_style": "body"
+          }
         }
       },
       "block_order": [
-        "vendor",
         "title",
-        "rating",
         "price",
-        "inventory",
+        "vendor",
+        "rating",
+        "description",
         "variant-picker",
+        "inventory",
         "buy_buttons",
         "trust_badges",
+        "tab_info",
+        "tab_care",
+        "tab_shipping",
+        "custom_liquid_4MYW7d",
+        "complementary",
+        "contact_line",
         "custom_liquid_DaDDUX",
         "custom_liquid_7y7Xzj",
-        "custom_liquid_4MYW7d",
-        "quantity-selector",
-        "complementary",
-        "description"
+        "quantity-selector"
       ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
-        "media_size": "medium",
+        "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "thumbnail_slider",
-        "mobile_thumbnails": "show",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
         "media_position": "left",
-        "image_zoom": "lightbox",
+        "image_zoom": "hover",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
