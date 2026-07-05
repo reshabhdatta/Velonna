@@ -5,8 +5,16 @@
 {% endcomment %}
 <div id="velonna-loader" aria-hidden="true">
   <div class="velonna-loader__inner">
-    <span class="velonna-loader__mark">VELONNA</span>
-    <span class="velonna-loader__line"></span>
+    <video
+      class="velonna-loader__bloom"
+      src="{{ 'velonna-loader-bloom.mp4' | asset_url }}"
+      autoplay
+      muted
+      loop
+      playsinline
+      disablepictureinpicture
+    ></video>
+    <span class="velonna-loader__mark velonna-loader__mark--small">VELONNA</span>
   </div>
 </div>
 
@@ -29,6 +37,13 @@
   .velonna-loader__inner {
     text-align: center;
   }
+  .velonna-loader__bloom {
+    display: block;
+    width: min(180px, 40vw);
+    height: auto;
+    margin: 0 auto;
+    mix-blend-mode: multiply; /* melts the video's white bg into the ivory */
+  }
   .velonna-loader__mark {
     display: block;
     font-family: 'Playfair Display', Georgia, serif;
@@ -38,6 +53,12 @@
     color: #1a1612;
     opacity: 0;
     animation: velonna-mark-in 1.1s ease forwards;
+  }
+  .velonna-loader__mark--small {
+    font-size: 15px;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
+    margin-top: 4px;
   }
   .velonna-loader__line {
     display: block;
@@ -55,6 +76,7 @@
     to { width: min(220px, 50vw); }
   }
   @media (prefers-reduced-motion: reduce) {
+    .velonna-loader__bloom { display: none; }
     .velonna-loader__mark, .velonna-loader__line { animation: none; opacity: 1; }
     .velonna-loader__line { width: min(220px, 50vw); }
     #velonna-loader { transition: none; }
