@@ -144,15 +144,14 @@
     endif
   -%}
   <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
-    {%- liquid
-      if section.settings.menu != blank
-        render 'header-drawer'
-      endif
-
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
+    <div class="header__left">
+      {%- liquid
+        if section.settings.menu != blank
+          render 'header-drawer'
+        endif
         render 'header-search', input_id: 'Search-In-Modal-1'
-      endif
-    -%}
+      -%}
+    </div>
 
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -248,8 +247,6 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
-
       {%- if shop.customer_accounts_enabled -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
@@ -443,6 +440,19 @@
     ],
     "url": {{ request.origin | append: page.url | json }}
   }
+</script>
+
+<script>
+  /* Velonna: expose header height so the hero can tuck under the glass header */
+  (function () {
+    var el = document.querySelector('.section-header');
+    if (!el) return;
+    var set = function () {
+      document.documentElement.style.setProperty('--vel-header-h', el.offsetHeight + 'px');
+    };
+    window.addEventListener('resize', set);
+    set();
+  })();
 </script>
 
 {%- if request.page_type == 'index' -%}

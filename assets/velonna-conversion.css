@@ -121,6 +121,37 @@
   transition: width 0.4s ease;
 }
 
+/* ---- Frosted-glass header ---- */
+.header-wrapper {
+  background: rgba(20, 16, 12, 0.55) !important;
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+}
+.header-wrapper.header-wrapper--border-bottom {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+/* Logo + icons stay visible on the dark glass */
+.header-wrapper .header__heading-logo {
+  filter: brightness(0) invert(1);
+}
+.header-wrapper .header__icon {
+  color: #faf9f6;
+}
+/* Left cluster: hamburger + search */
+.header__left {
+  grid-area: left-icons;
+  display: flex;
+  align-items: center;
+  justify-self: start;
+}
+.header__left header-drawer {
+  justify-self: start;
+}
+/* Homepage: let the hero flow underneath the glass */
+body:has(#MainContent .vl) .section-header {
+  margin-bottom: calc(-1 * var(--vel-header-h, 0px));
+}
+
 /* ---- Trust badges (icon-with-text block) polish ---- */
 .product .icon-with-text--horizontal .icon-with-text__item {
   font-size: 12px;
