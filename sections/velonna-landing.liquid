@@ -546,7 +546,7 @@
   {%- comment -%} ── MARQUEE ── {%- endcomment -%}
   <div class="vl-band" aria-hidden="true">
     <div class="vl-band-track">
-      {%- assign band_items = "Sterling silver · Lab-grown stones · Swarovski crystals · Contemporary luxury · Occasion wear · IGI certified · Created diamonds · Metro-first · Est. 2024" | split: " · " -%}
+      {%- assign band_items = "Sterling silver · Lab-grown stones · Swarovski crystals · Contemporary luxury · Occasion wear · IGI certified · Created diamonds · Metro-first · Est. 1924" | split: " · " -%}
       {%- for n in (1..2) -%}
       <div class="vl-band-group">
         {%- for item in band_items -%}
@@ -827,7 +827,7 @@
     { "type": "header", "content": "Hero" },
     { "type": "url",          "id": "hero_video",    "label": "Hero video URL" },
     { "type": "image_picker", "id": "hero_image",    "label": "Hero image (fallback)" },
-    { "type": "text",         "id": "hero_eyebrow",  "label": "Eyebrow", "default": "The Velonna Atelier · Est. 2024" },
+    { "type": "text",         "id": "hero_eyebrow",  "label": "Eyebrow", "default": "The Velonna Atelier · Est. 1924" },
     { "type": "textarea",     "id": "hero_title",    "label": "Title (use newlines)", "default": "Contemporary\nLuxury,\nAccessible." },
     { "type": "text",         "id": "hero_sub",      "label": "Subtitle", "default": "Silver, lab-grown stones, and Swarovski crystals. International couture aesthetics at prices that make sense." },
     { "type": "text",         "id": "hero_cta_label","label": "CTA label", "default": "Explore the collections" },
@@ -870,8 +870,4 @@
     { "type": "textarea", "id": "products_title", "label": "Section title", "default": "New\n<em>Arrivals</em>" },
 
     { "type": "header", "content": "Enquiry Form" },
-    { "type": "image_picker", "id": "enquire_image", "label": "Side image" }
-  ],
-  "presets": [{ "name": "Velonna Landing" }]
-}
-{% endschema %}
+    { "type": "image_picker", "id": "enquire_image", "label": "Si

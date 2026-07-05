@@ -1,0 +1,38 @@
+# Secrets — never commit
+new_token.txt
+
+# One-off maintenance scripts & logs (local only)
+*.log
+*_log.txt
+*_log.bat
+fix_*.js
+push_*.js
+run_*.bat
+upload_*.js
+remove_*.js
+make_*.js
+build_*.js
+revamp_*.js
+diagnose.js
+seo_fix.js
+ux_revamp.js
+update_watch_info.js
+create_products.js
+assign_collections.js
+setup_pages_menus.js
+extract_*.bat
+push_*.bat
+dump_*.json
+dump_*.liquid
+settings_data_live.json
+
+# Local media / data not part of the theme
+*.mp4
+!assets/*.mp4
+*.csv
+earring-images/
+products/
+velonna-website/
+hero-ring.jpg
+hero-ring.jpg.jpeg
+velonna-logo-black.png
