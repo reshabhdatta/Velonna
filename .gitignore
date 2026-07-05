@@ -23,6 +23,8 @@ create_products.js
 assign_collections.js
 setup_pages_menus.js
 fix_titles_vendor.js
+push_home_section.js
+add_menu_categories.js
 extract_*.bat
 push_*.bat
 dump_*.json

@@ -352,9 +352,21 @@
   .vl-products-viewall:hover { gap: 18px; }
 
   .vl-product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
     gap: 2px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .vl-product-grid::-webkit-scrollbar { display: none; }
+  .vl-product-grid .vl-product-card {
+    flex: 0 0 clamp(240px, 23vw, 340px);
+    scroll-snap-align: start;
+  }
+  @media screen and (max-width: 749px) {
+    .vl-product-grid .vl-product-card { flex-basis: 72vw; }
   }
   .vl-product-card {
     background: #fff;
@@ -687,7 +699,7 @@
       <a class="vl-products-viewall" href="/collections/{{ fp_collection.handle }}">View all</a>
     </div>
     <div class="vl-product-grid">
-      {%- for product in fp_collection.products limit: 4 -%}
+      {%- for product in fp_collection.products limit: 12 -%}
       <div class="vl-product-card">
         <a href="{{ product.url }}">
           <div class="vl-product-img-wrap">

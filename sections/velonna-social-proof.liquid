@@ -72,7 +72,21 @@
   }
   @media screen and (max-width: 899px) {
     .vl-social__trust { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
-    .vl-social__grid { grid-template-columns: 1fr; gap: 32px; }
+    .vl-social__grid {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin: 0 -6vw;
+      padding: 0 6vw 8px;
+    }
+    .vl-social__grid::-webkit-scrollbar { display: none; }
+    .vl-social__card {
+      flex: 0 0 78vw;
+      scroll-snap-align: center;
+    }
   }
 </style>
 
