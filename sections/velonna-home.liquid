@@ -750,7 +750,9 @@
           src="{{ section.settings.tile1_image | image_url: width: 800 }}"
           alt="Silver collection" loading="lazy" />
       {%- else -%}
-        <div class="vl-tile-placeholder"><span>Silver</span></div>
+        <video class="vl-tile-img vl-tile-video" src="{{ 'velonna-tile-silver.mp4' | asset_url }}"
+          poster="{{ 'velonna-tile-silver-poster.jpg' | asset_url }}"
+          loop muted playsinline preload="metadata" aria-hidden="true"></video>
       {%- endif -%}
       <div class="vl-tile-overlay"></div>
       <div class="vl-tile-label">
