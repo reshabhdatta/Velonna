@@ -70,42 +70,10 @@
       "settings": {
         "heading": "Loved by our customers"
       }
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "nh": {
-          "type": "heading",
-          "settings": {
-            "heading": "The Velonna List",
-            "heading_size": "h1"
-          }
-        },
-        "np": {
-          "type": "paragraph",
-          "settings": {}
-        },
-        "ne": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "nh",
-        "np",
-        "ne"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 60,
-        "padding_bottom": 60
-      }
     }
   },
   "order": [
     "velonna_landing",
-    "velonna_social",
-    "newsletter"
+    "velonna_social"
   ]
 }
