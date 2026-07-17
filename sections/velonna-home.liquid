@@ -61,20 +61,19 @@
     font-size: clamp(20px, 2.6vw, 34px); font-weight: 400; font-style: italic;
     color: var(--vl-ink); line-height: 1.25;
   }
-  .vl-gate-welcome-brand {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(46px, 7vw, 104px); font-weight: 400; font-style: italic;
-    color: var(--vl-ink); line-height: 1.02; letter-spacing: 0.01em;
-    margin-top: 0.15rem;
+  .vl-gate-welcome-logo {
+    display: block; width: clamp(280px, 42vw, 640px); height: auto;
+    margin: 0.5rem auto 0;
+    will-change: transform;
   }
   .vl-gate-welcome-rule {
     display: block; width: 54px; height: 1px; background: var(--vl-gold);
     margin: 1.4rem auto 0;
   }
-  /* Header is hidden while the gate is closing; fades in once the visitor enters */
-  .section-header { transition: opacity 0.6s ease, transform 0.6s ease; }
+  /* Header hidden during the gate; fades in IN PLACE as the logo lands (shared-element handoff) */
+  .section-header { transition: opacity 0.25s ease; }
   body:has(.vl-gate:not(.is-entered)) .section-header {
-    opacity: 0; transform: translateY(-100%); pointer-events: none;
+    opacity: 0; pointer-events: none;
   }
   @media (prefers-reduced-motion: reduce) { .vl-gate-cue span { animation: none; } }
 
@@ -674,7 +673,7 @@
       <div class="vl-gate-cue" id="vlGateCue">Scroll to enter<span>↓</span></div>
       <div class="vl-gate-welcome" id="vlGateWelcome">
         <p class="vl-gate-welcome-line">Welcome to the world of</p>
-        <p class="vl-gate-welcome-brand">Velonna</p>
+        <img class="vl-gate-welcome-logo" id="vlGateWelcomeLogo" src="{{ 'velonna-logo-black.png' | asset_url }}" alt="Velonna" />
         <span class="vl-gate-welcome-rule"></span>
       </div>
     </div>
@@ -1116,7 +1115,12 @@
   var video = document.getElementById('vlGateVideo');
   var cue = document.getElementById('vlGateCue');
   var welcome = document.getElementById('vlGateWelcome');
-  var heroEl = document.querySelector('.vl-hero');
+  var welcomeLine = welcome ? welcome.querySelector('.vl-gate-welcome-line') : null;
+  var welcomeRule = welcome ? welcome.querySelector('.vl-gate-welcome-rule') : null;
+  var welcomeLogo = document.getElementById('vlGateWelcomeLogo');
+  var headerLogo = document.querySelector('.header-wrapper .header__heading-logo img')
+                || document.querySelector('.header-wrapper .header__heading-logo');
+  var flip = null;
 
   // Desktop-first: on mobile/touch, skip the gate and show the hero directly.
   var isMobile = window.matchMedia('(max-width: 900px)').matches
@@ -1146,21 +1150,57 @@
     if (video.readyState >= 2) { try { video.currentTime = shown; } catch (e) {} }
     if (Math.abs(target - shown) > 0.001) { raf = requestAnimationFrame(tick); } else { raf = null; }
   }
+  function computeFlip() {
+    if (!welcomeLogo || !headerLogo) return null;
+    var prev = welcomeLogo.style.transform;
+    welcomeLogo.style.transform = 'none';
+    var lr = welcomeLogo.getBoundingClientRect();
+    welcomeLogo.style.transform = prev;
+    var hr = headerLogo.getBoundingClientRect();
+    if (!lr.width || !hr.width) return null;
+    // header logo is centered; use its width for scale and --vel-header-h for its vertical centre
+    var headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--vel-header-h')) || (hr.height + 40);
+    return {
+      dx: (window.innerWidth / 2) - (lr.left + lr.width / 2),
+      dy: (headerH / 2) - (lr.top + lr.height / 2),
+      scale: hr.width / lr.width
+    };
+  }
   function onScroll() {
     var p = progress();
-    target = p * duration;
+    // Doors finish opening by 78% of the scroll; the last stretch is the logo → header handoff
+    target = clamp(p / 0.78, 0, 1) * duration;
     if (!raf) raf = requestAnimationFrame(tick);
     cue.style.opacity = clamp(1 - p * 8, 0, 1);
-    // Welcome line slides up as the doors reach full-open
-    var wr = clamp((p - 0.80) / 0.13, 0, 1);
-    welcome.style.opacity = wr;
+
+    // Welcome rises with the diamond
+    var wr = clamp((p - 0.64) / 0.14, 0, 1);
     welcome.style.transform = 'translateY(' + (46 - wr * 46) + 'px)';
-    // Reveal the header ONLY after the gate has fully scrolled past and the hero reaches the top
-    if (heroEl && heroEl.getBoundingClientRect().top <= 4) { enter(); }
-    else { gate.classList.remove('is-entered'); }
+    welcome.style.opacity = (p >= 0.99) ? 0 : wr;   // hide the gate logo once the header logo has taken over
+
+    // FLIP: the logo flies up to the exact header-logo spot; caption fades
+    var t = clamp((p - 0.82) / 0.145, 0, 1);         // t reaches 1 at p = 0.965
+    if (t > 0) {
+      if (!flip) flip = computeFlip();
+      if (flip) {
+        welcomeLogo.style.transformOrigin = 'center center';
+        welcomeLogo.style.transform =
+          'translate(' + (flip.dx * t) + 'px,' + (flip.dy * t) + 'px) scale(' + (1 + (flip.scale - 1) * t) + ')';
+      }
+      if (welcomeLine) welcomeLine.style.opacity = 1 - t;
+      if (welcomeRule) welcomeRule.style.opacity = 1 - t;
+    } else {
+      if (welcomeLogo) welcomeLogo.style.transform = 'none';
+      if (welcomeLine) welcomeLine.style.opacity = 1;
+      if (welcomeRule) welcomeRule.style.opacity = 1;
+      flip = null;
+    }
+
+    // Once the logo has landed, fade the real header in around it (in place) → seamless handoff
+    if (p >= 0.965) { enter(); } else { gate.classList.remove('is-entered'); }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
+  window.addEventListener('resize', function () { flip = null; onScroll(); });
   onScroll();
 })();
 </script>
