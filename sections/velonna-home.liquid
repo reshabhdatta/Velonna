@@ -850,7 +850,8 @@
         <img src="{{ section.settings.ed1_image | image_url: width: 1200 }}"
           alt="{{ section.settings.ed1_image.alt | escape }}" loading="lazy" />
       {%- else -%}
-        <div class="vl-tile-placeholder" style="height:100%;"><span>Silver Collection</span></div>
+        <video src="{{ 'velonna-silver.mp4' | asset_url }}"
+          autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
       {%- endif -%}
     </div>
     <div class="vl-editorial-txt">
