@@ -27,7 +27,7 @@
   /* ── GATE INTRO (scroll-scrub, desktop) ──────────────── */
   .vl-gate {
     position: relative;
-    height: 300vh;            /* scroll length that drives the gate open */
+    height: 380vh;            /* scroll length that drives the gate open + long finale dwell */
     background: var(--vl-bg);
   }
   .vl-gate-sticky {
@@ -1170,18 +1170,18 @@
   }
   function onScroll() {
     var p = progress();
-    // Doors finish opening by 78% of the scroll; the last stretch is the logo → header handoff
-    target = clamp(p / 0.78, 0, 1) * duration;
+    // Doors finish opening by 56% of the scroll; the long remainder is dwell + logo → header handoff
+    target = clamp(p / 0.56, 0, 1) * duration;
     if (!raf) raf = requestAnimationFrame(tick);
     cue.style.opacity = clamp(1 - p * 8, 0, 1);
 
     // Welcome rises with the diamond
-    var wr = clamp((p - 0.64) / 0.14, 0, 1);
+    var wr = clamp((p - 0.50) / 0.10, 0, 1);
     welcome.style.transform = 'translateY(' + (46 - wr * 46) + 'px)';
     welcome.style.opacity = (p >= 0.99) ? 0 : wr;   // hide the gate logo once the header logo has taken over
 
     // FLIP: the logo HOLDS with the diamond, then flies up to the exact header-logo spot; caption fades
-    var t = clamp((p - 0.87) / 0.09, 0, 1);          // holds until 87%, lands by 96%
+    var t = clamp((p - 0.82) / 0.14, 0, 1);          // long hold to 82%, slow lift, lands by 96%
     if (t > 0) {
       if (!flip) flip = computeFlip();
       if (flip) {
