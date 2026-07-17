@@ -829,6 +829,9 @@
           <div class="vl-cat-tile" style="background: {{ cat_colors[idx] }};">
             {%- if img != blank -%}
               <img class="vl-cat-img" src="{{ img | image_url: width: 600 }}" alt="{{ cat_labels[idx] }}" loading="lazy" />
+            {%- elsif i == 5 -%}
+              <video class="vl-cat-img" src="{{ 'velonna-watch.mp4' | asset_url }}"
+                autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
             {%- else -%}
               <div class="vl-cat-ph" aria-hidden="true">
                 <svg viewBox="0 0 64 64" fill="none" stroke="#c8a96e" stroke-width="1.2" stroke-linejoin="round">
