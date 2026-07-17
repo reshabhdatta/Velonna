@@ -603,9 +603,7 @@
   }
 </style>
 
-<div class="vl">
-
-  {%- comment -%} ── GATE INTRO (scroll-scrub, desktop) ── {%- endcomment -%}
+  {%- comment -%} ── GATE INTRO (scroll-scrub) ── kept OUTSIDE .vl so sticky pins to the viewport; .vl has overflow-x:hidden which would break position:sticky ── {%- endcomment -%}
   <div class="vl-gate" id="vlGate">
     <div class="vl-gate-sticky">
       <video class="vl-gate-video" id="vlGateVideo"
@@ -615,6 +613,8 @@
       <div class="vl-gate-cue" id="vlGateCue">Scroll to enter<span>↓</span></div>
     </div>
   </div>
+
+<div class="vl">
 
   {%- comment -%} ── HERO ── {%- endcomment -%}
   <section class="vl-hero">
