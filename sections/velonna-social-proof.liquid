@@ -1,6 +1,4 @@
-{% comment %} VELONNA — Social proof: trust strip + Polaroid customer wall {% endcomment %}
-
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+{% comment %} VELONNA — Social proof: trust strip + auto-scrolling Polaroid wall {% endcomment %}
 
 <style>
   .vl-social {
@@ -31,32 +29,34 @@
     text-transform: uppercase; color: #c8a96e; margin: 0 0 40px;
   }
 
-  .vl-polaroids {
-    display: flex; gap: 30px;
-    overflow-x: auto; scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none;
-    padding: 24px 6vw 30px; margin: 0 -6vw;
+  /* Auto-scrolling polaroid marquee */
+  .vl-polaroids { overflow: hidden; padding: 24px 0 34px; }
+  .vl-polaroids-track {
+    display: flex; width: max-content;
+    animation: vlPolaroidScroll 70s linear infinite;
   }
-  .vl-polaroids::-webkit-scrollbar { display: none; }
+  .vl-polaroids:hover .vl-polaroids-track { animation-play-state: paused; }
+  .vl-polaroids-group { display: flex; gap: 30px; padding-right: 30px; }
+  @keyframes vlPolaroidScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
   .vl-polaroid {
     flex: 0 0 auto; width: 250px; background: #fff;
-    padding: 14px 14px 0;
+    padding: 14px 14px 44px;
     box-shadow: 0 12px 32px rgba(26, 22, 18, 0.16);
     transform: rotate(var(--rot, 0deg));
     transition: transform 0.35s ease, box-shadow 0.35s ease;
-    scroll-snap-align: center;
   }
   .vl-polaroid:hover { transform: rotate(0deg) translateY(-8px); box-shadow: 0 20px 44px rgba(26, 22, 18, 0.24); }
   .vl-polaroid-photo { width: 100%; aspect-ratio: 4 / 5; overflow: hidden; background: #ece7de; }
   .vl-polaroid-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .vl-polaroid figcaption {
-    font-family: 'Caveat', cursive; font-weight: 600; font-size: 23px;
-    color: #1a1612; text-align: center; padding: 12px 6px 18px; line-height: 1;
-  }
 
   @media screen and (max-width: 899px) {
     .vl-social__trust { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
-    .vl-polaroid { width: 70vw; max-width: 280px; }
+    .vl-polaroid { width: 62vw; max-width: 260px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vl-polaroids { overflow-x: auto; }
+    .vl-polaroids-track { animation: none; }
   }
 </style>
 
@@ -79,16 +79,22 @@
   {%- endif -%}
   <p class="vl-social__sub">The Velonna family &middot; In person</p>
 
-  <div class="vl-polaroids">
+  {%- capture polaroid_group -%}
     {%- for i in (1..16) -%}
       {%- assign img = 'velonna-review-' | append: i | append: '.jpg' -%}
       <figure class="vl-polaroid" style="--rot: {% cycle 'rot': '-3deg', '2.5deg', '-2deg', '3deg', '-1.5deg', '2deg' %};">
         <div class="vl-polaroid-photo">
           <img src="{{ img | asset_url }}" alt="Velonna customer in store" loading="lazy">
         </div>
-        <figcaption>{% cycle 'cap': 'The Velonna family', 'One year of Velonna', 'In the atelier', 'Our people', 'Moments at Velonna', 'Est. 1924' %}</figcaption>
       </figure>
     {%- endfor -%}
+  {%- endcapture -%}
+
+  <div class="vl-polaroids">
+    <div class="vl-polaroids-track">
+      <div class="vl-polaroids-group">{{ polaroid_group }}</div>
+      <div class="vl-polaroids-group" aria-hidden="true">{{ polaroid_group }}</div>
+    </div>
   </div>
 </section>
 
