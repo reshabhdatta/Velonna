@@ -65,6 +65,8 @@
     display: block; width: clamp(280px, 42vw, 640px); height: auto;
     margin: 0.5rem auto 0;
     will-change: transform;
+    transform-origin: center center;
+    transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   .vl-gate-welcome-rule {
     display: block; width: 54px; height: 1px; background: var(--vl-gold);
@@ -1178,8 +1180,8 @@
     welcome.style.transform = 'translateY(' + (46 - wr * 46) + 'px)';
     welcome.style.opacity = (p >= 0.99) ? 0 : wr;   // hide the gate logo once the header logo has taken over
 
-    // FLIP: the logo flies up to the exact header-logo spot; caption fades
-    var t = clamp((p - 0.82) / 0.145, 0, 1);         // t reaches 1 at p = 0.965
+    // FLIP: the logo HOLDS with the diamond, then flies up to the exact header-logo spot; caption fades
+    var t = clamp((p - 0.87) / 0.09, 0, 1);          // holds until 87%, lands by 96%
     if (t > 0) {
       if (!flip) flip = computeFlip();
       if (flip) {
