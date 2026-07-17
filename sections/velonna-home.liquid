@@ -272,6 +272,45 @@
     color: rgba(26,22,18,0.2);
   }
 
+  /* ── SHOP BY CATEGORY ─────────────────────────────────── */
+  .vl-cats { background: var(--vl-bg); padding: 6rem 6vw 5rem; }
+  .vl-cats-head { text-align: center; margin-bottom: 3.5rem; }
+  .vl-cats-eyebrow {
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--vl-gold); margin-bottom: 1rem;
+  }
+  .vl-cats-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; color: var(--vl-ink);
+  }
+  .vl-cats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+  }
+  .vl-cat { text-align: center; display: block; }
+  .vl-cat-tile {
+    position: relative; aspect-ratio: 1 / 1; border-radius: 14px;
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+  }
+  .vl-cat-tile::after {
+    content: ''; position: absolute; inset: 0; border-radius: 14px;
+    box-shadow: inset 0 0 0 1px rgba(200, 169, 110, 0.4);
+    pointer-events: none;
+  }
+  .vl-cat-img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .vl-cat:hover .vl-cat-img { transform: scale(1.06); }
+  .vl-cat-ph { display: flex; align-items: center; justify-content: center; }
+  .vl-cat-ph svg { width: 64px; height: 64px; opacity: 0.55; transition: transform 0.6s ease; }
+  .vl-cat:hover .vl-cat-ph svg { transform: scale(1.1) rotate(2deg); }
+  .vl-cat-label {
+    margin-top: 1.1rem; font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(15px, 1.4vw, 18px); color: var(--vl-ink);
+  }
+  @media (max-width: 900px) {
+    .vl-cats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .vl-cats { padding: 4rem 6vw 3.5rem; }
+  }
+
   /* ── STATEMENT ────────────────────────────────────────── */
   .vl-statement {
     padding: 10rem 6vw;
@@ -734,6 +773,40 @@
   </div>
   </div>
 
+  {%- comment -%} ── SHOP BY CATEGORY ── {%- endcomment -%}
+  <section class="vl-cats">
+    <div class="vl-cats-head">
+      <p class="vl-cats-eyebrow">Explore</p>
+      <h2 class="vl-cats-title">Shop by Category</h2>
+    </div>
+    <div class="vl-cats-grid">
+      {%- assign cat_labels = "Earrings~Silver~Created Diamonds~Gifts~Watches~Toys" | split: "~" -%}
+      {%- assign cat_links = "/collections/silver-earrings~/collections/silver~/collections/lab-grown-diamonds~/collections/all~/collections/watches~/collections/toys" | split: "~" -%}
+      {%- assign cat_colors = "#e6dcc9~#d3d8cb~#d0d9dd~#e4cfc6~#e7d3ab~#d8cad4" | split: "~" -%}
+      {%- for i in (1..6) -%}
+        {%- assign idx = forloop.index0 -%}
+        {%- assign img_key = 'cat' | append: i | append: '_image' -%}
+        {%- assign img = section.settings[img_key] -%}
+        <a class="vl-cat" href="{{ cat_links[idx] }}">
+          <div class="vl-cat-tile" style="background: {{ cat_colors[idx] }};">
+            {%- if img != blank -%}
+              <img class="vl-cat-img" src="{{ img | image_url: width: 600 }}" alt="{{ cat_labels[idx] }}" loading="lazy" />
+            {%- else -%}
+              <div class="vl-cat-ph" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none" stroke="#c8a96e" stroke-width="1.2" stroke-linejoin="round">
+                  <path d="M12 24 L32 10 L52 24 L32 56 Z"/><path d="M12 24 H52"/>
+                  <path d="M22 24 L32 56"/><path d="M42 24 L32 56"/>
+                  <path d="M22 24 L32 10"/><path d="M42 24 L32 10"/>
+                </svg>
+              </div>
+            {%- endif -%}
+          </div>
+          <p class="vl-cat-label">{{ cat_labels[idx] }}</p>
+        </a>
+      {%- endfor -%}
+    </div>
+  </section>
+
   {%- comment -%} ── STATEMENT ── {%- endcomment -%}
   <section class="vl-statement">
     <div class="vl-statement-inner">
@@ -1130,6 +1203,14 @@
     { "type": "header", "content": "Featured Products" },
     { "type": "collection", "id": "featured_collection", "label": "Collection to feature" },
     { "type": "textarea", "id": "products_title", "label": "Section title", "default": "New\n<em>Arrivals</em>" },
+
+    { "type": "header", "content": "Shop by Category" },
+    { "type": "image_picker", "id": "cat1_image", "label": "Earrings image" },
+    { "type": "image_picker", "id": "cat2_image", "label": "Silver image" },
+    { "type": "image_picker", "id": "cat3_image", "label": "Created Diamonds image" },
+    { "type": "image_picker", "id": "cat4_image", "label": "Gifts image" },
+    { "type": "image_picker", "id": "cat5_image", "label": "Watches image" },
+    { "type": "image_picker", "id": "cat6_image", "label": "Toys image" },
 
     { "type": "header", "content": "Enquiry Form" },
     { "type": "image_picker", "id": "enquire_image", "label": "Side image" }
