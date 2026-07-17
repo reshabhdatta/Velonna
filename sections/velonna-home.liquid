@@ -600,8 +600,21 @@
   .vl-enquire-sub {
     font-size: 13px; line-height: 1.85;
     color: var(--vl-mid);
-    max-width: 360px; margin-bottom: 3rem;
+    max-width: 360px; margin-bottom: 2.5rem;
   }
+  .vl-enquire-wa {
+    display: inline-flex; align-items: center; gap: 12px; align-self: flex-start;
+    background: var(--vl-ink); color: #faf9f6;
+    padding: 16px 34px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    border: 1px solid var(--vl-ink);
+    transition: background 0.25s, color 0.25s;
+  }
+  .vl-enquire-wa:hover { background: transparent; color: var(--vl-ink); }
+  .vl-enquire-wa svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .vl-enquire-alt {
+    margin-top: 1.5rem; font-size: 12px; color: var(--vl-faint); letter-spacing: 0.02em;
+  }
+  .vl-enquire-alt a { color: var(--vl-ink); border-bottom: 1px solid rgba(26,22,18,0.25); padding-bottom: 1px; }
   .vl-form { display: flex; flex-direction: column; gap: 1.25rem; }
   .vl-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   .vl-form-g { display: flex; flex-direction: column; gap: 6px; }
@@ -940,47 +953,13 @@
       <p class="vl-enquire-eyebrow">Velonna</p>
       <h2 class="vl-enquire-title">Enquire About<br><em>a Piece</em></h2>
       <p class="vl-enquire-sub">
-        A question about a piece, a custom order, or something else entirely — we reply within 24 hours.
+        A question about a piece, a custom order, or anything else? Message us on WhatsApp — we reply within 24 hours.
       </p>
-      <form class="vl-form" action="/contact#vl-enquire" method="POST">
-        <input type="hidden" name="form_type" value="contact" />
-        <input type="hidden" name="utf8" value="✓" />
-        <div class="vl-form-row">
-          <div class="vl-form-g">
-            <label for="vl-fname">First name</label>
-            <input id="vl-fname" name="contact[first_name]" type="text" required placeholder="Your name" autocomplete="given-name" />
-          </div>
-          <div class="vl-form-g">
-            <label for="vl-lname">Last name</label>
-            <input id="vl-lname" name="contact[last_name]" type="text" required placeholder="Last name" autocomplete="family-name" />
-          </div>
-        </div>
-        <div class="vl-form-g">
-          <label for="vl-email">Email address</label>
-          <input id="vl-email" name="contact[email]" type="email" required placeholder="you@example.com" autocomplete="email" />
-        </div>
-        <div class="vl-form-g">
-          <label for="vl-phone">Phone / WhatsApp</label>
-          <input id="vl-phone" name="contact[phone]" type="tel" placeholder="+91 98000 00000" autocomplete="tel" />
-        </div>
-        <div class="vl-form-g">
-          <label for="vl-interest">I'm interested in</label>
-          <select id="vl-interest" name="contact[interest]">
-            <option value="">Select</option>
-            <option>Silver jewellery</option>
-            <option>Created diamond pieces</option>
-            <option>Occasion wear / statement pieces</option>
-            <option>Custom / bespoke order</option>
-            <option>Franchise enquiry</option>
-          </select>
-        </div>
-        <div class="vl-form-g">
-          <label for="vl-msg">Message <span style="opacity:0.4">(optional)</span></label>
-          <textarea id="vl-msg" name="contact[body]" rows="3" placeholder="Tell us more..."></textarea>
-        </div>
-        <button class="vl-submit" type="submit">Send Enquiry</button>
-        <p class="vl-form-note">We reply within 24 hours. Your details stay private.</p>
-      </form>
+      <a class="vl-enquire-wa" href="https://wa.me/919796513766?text=Hi%20Velonna%2C%20I%20have%20a%20question%20about%20a%20piece." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.29-.14-1.7-.84-1.96-.93-.26-.1-.45-.14-.64.14-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.29-.14-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.6-2-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.63.6.68.22 1.31.19 1.8.12.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <p class="vl-enquire-alt">Prefer to talk? <a href="tel:+919796513766">+91 97965 13766</a></p>
     </div>
   </section>
 
