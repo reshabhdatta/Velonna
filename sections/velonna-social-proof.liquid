@@ -1,6 +1,6 @@
 {% comment %} VELONNA — Social proof: trust strip + Polaroid customer wall {% endcomment %}
 
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
   .vl-social {
@@ -31,7 +31,6 @@
     text-transform: uppercase; color: #c8a96e; margin: 0 0 40px;
   }
 
-  /* Polaroid wall — swipeable */
   .vl-polaroids {
     display: flex; gap: 30px;
     overflow-x: auto; scroll-snap-type: x mandatory;
@@ -78,21 +77,16 @@
   {%- if section.settings.heading != blank -%}
     <h2 class="vl-social__heading">{{ section.settings.heading }}</h2>
   {%- endif -%}
-  <p class="vl-social__sub">The Velonna family · In person</p>
+  <p class="vl-social__sub">The Velonna family &middot; In person</p>
 
-  {%- assign caps = "The Velonna family ♡~One year of Velonna~In the atelier~Our people ♡~Moments at Velonna~Velonna ♡" | split: "~" -%}
-  {%- assign rots = "-3~2.5~-2~3~-1.5~2~-2.5~1.5~-3~2" | split: "~" -%}
   <div class="vl-polaroids">
-    {%- assign review_count = section.settings.review_count | default: 16 -%}
-    {%- for i in (1..review_count) -%}
+    {%- for i in (1..16) -%}
       {%- assign img = 'velonna-review-' | append: i | append: '.jpg' -%}
-      {%- assign ci = forloop.index0 | modulo: caps.size -%}
-      {%- assign ri = forloop.index0 | modulo: rots.size -%}
-      <figure class="vl-polaroid" style="--rot: {{ rots[ri] }}deg;">
+      <figure class="vl-polaroid" style="--rot: {% cycle 'rot': '-3deg', '2.5deg', '-2deg', '3deg', '-1.5deg', '2deg' %};">
         <div class="vl-polaroid-photo">
-          <img src="{{ img | asset_url }}" alt="Velonna customer in store" loading="lazy" />
+          <img src="{{ img | asset_url }}" alt="Velonna customer in store" loading="lazy">
         </div>
-        <figcaption>{{ caps[ci] }}</figcaption>
+        <figcaption>{% cycle 'cap': 'The Velonna family', 'One year of Velonna', 'In the atelier', 'Our people', 'Moments at Velonna', 'Est. 1924' %}</figcaption>
       </figure>
     {%- endfor -%}
   </div>
@@ -103,7 +97,6 @@
   "name": "Velonna Social Proof",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by our customers" },
-    { "type": "range", "id": "review_count", "min": 1, "max": 16, "step": 1, "label": "Number of photos", "default": 16 },
     { "type": "header", "content": "Trust strip" },
     { "type": "text", "id": "trust1_num", "label": "Stat 1", "default": "925" },
     { "type": "text", "id": "trust1_label", "label": "Label 1", "default": "Certified Sterling Silver" },
@@ -117,7 +110,7 @@
   "blocks": [
     {
       "type": "testimonial",
-      "name": "Testimonial (legacy, unused)",
+      "name": "Testimonial (legacy)",
       "settings": [
         { "type": "textarea", "id": "quote", "label": "Quote" },
         { "type": "text", "id": "author", "label": "Author" }
