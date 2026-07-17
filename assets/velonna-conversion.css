@@ -195,6 +195,23 @@
 .header-wrapper.header-wrapper--border-bottom {
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
+/* Homepage only: transparent header over the hero (Swarovski-style), solid frosted once scrolled into content */
+body:has(#MainContent .vl) .header-wrapper {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.06) 60%, transparent 100%) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none;
+  border-bottom: none !important;
+  transition: background 0.45s ease, backdrop-filter 0.45s ease;
+}
+body:has(#MainContent .vl) .header-wrapper.vl-header-solid {
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 6px),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 6px),
+    linear-gradient(to bottom, rgba(18, 16, 13, 0.52) 0%, rgba(18, 16, 13, 0.42) 100%) !important;
+  backdrop-filter: blur(22px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(160%) !important;
+}
 /* Logo + icons stay visible on the dark glass */
 .header-wrapper .header__heading-logo {
   filter: brightness(0) invert(1);
