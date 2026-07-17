@@ -1160,8 +1160,9 @@
   var hero = document.querySelector('.vl-hero');
   if (!header || !hero) return;
   function upd() {
-    if (hero.getBoundingClientRect().bottom > 80) { header.classList.remove('vl-header-solid'); }
-    else { header.classList.add('vl-header-solid'); }
+    // Transparent ONLY while the hero is still behind the header; otherwise a clean dark bar.
+    if (hero.getBoundingClientRect().bottom > 80) { header.classList.add('vl-header-hero'); }
+    else { header.classList.remove('vl-header-hero'); }
   }
   window.addEventListener('scroll', upd, { passive: true });
   window.addEventListener('resize', upd);

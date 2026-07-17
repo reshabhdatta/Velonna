@@ -179,43 +179,28 @@
   transition: width 0.4s ease;
 }
 
-/* ---- Frosted-glass header (real glass: transparent, blurred, saturated) ---- */
+/* ---- Header: clean OPAQUE dark bar by default (no blur anywhere → no grey haze on any background) ---- */
 .header-wrapper {
-  /* fine diamond crosshatch as a light highlight, like patterned privacy glass */
-  background:
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 6px),
-    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 6px),
-    linear-gradient(to bottom, rgba(18, 16, 13, 0.24) 0%, rgba(18, 16, 13, 0.06) 100%) !important;
-  /* heavy blur + saturation = frosted glass; no brightness() so it doesn't flatten to grey */
-  backdrop-filter: blur(22px) saturate(165%);
-  -webkit-backdrop-filter: blur(22px) saturate(165%);
-  /* subtle inner top highlight sells the glass edge */
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
-}
-.header-wrapper.header-wrapper--border-bottom {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-/* Homepage: NO backdrop blur (blur is what created the grey haze). Transparent dark scrim over the hero, clean near-solid ink once scrolled. */
-body:has(#MainContent .vl) .header-wrapper {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.12) 55%, transparent 100%) !important;
+  background: linear-gradient(to bottom, rgba(20, 17, 13, 0.95) 0%, rgba(20, 17, 13, 0.88) 100%) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   box-shadow: none;
-  border-bottom: none !important;
-  transition: background 0.45s ease;
+  transition: background 0.4s ease;
 }
-body:has(#MainContent .vl) .header-wrapper.vl-header-solid {
-  background: linear-gradient(to bottom, rgba(20, 17, 13, 0.94) 0%, rgba(20, 17, 13, 0.88) 100%) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+.header-wrapper.header-wrapper--border-bottom {
   border-bottom: none !important;
 }
-/* Make the white logo + icons pop against the hero */
+/* Homepage, ONLY while over the hero (class added by JS): go transparent so the hero shows through.
+   Positively gated — if JS is absent the header stays a clean dark bar, never a grey scrim over content. */
+body:has(#MainContent .vl) .header-wrapper.vl-header-hero {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.10) 55%, transparent 100%) !important;
+}
+/* White logo + icons pop on the homepage header */
 body:has(#MainContent .vl) .header-wrapper .header__heading-logo {
-  filter: brightness(0) invert(1) drop-shadow(0 1px 8px rgba(0, 0, 0, 0.55)) !important;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 8px rgba(0, 0, 0, 0.6)) !important;
 }
 body:has(#MainContent .vl) .header-wrapper .header__icon {
-  filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.55));
 }
 /* Logo + icons stay visible on the dark glass */
 .header-wrapper .header__heading-logo {
