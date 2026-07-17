@@ -562,11 +562,13 @@
     position: relative; overflow: hidden;
     border-right: 1px solid var(--vl-rule);
   }
-  .vl-enquire-vis img {
+  .vl-enquire-vis img,
+  .vl-enquire-vis video {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .vl-enquire-vis:hover img { transform: scale(1.04); }
+  .vl-enquire-vis:hover img,
+  .vl-enquire-vis:hover video { transform: scale(1.04); }
   .vl-enquire-vis-ov {
     position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 60%);
@@ -926,7 +928,8 @@
         <img src="{{ section.settings.enquire_image | image_url: width: 1200 }}"
           alt="" loading="lazy" />
       {%- else -%}
-        <div class="vl-tile-placeholder" style="height:100%;"><span>Velonna Atelier</span></div>
+        <video src="{{ 'velonna-enquire.mp4' | asset_url }}"
+          autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
       {%- endif -%}
       <div class="vl-enquire-vis-ov"></div>
       <div class="vl-enquire-vis-caption">
