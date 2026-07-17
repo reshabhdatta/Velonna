@@ -32,7 +32,7 @@
   }
   .vl-gate-sticky {
     position: sticky; top: 0;
-    height: 100vh; overflow: hidden;
+    height: 100vh; height: 100svh; overflow: hidden;
     background: var(--vl-bg);
   }
   .vl-gate-video {
@@ -72,6 +72,13 @@
   .vl-gate-welcome-rule {
     display: block; width: 54px; height: 1px; background: var(--vl-gold);
     margin: 1.4rem auto 0;
+  }
+  /* Gate on mobile: shorter scroll + smaller lockup */
+  @media (max-width: 900px) {
+    .vl-gate { height: 240vh; }
+    .vl-gate-welcome-line { font-size: clamp(15px, 4.3vw, 20px); margin-bottom: 1.2rem; }
+    .vl-gate-welcome-logo { width: clamp(190px, 58vw, 300px); }
+    .vl-gate-welcome-rule { margin-top: 1rem; }
   }
   /* Header hidden during the gate; fades in IN PLACE as the logo lands (shared-element handoff) */
   .section-header { transition: opacity 0.25s ease; }
@@ -1094,13 +1101,10 @@
                 || document.querySelector('.header-wrapper .header__heading-logo');
   var flip = null;
 
-  // Desktop-first: on mobile/touch, skip the gate and show the hero directly.
-  var isMobile = window.matchMedia('(max-width: 900px)').matches
-              || window.matchMedia('(pointer: coarse)').matches;
-
   function enter() { gate.classList.add('is-entered'); }
 
-  if (isMobile) { gate.style.display = 'none'; enter(); return; }
+  // Runs on mobile + desktop. Only skip for reduced-motion users (accessibility).
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { gate.style.display = 'none'; enter(); return; }
 
   var duration = 4, target = 0, shown = 0, raf = null;
 
