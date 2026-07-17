@@ -179,35 +179,27 @@
   transition: width 0.4s ease;
 }
 
-/* ---- Header: clean OPAQUE dark bar by default (no blur anywhere → no grey haze on any background) ---- */
+/* ---- Header: solid white with the black Velonna logo ---- */
 .header-wrapper {
-  background: linear-gradient(to bottom, rgba(20, 17, 13, 0.95) 0%, rgba(20, 17, 13, 0.88) 100%) !important;
+  background: #ffffff !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   box-shadow: none;
-  transition: background 0.4s ease;
 }
 .header-wrapper.header-wrapper--border-bottom {
-  border-bottom: none !important;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.10) !important;
 }
-/* Homepage, ONLY while over the hero (class added by JS): go transparent so the hero shows through.
-   Positively gated — if JS is absent the header stays a clean dark bar, never a grey scrim over content. */
-body:has(#MainContent .vl) .header-wrapper.vl-header-hero {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.10) 55%, transparent 100%) !important;
-}
-/* White logo + icons pop on the homepage header */
-body:has(#MainContent .vl) .header-wrapper .header__heading-logo {
-  filter: brightness(0) invert(1) drop-shadow(0 1px 8px rgba(0, 0, 0, 0.6)) !important;
-}
-body:has(#MainContent .vl) .header-wrapper .header__icon {
-  filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.55));
-}
-/* Logo + icons stay visible on the dark glass */
+/* Black logo (no inversion) + dark icons/links on the white header */
 .header-wrapper .header__heading-logo {
-  filter: brightness(0) invert(1);
+  filter: none !important;
 }
 .header-wrapper .header__icon {
-  color: #faf9f6;
+  color: #1a1612 !important;
+}
+.header-wrapper .header__menu-item,
+.header-wrapper .header__active-menu-item,
+.header-wrapper .list-menu__item {
+  color: #1a1612 !important;
 }
 /* Left cluster: hamburger + search */
 .header__left {

@@ -1153,23 +1153,6 @@
 })();
 </script>
 
-<script>
-(function () {
-  // Header: transparent over the hero, solid frosted once scrolled past it
-  var header = document.querySelector('.header-wrapper');
-  var hero = document.querySelector('.vl-hero');
-  if (!header || !hero) return;
-  function upd() {
-    // Transparent ONLY while the hero is still behind the header; otherwise a clean dark bar.
-    if (hero.getBoundingClientRect().bottom > 80) { header.classList.add('vl-header-hero'); }
-    else { header.classList.remove('vl-header-hero'); }
-  }
-  window.addEventListener('scroll', upd, { passive: true });
-  window.addEventListener('resize', upd);
-  upd();
-})();
-</script>
-
 {% schema %}
 {
   "name": "Velonna Home",
