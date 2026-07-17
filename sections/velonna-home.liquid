@@ -49,6 +49,22 @@
   }
   .vl-gate-cue span { display: block; font-size: 16px; margin-top: 8px; animation: vlBob 1.8s ease-in-out infinite; }
   @keyframes vlBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+  /* Welcome line — slides up over the open-gate diamond scene */
+  .vl-gate-welcome {
+    position: absolute; z-index: 2; left: 0; right: 0; bottom: 15vh;
+    text-align: center; pointer-events: none;
+    opacity: 0; transform: translateY(34px);
+    transition: opacity 0.1s linear;
+  }
+  .vl-gate-welcome p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3vw, 40px); font-weight: 400; font-style: italic;
+    color: var(--vl-ink); line-height: 1.2;
+  }
+  .vl-gate-welcome span {
+    display: block; width: 40px; height: 1px; background: var(--vl-gold);
+    margin: 1.25rem auto 0;
+  }
   /* Header is hidden while the gate is closing; fades in once the visitor enters */
   .section-header { transition: opacity 0.6s ease, transform 0.6s ease; }
   body:has(.vl-gate:not(.is-entered)) .section-header {
@@ -611,6 +627,7 @@
         poster="{{ 'velonna-gate-poster.jpg' | asset_url }}"
         muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="vl-gate-cue" id="vlGateCue">Scroll to enter<span>↓</span></div>
+      <div class="vl-gate-welcome" id="vlGateWelcome"><p>Welcome to the world of Velonna<span></span></p></div>
     </div>
   </div>
 
@@ -1016,6 +1033,7 @@
   if (!gate) return;
   var video = document.getElementById('vlGateVideo');
   var cue = document.getElementById('vlGateCue');
+  var welcome = document.getElementById('vlGateWelcome');
 
   // Desktop-first: on mobile/touch, skip the gate and show the hero directly.
   var isMobile = window.matchMedia('(max-width: 900px)').matches
@@ -1050,6 +1068,10 @@
     target = p * duration;
     if (!raf) raf = requestAnimationFrame(tick);
     cue.style.opacity = clamp(1 - p * 8, 0, 1);
+    // Welcome line slides up as the doors reach full-open
+    var wr = clamp((p - 0.88) / 0.09, 0, 1);
+    welcome.style.opacity = wr;
+    welcome.style.transform = 'translateY(' + (34 - wr * 34) + 'px)';
     if (p > 0.985) { enter(); } else { gate.classList.remove('is-entered'); }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
