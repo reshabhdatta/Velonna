@@ -1,92 +1,63 @@
-{% comment %} VELONNA — Social proof: trust strip + editorial testimonials {% endcomment %}
+{% comment %} VELONNA — Social proof: trust strip + Polaroid customer wall {% endcomment %}
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
 
 <style>
   .vl-social {
-    background: #faf9f6;
-    color: #1a1612;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 300;
+    background: #faf9f6; color: #1a1612;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300;
     padding: 72px 6vw 88px;
   }
   .vl-social__trust {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    padding-bottom: 56px;
-    margin-bottom: 64px;
-    border-bottom: 1px solid rgba(26, 22, 18, 0.1);
-    text-align: center;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    padding-bottom: 56px; margin-bottom: 64px;
+    border-bottom: 1px solid rgba(26, 22, 18, 0.1); text-align: center;
   }
-  .vl-social__trust-item p {
-    margin: 0;
-  }
+  .vl-social__trust-item p { margin: 0; }
   .vl-social__trust-num {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 26px;
-    color: #c8a96e;
-    margin-bottom: 6px !important;
+    font-size: 26px; color: #c8a96e; margin-bottom: 6px !important;
   }
   .vl-social__trust-label {
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
     color: rgba(26, 22, 18, 0.55);
   }
   .vl-social__heading {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 400;
-    font-size: clamp(28px, 4vw, 44px);
-    text-align: center;
-    margin: 0 0 48px;
+    font-family: 'Playfair Display', Georgia, serif; font-weight: 400;
+    font-size: clamp(28px, 4vw, 44px); text-align: center; margin: 0 0 8px;
   }
-  .vl-social__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
+  .vl-social__sub {
+    text-align: center; font-size: 11px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #c8a96e; margin: 0 0 40px;
   }
-  .vl-social__card {
-    border-top: 1px solid #c8a96e;
-    padding-top: 28px;
+
+  /* Polaroid wall — swipeable */
+  .vl-polaroids {
+    display: flex; gap: 30px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    padding: 24px 6vw 30px; margin: 0 -6vw;
   }
-  .vl-social__stars {
-    color: #c8a96e;
-    font-size: 14px;
-    letter-spacing: 4px;
-    margin: 0 0 16px;
+  .vl-polaroids::-webkit-scrollbar { display: none; }
+  .vl-polaroid {
+    flex: 0 0 auto; width: 250px; background: #fff;
+    padding: 14px 14px 0;
+    box-shadow: 0 12px 32px rgba(26, 22, 18, 0.16);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    scroll-snap-align: center;
   }
-  .vl-social__quote {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 17px;
-    line-height: 1.6;
-    font-style: italic;
-    margin: 0 0 20px;
+  .vl-polaroid:hover { transform: rotate(0deg) translateY(-8px); box-shadow: 0 20px 44px rgba(26, 22, 18, 0.24); }
+  .vl-polaroid-photo { width: 100%; aspect-ratio: 4 / 5; overflow: hidden; background: #ece7de; }
+  .vl-polaroid-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vl-polaroid figcaption {
+    font-family: 'Caveat', cursive; font-weight: 600; font-size: 23px;
+    color: #1a1612; text-align: center; padding: 12px 6px 18px; line-height: 1;
   }
-  .vl-social__author {
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(26, 22, 18, 0.55);
-    margin: 0;
-  }
+
   @media screen and (max-width: 899px) {
     .vl-social__trust { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
-    .vl-social__grid {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      margin: 0 -6vw;
-      padding: 0 6vw 8px;
-    }
-    .vl-social__grid::-webkit-scrollbar { display: none; }
-    .vl-social__card {
-      flex: 0 0 78vw;
-      scroll-snap-align: center;
-    }
+    .vl-polaroid { width: 70vw; max-width: 280px; }
   }
 </style>
 
@@ -107,14 +78,22 @@
   {%- if section.settings.heading != blank -%}
     <h2 class="vl-social__heading">{{ section.settings.heading }}</h2>
   {%- endif -%}
+  <p class="vl-social__sub">The Velonna family · In person</p>
 
-  <div class="vl-social__grid">
-    {%- for block in section.blocks -%}
-      <div class="vl-social__card" {{ block.shopify_attributes }}>
-        <p class="vl-social__stars" aria-label="5 star review">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-        <p class="vl-social__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
-        <p class="vl-social__author">{{ block.settings.author }}</p>
-      </div>
+  {%- assign caps = "The Velonna family ♡~One year of Velonna~In the atelier~Our people ♡~Moments at Velonna~Velonna ♡" | split: "~" -%}
+  {%- assign rots = "-3~2.5~-2~3~-1.5~2~-2.5~1.5~-3~2" | split: "~" -%}
+  <div class="vl-polaroids">
+    {%- assign review_count = section.settings.review_count | default: 16 -%}
+    {%- for i in (1..review_count) -%}
+      {%- assign img = 'velonna-review-' | append: i | append: '.jpg' -%}
+      {%- assign ci = forloop.index0 | modulo: caps.size -%}
+      {%- assign ri = forloop.index0 | modulo: rots.size -%}
+      <figure class="vl-polaroid" style="--rot: {{ rots[ri] }}deg;">
+        <div class="vl-polaroid-photo">
+          <img src="{{ img | asset_url }}" alt="Velonna customer in store" loading="lazy" />
+        </div>
+        <figcaption>{{ caps[ci] }}</figcaption>
+      </figure>
     {%- endfor -%}
   </div>
 </section>
@@ -124,6 +103,7 @@
   "name": "Velonna Social Proof",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by our customers" },
+    { "type": "range", "id": "review_count", "min": 1, "max": 16, "step": 1, "label": "Number of photos", "default": 16 },
     { "type": "header", "content": "Trust strip" },
     { "type": "text", "id": "trust1_num", "label": "Stat 1", "default": "925" },
     { "type": "text", "id": "trust1_label", "label": "Label 1", "default": "Certified Sterling Silver" },
@@ -137,22 +117,13 @@
   "blocks": [
     {
       "type": "testimonial",
-      "name": "Testimonial",
+      "name": "Testimonial (legacy, unused)",
       "settings": [
-        { "type": "textarea", "id": "quote", "label": "Quote", "default": "The craftsmanship is stunning — looks far more expensive than it is." },
-        { "type": "text", "id": "author", "label": "Author", "default": "Verified Buyer · Mumbai" }
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "author", "label": "Author" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Velonna Social Proof",
-      "blocks": [
-        { "type": "testimonial" },
-        { "type": "testimonial" },
-        { "type": "testimonial" }
-      ]
-    }
-  ]
+  "presets": [ { "name": "Velonna Social Proof" } ]
 }
 {% endschema %}
