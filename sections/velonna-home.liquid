@@ -24,6 +24,38 @@
   .vl a { color: inherit; text-decoration: none; }
   .vl img, .vl video { display: block; max-width: 100%; }
 
+  /* ── GATE INTRO (scroll-scrub, desktop) ──────────────── */
+  .vl-gate {
+    position: relative;
+    height: 300vh;            /* scroll length that drives the gate open */
+    background: var(--vl-bg);
+  }
+  .vl-gate-sticky {
+    position: sticky; top: 0;
+    height: 100vh; overflow: hidden;
+    background: var(--vl-bg);
+  }
+  .vl-gate-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .vl-gate-cue {
+    position: absolute; z-index: 2;
+    left: 50%; bottom: 5vh; transform: translateX(-50%);
+    text-align: center; color: var(--vl-ink);
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    transition: opacity 0.3s;
+  }
+  .vl-gate-cue span { display: block; font-size: 16px; margin-top: 8px; animation: vlBob 1.8s ease-in-out infinite; }
+  @keyframes vlBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+  /* Header is hidden while the gate is closing; fades in once the visitor enters */
+  .section-header { transition: opacity 0.6s ease, transform 0.6s ease; }
+  body:has(.vl-gate:not(.is-entered)) .section-header {
+    opacity: 0; transform: translateY(-100%); pointer-events: none;
+  }
+  @media (prefers-reduced-motion: reduce) { .vl-gate-cue span { animation: none; } }
+
   /* ── HERO ─────────────────────────────────────────────── */
   .vl-hero {
     position: relative;
@@ -573,6 +605,17 @@
 
 <div class="vl">
 
+  {%- comment -%} ── GATE INTRO (scroll-scrub, desktop) ── {%- endcomment -%}
+  <div class="vl-gate" id="vlGate">
+    <div class="vl-gate-sticky">
+      <video class="vl-gate-video" id="vlGateVideo"
+        src="{{ 'velonna-gate.mp4' | asset_url }}"
+        poster="{{ 'velonna-gate-poster.jpg' | asset_url }}"
+        muted playsinline preload="auto" aria-hidden="true"></video>
+      <div class="vl-gate-cue" id="vlGateCue">Scroll to enter<span>↓</span></div>
+    </div>
+  </div>
+
   {%- comment -%} ── HERO ── {%- endcomment -%}
   <section class="vl-hero">
     {%- if section.settings.hero_video != blank -%}
@@ -963,6 +1006,55 @@
       }, { threshold: 0.35 }).observe(tv);
     }
   });
+})();
+</script>
+
+<script>
+(function () {
+  // ── Gate intro: scroll-scrubbed door-open, hands off to the hero ──
+  var gate = document.getElementById('vlGate');
+  if (!gate) return;
+  var video = document.getElementById('vlGateVideo');
+  var cue = document.getElementById('vlGateCue');
+
+  // Desktop-first: on mobile/touch, skip the gate and show the hero directly.
+  var isMobile = window.matchMedia('(max-width: 900px)').matches
+              || window.matchMedia('(pointer: coarse)').matches;
+
+  function enter() { gate.classList.add('is-entered'); }
+
+  if (isMobile) { gate.style.display = 'none'; enter(); return; }
+
+  var duration = 4, target = 0, shown = 0, raf = null;
+
+  video.addEventListener('loadedmetadata', function () { duration = video.duration || 4; });
+  video.addEventListener('error', function () { gate.style.display = 'none'; enter(); });
+  video.play().then(function () { video.pause(); try { video.currentTime = 0; } catch (e) {} }).catch(function () {});
+  // Safety: if the video never loads, don't trap the visitor behind a blank gate.
+  setTimeout(function () { if (video.readyState < 1) { gate.style.display = 'none'; enter(); } }, 4000);
+
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function progress() {
+    var rect = gate.getBoundingClientRect();
+    var scrollable = gate.offsetHeight - window.innerHeight;
+    return clamp((0 - rect.top) / scrollable, 0, 1);
+  }
+  function tick() {
+    shown += (target - shown) * 0.18;                 // ease toward target = buttery scrub
+    if (Math.abs(target - shown) < 0.001) shown = target;
+    if (video.readyState >= 2) { try { video.currentTime = shown; } catch (e) {} }
+    if (Math.abs(target - shown) > 0.001) { raf = requestAnimationFrame(tick); } else { raf = null; }
+  }
+  function onScroll() {
+    var p = progress();
+    target = p * duration;
+    if (!raf) raf = requestAnimationFrame(tick);
+    cue.style.opacity = clamp(1 - p * 8, 0, 1);
+    if (p > 0.985) { enter(); } else { gate.classList.remove('is-entered'); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
 })();
 </script>
 
