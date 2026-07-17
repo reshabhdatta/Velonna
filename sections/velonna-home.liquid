@@ -359,12 +359,14 @@
   .vl-editorial-vis {
     position: relative; overflow: hidden;
   }
-  .vl-editorial-vis img {
+  .vl-editorial-vis img,
+  .vl-editorial-vis video {
     width: 100%; height: 100%;
     object-fit: cover;
     transition: transform 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .vl-editorial-vis:hover img { transform: scale(1.04); }
+  .vl-editorial-vis:hover img,
+  .vl-editorial-vis:hover video { transform: scale(1.04); }
 
   .vl-editorial-txt {
     padding: 8vw 6vw;
@@ -859,25 +861,6 @@
     </div>
   </section>
 
-  {%- comment -%} ── FULL-BLEED FEATURE ── {%- endcomment -%}
-  <section class="vl-feature">
-    {%- if section.settings.feature_image != blank -%}
-      <img class="vl-feature-bg"
-        src="{{ section.settings.feature_image | image_url: width: 2000 }}"
-        alt="" aria-hidden="true" loading="lazy" />
-    {%- else -%}
-      <video class="vl-feature-bg" src="{{ 'extra.mp4' | asset_url }}"
-        autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
-    {%- endif -%}
-    <div class="vl-feature-ov"></div>
-    <div class="vl-feature-content">
-      <p class="vl-feature-eyebrow">{{ section.settings.feature_eyebrow }}</p>
-      <p class="vl-feature-title">"{{ section.settings.feature_quote }}"</p>
-      <div class="vl-feature-rule"></div>
-      <a class="vl-feature-cta" href="{{ section.settings.feature_cta_url | default: '/collections/lab-grown-diamonds' }}">{{ section.settings.feature_cta }}</a>
-    </div>
-  </section>
-
   {%- comment -%} ── EDITORIAL: CREATED DIAMONDS (dark section, reversed) ── {%- endcomment -%}
   <section class="vl-editorial dark rev">
     <div class="vl-editorial-vis">
@@ -885,7 +868,8 @@
         <img src="{{ section.settings.ed2_image | image_url: width: 1200 }}"
           alt="{{ section.settings.ed2_image.alt | escape }}" loading="lazy" />
       {%- else -%}
-        <div class="vl-tile-placeholder" style="height:100%;"><span>Created Diamonds</span></div>
+        <video src="{{ 'extra.mp4' | asset_url }}"
+          autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
       {%- endif -%}
     </div>
     <div class="vl-editorial-txt">
