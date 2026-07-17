@@ -1116,6 +1116,7 @@
   var video = document.getElementById('vlGateVideo');
   var cue = document.getElementById('vlGateCue');
   var welcome = document.getElementById('vlGateWelcome');
+  var heroEl = document.querySelector('.vl-hero');
 
   // Desktop-first: on mobile/touch, skip the gate and show the hero directly.
   var isMobile = window.matchMedia('(max-width: 900px)').matches
@@ -1154,7 +1155,9 @@
     var wr = clamp((p - 0.80) / 0.13, 0, 1);
     welcome.style.opacity = wr;
     welcome.style.transform = 'translateY(' + (46 - wr * 46) + 'px)';
-    if (p > 0.985) { enter(); } else { gate.classList.remove('is-entered'); }
+    // Reveal the header ONLY after the gate has fully scrolled past and the hero reaches the top
+    if (heroEl && heroEl.getBoundingClientRect().top <= 4) { enter(); }
+    else { gate.classList.remove('is-entered'); }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
