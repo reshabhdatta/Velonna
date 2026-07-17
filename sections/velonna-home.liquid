@@ -700,7 +700,7 @@
   {%- comment -%} ── MARQUEE ── {%- endcomment -%}
   <div class="vl-band" aria-hidden="true">
     <div class="vl-band-track">
-      {%- assign band_items = "Sterling silver · Lab-grown stones · Swarovski crystals · Contemporary luxury · Occasion wear · IGI certified · Created diamonds · Metro-first · Est. 1924" | split: " · " -%}
+      {%- assign band_items = "Sterling silver · Lab-grown stones · Contemporary luxury · Occasion wear · IGI certified · Created diamonds · Metro-first · Est. 1924" | split: " · " -%}
       {%- for n in (1..2) -%}
       <div class="vl-band-group">
         {%- for item in band_items -%}
@@ -958,7 +958,6 @@
             <option>Silver jewellery</option>
             <option>Created diamond pieces</option>
             <option>Occasion wear / statement pieces</option>
-            <option>Swarovski crystal designs</option>
             <option>Custom / bespoke order</option>
             <option>Franchise enquiry</option>
           </select>
@@ -1164,7 +1163,7 @@
     { "type": "image_picker", "id": "hero_image",    "label": "Hero image (fallback)" },
     { "type": "text",         "id": "hero_eyebrow",  "label": "Eyebrow", "default": "The Velonna Atelier · Est. 1924" },
     { "type": "textarea",     "id": "hero_title",    "label": "Title (use newlines)", "default": "Contemporary\nLuxury,\nAccessible." },
-    { "type": "text",         "id": "hero_sub",      "label": "Subtitle", "default": "Silver, lab-grown stones, and Swarovski crystals. International couture aesthetics at prices that make sense." },
+    { "type": "text",         "id": "hero_sub",      "label": "Subtitle", "default": "Silver and lab-grown stones. International couture aesthetics at prices that make sense." },
     { "type": "text",         "id": "hero_cta_label","label": "CTA label", "default": "Explore the collections" },
     { "type": "url",          "id": "hero_cta_url",  "label": "CTA URL" },
 
@@ -1196,7 +1195,7 @@
     { "type": "image_picker", "id": "ed2_image",   "label": "Image" },
     { "type": "text",   "id": "ed2_eyebrow", "label": "Eyebrow",  "default": "Created Diamonds" },
     { "type": "textarea","id": "ed2_title",  "label": "Title",    "default": "For the\n<em>Exceptional</em>\nMoment" },
-    { "type": "textarea","id": "ed2_body",   "label": "Body",     "default": "Lab-grown diamonds and Swarovski crystals, physically and chemically identical to mined stones, set into designs inspired by the world's great jewellery houses. Identical light. A fraction of the price." },
+    { "type": "textarea","id": "ed2_body",   "label": "Body",     "default": "Lab-grown diamonds, physically and chemically identical to mined stones, set into designs inspired by the world's great jewellery houses. Identical light. A fraction of the price." },
     { "type": "text",   "id": "ed2_cta",    "label": "CTA",      "default": "Explore Created Diamonds" },
     { "type": "url",    "id": "ed2_url",    "label": "CTA URL" },
 
