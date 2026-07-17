@@ -27,7 +27,7 @@
   /* ── GATE INTRO (scroll-scrub, desktop) ──────────────── */
   .vl-gate {
     position: relative;
-    height: 380vh;            /* scroll length that drives the gate open + long finale dwell */
+    height: 320vh;            /* scroll length that drives the gate open + long finale dwell */
     background: var(--vl-bg);
   }
   .vl-gate-sticky {
@@ -58,12 +58,13 @@
   }
   .vl-gate-welcome-line {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(20px, 2.6vw, 34px); font-weight: 400; font-style: italic;
+    font-size: clamp(18px, 2.2vw, 30px); font-weight: 400; font-style: italic;
     color: var(--vl-ink); line-height: 1.25;
+    margin-bottom: 1.8rem;
   }
   .vl-gate-welcome-logo {
-    display: block; width: clamp(280px, 42vw, 640px); height: auto;
-    margin: 0.5rem auto 0;
+    display: block; width: clamp(240px, 34vw, 480px); height: auto;
+    margin: 0 auto;
     will-change: transform;
     transform-origin: center center;
     transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -1178,10 +1179,10 @@
     // Welcome rises with the diamond
     var wr = clamp((p - 0.50) / 0.10, 0, 1);
     welcome.style.transform = 'translateY(' + (46 - wr * 46) + 'px)';
-    welcome.style.opacity = (p >= 0.99) ? 0 : wr;   // hide the gate logo once the header logo has taken over
+    welcome.style.opacity = (p >= 0.995) ? 0 : wr;   // hide the gate logo once the header logo has taken over
 
     // FLIP: the logo HOLDS with the diamond, then flies up to the exact header-logo spot; caption fades
-    var t = clamp((p - 0.82) / 0.14, 0, 1);          // long hold to 82%, slow lift, lands by 96%
+    var t = clamp((p - 0.86) / 0.13, 0, 1);          // long hold to 86%, then lift, lands ~99% (right before hero)
     if (t > 0) {
       if (!flip) flip = computeFlip();
       if (flip) {
@@ -1199,7 +1200,7 @@
     }
 
     // Once the logo has landed, fade the real header in around it (in place) → seamless handoff
-    if (p >= 0.965) { enter(); } else { gate.classList.remove('is-entered'); }
+    if (p >= 0.985) { enter(); } else { gate.classList.remove('is-entered'); }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', function () { flip = null; onScroll(); });
