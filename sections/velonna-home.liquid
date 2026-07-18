@@ -31,10 +31,12 @@
     background: var(--vl-bg);
   }
   .vl-gate-sticky {
-    position: sticky; top: 0;
+    position: fixed; top: 0; left: 0; width: 100%;
     height: 100vh; height: 100svh; overflow: hidden;
-    background: var(--vl-bg);
+    background: var(--vl-bg); z-index: 60;
+    transition: opacity 0.5s ease;
   }
+  .vl-gate.is-entered .vl-gate-sticky { opacity: 0; pointer-events: none; }
   .vl-gate-video {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
@@ -1100,9 +1102,6 @@
   var welcomeLine = welcome ? welcome.querySelector('.vl-gate-welcome-line') : null;
   var welcomeRule = welcome ? welcome.querySelector('.vl-gate-welcome-rule') : null;
   var welcomeLogo = document.getElementById('vlGateWelcomeLogo');
-  var headerLogo = document.querySelector('.header-wrapper .header__heading-logo img')
-                || document.querySelector('.header-wrapper .header__heading-logo');
-  var flip = null;
 
   function enter() { gate.classList.add('is-entered'); }
 
@@ -1119,9 +1118,9 @@
 
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   function progress() {
+    // The spacer drives progress; 1 = spacer fully scrolled and the hero sits at the top.
     var rect = gate.getBoundingClientRect();
-    var scrollable = gate.offsetHeight - window.innerHeight;
-    return clamp((0 - rect.top) / scrollable, 0, 1);
+    return clamp((0 - rect.top) / gate.offsetHeight, 0, 1);
   }
   function tick() {
     shown += (target - shown) * 0.18;                 // ease toward target = buttery scrub
@@ -1129,57 +1128,29 @@
     if (video.readyState >= 2) { try { video.currentTime = shown; } catch (e) {} }
     if (Math.abs(target - shown) > 0.001) { raf = requestAnimationFrame(tick); } else { raf = null; }
   }
-  function computeFlip() {
-    if (!welcomeLogo || !headerLogo) return null;
-    var prev = welcomeLogo.style.transform;
-    welcomeLogo.style.transform = 'none';
-    var lr = welcomeLogo.getBoundingClientRect();
-    welcomeLogo.style.transform = prev;
-    var hr = headerLogo.getBoundingClientRect();
-    if (!lr.width || !hr.width) return null;
-    // header logo is centered; use its width for scale and --vel-header-h for its vertical centre
-    var headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--vel-header-h')) || (hr.height + 40);
-    return {
-      dx: (window.innerWidth / 2) - (lr.left + lr.width / 2),
-      dy: (headerH / 2) - (lr.top + lr.height / 2),
-      scale: hr.width / lr.width
-    };
-  }
   function onScroll() {
     var p = progress();
-    // Doors finish opening by 56% of the scroll; the long remainder is dwell + logo → header handoff
-    target = clamp(p / 0.56, 0, 1) * duration;
+    // Doors finish opening by ~55%; then a long dwell, then the logo rises
+    target = clamp(p / 0.55, 0, 1) * duration;
     if (!raf) raf = requestAnimationFrame(tick);
-    cue.style.opacity = clamp(1 - p * 8, 0, 1);
+    cue.style.opacity = clamp(1 - p * 10, 0, 1);
 
-    // Welcome rises with the diamond
-    var wr = clamp((p - 0.50) / 0.10, 0, 1);
-    welcome.style.transform = 'translateY(' + (46 - wr * 46) + 'px)';
-    welcome.style.opacity = (p >= 0.995) ? 0 : wr;   // hide the gate logo once the header logo has taken over
+    // Welcome fades / rises in, then holds
+    var wr = clamp((p - 0.48) / 0.10, 0, 1);
+    welcome.style.opacity = wr;
+    welcome.style.transform = 'translateY(' + (40 - wr * 40) + 'px)';
 
-    // FLIP: the logo HOLDS with the diamond, then flies up to the exact header-logo spot; caption fades
-    var t = clamp((p - 0.86) / 0.13, 0, 1);          // long hold to 86%, then lift, lands ~99% (right before hero)
-    if (t > 0) {
-      if (!flip) flip = computeFlip();
-      if (flip) {
-        welcomeLogo.style.transformOrigin = 'center center';
-        welcomeLogo.style.transform =
-          'translate(' + (flip.dx * t) + 'px,' + (flip.dy * t) + 'px) scale(' + (1 + (flip.scale - 1) * t) + ')';
-      }
-      if (welcomeLine) welcomeLine.style.opacity = 1 - t;
-      if (welcomeRule) welcomeRule.style.opacity = 1 - t;
-    } else {
-      if (welcomeLogo) welcomeLogo.style.transform = 'none';
-      if (welcomeLine) welcomeLine.style.opacity = 1;
-      if (welcomeRule) welcomeRule.style.opacity = 1;
-      flip = null;
-    }
+    // Finale: the logo rises toward the top and shrinks; caption fades (no per-device measuring)
+    var t = clamp((p - 0.82) / 0.14, 0, 1);
+    if (welcomeLogo) welcomeLogo.style.transform = 'translateY(' + (-64 * t) + 'vh) scale(' + (1 - 0.55 * t) + ')';
+    if (welcomeLine) welcomeLine.style.opacity = 1 - t;
+    if (welcomeRule) welcomeRule.style.opacity = 1 - t;
 
-    // Once the logo has landed, fade the real header in around it (in place) → seamless handoff
+    // Near the end: fade the whole overlay out to reveal the hero, and fade the header in (no empty gap)
     if (p >= 0.985) { enter(); } else { gate.classList.remove('is-entered'); }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function () { flip = null; onScroll(); });
+  window.addEventListener('resize', onScroll);
   onScroll();
 })();
 </script>
