@@ -53,7 +53,8 @@
   @keyframes vlBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
   /* Welcome — rises with the diamond; "Velonna" dropped below for emphasis */
   .vl-gate-welcome {
-    position: absolute; z-index: 2; left: 0; right: 0; bottom: 15vh;
+    position: absolute; z-index: 2; left: 0; right: 0; top: 0; bottom: 0;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; pointer-events: none;
     opacity: 0; transform: translateY(46px);
     transition: opacity 0.1s linear;
