@@ -1104,6 +1104,16 @@
       }, { threshold: 0.4 }).observe(cv);
     }
   });
+
+  // Perf: pause background autoplay videos (hero, editorials, enquiry) when off-screen,
+  // so phones aren't decoding several clips at once (a big cause of jank/crashes).
+  document.querySelectorAll('.vl video[autoplay]').forEach(function (v) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { v.play().catch(function () {}); } else { v.pause(); }
+      });
+    }, { threshold: 0.1 }).observe(v);
+  });
 })();
 </script>
 
@@ -1121,8 +1131,30 @@
 
   function enter() { gate.classList.add('is-entered'); }
 
-  // Runs on mobile + desktop. Only skip for reduced-motion users (accessibility).
+  // Skip for reduced-motion users (accessibility).
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { gate.style.display = 'none'; enter(); return; }
+
+  // MOBILE / TOUCH: scroll-scrubbing a video is unreliable on phones (stutters + crashes).
+  // Use a simple one-time autoplay intro instead — rock solid.
+  var isTouch = window.matchMedia('(hover: none)').matches || ('ontouchstart' in window) || window.innerWidth <= 900;
+  if (isTouch) {
+    var overlayEl = gate.querySelector('.vl-gate-sticky');
+    gate.style.height = '0px';                 // no scroll spacer needed on mobile
+    if (cue) cue.style.display = 'none';
+    var mDone = false;
+    function mFinish() { if (mDone) return; mDone = true; enter(); }
+    function showWelcome() { if (welcome) { welcome.style.opacity = '1'; welcome.style.transform = 'none'; } }
+    video.preload = 'auto';
+    video.addEventListener('timeupdate', function () {
+      var d = video.duration || 4;
+      if (video.currentTime > d * 0.55) showWelcome();
+    });
+    video.addEventListener('ended', function () { setTimeout(mFinish, 900); });
+    video.play().catch(function () { showWelcome(); setTimeout(mFinish, 1500); });
+    setTimeout(mFinish, 9000);                 // safety net so no one gets stuck
+    if (overlayEl) overlayEl.addEventListener('click', mFinish);  // tap to skip
+    return;
+  }
 
   var duration = 4, target = 0, shown = 0, raf = null;
 
