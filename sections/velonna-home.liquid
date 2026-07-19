@@ -1129,7 +1129,15 @@
   var welcomeRule = welcome ? welcome.querySelector('.vl-gate-welcome-rule') : null;
   var welcomeLogo = document.getElementById('vlGateWelcomeLogo');
 
-  function enter() { gate.classList.add('is-entered'); }
+  function enter() {
+    gate.classList.add('is-entered');
+    try { sessionStorage.setItem('vlGateSeen', '1'); } catch (e) {}
+  }
+
+  // Already walked through the gate this session? Skip it and start straight at the hero.
+  var gateSeen = false;
+  try { gateSeen = !!sessionStorage.getItem('vlGateSeen'); } catch (e) {}
+  if (gateSeen) { gate.style.display = 'none'; enter(); return; }
 
   // Skip for reduced-motion users (accessibility).
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { gate.style.display = 'none'; enter(); return; }
