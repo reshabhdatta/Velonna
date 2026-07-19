@@ -830,8 +830,13 @@
             {%- if img != blank -%}
               <img class="vl-cat-img" src="{{ img | image_url: width: 600 }}" alt="{{ cat_labels[idx] }}" loading="lazy" />
             {%- elsif i == 1 -%}
-              <video class="vl-cat-img" src="{{ 'velonna-watch.mp4' | asset_url }}"
-                autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
+              <video class="vl-cat-img vl-cat-video" src="{{ 'velonna-watch.mp4' | asset_url }}"
+                poster="{{ 'velonna-watch-poster.jpg' | asset_url }}"
+                loop muted playsinline preload="none" aria-hidden="true"></video>
+            {%- elsif i == 2 -%}
+              <video class="vl-cat-img vl-cat-video" src="{{ 'velonna-toys.mp4' | asset_url }}"
+                poster="{{ 'velonna-toys-poster.jpg' | asset_url }}"
+                loop muted playsinline preload="none" aria-hidden="true"></video>
             {%- else -%}
               <div class="vl-cat-ph" aria-hidden="true">
                 <svg viewBox="0 0 64 64" fill="none" stroke="#c8a96e" stroke-width="1.2" stroke-linejoin="round">
@@ -1084,6 +1089,19 @@
           if (e.isIntersecting) { tv.play().catch(function () {}); } else { tv.pause(); }
         });
       }, { threshold: 0.35 }).observe(tv);
+    }
+  });
+
+  // Category videos (Watches, Toys): hover to play on desktop, play-in-view on touch. Never autoplay on desktop.
+  document.querySelectorAll('.vl-cat-video').forEach(function (cv) {
+    var card = cv.closest('.vl-cat') || cv;
+    if (window.matchMedia('(hover: hover)').matches) {
+      card.addEventListener('mouseenter', function () { cv.play().catch(function () {}); });
+      card.addEventListener('mouseleave', function () { cv.pause(); try { cv.currentTime = 0; } catch (e) {} });
+    } else {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { cv.play().catch(function () {}); } else { cv.pause(); } });
+      }, { threshold: 0.4 }).observe(cv);
     }
   });
 })();
