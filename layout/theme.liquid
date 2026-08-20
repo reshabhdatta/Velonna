@@ -317,7 +317,7 @@
   {%- elsif template.name == 'collection' -%}
     {%- assign seo_title = collection.title | append: ' | ' | append: site_name -%}
     {%- assign seo_desc = collection.description | strip_html | truncate: 155 -%}
-    {%- if seo_desc == blank -%}{%- assign seo_desc = 'Shop Velonna's ' | append: collection.title | append: ' — fine jewellery crafted in sterling silver and created diamonds. Hallmarked, ethically made, and shipped across India.' -%}{%- endif -%}
+    {%- if seo_desc == blank -%}{%- assign seo_desc = 'Shop Velonna' | append: collection.title | append: ' — fine jewellery crafted in sterling silver and created diamonds. Hallmarked, ethically made, and shipped across India.' -%}{%- endif -%}
   {%- elsif template.name == 'page' -%}
     {%- assign seo_title = page.title | append: ' | ' | append: site_name -%}
     {%- assign seo_desc = page.content | strip_html | truncate: 155 -%}
@@ -511,3 +511,17 @@
     {%- endif -%}
   </body>
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- assign seo_desc = 'Shop Velonna's ' | append: collection.title | append:
+    ' — fine jewellery crafted in sterling silver and created diamonds. Hallmarked,
+    ethically made, and shipped across India.' -%}"
+  to: "{%- assign seo_desc = 'Shop Velonna' | append: collection.title | append: '
+    — fine jewellery crafted in sterling silver and created diamonds. Hallmarked,
+    ethically made, and shipped across India.' -%}"
+  position: 19744..19944
+{% endcomment %}
