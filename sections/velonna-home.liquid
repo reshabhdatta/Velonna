@@ -66,8 +66,9 @@
     margin-bottom: 0.2rem;
   }
   .vl-gate-welcome-logo {
-    display: block; width: clamp(240px, 34vw, 480px); height: auto;
-    margin: -1.2rem auto 0;
+    display: block; width: clamp(190px, 24vw, 320px); height: auto;
+    margin: 0.4rem auto 0;
+    filter: drop-shadow(0 4px 18px rgba(60, 45, 15, 0.35));
     will-change: transform;
     transform-origin: center center;
     transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -702,7 +703,7 @@
       <div class="vl-gate-cue" id="vlGateCue">Scroll to enter<span>↓</span></div>
       <div class="vl-gate-welcome" id="vlGateWelcome">
         <p class="vl-gate-welcome-line">Welcome to the world of</p>
-        <img class="vl-gate-welcome-logo" id="vlGateWelcomeLogo" src="{{ 'velonna-logo-black.png' | asset_url }}" alt="Velonna" />
+        <img class="vl-gate-welcome-logo" id="vlGateWelcomeLogo" src="{{ 'velonna-logo-gold.png' | asset_url }}" alt="Velonna" />
         <span class="vl-gate-welcome-rule"></span>
       </div>
     </div>
@@ -736,7 +737,7 @@
   {%- comment -%} ── MARQUEE ── {%- endcomment -%}
   <div class="vl-band" aria-hidden="true">
     <div class="vl-band-track">
-      {%- assign band_items = "Sterling silver · Lab-grown stones · Contemporary luxury · Occasion wear · IGI certified · Created diamonds · Metro-first · Est. 1924" | split: " · " -%}
+      {%- assign band_items = "Sterling silver · Lab-grown stones · Contemporary luxury · Occasion wear · IGI certified · Lab grown diamonds · Metro-first · Est. 1924" | split: " · " -%}
       {%- for n in (1..2) -%}
       <div class="vl-band-group">
         {%- for item in band_items -%}
@@ -769,11 +770,11 @@
       </div>
     </a>
 
-    <a class="vl-tile" href="/collections/lab-grown-diamonds">
+    <a class="vl-tile" href="/collections/lab-grown">
       {%- if section.settings.tile2_image != blank -%}
         <img class="vl-tile-img"
           src="{{ section.settings.tile2_image | image_url: width: 800 }}"
-          alt="Created Diamonds collection" loading="lazy" />
+          alt="Lab Grown Diamonds collection" loading="lazy" />
       {%- else -%}
         <video class="vl-tile-img vl-tile-video" src="{{ 'velonna-tile-diamonds.mp4' | asset_url }}"
           poster="{{ 'velonna-tile-diamonds-poster.jpg' | asset_url }}"
@@ -782,7 +783,7 @@
       <div class="vl-tile-overlay"></div>
       <div class="vl-tile-label">
         <p class="vl-tile-eyebrow">Explore the collection</p>
-        <p class="vl-tile-name">Created<br>Diamonds</p>
+        <p class="vl-tile-name">Lab Grown<br>Diamonds</p>
         <span class="vl-tile-discover">Discover</span>
       </div>
     </a>
@@ -806,7 +807,7 @@
   </div>
   <div class="vl-tiles-dots" aria-hidden="false">
     <button class="vl-tiles-dot" type="button" aria-label="Silver"></button>
-    <button class="vl-tiles-dot" type="button" aria-label="Created Diamonds"></button>
+    <button class="vl-tiles-dot" type="button" aria-label="Lab Grown Diamonds"></button>
     <button class="vl-tiles-dot" type="button" aria-label="All Collections"></button>
   </div>
   </div>
@@ -896,7 +897,7 @@
       <p class="vl-ed-eyebrow">{{ section.settings.ed2_eyebrow }}</p>
       <h2 class="vl-ed-title">{{ section.settings.ed2_title | newline_to_br }}</h2>
       <p class="vl-ed-body">{{ section.settings.ed2_body }}</p>
-      <a class="vl-ed-link" href="{{ section.settings.ed2_url | default: '/collections/lab-grown-diamonds' }}">{{ section.settings.ed2_cta }}</a>
+      <a class="vl-ed-link" href="{{ section.settings.ed2_url | default: '/collections/lab-grown' }}">{{ section.settings.ed2_cta }}</a>
     </div>
   </section>
 
@@ -1016,7 +1017,7 @@
     var dots = [].slice.call(document.querySelectorAll('.vl-tiles-dot'));
     var len = cards.length;
     if (len < 2) return;
-    var active = 1; // start on Created Diamonds
+    var active = 1; // start on Lab Grown Diamonds
     var dragMoved = false;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1228,7 +1229,7 @@
 
     { "type": "header", "content": "Collection Tiles" },
     { "type": "image_picker", "id": "tile1_image", "label": "Tile 1 — Silver image" },
-    { "type": "image_picker", "id": "tile2_image", "label": "Tile 2 — Created Diamonds image" },
+    { "type": "image_picker", "id": "tile2_image", "label": "Tile 2 — Lab Grown Diamonds image" },
     { "type": "image_picker", "id": "tile3_image", "label": "Tile 3 — All Collections image" },
 
     { "type": "header", "content": "Statement" },
@@ -1245,17 +1246,17 @@
 
     { "type": "header", "content": "Full-bleed Feature" },
     { "type": "image_picker", "id": "feature_image",   "label": "Background image" },
-    { "type": "text",   "id": "feature_eyebrow",  "label": "Eyebrow",  "default": "Created Diamonds · IGI Certified" },
+    { "type": "text",   "id": "feature_eyebrow",  "label": "Eyebrow",  "default": "Lab Grown Diamonds · IGI Certified" },
     { "type": "textarea","id": "feature_quote",   "label": "Quote",    "default": "Light, made by science. Set by hand." },
-    { "type": "text",   "id": "feature_cta",     "label": "CTA",      "default": "Shop Created Diamonds" },
+    { "type": "text",   "id": "feature_cta",     "label": "CTA",      "default": "Shop Lab Grown Diamonds" },
     { "type": "url",    "id": "feature_cta_url", "label": "CTA URL" },
 
-    { "type": "header", "content": "Editorial — Created Diamonds" },
+    { "type": "header", "content": "Editorial — Lab Grown Diamonds" },
     { "type": "image_picker", "id": "ed2_image",   "label": "Image" },
-    { "type": "text",   "id": "ed2_eyebrow", "label": "Eyebrow",  "default": "Created Diamonds" },
+    { "type": "text",   "id": "ed2_eyebrow", "label": "Eyebrow",  "default": "Lab Grown Diamonds" },
     { "type": "textarea","id": "ed2_title",  "label": "Title",    "default": "For the\n<em>Exceptional</em>\nMoment" },
     { "type": "textarea","id": "ed2_body",   "label": "Body",     "default": "Lab-grown diamonds, physically and chemically identical to mined stones, set into designs inspired by the world's great jewellery houses. Identical light. A fraction of the price." },
-    { "type": "text",   "id": "ed2_cta",    "label": "CTA",      "default": "Explore Created Diamonds" },
+    { "type": "text",   "id": "ed2_cta",    "label": "CTA",      "default": "Explore Lab Grown Diamonds" },
     { "type": "url",    "id": "ed2_url",    "label": "CTA URL" },
 
     { "type": "header", "content": "Featured Products" },
@@ -1265,7 +1266,7 @@
     { "type": "header", "content": "Shop by Category" },
     { "type": "image_picker", "id": "cat1_image", "label": "Earrings image" },
     { "type": "image_picker", "id": "cat2_image", "label": "Silver image" },
-    { "type": "image_picker", "id": "cat3_image", "label": "Created Diamonds image" },
+    { "type": "image_picker", "id": "cat3_image", "label": "Lab Grown Diamonds image" },
     { "type": "image_picker", "id": "cat4_image", "label": "Gifts image" },
     { "type": "image_picker", "id": "cat5_image", "label": "Watches image" },
     { "type": "image_picker", "id": "cat6_image", "label": "Toys image" },
