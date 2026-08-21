@@ -303,9 +303,9 @@
 
   {%- assign page_title_seo = page_title | escape -%}
   {%- assign site_name = 'Velonna' -%}
-  {%- assign site_tagline = 'Fine Silver & Created Diamond Jewellery' -%}
-  {%- assign site_desc_default = 'Velonna is a fine jewellery atelier from Jammu & Kashmir, Est. 2014. Specialising in 925 sterling silver and GIA-certified created diamond jewellery — ethically made, hallmarked, and signed by the artisan.' -%}
-  {%- assign site_keywords = '925 silver jewellery India, sterling silver rings, created diamond jewellery India, lab grown diamond rings, ethical diamond jewellery, fine jewellery Jammu Kashmir, silver earrings online India, GIA certified diamonds' -%}
+  {%- assign site_tagline = 'Fine Silver & Lab Grown Diamond Jewellery' -%}
+  {%- assign site_desc_default = 'Velonna is a fine jewellery atelier from Jammu & Kashmir, Est. 2014. Specialising in 925 sterling silver and GIA-certified lab grown diamond jewellery — ethically made, hallmarked, and signed by the artisan.' -%}
+  {%- assign site_keywords = '925 silver jewellery India, sterling silver rings, lab grown diamond jewellery India, lab grown diamond rings, ethical diamond jewellery, fine jewellery Jammu Kashmir, silver earrings online India, GIA certified diamonds' -%}
 
   {%- if template.name == 'index' -%}
     {%- assign seo_title = site_name | append: ' — ' | append: site_tagline -%}
@@ -317,7 +317,7 @@
   {%- elsif template.name == 'collection' -%}
     {%- assign seo_title = collection.title | append: ' | ' | append: site_name -%}
     {%- assign seo_desc = collection.description | strip_html | truncate: 155 -%}
-    {%- if seo_desc == blank -%}{%- assign seo_desc = 'Shop Velonna' | append: collection.title | append: ' — fine jewellery crafted in sterling silver and created diamonds. Hallmarked, ethically made, and shipped across India.' -%}{%- endif -%}
+    {%- if seo_desc == blank -%}{%- assign seo_desc = 'Shop Velonna ' | append: collection.title | append: ' — fine jewellery crafted in sterling silver and lab grown diamonds. Hallmarked, ethically made, and shipped across India.' -%}{%- endif -%}
   {%- elsif template.name == 'page' -%}
     {%- assign seo_title = page.title | append: ' | ' | append: site_name -%}
     {%- assign seo_desc = page.content | strip_html | truncate: 155 -%}
@@ -373,7 +373,7 @@
     "@type": "JewelryStore",
     "name": "Velonna",
     "alternateName": "Velonna Jewellers",
-    "description": "Fine jewellery atelier specialising in 925 sterling silver and GIA-certified created diamonds. Est. 2014, Jammu & Kashmir, India.",
+    "description": "Fine jewellery atelier specialising in 925 sterling silver and GIA-certified lab grown diamonds. Est. 2014, Jammu & Kashmir, India.",
     "url": "https://velonnajewellers.myshopify.com",
     "foundingDate": "2014",
     "foundingLocation": {
@@ -387,7 +387,7 @@
       "name": "Velonna Fine Jewellery",
       "itemListElement": [
         { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Sterling Silver Jewellery" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Created Diamond Jewellery" } }
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Lab Grown Diamond Jewellery" } }
       ]
     },
     "sameAs": []
