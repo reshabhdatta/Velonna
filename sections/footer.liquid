@@ -6,9 +6,15 @@
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  /* Black logo in footer */
+  /* Full stacked logo (diamond mark + wordmark) in footer */
   .footer-block__image-wrapper img {
-    content: url({{ 'velonna-logo-black.png' | asset_url }});
+    content: url({{ 'velonna-logo-gold.png' | asset_url }});
+    width: auto;
+    height: 120px;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 749px) {
+    .footer-block__image-wrapper img { height: 96px; }
   }
 
   .footer {
