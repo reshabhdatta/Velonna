@@ -1,112 +1,291 @@
-{% comment %} Velonna — Franchise landing {% endcomment %}
+{% comment %} Velonna — Franchise landing (content from the Franchise Business Proposal) {% endcomment %}
 <style>
-  .vjoin { background:#faf9f6; color:#1a1612; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; padding:5rem 6vw 6rem; }
-  .vjoin-inner { max-width:940px; margin:0 auto; }
-  .vjoin-eyebrow { font-size:10px; letter-spacing:.32em; text-transform:uppercase; color:#c8a96e; margin-bottom:1.2rem; text-align:center; }
-  .vjoin-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(34px,5.6vw,58px); font-weight:400; line-height:1.04; text-align:center; margin-bottom:1.2rem; }
-  .vjoin-rule { width:44px; height:1px; background:#c8a96e; margin:0 auto 2rem; }
-  .vjoin-lead { max-width:640px; margin:0 auto 3rem; text-align:center; font-size:15px; line-height:1.85; color:rgba(26,22,18,.62); }
-  .vjoin-stats { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin-bottom:3.5rem; }
-  .vjoin-stat { text-align:center; }
-  .vjoin-stat b { display:block; font-family:'Playfair Display',Georgia,serif; font-size:30px; font-weight:400; color:#1a1612; }
-  .vjoin-stat span { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#c8a96e; }
-  .vjoin-grid { display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start; }
-  .vjoin-points h3 { font-family:'Playfair Display',Georgia,serif; font-size:20px; font-weight:400; margin-bottom:1rem; }
-  .vjoin-points ul { list-style:none; padding:0; margin:0 0 2rem; }
-  .vjoin-points li { position:relative; padding-left:20px; margin-bottom:.9rem; font-size:14px; line-height:1.7; color:rgba(26,22,18,.7); }
-  .vjoin-points li::before { content:''; position:absolute; left:0; top:9px; width:7px; height:7px; background:#c8a96e; transform:rotate(45deg); }
-  .vjoin-wa { display:inline-flex; align-items:center; gap:10px; margin-top:.5rem; background:#1a1612; color:#faf9f6; padding:14px 30px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid #1a1612; transition:background .25s,color .25s; }
-  .vjoin-wa:hover { background:transparent; color:#1a1612; }
-  .vjoin-wa svg { width:17px; height:17px; }
-  .vjoin-form { display:flex; flex-direction:column; gap:1.1rem; }
-  .vjoin-form .row { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
-  .vjoin-form label { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(26,22,18,.42); display:block; margin-bottom:6px; }
-  .vjoin-form input, .vjoin-form select, .vjoin-form textarea { width:100%; background:transparent; border:none; border-bottom:1px solid rgba(26,22,18,.2); padding:10px 0; font-size:14px; font-family:inherit; color:#1a1612; outline:none; border-radius:0; -webkit-appearance:none; }
-  .vjoin-form input:focus, .vjoin-form select:focus, .vjoin-form textarea:focus { border-bottom-color:#c8a96e; }
-  .vjoin-form textarea { resize:none; min-height:70px; }
-  .vjoin-submit { align-self:flex-start; margin-top:.4rem; background:#1a1612; color:#faf9f6; padding:14px 40px; font-size:10px; letter-spacing:.22em; text-transform:uppercase; border:1px solid #1a1612; cursor:pointer; transition:background .25s,color .25s; }
-  .vjoin-submit:hover { background:transparent; color:#1a1612; }
-  .vjoin-thanks { background:#f0ece4; border:1px solid rgba(200,169,110,.4); padding:1.25rem; margin-bottom:1.5rem; font-size:14px; }
-  @media (max-width:760px){ .vjoin-grid{ grid-template-columns:1fr; gap:2.5rem; } .vjoin-form .row{ grid-template-columns:1fr; } .vjoin-stats{ gap:2rem; } }
+  .vfr { background:#faf9f6; color:#1a1612; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; }
+  .vfr-wrap { max-width:1040px; margin:0 auto; padding:0 6vw; }
+  .vfr *{ box-sizing:border-box; }
+
+  /* Hero */
+  .vfr-hero { text-align:center; padding:5rem 6vw 3rem; }
+  .vfr-eyebrow { font-size:10px; letter-spacing:.32em; text-transform:uppercase; color:#c8a96e; margin-bottom:1.2rem; }
+  .vfr-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(36px,6vw,62px); font-weight:400; line-height:1.02; margin-bottom:1.4rem; }
+  .vfr-quote { max-width:620px; margin:0 auto; font-family:'Playfair Display',Georgia,serif; font-style:italic; font-size:clamp(17px,2.2vw,22px); line-height:1.5; color:rgba(26,22,18,.72); }
+  .vfr-rule { width:44px; height:1px; background:#c8a96e; margin:2rem auto; }
+
+  /* Stat strip */
+  .vfr-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(26,22,18,.08); border:1px solid rgba(26,22,18,.08); margin:0 0 4rem; }
+  .vfr-stat { background:#faf9f6; padding:1.6rem 1rem; text-align:center; }
+  .vfr-stat b { display:block; font-family:'Playfair Display',Georgia,serif; font-size:clamp(20px,2.4vw,28px); font-weight:400; }
+  .vfr-stat span { display:block; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:#c8a96e; margin-top:.4rem; }
+
+  .vfr-section { padding:0 0 4rem; }
+  .vfr-h2 { font-family:'Playfair Display',Georgia,serif; font-size:clamp(24px,3.2vw,36px); font-weight:400; margin-bottom:.4rem; }
+  .vfr-h2 .num { color:#c8a96e; font-size:.7em; margin-right:.5rem; }
+  .vfr-sub { font-size:14px; color:rgba(26,22,18,.6); margin-bottom:2rem; max-width:640px; line-height:1.7; }
+
+  .vfr-two { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .vfr-card { border:1px solid rgba(200,169,110,.35); background:#f4efe6; padding:2rem 1.8rem; border-radius:4px; }
+  .vfr-card .tag { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#c8a96e; }
+  .vfr-card .big { font-family:'Playfair Display',Georgia,serif; font-size:34px; font-weight:400; margin:.3rem 0; }
+  .vfr-card h3 { font-family:'Playfair Display',Georgia,serif; font-size:20px; font-weight:400; margin:.2rem 0 .8rem; }
+  .vfr-card p { font-size:13.5px; line-height:1.7; color:rgba(26,22,18,.7); }
+  .vfr-list { list-style:none; padding:0; margin:.8rem 0 0; }
+  .vfr-list li { position:relative; padding-left:20px; margin-bottom:.7rem; font-size:13.5px; line-height:1.6; color:rgba(26,22,18,.72); }
+  .vfr-list li::before { content:''; position:absolute; left:0; top:8px; width:6px; height:6px; background:#c8a96e; transform:rotate(45deg); }
+
+  /* Terms table */
+  .vfr-terms { width:100%; border-collapse:collapse; }
+  .vfr-terms td { padding:1rem 0; border-bottom:1px solid rgba(26,22,18,.1); vertical-align:top; font-size:14px; }
+  .vfr-terms td:first-child { width:42%; color:#1a1612; font-weight:500; }
+  .vfr-terms td:last-child { color:rgba(26,22,18,.72); }
+  .vfr-terms .em { font-family:'Playfair Display',Georgia,serif; font-size:17px; color:#1a1612; }
+  .vfr-terms .muted { color:rgba(26,22,18,.5); font-size:12.5px; }
+
+  /* Support grid */
+  .vfr-grid3 { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem 2.5rem; }
+  .vfr-feat { border-left:2px solid #c8a96e; padding-left:1rem; }
+  .vfr-feat b { display:block; font-size:14px; margin-bottom:.3rem; }
+  .vfr-feat span { font-size:13px; color:rgba(26,22,18,.65); line-height:1.6; }
+
+  /* Margins / territory small cards */
+  .vfr-mini { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+  .vfr-mini .box { border:1px solid rgba(200,169,110,.35); padding:1.6rem; border-radius:4px; }
+  .vfr-mini .box h4 { font-family:'Playfair Display',Georgia,serif; font-weight:400; font-size:18px; margin-bottom:.6rem; }
+  .vfr-mini .pct { float:right; font-family:'Playfair Display',Georgia,serif; font-size:26px; color:#a8863f; }
+  .vfr-tiers { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+  .vfr-tier { border:1px solid rgba(26,22,18,.1); padding:1.4rem; border-radius:4px; }
+  .vfr-tier .t { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#c8a96e; margin-bottom:.6rem; }
+  .vfr-tier p { font-size:13px; line-height:1.6; color:rgba(26,22,18,.72); }
+  .vfr-tier .it { font-style:italic; color:rgba(26,22,18,.5); font-size:12.5px; margin-top:.5rem; }
+
+  /* Enquiry form */
+  .vfr-enq { background:#f0ece4; border-top:1px solid rgba(200,169,110,.4); margin-top:2rem; padding:4.5rem 6vw 5.5rem; }
+  .vfr-enq-inner { max-width:640px; margin:0 auto; }
+  .vfr-wa { display:inline-flex; align-items:center; gap:10px; margin-bottom:2rem; background:#1a1612; color:#faf9f6; padding:14px 30px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid #1a1612; transition:background .25s,color .25s; }
+  .vfr-wa:hover { background:transparent; color:#1a1612; }
+  .vfr-wa svg { width:17px; height:17px; }
+  .vfr-form { display:flex; flex-direction:column; gap:1.1rem; }
+  .vfr-form .row { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+  .vfr-form label { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(26,22,18,.42); display:block; margin-bottom:6px; }
+  .vfr-form input, .vfr-form select, .vfr-form textarea { width:100%; background:transparent; border:none; border-bottom:1px solid rgba(26,22,18,.25); padding:10px 0; font-size:14px; font-family:inherit; color:#1a1612; outline:none; border-radius:0; -webkit-appearance:none; }
+  .vfr-form input:focus, .vfr-form select:focus, .vfr-form textarea:focus { border-bottom-color:#c8a96e; }
+  .vfr-form textarea { resize:none; min-height:70px; }
+  .vfr-submit { align-self:flex-start; margin-top:.4rem; background:#1a1612; color:#faf9f6; padding:14px 40px; font-size:10px; letter-spacing:.22em; text-transform:uppercase; border:1px solid #1a1612; cursor:pointer; transition:background .25s,color .25s; }
+  .vfr-submit:hover { background:transparent; color:#1a1612; }
+  .vfr-thanks { background:#fff; border:1px solid rgba(200,169,110,.5); padding:1.25rem; margin-bottom:1.5rem; font-size:14px; }
+  .vfr-disc { font-size:11px; color:rgba(26,22,18,.4); margin-top:2.5rem; line-height:1.6; text-align:center; }
+
+  @media (max-width:760px){
+    .vfr-stats{ grid-template-columns:1fr 1fr; }
+    .vfr-two,.vfr-grid3,.vfr-mini{ grid-template-columns:1fr; }
+    .vfr-tiers{ grid-template-columns:1fr; }
+    .vfr-form .row{ grid-template-columns:1fr; }
+  }
 </style>
 
-<div class="vjoin">
-  <div class="vjoin-inner">
-    <p class="vjoin-eyebrow">Velonna Franchise</p>
-    <h1 class="vjoin-title">Become a Franchise Owner</h1>
-    <div class="vjoin-rule"></div>
-    <p class="vjoin-lead">Bring Velonna to your city. Partner with a fast-growing fine-jewellery brand — 925 sterling silver and lab-grown diamonds — with a proven design language, marketing engine, and full onboarding support.</p>
+<div class="vfr">
 
-    <div class="vjoin-stats">
-      <div class="vjoin-stat"><b>925</b><span>Certified Silver</span></div>
-      <div class="vjoin-stat"><b>IGI</b><span>Lab Grown Diamonds</span></div>
-      <div class="vjoin-stat"><b>End-to-end</b><span>Brand &amp; Ops Support</span></div>
+  <div class="vfr-hero">
+    <p class="vfr-eyebrow">Velonna Franchise · FOFO &amp; FOCO</p>
+    <h1 class="vfr-title">Become a Franchise Owner</h1>
+    <p class="vfr-quote">"We are not offering you a shop. We are offering you a scalable luxury jewellery business."</p>
+  </div>
+
+  <div class="vfr-wrap">
+    <div class="vfr-stats">
+      <div class="vfr-stat"><b>From ₹2 Cr</b><span>All-inclusive setup</span></div>
+      <div class="vfr-stat"><b>12–15%</b><span>Target return</span></div>
+      <div class="vfr-stat"><b>2–3 yrs</b><span>Payback period</span></div>
+      <div class="vfr-stat"><b>SOR</b><span>Zero dead-stock risk</span></div>
     </div>
 
-    <div class="vjoin-grid">
-      <div class="vjoin-points">
-        <h3>What we provide</h3>
-        <ul>
-          <li>Established brand identity &amp; store design</li>
-          <li>Curated, ready-to-sell collections</li>
-          <li>Marketing, catalogue &amp; digital support</li>
-          <li>Training for you and your team</li>
-          <li>Ongoing supply and merchandising help</li>
-        </ul>
-        <h3>What we look for</h3>
-        <ul>
-          <li>Retail space in a strong location</li>
-          <li>Investment capacity &amp; local market knowledge</li>
-          <li>A commitment to service and the brand</li>
-        </ul>
-        <a class="vjoin-wa" href="https://wa.me/919796513766?text=Hi%20Velonna%2C%20I%27m%20interested%20in%20a%20franchise." target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.29-.14-1.7-.84-1.96-.93-.26-.1-.45-.14-.64.14-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.29-.14-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.6-2-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.63.6.68.22 1.31.19 1.8.12.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>
-          Enquire on WhatsApp
-        </a>
+    <!-- Investment models -->
+    <div class="vfr-section">
+      <h2 class="vfr-h2"><span class="num">I.</span>Two Investment Models</h2>
+      <p class="vfr-sub">All-inclusive, transparent pricing with no hidden costs. Choose the format that fits your market.</p>
+      <div class="vfr-two">
+        <div class="vfr-card"><span class="tag">Model — Mega</span><div class="big">₹2 Crore</div><p>Our flagship all-in-one format for high-street and premium mall locations.</p></div>
+        <div class="vfr-card"><span class="tag">Model — Giga</span><div class="big">₹5 Crore</div><p>A larger destination store for flagship, high-density luxury retail markets.</p></div>
       </div>
+    </div>
 
-      <div>
-        {% form 'contact' %}
-          {%- if form.posted_successfully? -%}
-            <div class="vjoin-thanks">Thank you — your franchise enquiry has been received. Our team will reach out shortly.</div>
-          {%- endif -%}
-          {%- if form.errors -%}
-            <div class="vjoin-thanks">Please check your details and try again.</div>
-          {%- endif -%}
-          <input type="hidden" name="contact[enquiry_type]" value="Franchise enquiry">
-          <div class="vjoin-form">
-            <div class="row">
-              <div><label for="f-name">Full name</label><input id="f-name" type="text" name="contact[name]" required></div>
-              <div><label for="f-phone">Phone / WhatsApp</label><input id="f-phone" type="tel" name="contact[phone]" required></div>
+    <!-- Partnership models -->
+    <div class="vfr-section">
+      <h2 class="vfr-h2">Two Partnership Models</h2>
+      <div class="vfr-two">
+        <div class="vfr-card">
+          <span class="tag">FOFO</span><h3>The entrepreneurial model</h3>
+          <p>For partners who want control, local ownership and higher operating upside.</p>
+          <ul class="vfr-list">
+            <li>Inventory-led franchise; opening stock is the largest component</li>
+            <li>Partner manages store team, daily sales and local relationships</li>
+            <li>Velonna controls brand standards, product and pricing guardrails</li>
+            <li>Territory exclusivity linked to launch timeline &amp; performance</li>
+          </ul>
+        </div>
+        <div class="vfr-card">
+          <span class="tag">FOCO</span><h3>Capital with professional execution</h3>
+          <p>The partner owns the investment. Velonna owns the operating engine.</p>
+          <ul class="vfr-list">
+            <li>Velonna appoints and manages the store team</li>
+            <li>Velonna controls merchandising, pricing, CX, CRM and campaigns</li>
+            <li>Partner receives an agreed fixed and/or performance-linked upside</li>
+            <li>Transparent store P&amp;L with monthly reporting and audit rights</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key terms -->
+    <div class="vfr-section">
+      <h2 class="vfr-h2"><span class="num">II.</span>Key Commercial Terms</h2>
+      <table class="vfr-terms">
+        <tr><td>Total Investment</td><td><span class="em">₹2 Cr – ₹5 Cr</span> <span class="muted">(all-in-one setup, model dependent)</span></td></tr>
+        <tr><td>Token Amount</td><td><span class="em">₹5,00,000</span> <span class="muted">(100% adjustable against inventory)</span></td></tr>
+        <tr><td>Franchise Fee</td><td><span class="em">₹10,00,000</span> <span class="muted">(non-refundable — covers store software &amp; CRM)</span></td></tr>
+        <tr><td>Investment Return</td><td><span class="em">12% – 15%</span></td></tr>
+        <tr><td>Payback Period</td><td><span class="em">2 – 3 years</span></td></tr>
+        <tr><td>Gross Product Margin</td><td><span class="em">30% – 35%</span></td></tr>
+        <tr><td>Agreement Term</td><td><span class="em">9 years</span> <span class="muted">(renewable 5 years upon mutual consent)</span></td></tr>
+        <tr><td>Lock-in Period</td><td><span class="em">5 years</span></td></tr>
+        <tr><td>Inventory Model</td><td><span class="em">SOR — Sale or Return</span> <span class="muted">(zero dead-stock risk)</span></td></tr>
+      </table>
+    </div>
+
+    <!-- Support -->
+    <div class="vfr-section">
+      <h2 class="vfr-h2"><span class="num">III.</span>You Invest, We Build the Engine</h2>
+      <p class="vfr-sub">Every franchise should feel like a Velonna store, not an independent store wearing Velonna branding. The investor is the asset owner; Velonna is the operator.</p>
+      <div class="vfr-grid3">
+        <div class="vfr-feat"><b>Site selection</b><span>Catchment study, rent guardrails, store layout and launch plan</span></div>
+        <div class="vfr-feat"><b>Design &amp; build</b><span>Approved design language, fixtures, VM and project supervision</span></div>
+        <div class="vfr-feat"><b>Inventory</b><span>Curated opening assortment, replenishment and SKU rotation</span></div>
+        <div class="vfr-feat"><b>People</b><span>Hiring framework, training, scripts and incentive architecture</span></div>
+        <div class="vfr-feat"><b>Marketing</b><span>Launch campaign, national creative and local activation toolkit</span></div>
+        <div class="vfr-feat"><b>Technology</b><span>POS, CRM, inventory visibility, dashboards and lead management</span></div>
+        <div class="vfr-feat"><b>Sales</b><span>Monthly targets, conversion playbooks, bridal and high-ticket selling</span></div>
+        <div class="vfr-feat"><b>Governance</b><span>MIS, audits, SOP compliance and quarterly business reviews</span></div>
+      </div>
+    </div>
+
+    <!-- Margins & inventory -->
+    <div class="vfr-section">
+      <h2 class="vfr-h2"><span class="num">IV.</span>Product Margins &amp; Inventory Mix</h2>
+      <div class="vfr-mini">
+        <div class="box"><span class="pct">40%</span><h4>Silver &amp; Lifestyle</h4><p style="font-size:13px;color:rgba(26,22,18,.65)">Margin on cost across all silver products.</p></div>
+        <div class="box"><span class="pct">35%</span><h4>Lab Grown Diamond</h4><p style="font-size:13px;color:rgba(26,22,18,.65)">14 KT &amp; 18 KT studded jewellery.</p></div>
+        <div class="box"><span class="pct">30%</span><h4>Silver — inventory share</h4></div>
+        <div class="box"><span class="pct">70%</span><h4>Lab-Grown Diamond — inventory share</h4></div>
+      </div>
+    </div>
+
+    <!-- Store requirements -->
+    <div class="vfr-section">
+      <h2 class="vfr-h2"><span class="num">V.</span>Store Requirements</h2>
+      <div class="vfr-two">
+        <div class="vfr-card">
+          <span class="tag">Store dimensions</span>
+          <ul class="vfr-list">
+            <li><b>High Street:</b> 800 – 1,500 sq.ft (ground floor only)</li>
+            <li><b>Mall:</b> 700+ sq.ft</li>
+            <li>Minimum 20 ft frontage with 10–20 ft signage height</li>
+          </ul>
+        </div>
+        <div class="vfr-card">
+          <span class="tag">Target catchment</span>
+          <ul class="vfr-list">
+            <li>Within 50–100 m of national jewellery brands</li>
+            <li>Or prime placement near leading national apparel brands</li>
+            <li>500 m – 1 km from existing Shop-in-Shop stores</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Territory -->
+    <div class="vfr-section">
+      <h2 class="vfr-h2"><span class="num">VI.</span>Territory Strategy</h2>
+      <p class="vfr-sub">Build city leadership, not store count.</p>
+      <div class="vfr-tiers">
+        <div class="vfr-tier"><div class="t">Tier 1</div><p>Delhi NCR · Mumbai · Bengaluru · Hyderabad · Chennai · Pune · Kolkata</p><div class="it">Premium flagship + high-density retail</div></div>
+        <div class="vfr-tier"><div class="t">Tier 2</div><p>Ahmedabad · Jaipur · Chandigarh · Lucknow · Kochi · Indore · Surat</p><div class="it">Compact luxury studio</div></div>
+        <div class="vfr-tier"><div class="t">Tier 3</div><p>High-potential emerging cities</p><div class="it">Partner-led market creation</div></div>
+      </div>
+    </div>
+
+    <!-- Market -->
+    <div class="vfr-section">
+      <h2 class="vfr-h2"><span class="num">VII.</span>A Fast-Growing Market</h2>
+      <div class="vfr-mini">
+        <div class="box"><h4>Global Lab-Grown Diamonds</h4><p style="font-size:13px;color:rgba(26,22,18,.7)">$29.73B (2025) → $33.94B (2026) · <b>+14.2%</b>. On track to roughly double to ~$57B by 2030.</p></div>
+        <div class="box"><h4>India</h4><p style="font-size:13px;color:rgba(26,22,18,.7)">$2.80B (2025) → $3.23B (2026) · <b>+15.4%</b>. India expected to grow at a <b>13–16% CAGR</b>, outpacing the world.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enquiry -->
+  <div class="vfr-enq" id="enquire">
+    <div class="vfr-enq-inner">
+      <p class="vfr-eyebrow" style="text-align:left">Register your interest</p>
+      <h2 class="vfr-h2">Start the conversation</h2>
+      <p class="vfr-sub">Tell us about yourself and your market. Our team will reach out with the full proposal and next steps.</p>
+
+      <a class="vfr-wa" href="https://wa.me/919796513766?text=Hi%20Velonna%2C%20I%27m%20interested%20in%20a%20franchise." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.29-.14-1.7-.84-1.96-.93-.26-.1-.45-.14-.64.14-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.29-.14-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.6-2-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.63.6.68.22 1.31.19 1.8.12.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>
+        Enquire on WhatsApp
+      </a>
+
+      {% form 'contact' %}
+        {%- if form.posted_successfully? -%}
+          <div class="vfr-thanks">Thank you — your franchise enquiry has been received. Our team will reach out shortly.</div>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="vfr-thanks">Please check your details and try again.</div>
+        {%- endif -%}
+        <input type="hidden" name="contact[enquiry_type]" value="Franchise enquiry">
+        <div class="vfr-form">
+          <div class="row">
+            <div><label for="f-name">Full name</label><input id="f-name" type="text" name="contact[name]" required></div>
+            <div><label for="f-phone">Phone / WhatsApp</label><input id="f-phone" type="tel" name="contact[phone]" required></div>
+          </div>
+          <div><label for="f-email">Email</label><input id="f-email" type="email" name="contact[email]" required></div>
+          <div class="row">
+            <div><label for="f-city">City / Location</label><input id="f-city" type="text" name="contact[city]" required></div>
+            <div>
+              <label for="f-invest">Investment capacity</label>
+              <select id="f-invest" name="contact[investment]">
+                <option>₹2 Cr (Mega)</option>
+                <option>₹5 Cr (Giga)</option>
+                <option>Other / to discuss</option>
+              </select>
             </div>
-            <div><label for="f-email">Email</label><input id="f-email" type="email" name="contact[email]" required></div>
-            <div class="row">
-              <div><label for="f-city">City / Location</label><input id="f-city" type="text" name="contact[city]" required></div>
-              <div>
-                <label for="f-invest">Investment capacity</label>
-                <select id="f-invest" name="contact[investment]">
-                  <option>Under ₹10 lakh</option>
-                  <option>₹10–25 lakh</option>
-                  <option>₹25–50 lakh</option>
-                  <option>₹50 lakh+</option>
-                </select>
-              </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="f-model">Preferred model</label>
+              <select id="f-model" name="contact[model]">
+                <option>FOFO — I operate</option>
+                <option>FOCO — Velonna operates</option>
+                <option>Not sure yet</option>
+              </select>
             </div>
-            <div><label for="f-space">Do you have retail space?</label>
+            <div>
+              <label for="f-space">Retail space</label>
               <select id="f-space" name="contact[retail_space]">
                 <option>Yes, ready</option>
                 <option>Identified / in progress</option>
                 <option>Not yet</option>
               </select>
             </div>
-            <div><label for="f-msg">Tell us about yourself</label><textarea id="f-msg" name="contact[body]" placeholder="Your background, location details, and why Velonna…"></textarea></div>
-            <button type="submit" class="vjoin-submit">Submit Enquiry</button>
           </div>
-        {% endform %}
-      </div>
+          <div><label for="f-msg">Tell us about yourself</label><textarea id="f-msg" name="contact[body]" placeholder="Your background, target city, and why Velonna…"></textarea></div>
+          <button type="submit" class="vfr-submit">Submit Enquiry</button>
+        </div>
+      {% endform %}
+
+      <p class="vfr-disc">Margins and commercial terms are indicative, subject to company discretion and a final bilateral agreement. Market figures are estimates, not audited financial data.</p>
     </div>
   </div>
 </div>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
