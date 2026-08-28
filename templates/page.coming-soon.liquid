@@ -1,0 +1,86 @@
+{% comment %} Velonna — Coming Soon landing (Watches & Collectibles) {% endcomment %}
+<style>
+  .vcs { background:#faf9f6; color:#1a1612; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    min-height:78vh; display:flex; align-items:center; justify-content:center; padding:6rem 6vw; }
+  .vcs-inner { max-width:620px; width:100%; text-align:center; }
+  .vcs-eyebrow { font-size:10px; letter-spacing:.32em; text-transform:uppercase; color:#c8a96e; margin-bottom:1.5rem; }
+  .vcs-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(40px,7vw,72px); font-weight:400;
+    line-height:1; letter-spacing:-.01em; margin-bottom:1.4rem; }
+  .vcs-sub { font-size:15px; line-height:1.8; color:rgba(26,22,18,.6); max-width:440px; margin:0 auto 2.5rem; }
+  .vcs-rule { width:44px; height:1px; background:#c8a96e; margin:0 auto 2.5rem; }
+  .vcs-wa { display:inline-flex; align-items:center; gap:12px; background:#1a1612; color:#faf9f6;
+    padding:16px 34px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; border:1px solid #1a1612;
+    text-decoration:none; transition:background .25s,color .25s; }
+  .vcs-wa:hover { background:transparent; color:#1a1612; }
+  .vcs-wa svg { width:18px; height:18px; }
+  .vcs-or { margin:2.75rem 0 1.5rem; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(26,22,18,.35); }
+  .vcs-form { display:flex; flex-direction:column; gap:1.1rem; text-align:left; max-width:440px; margin:0 auto; }
+  .vcs-form .row { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+  .vcs-form label { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(26,22,18,.4); display:block; margin-bottom:6px; }
+  .vcs-form input, .vcs-form select { width:100%; background:transparent; border:none; border-bottom:1px solid rgba(26,22,18,.2);
+    padding:10px 0; font-size:14px; font-family:inherit; color:#1a1612; outline:none; border-radius:0; -webkit-appearance:none; }
+  .vcs-form input:focus, .vcs-form select:focus { border-bottom-color:#c8a96e; }
+  .vcs-submit { align-self:flex-start; margin-top:.5rem; background:#1a1612; color:#faf9f6; padding:14px 40px;
+    font-size:10px; letter-spacing:.22em; text-transform:uppercase; border:1px solid #1a1612; cursor:pointer; transition:background .25s,color .25s; }
+  .vcs-submit:hover { background:transparent; color:#1a1612; }
+  .vcs-thanks { background:#f0ece4; border:1px solid rgba(200,169,110,.4); padding:1.5rem; margin-bottom:2rem;
+    font-size:14px; color:#1a1612; }
+  @media (max-width:600px){ .vcs-form .row { grid-template-columns:1fr; } }
+</style>
+
+<div class="vcs">
+  <div class="vcs-inner">
+    <p class="vcs-eyebrow">Velonna</p>
+    <h1 class="vcs-title">{{ page.title | default: 'Coming Soon' }}</h1>
+    <div class="vcs-rule"></div>
+    <p class="vcs-sub">
+      {{ page.content | default: "We're crafting something special. Be the first to know when this collection launches — leave your details or message us on WhatsApp." }}
+    </p>
+
+    <a class="vcs-wa" href="https://wa.me/919796513766?text=Hi%20Velonna%2C%20please%20notify%20me%20when%20the%20new%20collection%20launches." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.29-.14-1.7-.84-1.96-.93-.26-.1-.45-.14-.64.14-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.29-.14-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.6-2-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.63.6.68.22 1.31.19 1.8.12.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>
+      Notify me on WhatsApp
+    </a>
+
+    <p class="vcs-or">— or leave your details —</p>
+
+    {%- if page.metafields.custom.posted or contact.posted -%}{%- endif -%}
+    {% form 'contact' %}
+      {%- if form.posted_successfully? -%}
+        <div class="vcs-thanks">Thank you — we've noted your interest and will reach out the moment this collection launches.</div>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <div class="vcs-thanks">Please check your details and try again.</div>
+      {%- endif -%}
+      <div class="vcs-form">
+        <div class="row">
+          <div>
+            <label for="cs-name">Name</label>
+            <input id="cs-name" type="text" name="contact[name]" required>
+          </div>
+          <div>
+            <label for="cs-phone">Phone / WhatsApp</label>
+            <input id="cs-phone" type="tel" name="contact[phone]">
+          </div>
+        </div>
+        <div>
+          <label for="cs-email">Email</label>
+          <input id="cs-email" type="email" name="contact[email]" required>
+        </div>
+        <div>
+          <label for="cs-interest">Interested in</label>
+          <select id="cs-interest" name="contact[interested_in]">
+            <option>Watches</option>
+            <option>Collectibles</option>
+            <option>Both</option>
+          </select>
+        </div>
+        <input type="hidden" name="contact[body]" value="Coming Soon interest registration">
+        <button type="submit" class="vcs-submit">Notify Me</button>
+      </div>
+    {% endform %}
+  </div>
+</div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
