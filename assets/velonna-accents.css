@@ -1,0 +1,63 @@
+/* ============================================================
+   Velonna — Gold Accents (site-wide)
+   Accents only: gold fills / hovers / selected states / focus.
+   Primary dark buttons (Add to Cart, Buy It Now) are left untouched.
+   Brand gold: #c8a96e  ·  Ink: #1a1612
+   ============================================================ */
+:root { --vlg: #c8a96e; --vlg-ink: #1a1612; }
+
+/* --- Selected variant / size pill → solid gold --- */
+.product-form__input--pill input[type="radio"]:checked + label {
+  background-color: var(--vlg) !important;
+  border-color: var(--vlg) !important;
+  color: var(--vlg-ink) !important;
+}
+.product-form__input--pill label:hover { border-color: var(--vlg) !important; }
+
+/* --- Sale / product badges → gold --- */
+.badge.price__badge-sale,
+.badge--sale {
+  background-color: var(--vlg) !important;
+  color: var(--vlg-ink) !important;
+  border-color: var(--vlg) !important;
+}
+
+/* --- Link hover states → gold --- */
+a.link:hover, .link--text:hover,
+.list-menu__item:hover, .header__menu-item:hover,
+.card__heading a:hover, .card-information__text a:hover,
+.full-unstyled-link:hover,
+.footer__list-item a:hover, .footer-block__details-content a:hover,
+.footer__content-bottom a:hover,
+.product__title a:hover,
+.breadcrumb a:hover { color: var(--vlg) !important; }
+
+/* --- Header account / cart icons → gold on hover --- */
+.header__icon:hover, .header__icon:hover .icon, .header__icon:hover svg { color: var(--vlg) !important; }
+
+/* --- In-content links → gold with a clear underline --- */
+.rte a { color: var(--vlg) !important; text-underline-offset: 2px; }
+
+/* --- Rating stars → gold --- */
+.rating-star { color: var(--vlg) !important; }
+
+/* --- Form focus → gold ring --- */
+.field__input:focus, .select__select:focus, textarea:focus,
+.customer input:focus, .customer textarea:focus {
+  border-color: var(--vlg) !important;
+  box-shadow: 0 0 0 1px var(--vlg) !important;
+}
+.quantity:focus-within { border-color: var(--vlg) !important; }
+
+/* --- Pagination current page → gold --- */
+.pagination__item--current, .pagination__item[aria-current] { color: var(--vlg) !important; }
+
+/* --- Secondary/outline buttons: ensure they read gold consistently --- */
+.button--secondary {
+  color: var(--vlg) !important;
+  border-color: var(--vlg) !important;
+}
+.button--secondary:hover {
+  background-color: var(--vlg) !important;
+  color: var(--vlg-ink) !important;
+}
