@@ -1,0 +1,112 @@
+{% comment %} Velonna — Franchise landing {% endcomment %}
+<style>
+  .vjoin { background:#faf9f6; color:#1a1612; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; padding:5rem 6vw 6rem; }
+  .vjoin-inner { max-width:940px; margin:0 auto; }
+  .vjoin-eyebrow { font-size:10px; letter-spacing:.32em; text-transform:uppercase; color:#c8a96e; margin-bottom:1.2rem; text-align:center; }
+  .vjoin-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(34px,5.6vw,58px); font-weight:400; line-height:1.04; text-align:center; margin-bottom:1.2rem; }
+  .vjoin-rule { width:44px; height:1px; background:#c8a96e; margin:0 auto 2rem; }
+  .vjoin-lead { max-width:640px; margin:0 auto 3rem; text-align:center; font-size:15px; line-height:1.85; color:rgba(26,22,18,.62); }
+  .vjoin-stats { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin-bottom:3.5rem; }
+  .vjoin-stat { text-align:center; }
+  .vjoin-stat b { display:block; font-family:'Playfair Display',Georgia,serif; font-size:30px; font-weight:400; color:#1a1612; }
+  .vjoin-stat span { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#c8a96e; }
+  .vjoin-grid { display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start; }
+  .vjoin-points h3 { font-family:'Playfair Display',Georgia,serif; font-size:20px; font-weight:400; margin-bottom:1rem; }
+  .vjoin-points ul { list-style:none; padding:0; margin:0 0 2rem; }
+  .vjoin-points li { position:relative; padding-left:20px; margin-bottom:.9rem; font-size:14px; line-height:1.7; color:rgba(26,22,18,.7); }
+  .vjoin-points li::before { content:''; position:absolute; left:0; top:9px; width:7px; height:7px; background:#c8a96e; transform:rotate(45deg); }
+  .vjoin-wa { display:inline-flex; align-items:center; gap:10px; margin-top:.5rem; background:#1a1612; color:#faf9f6; padding:14px 30px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid #1a1612; transition:background .25s,color .25s; }
+  .vjoin-wa:hover { background:transparent; color:#1a1612; }
+  .vjoin-wa svg { width:17px; height:17px; }
+  .vjoin-form { display:flex; flex-direction:column; gap:1.1rem; }
+  .vjoin-form .row { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+  .vjoin-form label { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(26,22,18,.42); display:block; margin-bottom:6px; }
+  .vjoin-form input, .vjoin-form select, .vjoin-form textarea { width:100%; background:transparent; border:none; border-bottom:1px solid rgba(26,22,18,.2); padding:10px 0; font-size:14px; font-family:inherit; color:#1a1612; outline:none; border-radius:0; -webkit-appearance:none; }
+  .vjoin-form input:focus, .vjoin-form select:focus, .vjoin-form textarea:focus { border-bottom-color:#c8a96e; }
+  .vjoin-form textarea { resize:none; min-height:70px; }
+  .vjoin-submit { align-self:flex-start; margin-top:.4rem; background:#1a1612; color:#faf9f6; padding:14px 40px; font-size:10px; letter-spacing:.22em; text-transform:uppercase; border:1px solid #1a1612; cursor:pointer; transition:background .25s,color .25s; }
+  .vjoin-submit:hover { background:transparent; color:#1a1612; }
+  .vjoin-thanks { background:#f0ece4; border:1px solid rgba(200,169,110,.4); padding:1.25rem; margin-bottom:1.5rem; font-size:14px; }
+  @media (max-width:760px){ .vjoin-grid{ grid-template-columns:1fr; gap:2.5rem; } .vjoin-form .row{ grid-template-columns:1fr; } .vjoin-stats{ gap:2rem; } }
+</style>
+
+<div class="vjoin">
+  <div class="vjoin-inner">
+    <p class="vjoin-eyebrow">Velonna Franchise</p>
+    <h1 class="vjoin-title">Become a Franchise Owner</h1>
+    <div class="vjoin-rule"></div>
+    <p class="vjoin-lead">Bring Velonna to your city. Partner with a fast-growing fine-jewellery brand — 925 sterling silver and lab-grown diamonds — with a proven design language, marketing engine, and full onboarding support.</p>
+
+    <div class="vjoin-stats">
+      <div class="vjoin-stat"><b>925</b><span>Certified Silver</span></div>
+      <div class="vjoin-stat"><b>IGI</b><span>Lab Grown Diamonds</span></div>
+      <div class="vjoin-stat"><b>End-to-end</b><span>Brand &amp; Ops Support</span></div>
+    </div>
+
+    <div class="vjoin-grid">
+      <div class="vjoin-points">
+        <h3>What we provide</h3>
+        <ul>
+          <li>Established brand identity &amp; store design</li>
+          <li>Curated, ready-to-sell collections</li>
+          <li>Marketing, catalogue &amp; digital support</li>
+          <li>Training for you and your team</li>
+          <li>Ongoing supply and merchandising help</li>
+        </ul>
+        <h3>What we look for</h3>
+        <ul>
+          <li>Retail space in a strong location</li>
+          <li>Investment capacity &amp; local market knowledge</li>
+          <li>A commitment to service and the brand</li>
+        </ul>
+        <a class="vjoin-wa" href="https://wa.me/919796513766?text=Hi%20Velonna%2C%20I%27m%20interested%20in%20a%20franchise." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.29-.14-1.7-.84-1.96-.93-.26-.1-.45-.14-.64.14-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.29-.14-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.6-2-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.63.6.68.22 1.31.19 1.8.12.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>
+          Enquire on WhatsApp
+        </a>
+      </div>
+
+      <div>
+        {% form 'contact' %}
+          {%- if form.posted_successfully? -%}
+            <div class="vjoin-thanks">Thank you — your franchise enquiry has been received. Our team will reach out shortly.</div>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="vjoin-thanks">Please check your details and try again.</div>
+          {%- endif -%}
+          <input type="hidden" name="contact[enquiry_type]" value="Franchise enquiry">
+          <div class="vjoin-form">
+            <div class="row">
+              <div><label for="f-name">Full name</label><input id="f-name" type="text" name="contact[name]" required></div>
+              <div><label for="f-phone">Phone / WhatsApp</label><input id="f-phone" type="tel" name="contact[phone]" required></div>
+            </div>
+            <div><label for="f-email">Email</label><input id="f-email" type="email" name="contact[email]" required></div>
+            <div class="row">
+              <div><label for="f-city">City / Location</label><input id="f-city" type="text" name="contact[city]" required></div>
+              <div>
+                <label for="f-invest">Investment capacity</label>
+                <select id="f-invest" name="contact[investment]">
+                  <option>Under ₹10 lakh</option>
+                  <option>₹10–25 lakh</option>
+                  <option>₹25–50 lakh</option>
+                  <option>₹50 lakh+</option>
+                </select>
+              </div>
+            </div>
+            <div><label for="f-space">Do you have retail space?</label>
+              <select id="f-space" name="contact[retail_space]">
+                <option>Yes, ready</option>
+                <option>Identified / in progress</option>
+                <option>Not yet</option>
+              </select>
+            </div>
+            <div><label for="f-msg">Tell us about yourself</label><textarea id="f-msg" name="contact[body]" placeholder="Your background, location details, and why Velonna…"></textarea></div>
+            <button type="submit" class="vjoin-submit">Submit Enquiry</button>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
