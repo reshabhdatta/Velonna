@@ -730,6 +730,77 @@
   </div>
   </div>
 
+  {%- comment -%} ── SHOP BY TYPE (cross-metal) ── {%- endcomment -%}
+  <style>
+    .vl-types { background: var(--vl-bg); padding: 5rem 6vw 2.5rem; }
+    .vl-types-head { text-align:center; margin-bottom:3rem; }
+    .vl-types-eyebrow { font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--vl-gold); margin-bottom:1rem; }
+    .vl-types-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(28px,3.5vw,44px); font-weight:400; color:var(--vl-ink); }
+    .vl-types-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1.2rem; max-width:1120px; margin:0 auto; }
+    .vl-type { text-align:center; display:block; }
+    .vl-type-tile { position:relative; aspect-ratio:1/1; border-radius:14px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(200,169,110,.35); background:linear-gradient(135deg,#efe9df,#e4ddd0); }
+    .vl-type-tile img { width:100%; height:100%; object-fit:cover; transition:transform 1s cubic-bezier(.25,.46,.45,.94); }
+    .vl-type:hover .vl-type-tile img { transform:scale(1.06); }
+    .vl-type-ph { display:flex; align-items:center; justify-content:center; height:100%; font-family:'Playfair Display',Georgia,serif; color:rgba(26,22,18,.3); font-size:12px; letter-spacing:.14em; text-transform:uppercase; text-align:center; padding:0 8px; }
+    .vl-type-label { margin-top:.9rem; font-family:'Playfair Display',Georgia,serif; font-size:clamp(13px,1.3vw,17px); color:var(--vl-ink); }
+    @media (max-width:900px){ .vl-types-grid { grid-template-columns:repeat(2,1fr); gap:1rem; } }
+  </style>
+  <section class="vl-types">
+    <div class="vl-types-head">
+      <p class="vl-types-eyebrow">Find your piece</p>
+      <h2 class="vl-types-title">Shop by Type</h2>
+    </div>
+    <div class="vl-types-grid">
+      {%- assign type_labels = "Rings~Earrings~Bracelets~Necklaces & Pendants~Engagement Rings" | split: "~" -%}
+      {%- assign type_handles = "all-rings~all-earrings~all-bracelets~all-necklaces~engagement-rings" | split: "~" -%}
+      {%- for i in (0..4) -%}
+        {%- assign h = type_handles[i] -%}
+        {%- assign col = collections[h] -%}
+        <a class="vl-type" href="/collections/{{ h }}">
+          <div class="vl-type-tile">
+            {%- if col.products.first.featured_image -%}
+              <img src="{{ col.products.first.featured_image | image_url: width: 500 }}" alt="{{ type_labels[i] }}" loading="lazy">
+            {%- else -%}
+              <div class="vl-type-ph">{{ type_labels[i] }}</div>
+            {%- endif -%}
+          </div>
+          <p class="vl-type-label">{{ type_labels[i] }}</p>
+        </a>
+      {%- endfor -%}
+    </div>
+  </section>
+
+  {%- comment -%} ── MOST LOVED (best sellers — auto-updates by sales) ── {%- endcomment -%}
+  {%- assign bs = collections['best-sellers'] -%}
+  {%- if bs != blank and bs.products.size > 0 -%}
+  <section class="vl-products" style="border-top:none; padding-top:1rem;">
+    <div class="vl-products-header">
+      <h2 class="vl-products-title">Most <em>Loved</em></h2>
+      <a class="vl-products-viewall" href="/collections/best-sellers">View all</a>
+    </div>
+    <div class="vl-product-grid">
+      {%- for product in bs.products limit: 12 -%}
+      <div class="vl-product-card">
+        <a href="{{ product.url }}">
+          <div class="vl-product-img-wrap">
+            {%- if product.featured_image -%}
+              <img class="vl-product-img" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" />
+            {%- else -%}
+              <div class="vl-product-placeholder" style="height:100%;"><span>{{ product.title }}</span></div>
+            {%- endif -%}
+          </div>
+          <div class="vl-product-info">
+            <p class="vl-product-collection">{{ product.type }}</p>
+            <p class="vl-product-name">{{ product.title }}</p>
+            <p class="vl-product-price">{{ product.price | money }}</p>
+          </div>
+        </a>
+      </div>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
   {%- comment -%} ── SHOP BY CATEGORY ── {%- endcomment -%}
   <section class="vl-cats">
     <div class="vl-cats-head">
