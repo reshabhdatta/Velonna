@@ -59,12 +59,13 @@
     font-weight: 400; line-height: 0.95;
     letter-spacing: -0.01em;
     max-width: min(900px, 92vw);
-    color: #faf9f6;
+    color: #e2d1a6;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.35);
     overflow-wrap: normal;
     word-break: keep-all;
     hyphens: none;
   }
-  .vl-hero-title em { font-style: italic; color: rgba(245,240,232,0.65); }
+  .vl-hero-title em { font-style: italic; color: #c8a96e; }
   .vl-hero-sub {
     margin-top: 2rem;
     font-size: clamp(12px, 1.2vw, 14px);
@@ -264,7 +265,7 @@
 
   /* ── STATEMENT ────────────────────────────────────────── */
   .vl-statement {
-    padding: 10rem 6vw;
+    padding: clamp(4rem, 11vw, 10rem) 6vw;
     background: var(--vl-bg-alt);
     border-top: 1px solid var(--vl-rule);
     border-bottom: 1px solid var(--vl-rule);
@@ -992,6 +993,9 @@
   }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
 
   targets.forEach(function (el) { io.observe(el); });
+
+  // Failsafe: never leave content stuck invisible if the observer doesn't fire (mobile edge cases)
+  setTimeout(function () { targets.forEach(function (el) { if (getComputedStyle(el).opacity === '0') { el.style.opacity = '1'; el.style.transform = 'none'; } }); }, 1600);
 
   // Stagger product cards
   document.querySelectorAll('.vl-product-card').forEach(function (card, i) {
