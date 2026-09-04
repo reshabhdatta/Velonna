@@ -381,7 +381,7 @@
       "name": "Jammu & Kashmir, India"
     },
     "areaServed": "IN",
-    "priceRange": "£££",
+    "priceRange": "₹₹",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Velonna Fine Jewellery",
@@ -412,24 +412,23 @@
   }
   </script>
 
-  {%- if template.name == 'product' -%}
-  <!-- JSON-LD: Product -->
+  {%- comment -%} Product structured data is emitted once by Shopify ({{ product | structured_data }} in main-product) to avoid duplicate/invalid schema. Below adds BreadcrumbList for richer results. {%- endcomment -%}
+  {%- if template.name == 'collection' and collection -%}
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": {{ product.title | json }},
-    "description": {{ product.description | strip_html | json }},
-    "brand": { "@type": "Brand", "name": "Velonna" },
-    "image": [{% for image in product.images limit:3 %}"{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "{{ cart.currency.iso_code }}",
-      "price": "{{ product.price | money_without_currency }}",
-      "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
-      "seller": { "@type": "Organization", "name": "Velonna" }
-    }
-  }
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"{{ shop.secure_url }}/"},
+    {"@type":"ListItem","position":2,"name":{{ collection.title | json }},"item":"{{ shop.secure_url }}{{ collection.url }}"}
+  ]}
+  </script>
+  {%- elsif template.name == 'product' and product -%}
+  {%- assign pcol = product.collections.first -%}
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"{{ shop.secure_url }}/"}{% if pcol %},
+    {"@type":"ListItem","position":2,"name":{{ pcol.title | json }},"item":"{{ shop.secure_url }}{{ pcol.url }}"},
+    {"@type":"ListItem","position":3,"name":{{ product.title | json }},"item":"{{ shop.secure_url }}{{ product.url }}"}{% else %},
+    {"@type":"ListItem","position":2,"name":{{ product.title | json }},"item":"{{ shop.secure_url }}{{ product.url }}"}{% endif %}
+  ]}
   </script>
   {%- endif -%}
 </head>
