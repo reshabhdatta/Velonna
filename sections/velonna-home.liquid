@@ -737,58 +737,96 @@
     .vl-types-head { text-align:center; margin-bottom:3rem; }
     .vl-types-eyebrow { font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--vl-gold); margin-bottom:1rem; }
     .vl-types-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(28px,3.5vw,44px); font-weight:400; color:var(--vl-ink); }
-    .vl-types-grid { display:flex; gap:1.1rem; overflow-x:auto; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; padding:.25rem 6vw 1.4rem; margin:0 -6vw; scrollbar-width:thin; scrollbar-color:rgba(200,169,110,.5) transparent; }
-    .vl-types-grid::-webkit-scrollbar { height:6px; }
-    .vl-types-grid::-webkit-scrollbar-thumb { background:rgba(200,169,110,.45); border-radius:3px; }
-    .vl-type { text-align:center; display:block; flex:0 0 auto; width:132px; scroll-snap-align:start; }
-    .vl-type-tile { position:relative; aspect-ratio:1/1; border-radius:14px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(200,169,110,.35); background:linear-gradient(135deg,#efe9df,#e4ddd0); }
-    .vl-type-tile img { width:100%; height:100%; object-fit:cover; transition:transform 1s cubic-bezier(.25,.46,.45,.94); }
-    .vl-type:hover .vl-type-tile img { transform:scale(1.06); }
-    .vl-type-ph { display:flex; align-items:center; justify-content:center; height:100%; font-family:'Playfair Display',Georgia,serif; color:rgba(26,22,18,.3); font-size:11px; letter-spacing:.12em; text-transform:uppercase; text-align:center; padding:0 6px; }
-    .vl-type-label { margin-top:.75rem; font-family:'Playfair Display',Georgia,serif; font-size:14px; line-height:1.25; color:var(--vl-ink); }
-    @media (max-width:900px){ .vl-type { width:112px; } .vl-type-label { font-size:13px; } }
+    .vl-catsec { padding-left:3vw; padding-right:3vw; }
+    .vl-slider-viewport { position:relative; width:100%; overflow:hidden; border-radius:16px; box-shadow:0 10px 40px rgba(20,17,14,.12); }
+    .vl-slider-track { display:flex; transition:transform .6s cubic-bezier(.25,.46,.45,.94); }
+    .vl-slide { flex:0 0 100%; position:relative; display:block; aspect-ratio:16/9; max-height:74vh; background:linear-gradient(135deg,#efe9df,#e4ddd0); overflow:hidden; }
+    .vl-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .vl-slide::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(20,17,14,.6) 0%,rgba(20,17,14,.2) 42%,rgba(20,17,14,0) 72%); }
+    .vl-slide-cap { position:absolute; left:clamp(1.5rem,5vw,5rem); bottom:clamp(1.5rem,5vw,4rem); z-index:2; color:#fff; }
+    .vl-slide-kind { display:block; font-family:'Playfair Display',Georgia,serif; font-size:clamp(26px,4vw,52px); font-weight:400; text-shadow:0 2px 16px rgba(0,0,0,.4); }
+    .vl-slide-cta { display:inline-block; margin-top:.6rem; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#e9d9b8; }
+    .vl-slide--ph { display:flex; align-items:center; justify-content:center; }
+    .vl-slide--ph .vl-slide-cap { position:static; text-align:center; color:rgba(26,22,18,.55); }
+    .vl-slide--ph .vl-slide-kind { color:rgba(26,22,18,.6); text-shadow:none; }
+    .vl-slide--ph .vl-slide-cta { color:rgba(26,22,18,.4); }
+    .vl-slide--ph::after { display:none; }
+    .vl-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:52px; height:52px; border-radius:50%; border:none; background:rgba(255,255,255,.85); color:#14110e; font-size:26px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 18px rgba(0,0,0,.22); transition:background .25s, transform .25s; }
+    .vl-arrow:hover { background:#fff; transform:translateY(-50%) scale(1.06); }
+    .vl-prev { left:1.2rem; } .vl-next { right:1.2rem; }
+    .vl-dots { display:flex; gap:.5rem; justify-content:center; margin-top:1.4rem; }
+    .vl-dot { width:8px; height:8px; border-radius:50%; border:none; background:rgba(200,169,110,.35); cursor:pointer; padding:0; transition:background .25s, transform .25s; }
+    .vl-dot.is-active { background:var(--vl-gold); transform:scale(1.3); }
+    @media (max-width:700px){ .vl-arrow { width:40px; height:40px; font-size:20px; } .vl-prev{left:.6rem;} .vl-next{right:.6rem;} }
   </style>
-  <section class="vl-types">
+  <section class="vl-types vl-catsec" data-vl-slider>
     <div class="vl-types-head">
       <p class="vl-types-eyebrow">925 Sterling Silver</p>
       <h2 class="vl-types-title">Shop Silver by Type</h2>
     </div>
-    <div class="vl-types-grid">
-      {%- assign s_labels = "Ladies Ring~Gents Ring~Ladies Bracelet~Gents Bracelet~Bangles~Earrings~Chain Pendant~Pendant~Mangalsutra~Necklace Sets~Necklace~Chain Pendant Sets~Anklets~Baby Kada~Baby Anklets~Gents Kada~Danglers~Jhumkas~Toe Rings~Ladies Chain~Gents Chain~Pendant Set~Pendants" | split: "~" -%}
-      {%- assign s_handles = "sv-ladies-ring~sv-gents-ring~sv-ladies-bracelet~sv-gents-bracelet~sv-bangles~sv-earrings~sv-chain-pendant~sv-pendant~sv-mangalsutra~sv-necklace-sets~sv-necklace~sv-chain-pendant-sets~sv-anklets~sv-baby-kada~sv-baby-anklets~sv-gents-kada~sv-danglers~sv-jhumkas~sv-toe-rings~sv-ladies-chain~sv-gents-chain~sv-pendant-set~sv-pendants" | split: "~" -%}
-      {%- for h in s_handles -%}
-        {%- assign lbl = s_labels[forloop.index0] -%}
-        {%- assign col = collections[h] -%}
-        <a class="vl-type" href="/collections/{{ h }}">
-          <div class="vl-type-tile">
-            {%- if col.products.first.featured_image -%}<img src="{{ col.products.first.featured_image | image_url: width: 500 }}" alt="Silver {{ lbl }}" loading="lazy">{%- else -%}<div class="vl-type-ph">{{ lbl }}</div>{%- endif -%}
-          </div>
-          <p class="vl-type-label">{{ lbl }}</p>
-        </a>
-      {%- endfor -%}
+    <div class="vl-slider-viewport">
+      <div class="vl-slider-track">
+        {%- assign s_labels = "Rings~Earrings~Bracelets~Necklaces & Pendants~Bangles" | split: "~" -%}
+        {%- assign s_handles = "silver-all-rings~silver-all-earrings~silver-all-bracelets~silver-necklaces~silver-bangles" | split: "~" -%}
+        {%- assign s_imgs = "velonna-cat-silver-rings.jpg~velonna-cat-silver-earrings.jpg~velonna-cat-silver-bracelets.jpg~velonna-cat-silver-necklaces.jpg~velonna-cat-silver-bangles.jpg" | split: "~" -%}
+        {%- for h in s_handles -%}
+          {%- assign lbl = s_labels[forloop.index0] -%}
+          <a class="vl-slide" href="/collections/{{ h }}">
+            <img src="{{ s_imgs[forloop.index0] | asset_url }}" alt="Silver {{ lbl }}" loading="lazy" onerror="this.remove();this.closest('.vl-slide').classList.add('vl-slide--ph')">
+            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
+          </a>
+        {%- endfor -%}
+      </div>
+      <button class="vl-arrow vl-prev" type="button" aria-label="Previous">&lsaquo;</button>
+      <button class="vl-arrow vl-next" type="button" aria-label="Next">&rsaquo;</button>
     </div>
+    <div class="vl-dots"></div>
   </section>
 
-  <section class="vl-types" style="padding-top:1.5rem;">
+  <section class="vl-types vl-catsec" style="padding-top:1.5rem;" data-vl-slider>
     <div class="vl-types-head">
       <p class="vl-types-eyebrow">Lab Grown Diamonds · IGI Certified</p>
       <h2 class="vl-types-title">Shop Diamonds by Type</h2>
     </div>
-    <div class="vl-types-grid">
-      {%- assign d_labels = "Ladies Ring~Gents Ring~Ladies Bracelet~Gents Bracelet~Bangles~Earrings~Chain Pendant~Pendant~Mangalsutra~Necklace Sets~Necklace" | split: "~" -%}
-      {%- assign d_handles = "lgd-ladies-ring~lgd-gents-ring~lgd-ladies-bracelet~lgd-gents-bracelet~lgd-bangles~lgd-earrings~lgd-chain-pendant~lgd-pendant~lgd-mangalsutra~lgd-necklace-sets~lgd-necklace" | split: "~" -%}
-      {%- for h in d_handles -%}
-        {%- assign lbl = d_labels[forloop.index0] -%}
-        {%- assign col = collections[h] -%}
-        <a class="vl-type" href="/collections/{{ h }}">
-          <div class="vl-type-tile">
-            {%- if col.products.first.featured_image -%}<img src="{{ col.products.first.featured_image | image_url: width: 500 }}" alt="Lab Grown Diamond {{ lbl }}" loading="lazy">{%- else -%}<div class="vl-type-ph">{{ lbl }}</div>{%- endif -%}
-          </div>
-          <p class="vl-type-label">{{ lbl }}</p>
-        </a>
-      {%- endfor -%}
+    <div class="vl-slider-viewport">
+      <div class="vl-slider-track">
+        {%- assign d_labels = "Rings~Earrings~Bracelets~Necklaces & Pendants~Bangles" | split: "~" -%}
+        {%- assign d_handles = "diamond-rings~diamond-earrings~diamond-bracelets~diamond-necklaces~diamond-bangles" | split: "~" -%}
+        {%- assign d_imgs = "velonna-cat-diamond-rings.jpg~velonna-cat-diamond-earrings.jpg~velonna-cat-diamond-bracelets.jpg~velonna-cat-diamond-necklaces.jpg~velonna-cat-diamond-bangles.jpg" | split: "~" -%}
+        {%- for h in d_handles -%}
+          {%- assign lbl = d_labels[forloop.index0] -%}
+          <a class="vl-slide" href="/collections/{{ h }}">
+            <img src="{{ d_imgs[forloop.index0] | asset_url }}" alt="Lab Grown Diamond {{ lbl }}" loading="lazy" onerror="this.remove();this.closest('.vl-slide').classList.add('vl-slide--ph')">
+            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
+          </a>
+        {%- endfor -%}
+      </div>
+      <button class="vl-arrow vl-prev" type="button" aria-label="Previous">&lsaquo;</button>
+      <button class="vl-arrow vl-next" type="button" aria-label="Next">&rsaquo;</button>
     </div>
+    <div class="vl-dots"></div>
   </section>
+
+  <script>
+  (function(){
+    function init(root){
+      var track=root.querySelector('.vl-slider-track');
+      var slides=root.querySelectorAll('.vl-slide');
+      var dotsWrap=root.querySelector('.vl-dots');
+      var n=slides.length, i=0, dots=[];
+      if(!n) return;
+      for(var d=0; d<n; d++){ (function(k){ var b=document.createElement('button'); b.type='button'; b.className='vl-dot'+(k===0?' is-active':''); b.setAttribute('aria-label','Slide '+(k+1)); b.addEventListener('click',function(){go(k);}); dotsWrap.appendChild(b); dots.push(b); })(d); }
+      function go(x){ i=(x+n)%n; track.style.transform='translateX(-'+(i*100)+'%)'; for(var k=0;k<dots.length;k++){ dots[k].classList.toggle('is-active',k===i); } }
+      root.querySelector('.vl-next').addEventListener('click',function(e){e.preventDefault();go(i+1);});
+      root.querySelector('.vl-prev').addEventListener('click',function(e){e.preventDefault();go(i-1);});
+      var t=setInterval(function(){go(i+1);},6000);
+      root.addEventListener('mouseenter',function(){clearInterval(t);});
+      root.addEventListener('mouseleave',function(){t=setInterval(function(){go(i+1);},6000);});
+    }
+    var sliders=document.querySelectorAll('[data-vl-slider]');
+    for(var s=0;s<sliders.length;s++){ init(sliders[s]); }
+  })();
+  </script>
 
   {%- comment -%} ── MOST LOVED (best sellers — auto-updates by sales) ── {%- endcomment -%}
   {%- assign bs = collections['best-sellers'] -%}
