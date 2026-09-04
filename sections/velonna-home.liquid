@@ -737,14 +737,16 @@
     .vl-types-head { text-align:center; margin-bottom:3rem; }
     .vl-types-eyebrow { font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--vl-gold); margin-bottom:1rem; }
     .vl-types-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(28px,3.5vw,44px); font-weight:400; color:var(--vl-ink); }
-    .vl-types-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1.2rem; max-width:1120px; margin:0 auto; }
-    .vl-type { text-align:center; display:block; }
+    .vl-types-grid { display:flex; gap:1.1rem; overflow-x:auto; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; padding:.25rem 6vw 1.4rem; margin:0 -6vw; scrollbar-width:thin; scrollbar-color:rgba(200,169,110,.5) transparent; }
+    .vl-types-grid::-webkit-scrollbar { height:6px; }
+    .vl-types-grid::-webkit-scrollbar-thumb { background:rgba(200,169,110,.45); border-radius:3px; }
+    .vl-type { text-align:center; display:block; flex:0 0 auto; width:132px; scroll-snap-align:start; }
     .vl-type-tile { position:relative; aspect-ratio:1/1; border-radius:14px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(200,169,110,.35); background:linear-gradient(135deg,#efe9df,#e4ddd0); }
     .vl-type-tile img { width:100%; height:100%; object-fit:cover; transition:transform 1s cubic-bezier(.25,.46,.45,.94); }
     .vl-type:hover .vl-type-tile img { transform:scale(1.06); }
-    .vl-type-ph { display:flex; align-items:center; justify-content:center; height:100%; font-family:'Playfair Display',Georgia,serif; color:rgba(26,22,18,.3); font-size:12px; letter-spacing:.14em; text-transform:uppercase; text-align:center; padding:0 8px; }
-    .vl-type-label { margin-top:.9rem; font-family:'Playfair Display',Georgia,serif; font-size:clamp(13px,1.3vw,17px); color:var(--vl-ink); }
-    @media (max-width:900px){ .vl-types-grid { grid-template-columns:repeat(2,1fr); gap:1rem; } }
+    .vl-type-ph { display:flex; align-items:center; justify-content:center; height:100%; font-family:'Playfair Display',Georgia,serif; color:rgba(26,22,18,.3); font-size:11px; letter-spacing:.12em; text-transform:uppercase; text-align:center; padding:0 6px; }
+    .vl-type-label { margin-top:.75rem; font-family:'Playfair Display',Georgia,serif; font-size:14px; line-height:1.25; color:var(--vl-ink); }
+    @media (max-width:900px){ .vl-type { width:112px; } .vl-type-label { font-size:13px; } }
   </style>
   <section class="vl-types">
     <div class="vl-types-head">
