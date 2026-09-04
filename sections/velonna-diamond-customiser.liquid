@@ -1,0 +1,149 @@
+{% comment %} Velonna — Lab Grown Diamond customiser (metal · colour · carat · quality) with live price {% endcomment %}
+{%- liquid
+  assign w9  = product.metafields.custom.gold_weight_9k  | default: section.settings.weight_9k
+  assign w14 = product.metafields.custom.gold_weight_14k | default: section.settings.weight_14k
+  assign w18 = product.metafields.custom.gold_weight_18k | default: section.settings.weight_18k
+  assign wa_number = section.settings.whatsapp | default: '919796513766'
+-%}
+<style>
+  .vdc{--bg:#faf9f6;--ink:#1a1612;--gold:#c8a96e;--gold-deep:#a8863f;--mid:rgba(26,22,18,.55);--rule:rgba(26,22,18,.12);
+    background:var(--bg);color:var(--ink);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300}
+  .vdc *{box-sizing:border-box}
+  .vdc-wrap{max-width:1160px;margin:0 auto;padding:2.5rem 5vw 4rem;display:grid;grid-template-columns:1.05fr 1fr;gap:4rem}
+  .vdc-gallery{position:sticky;top:2rem;align-self:start}
+  .vdc-main{aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#efe9df,#e4ddd0);box-shadow:0 30px 60px rgba(26,22,18,.14)}
+  .vdc-main img{width:100%;height:100%;object-fit:cover;display:block}
+  .vdc-note{text-align:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-top:1rem}
+  .vdc-eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+  .vdc h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(26px,3.4vw,40px);font-weight:400;line-height:1.05;margin-bottom:1.1rem}
+  .vdc-price{font-family:'Playfair Display',Georgia,serif;font-size:32px;margin-bottom:.2rem}
+  .vdc-price small{font-size:13px;color:var(--mid);font-family:inherit}
+  .vdc-opt{margin:1.6rem 0}
+  .vdc-lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:.6rem;display:flex;justify-content:space-between}
+  .vdc-lbl b{color:var(--ink);font-weight:600;letter-spacing:.03em;text-transform:none;font-size:13px}
+  .vdc-pills{display:flex;gap:.6rem;flex-wrap:wrap}
+  .vdc-pill{padding:11px 20px;border:1px solid var(--rule);border-radius:40px;font-size:13px;cursor:pointer;background:#fff;transition:.2s}
+  .vdc-pill:hover{border-color:var(--gold)} .vdc-pill.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .vdc-sw{display:flex;gap:.8rem}
+  .vdc-sw span{width:40px;height:40px;border-radius:50%;cursor:pointer;border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);transition:.2s}
+  .vdc-sw span.on{border-color:var(--gold);box-shadow:inset 0 0 0 1px rgba(0,0,0,.12),0 0 0 3px rgba(200,169,110,.25)}
+  .vdc-sw [data-c=rose]{background:linear-gradient(135deg,#e8b7a1,#c98f76)}
+  .vdc-sw [data-c=white]{background:linear-gradient(135deg,#f0f0f2,#c9ccd2)}
+  .vdc-sw [data-c=yellow]{background:linear-gradient(135deg,#f4dd9a,#d8b24e)}
+  .vdc-q{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+  .vdc-q div{border:1px solid var(--rule);border-radius:12px;padding:.75rem;text-align:center;cursor:pointer;background:#fff;transition:.2s}
+  .vdc-q div:hover{border-color:var(--gold)} .vdc-q div.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+  .vdc-q b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:15px} .vdc-q span{font-size:11px;color:var(--mid)}
+  .vdc select{width:100%;padding:12px;border:1px solid var(--rule);border-radius:10px;font-size:14px;font-family:inherit;background:#fff}
+  .vdc-break{border-top:1px solid var(--rule);margin-top:1.3rem;padding-top:1rem;font-size:13px;color:var(--mid)}
+  .vdc-break div{display:flex;justify-content:space-between;margin:.32rem 0}
+  .vdc-break .tot{color:var(--ink);font-weight:600;font-size:15px;border-top:1px solid var(--rule);padding-top:.55rem;margin-top:.55rem}
+  .vdc-cta{display:flex;gap:.8rem;margin-top:1.4rem}
+  .vdc-btn{flex:1;padding:16px;border:1px solid var(--ink);border-radius:12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;text-align:center;text-decoration:none;color:var(--ink);transition:.2s}
+  .vdc-btn.primary{background:var(--ink);color:#fff} .vdc-btn.primary:hover{background:#000}
+  .vdc-btn.ghost{background:#fff} .vdc-btn.ghost:hover{border-color:var(--gold)}
+  .vdc-fine{font-size:11px;color:var(--mid);margin-top:1rem;line-height:1.6}
+  @media(max-width:860px){.vdc-wrap{grid-template-columns:1fr;gap:2rem}.vdc-gallery{position:static}}
+</style>
+
+<div class="vdc" data-w9="{{ w9 }}" data-w14="{{ w14 }}" data-w18="{{ w18 }}"
+     data-gold="{{ section.settings.gold_rate }}" data-make="{{ section.settings.making_pct }}" data-gst="{{ section.settings.gst_pct }}"
+     data-dc="{{ section.settings.dia_classic }}" data-dp="{{ section.settings.dia_premium }}" data-ds="{{ section.settings.dia_signature }}"
+     data-title="{{ product.title | escape }}" data-wa="{{ wa_number }}">
+  <div class="vdc-wrap">
+    <div class="vdc-gallery">
+      <div class="vdc-main">
+        {%- if product.featured_image -%}
+          <img id="vdcImg" src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.title | escape }}">
+        {%- else -%}<img id="vdcImg" src="{{ 'velonna-tile-diamonds-poster.jpg' | asset_url }}" alt="{{ product.title | escape }}">{%- endif -%}
+      </div>
+      <p class="vdc-note">Approximate view of a <span id="vdcCtNote">0.50</span> ct lab-grown diamond</p>
+    </div>
+    <div>
+      <p class="vdc-eyebrow">Lab Grown Diamonds · IGI Certified</p>
+      <h1>{{ product.title }}</h1>
+      <div class="vdc-price">₹<span id="vdcPrice">0</span> <small>est. · incl. GST · made to order</small></div>
+
+      <div class="vdc-opt"><div class="vdc-lbl">Metal <b id="vdcKL">18K Gold</b></div>
+        <div class="vdc-pills" id="vdcK"><div class="vdc-pill" data-k="9K">9K</div><div class="vdc-pill" data-k="14K">14K</div><div class="vdc-pill on" data-k="18K">18K</div></div></div>
+      <div class="vdc-opt"><div class="vdc-lbl">Colour <b id="vdcCL">White Gold</b></div>
+        <div class="vdc-sw" id="vdcC"><span data-c="rose"></span><span class="on" data-c="white"></span><span data-c="yellow"></span></div></div>
+      <div class="vdc-opt"><div class="vdc-lbl">Diamond Carat <b id="vdcCtL">0.50 ct</b></div>
+        <div class="vdc-pills" id="vdcCt"><div class="vdc-pill on" data-ct="0.5">0.50 ct</div><div class="vdc-pill" data-ct="1">1 ct</div><div class="vdc-pill" data-ct="1.5">1.5 ct</div><div class="vdc-pill" data-ct="2">2 ct</div><div class="vdc-pill" data-ct="2.5">2.5 ct</div><div class="vdc-pill" data-ct="3">3 ct</div></div></div>
+      <div class="vdc-opt"><div class="vdc-lbl">Diamond Quality <b id="vdcQL">Premium</b></div>
+        <div class="vdc-q" id="vdcQ"><div data-q="classic"><b>Classic</b><span>GH · SI</span></div><div class="on" data-q="premium"><b>Premium</b><span>FG · VS</span></div><div data-q="signature"><b>Signature</b><span>DE · VVS</span></div></div></div>
+      {%- if section.settings.show_size -%}
+      <div class="vdc-opt"><div class="vdc-lbl">Ring Size</div>
+        <select id="vdcSize"><option>Size 10</option><option>Size 11</option><option>Size 12</option><option selected>Size 13</option><option>Size 14</option><option>Size 15</option><option>Size 16</option><option>Size 17</option></select></div>
+      {%- endif -%}
+
+      <div class="vdc-break">
+        <div><span>Gold value (<span id="vdcKL2">18K</span>)</span><span>₹<span id="vdcBG">0</span></span></div>
+        <div><span>Making</span><span>₹<span id="vdcBM">0</span></span></div>
+        <div><span>Diamond (<span id="vdcCtL2">0.50</span> ct · <span id="vdcQL2">Premium</span>)</span><span>₹<span id="vdcBD">0</span></span></div>
+        <div><span>GST</span><span>₹<span id="vdcBGst">0</span></span></div>
+        <div class="tot"><span>Estimated total</span><span>₹<span id="vdcBT">0</span></span></div>
+      </div>
+
+      <div class="vdc-cta">
+        <a class="vdc-btn primary" id="vdcWA" href="#" target="_blank" rel="noopener">Enquire / Order on WhatsApp</a>
+      </div>
+      <p class="vdc-fine">Each piece is made to order and IGI-certified. This is an estimate for your chosen configuration; our team confirms the final quote and lead time when you enquire.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root=document.currentScript.previousElementSibling; while(root&&!root.classList.contains('vdc')){root=root.previousElementSibling;}
+  if(!root) root=document.querySelector('.vdc'); if(!root) return;
+  var d=root.dataset;
+  var W={"9K":parseFloat(d.w9)||2.5,"14K":parseFloat(d.w14)||3.0,"18K":parseFloat(d.w18)||3.5};
+  var F={"9K":0.375,"14K":0.585,"18K":0.75};
+  var RATE={gold:parseFloat(d.gold)||7400,make:(parseFloat(d.make)||12)/100,gst:(parseFloat(d.gst)||3)/100};
+  var DIA={classic:parseFloat(d.dc)||22000,premium:parseFloat(d.dp)||30000,signature:parseFloat(d.ds)||42000};
+  var CN={rose:"Rose Gold",white:"White Gold",yellow:"Yellow Gold"},QN={classic:"Classic",premium:"Premium",signature:"Signature"};
+  var st={k:"18K",c:"white",q:"premium",ct:0.5};
+  var $=function(id){return root.querySelector('#'+id)};
+  function fmt(n){return Math.round(n).toLocaleString('en-IN')}
+  function calc(){
+    var gold=W[st.k]*F[st.k]*RATE.gold, making=gold*RATE.make, dia=st.ct*DIA[st.q];
+    var sub=gold+making+dia, g=sub*RATE.gst, tot=sub+g, ct=(''+st.ct);
+    $('vdcPrice').textContent=fmt(tot); $('vdcBG').textContent=fmt(gold); $('vdcBM').textContent=fmt(making);
+    $('vdcBD').textContent=fmt(dia); $('vdcBGst').textContent=fmt(g); $('vdcBT').textContent=fmt(tot);
+    $('vdcKL').textContent=st.k+" Gold"; $('vdcKL2').textContent=st.k; $('vdcCL').textContent=CN[st.c];
+    $('vdcQL').textContent=QN[st.q]; $('vdcQL2').textContent=QN[st.q]; $('vdcCtL').textContent=ct+" ct";
+    $('vdcCtL2').textContent=ct; $('vdcCtNote').textContent=ct;
+    var size=$('vdcSize')?(', '+$('vdcSize').value):'';
+    var msg="Hi Velonna, I'd like to order: "+d.title+" — "+st.k+" "+CN[st.c]+", "+ct+"ct "+QN[st.q]+" diamond"+size+". Estimated ₹"+fmt(tot)+". Please confirm.";
+    $('vdcWA').href="https://wa.me/"+d.wa+"?text="+encodeURIComponent(msg);
+  }
+  function bind(wrapId,attr,key,cast){root.querySelectorAll('#'+wrapId+' [data-'+attr+']').forEach(function(el){el.onclick=function(){root.querySelectorAll('#'+wrapId+' [data-'+attr+']').forEach(function(x){x.classList.remove('on')});el.classList.add('on');st[key]=cast?cast(el.getAttribute('data-'+attr)):el.getAttribute('data-'+attr);calc()}})}
+  bind('vdcK','k','k'); bind('vdcC','c','c'); bind('vdcCt','ct','ct',parseFloat); bind('vdcQ','q','q');
+  if($('vdcSize')) $('vdcSize').onchange=calc;
+  calc();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Diamond Customiser",
+  "settings": [
+    { "type": "header", "content": "Rates (edit these to set live pricing)" },
+    { "type": "number", "id": "gold_rate", "label": "24K gold rate (₹ / gram)", "default": 7400 },
+    { "type": "number", "id": "making_pct", "label": "Making charge (%)", "default": 12 },
+    { "type": "number", "id": "gst_pct", "label": "GST (%)", "default": 3 },
+    { "type": "number", "id": "dia_classic", "label": "Diamond ₹/ct — Classic (GH/SI)", "default": 22000 },
+    { "type": "number", "id": "dia_premium", "label": "Diamond ₹/ct — Premium (FG/VS)", "default": 30000 },
+    { "type": "number", "id": "dia_signature", "label": "Diamond ₹/ct — Signature (DE/VVS)", "default": 42000 },
+    { "type": "header", "content": "Default gold weight (used if a product has no gold-weight metafield)" },
+    { "type": "text", "id": "weight_9k", "label": "9K weight (g)", "default": "2.5" },
+    { "type": "text", "id": "weight_14k", "label": "14K weight (g)", "default": "3.0" },
+    { "type": "text", "id": "weight_18k", "label": "18K weight (g)", "default": "3.5" },
+    { "type": "header", "content": "Options" },
+    { "type": "checkbox", "id": "show_size", "label": "Show ring size selector", "default": true },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp number (no +)", "default": "919796513766" }
+  ],
+  "presets": [{ "name": "Diamond Customiser" }]
+}
+{% endschema %}

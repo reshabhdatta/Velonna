@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "velonna-diamond-customiser",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
