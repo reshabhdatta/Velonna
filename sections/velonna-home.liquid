@@ -807,6 +807,30 @@
     <div class="vl-dots"></div>
   </section>
 
+  <section class="vl-types vl-catsec" style="padding-top:1.5rem;" data-vl-slider>
+    <div class="vl-types-head">
+      <p class="vl-types-eyebrow">Handpicked · Speciality</p>
+      <h2 class="vl-types-title">Beyond the Everyday</h2>
+    </div>
+    <div class="vl-slider-viewport">
+      <div class="vl-slider-track">
+        {%- assign n_labels = "Mangalsutra~Anklets~Toe Rings~Jhumkas~Baby Kada~Gents Kada~Ladies Chain~Gents Chain" | split: "~" -%}
+        {%- assign n_handles = "sv-mangalsutra~sv-anklets~sv-toe-rings~sv-jhumkas~sv-baby-kada~sv-gents-kada~sv-ladies-chain~sv-gents-chain" | split: "~" -%}
+        {%- assign n_imgs = "velonna-cat-mangalsutra.jpg~velonna-cat-anklets.jpg~velonna-cat-toe-rings.jpg~velonna-cat-jhumkas.jpg~velonna-cat-baby-kada.jpg~velonna-cat-gents-kada.jpg~velonna-cat-ladies-chain.jpg~velonna-cat-gents-chain.jpg" | split: "~" -%}
+        {%- for h in n_handles -%}
+          {%- assign lbl = n_labels[forloop.index0] -%}
+          <a class="vl-slide" href="/collections/{{ h }}">
+            <img src="{{ n_imgs[forloop.index0] | asset_url }}" alt="{{ lbl }}" loading="lazy" onerror="this.remove();this.closest('.vl-slide').classList.add('vl-slide--ph')">
+            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
+          </a>
+        {%- endfor -%}
+      </div>
+      <button class="vl-arrow vl-prev" type="button" aria-label="Previous">&lsaquo;</button>
+      <button class="vl-arrow vl-next" type="button" aria-label="Next">&rsaquo;</button>
+    </div>
+    <div class="vl-dots"></div>
+  </section>
+
   <script>
   (function(){
     function init(root){
