@@ -72,6 +72,10 @@
         <div class="vdc-pills" id="vdcCt"><div class="vdc-pill on" data-ct="0.5">0.50 ct</div><div class="vdc-pill" data-ct="1">1 ct</div><div class="vdc-pill" data-ct="1.5">1.5 ct</div><div class="vdc-pill" data-ct="2">2 ct</div><div class="vdc-pill" data-ct="2.5">2.5 ct</div><div class="vdc-pill" data-ct="3">3 ct</div></div></div>
       <div class="vdc-opt"><div class="vdc-lbl">Diamond Quality <b id="vdcQL">Premium</b></div>
         <div class="vdc-q" id="vdcQ"><div data-q="classic"><b>Classic</b><span>GH · SI</span></div><div class="on" data-q="premium"><b>Premium</b><span>FG · VS</span></div><div data-q="signature"><b>Signature</b><span>DE · VVS</span></div></div></div>
+      {%- if section.settings.show_cut -%}
+      <div class="vdc-opt"><div class="vdc-lbl">Diamond Cut <b id="vdcCutL">Round</b></div>
+        <div class="vdc-pills" id="vdcCut"><div class="vdc-pill on" data-cut="Round">Round</div><div class="vdc-pill" data-cut="Princess">Princess</div><div class="vdc-pill" data-cut="Oval">Oval</div><div class="vdc-pill" data-cut="Pear">Pear</div></div></div>
+      {%- endif -%}
       {%- if section.settings.show_size -%}
       <div class="vdc-opt"><div class="vdc-lbl">Ring Size</div>
         <select id="vdcSize"><option>Size 10</option><option>Size 11</option><option>Size 12</option><option selected>Size 13</option><option>Size 14</option><option>Size 15</option><option>Size 16</option><option>Size 17</option></select></div>
@@ -103,7 +107,7 @@
   var RATE={gold:parseFloat(d.gold)||7400,make:(parseFloat(d.make)||12)/100,gst:(parseFloat(d.gst)||3)/100};
   var DIA={classic:parseFloat(d.dc)||22000,premium:parseFloat(d.dp)||30000,signature:parseFloat(d.ds)||42000};
   var CN={rose:"Rose Gold",white:"White Gold",yellow:"Yellow Gold"},QN={classic:"Classic",premium:"Premium",signature:"Signature"};
-  var st={k:"18K",c:"white",q:"premium",ct:0.5};
+  var st={k:"18K",c:"white",q:"premium",ct:0.5,cut:"Round"};
   var $=function(id){return root.querySelector('#'+id)};
   function fmt(n){return Math.round(n).toLocaleString('en-IN')}
   function calc(){
@@ -114,12 +118,15 @@
     $('vdcKL').textContent=st.k+" Gold"; $('vdcKL2').textContent=st.k; $('vdcCL').textContent=CN[st.c];
     $('vdcQL').textContent=QN[st.q]; $('vdcQL2').textContent=QN[st.q]; $('vdcCtL').textContent=ct+" ct";
     $('vdcCtL2').textContent=ct; $('vdcCtNote').textContent=ct;
+    if($('vdcCutL')) $('vdcCutL').textContent=st.cut;
+    var cut=root.querySelector('#vdcCut')?(', '+st.cut+' cut'):'';
     var size=$('vdcSize')?(', '+$('vdcSize').value):'';
-    var msg="Hi Velonna, I'd like to order: "+d.title+" — "+st.k+" "+CN[st.c]+", "+ct+"ct "+QN[st.q]+" diamond"+size+". Estimated ₹"+fmt(tot)+". Please confirm.";
+    var msg="Hi Velonna, I'd like to order: "+d.title+" — "+st.k+" "+CN[st.c]+", "+ct+"ct "+QN[st.q]+" diamond"+cut+size+". Estimated ₹"+fmt(tot)+". Please confirm.";
     $('vdcWA').href="https://wa.me/"+d.wa+"?text="+encodeURIComponent(msg);
   }
   function bind(wrapId,attr,key,cast){root.querySelectorAll('#'+wrapId+' [data-'+attr+']').forEach(function(el){el.onclick=function(){root.querySelectorAll('#'+wrapId+' [data-'+attr+']').forEach(function(x){x.classList.remove('on')});el.classList.add('on');st[key]=cast?cast(el.getAttribute('data-'+attr)):el.getAttribute('data-'+attr);calc()}})}
   bind('vdcK','k','k'); bind('vdcC','c','c'); bind('vdcCt','ct','ct',parseFloat); bind('vdcQ','q','q');
+  if(root.querySelector('#vdcCut')) bind('vdcCut','cut','cut');
   if($('vdcSize')) $('vdcSize').onchange=calc;
   calc();
 })();
@@ -141,7 +148,8 @@
     { "type": "text", "id": "weight_14k", "label": "14K weight (g)", "default": "3.0" },
     { "type": "text", "id": "weight_18k", "label": "18K weight (g)", "default": "3.5" },
     { "type": "header", "content": "Options" },
-    { "type": "checkbox", "id": "show_size", "label": "Show ring size selector", "default": true },
+    { "type": "checkbox", "id": "show_size", "label": "Show ring size selector (rings)", "default": true },
+    { "type": "checkbox", "id": "show_cut", "label": "Show diamond cut selector (earrings/solitaire)", "default": false },
     { "type": "text", "id": "whatsapp", "label": "WhatsApp number (no +)", "default": "919796513766" }
   ],
   "presets": [{ "name": "Diamond Customiser" }]

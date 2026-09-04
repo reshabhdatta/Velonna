@@ -3,8 +3,8 @@
     "main": {
       "type": "velonna-diamond-customiser",
       "settings": {
-        "show_size": true,
-        "show_cut": false
+        "show_size": false,
+        "show_cut": true
       }
     }
   },
