@@ -39,7 +39,9 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   let made = 0;
   for (const metal of METALS) {
     for (const [word, label] of TYPES) {
-      const handle = `${metal.prefix}-${HANDLE[word]}`;
+      // silver-rings/earrings/bracelets handles are taken by old theme-default collections — use a conflict-free handle
+      const conflict = metal.prefix === 'silver' && ['Ring', 'Earring', 'Bracelet'].includes(word);
+      const handle = conflict ? `silver-all-${HANDLE[word]}` : `${metal.prefix}-${HANDLE[word]}`;
       const title = `${metal.title} ${label}`;
       const rules = [{ column: 'type', relation: 'contains', condition: word }, { column: 'tag', relation: 'equals', condition: metal.tag }];
       if (have.has(handle)) {

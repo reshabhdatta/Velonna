@@ -753,7 +753,7 @@
     </div>
     <div class="vl-types-grid">
       {%- assign s_labels = "Rings~Earrings~Bracelets~Necklaces & Pendants~Bangles" | split: "~" -%}
-      {%- assign s_handles = "silver-rings~silver-earrings~silver-bracelets~silver-necklaces~silver-bangles" | split: "~" -%}
+      {%- assign s_handles = "silver-all-rings~silver-all-earrings~silver-all-bracelets~silver-necklaces~silver-bangles" | split: "~" -%}
       {%- for i in (0..4) -%}
         {%- assign h = s_handles[i] -%}
         {%- assign col = collections[h] -%}
