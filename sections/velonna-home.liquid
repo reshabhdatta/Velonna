@@ -752,16 +752,16 @@
       <h2 class="vl-types-title">Shop Silver by Type</h2>
     </div>
     <div class="vl-types-grid">
-      {%- assign s_labels = "Rings~Earrings~Bracelets~Necklaces & Pendants~Bangles" | split: "~" -%}
-      {%- assign s_handles = "silver-all-rings~silver-all-earrings~silver-all-bracelets~silver-necklaces~silver-bangles" | split: "~" -%}
-      {%- for i in (0..4) -%}
-        {%- assign h = s_handles[i] -%}
+      {%- assign s_labels = "Ladies Ring~Gents Ring~Ladies Bracelet~Gents Bracelet~Bangles~Earrings~Chain Pendant~Pendant~Mangalsutra~Necklace Sets~Necklace~Chain Pendant Sets~Anklets~Baby Kada~Baby Anklets~Gents Kada~Danglers~Jhumkas~Toe Rings~Ladies Chain~Gents Chain~Pendant Set~Pendants" | split: "~" -%}
+      {%- assign s_handles = "sv-ladies-ring~sv-gents-ring~sv-ladies-bracelet~sv-gents-bracelet~sv-bangles~sv-earrings~sv-chain-pendant~sv-pendant~sv-mangalsutra~sv-necklace-sets~sv-necklace~sv-chain-pendant-sets~sv-anklets~sv-baby-kada~sv-baby-anklets~sv-gents-kada~sv-danglers~sv-jhumkas~sv-toe-rings~sv-ladies-chain~sv-gents-chain~sv-pendant-set~sv-pendants" | split: "~" -%}
+      {%- for h in s_handles -%}
+        {%- assign lbl = s_labels[forloop.index0] -%}
         {%- assign col = collections[h] -%}
         <a class="vl-type" href="/collections/{{ h }}">
           <div class="vl-type-tile">
-            {%- if col.products.first.featured_image -%}<img src="{{ col.products.first.featured_image | image_url: width: 500 }}" alt="Silver {{ s_labels[i] }}" loading="lazy">{%- else -%}<div class="vl-type-ph">{{ s_labels[i] }}</div>{%- endif -%}
+            {%- if col.products.first.featured_image -%}<img src="{{ col.products.first.featured_image | image_url: width: 500 }}" alt="Silver {{ lbl }}" loading="lazy">{%- else -%}<div class="vl-type-ph">{{ lbl }}</div>{%- endif -%}
           </div>
-          <p class="vl-type-label">{{ s_labels[i] }}</p>
+          <p class="vl-type-label">{{ lbl }}</p>
         </a>
       {%- endfor -%}
     </div>
@@ -773,16 +773,16 @@
       <h2 class="vl-types-title">Shop Diamonds by Type</h2>
     </div>
     <div class="vl-types-grid">
-      {%- assign d_labels = "Rings~Earrings~Bracelets~Necklaces & Pendants~Bangles" | split: "~" -%}
-      {%- assign d_handles = "diamond-rings~diamond-earrings~diamond-bracelets~diamond-necklaces~diamond-bangles" | split: "~" -%}
-      {%- for i in (0..4) -%}
-        {%- assign h = d_handles[i] -%}
+      {%- assign d_labels = "Ladies Ring~Gents Ring~Ladies Bracelet~Gents Bracelet~Bangles~Earrings~Chain Pendant~Pendant~Mangalsutra~Necklace Sets~Necklace" | split: "~" -%}
+      {%- assign d_handles = "lgd-ladies-ring~lgd-gents-ring~lgd-ladies-bracelet~lgd-gents-bracelet~lgd-bangles~lgd-earrings~lgd-chain-pendant~lgd-pendant~lgd-mangalsutra~lgd-necklace-sets~lgd-necklace" | split: "~" -%}
+      {%- for h in d_handles -%}
+        {%- assign lbl = d_labels[forloop.index0] -%}
         {%- assign col = collections[h] -%}
         <a class="vl-type" href="/collections/{{ h }}">
           <div class="vl-type-tile">
-            {%- if col.products.first.featured_image -%}<img src="{{ col.products.first.featured_image | image_url: width: 500 }}" alt="Lab Grown Diamond {{ d_labels[i] }}" loading="lazy">{%- else -%}<div class="vl-type-ph">{{ d_labels[i] }}</div>{%- endif -%}
+            {%- if col.products.first.featured_image -%}<img src="{{ col.products.first.featured_image | image_url: width: 500 }}" alt="Lab Grown Diamond {{ lbl }}" loading="lazy">{%- else -%}<div class="vl-type-ph">{{ lbl }}</div>{%- endif -%}
           </div>
-          <p class="vl-type-label">{{ d_labels[i] }}</p>
+          <p class="vl-type-label">{{ lbl }}</p>
         </a>
       {%- endfor -%}
     </div>
