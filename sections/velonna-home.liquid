@@ -792,7 +792,7 @@
         {%- for h in s_handles -%}
           {%- assign lbl = s_labels[forloop.index0] -%}
           <a class="vl-slide" href="/collections/{{ h }}">
-            <img src="{{ s_imgs[forloop.index0] | asset_url }}" alt="Silver {{ lbl }}" loading="lazy" onerror="this.remove();this.closest('.vl-slide').classList.add('vl-slide--ph')">
+            <img src="{{ s_imgs[forloop.index0] | asset_url }}" alt="Silver {{ lbl }}" loading="lazy" onerror="this.closest('.vl-slide').classList.add('vl-slide--ph');this.remove()">
             <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
           </a>
         {%- endfor -%}
@@ -816,7 +816,7 @@
         {%- for h in d_handles -%}
           {%- assign lbl = d_labels[forloop.index0] -%}
           <a class="vl-slide" href="/collections/{{ h }}">
-            <img src="{{ d_imgs[forloop.index0] | asset_url }}" alt="Lab Grown Diamond {{ lbl }}" loading="lazy" onerror="this.remove();this.closest('.vl-slide').classList.add('vl-slide--ph')">
+            <img src="{{ d_imgs[forloop.index0] | asset_url }}" alt="Lab Grown Diamond {{ lbl }}" loading="lazy" onerror="this.closest('.vl-slide').classList.add('vl-slide--ph');this.remove()">
             <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
           </a>
         {%- endfor -%}
@@ -834,15 +834,15 @@
     </div>
     <div class="vl-fan">
       <a class="vl-fan-card vl-fan-left" href="/collections/shop-for-her">
-        <img src="{{ 'velonna-shop-her.jpg' | asset_url }}" alt="Shop for Her" loading="lazy" onerror="this.remove();this.closest('.vl-fan-card').classList.add('is-ph')">
+        <img src="{{ 'velonna-shop-her.jpg' | asset_url }}" alt="Shop for Her" loading="lazy" onerror="this.closest('.vl-fan-card').classList.add('is-ph');this.remove()">
         <div class="vl-fan-cap"><span class="vl-fan-kind">Shop for Her</span><span class="vl-fan-cta">Discover &rarr;</span></div>
       </a>
       <a class="vl-fan-card vl-fan-center" href="/collections/all">
-        <img src="{{ 'velonna-all-collections.jpg' | asset_url }}" alt="All Collections" loading="lazy" onerror="this.remove();this.closest('.vl-fan-card').classList.add('is-ph')">
+        <img src="{{ 'velonna-all-collections.jpg' | asset_url }}" alt="All Collections" loading="lazy" onerror="this.closest('.vl-fan-card').classList.add('is-ph');this.remove()">
         <div class="vl-fan-cap"><span class="vl-fan-kind">All Collections</span><span class="vl-fan-cta">Discover &rarr;</span></div>
       </a>
       <a class="vl-fan-card vl-fan-right" href="/collections/shop-for-him">
-        <img src="{{ 'velonna-shop-him.jpg' | asset_url }}" alt="Shop for Him" loading="lazy" onerror="this.remove();this.closest('.vl-fan-card').classList.add('is-ph')">
+        <img src="{{ 'velonna-shop-him.jpg' | asset_url }}" alt="Shop for Him" loading="lazy" onerror="this.closest('.vl-fan-card').classList.add('is-ph');this.remove()">
         <div class="vl-fan-cap"><span class="vl-fan-kind">Shop for Him</span><span class="vl-fan-cta">Discover &rarr;</span></div>
       </a>
     </div>
@@ -861,7 +861,7 @@
         {%- for h in n_handles -%}
           {%- assign lbl = n_labels[forloop.index0] -%}
           <a class="vl-slide" href="/collections/{{ h }}">
-            <img src="{{ n_imgs[forloop.index0] | asset_url }}" alt="{{ lbl }}" loading="lazy" onerror="this.remove();this.closest('.vl-slide').classList.add('vl-slide--ph')">
+            <img src="{{ n_imgs[forloop.index0] | asset_url }}" alt="{{ lbl }}" loading="lazy" onerror="this.closest('.vl-slide').classList.add('vl-slide--ph');this.remove()">
             <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
           </a>
         {%- endfor -%}
