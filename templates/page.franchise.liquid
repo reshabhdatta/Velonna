@@ -74,7 +74,13 @@
   .vfr-thanks { background:#fff; border:1px solid rgba(200,169,110,.5); padding:1.25rem; margin-bottom:1.5rem; font-size:14px; }
   .vfr-disc { font-size:11px; color:rgba(26,22,18,.4); margin-top:2.5rem; line-height:1.6; text-align:center; }
 
+  /* Sticky enquiry CTA */
+  .vfr-sticky-cta { position:fixed; left:50%; bottom:24px; transform:translateX(-50%); z-index:50; display:inline-flex; align-items:center; gap:10px; background:#1a1612; color:#faf9f6; padding:15px 34px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid #c8a96e; border-radius:40px; box-shadow:0 12px 32px rgba(26,22,18,.3); transition:opacity .3s ease, transform .3s ease, background .25s, color .25s; }
+  .vfr-sticky-cta:hover { background:#c8a96e; color:#1a1612; }
+  .vfr-sticky-cta.is-hidden { opacity:0; transform:translateX(-50%) translateY(24px); pointer-events:none; }
+
   @media (max-width:760px){
+    .vfr-sticky-cta { bottom:16px; padding:14px 24px; font-size:10px; letter-spacing:.16em; }
     .vfr-stats{ grid-template-columns:1fr 1fr; }
     .vfr-two,.vfr-grid3,.vfr-mini{ grid-template-columns:1fr; }
     .vfr-tiers{ grid-template-columns:1fr; }
@@ -285,7 +291,27 @@
       <p class="vfr-disc">Margins and commercial terms are indicative, subject to company discretion and a final bilateral agreement. Market figures are estimates, not audited financial data.</p>
     </div>
   </div>
+
+  <a class="vfr-sticky-cta" href="#enquire" id="vfrStickyCta">Become a Franchise Owner &rarr;</a>
 </div>
+
+<script>
+  (function(){
+    var cta = document.getElementById('vfrStickyCta');
+    var enq = document.getElementById('enquire');
+    if (!cta || !enq) return;
+    cta.addEventListener('click', function (e) {
+      e.preventDefault();
+      enq.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(function () { var f = document.getElementById('f-name'); if (f) f.focus({ preventScroll: true }); }, 650);
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { cta.classList.toggle('is-hidden', en.isIntersecting); });
+      }, { threshold: 0.15 }).observe(enq);
+    }
+  })();
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
