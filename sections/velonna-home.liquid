@@ -832,19 +832,41 @@
       <p class="vl-types-eyebrow">Find Your Match</p>
       <h2 class="vl-types-title">Shop by Style</h2>
     </div>
-    <div class="vl-fan">
-      <a class="vl-fan-card vl-fan-left" href="/collections/shop-for-her">
-        <img src="{{ 'velonna-shop-her.jpg' | asset_url }}" alt="Shop for Her" loading="lazy" onerror="this.closest('.vl-fan-card').classList.add('is-ph');this.remove()">
-        <div class="vl-fan-cap"><span class="vl-fan-kind">Shop for Her</span><span class="vl-fan-cta">Discover &rarr;</span></div>
+    <div class="vl-tiles">
+    <div class="vl-tiles-stage" tabindex="0" role="region" aria-label="Shop by style carousel">
+      <a class="vl-tile" href="/collections/shop-for-her">
+        <img class="vl-tile-img" src="{{ 'velonna-shop-her.jpg' | asset_url }}" alt="Shop for Her" loading="lazy" />
+        <div class="vl-tile-overlay"></div>
+        <div class="vl-tile-label">
+          <p class="vl-tile-eyebrow">Curated for her</p>
+          <p class="vl-tile-name">Shop for Her</p>
+          <span class="vl-tile-discover">Discover</span>
+        </div>
       </a>
-      <a class="vl-fan-card vl-fan-center" href="/collections/all">
-        <img src="{{ 'velonna-all-collections.jpg' | asset_url }}" alt="Unisex" loading="lazy" onerror="this.closest('.vl-fan-card').classList.add('is-ph');this.remove()">
-        <div class="vl-fan-cap"><span class="vl-fan-kind">Unisex</span><span class="vl-fan-cta">Discover &rarr;</span></div>
+      <a class="vl-tile" href="/collections/all">
+        <img class="vl-tile-img" src="{{ 'velonna-all-collections.jpg' | asset_url }}" alt="Unisex" loading="lazy" />
+        <div class="vl-tile-overlay"></div>
+        <div class="vl-tile-label">
+          <p class="vl-tile-eyebrow">For everyone</p>
+          <p class="vl-tile-name">Unisex</p>
+          <span class="vl-tile-discover">Discover</span>
+        </div>
       </a>
-      <a class="vl-fan-card vl-fan-right" href="/collections/shop-for-him">
-        <img src="{{ 'velonna-shop-him.jpg' | asset_url }}" alt="Shop for Him" loading="lazy" onerror="this.closest('.vl-fan-card').classList.add('is-ph');this.remove()">
-        <div class="vl-fan-cap"><span class="vl-fan-kind">Shop for Him</span><span class="vl-fan-cta">Discover &rarr;</span></div>
+      <a class="vl-tile" href="/collections/shop-for-him">
+        <img class="vl-tile-img" src="{{ 'velonna-shop-him.jpg' | asset_url }}" alt="Shop for Him" loading="lazy" />
+        <div class="vl-tile-overlay"></div>
+        <div class="vl-tile-label">
+          <p class="vl-tile-eyebrow">Curated for him</p>
+          <p class="vl-tile-name">Shop for Him</p>
+          <span class="vl-tile-discover">Discover</span>
+        </div>
       </a>
+    </div>
+    <div class="vl-tiles-dots">
+      <button class="vl-tiles-dot" type="button" aria-label="Shop for Her"></button>
+      <button class="vl-tiles-dot" type="button" aria-label="Unisex"></button>
+      <button class="vl-tiles-dot" type="button" aria-label="Shop for Him"></button>
+    </div>
     </div>
   </section>
 
@@ -1125,14 +1147,13 @@
   });
 
   // Card stack: fan layout, swipe/drag, dots, gentle auto-advance
-  (function () {
-    var stage = document.querySelector('.vl-tiles-stage');
-    if (!stage) return;
+  [].slice.call(document.querySelectorAll('.vl-tiles-stage')).forEach(function (stage) {
+    var wrap = stage.closest('.vl-tiles') || document;
     var cards = [].slice.call(stage.querySelectorAll('.vl-tile'));
-    var dots = [].slice.call(document.querySelectorAll('.vl-tiles-dot'));
+    var dots = [].slice.call(wrap.querySelectorAll('.vl-tiles-dot'));
     var len = cards.length;
     if (len < 2) return;
-    var active = 1; // start on Lab Grown Diamonds
+    var active = 1; // start on the middle card
     var dragMoved = false;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1190,7 +1211,7 @@
       }, 4500);
     }
     render();
-  })();
+  });
 
   // Tile video: hover to play on desktop, play-while-in-view on touch devices
   document.querySelectorAll('.vl-tile-video').forEach(function (tv) {
