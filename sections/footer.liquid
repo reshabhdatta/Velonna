@@ -21,6 +21,10 @@
     .footer-block-image .footer-block__image-wrapper { margin-left: 0 !important; margin-right: auto !important; }
     .footer-block__image-wrapper img { margin-left: 0 !important; margin-right: auto !important; }
   }
+  @media screen and (min-width: 990px) {
+    /* Logo column hugs the logo so all four columns are evenly spaced */
+    .footer__blocks-wrapper.grid--4-col-desktop { grid-template-columns: auto 1fr 1fr 1fr !important; align-items: start; }
+  }
 
   .footer {
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
