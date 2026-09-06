@@ -16,6 +16,10 @@
   @media screen and (max-width: 749px) {
     .footer-block__image-wrapper img { height: 96px; }
   }
+  @media screen and (min-width: 750px) {
+    .footer-block__image-wrapper { text-align: left; }
+    .footer-block__image-wrapper img { margin-left: 0; margin-right: auto; }
+  }
 
   .footer {
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
