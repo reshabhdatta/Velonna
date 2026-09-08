@@ -61,18 +61,7 @@
 </style>
 
 <section class="vl-social">
-  <div class="vl-social__trust">
-    {%- for i in (1..4) -%}
-      {%- assign num_key = 'trust' | append: i | append: '_num' -%}
-      {%- assign label_key = 'trust' | append: i | append: '_label' -%}
-      {%- if section.settings[num_key] != blank -%}
-        <div class="vl-social__trust-item">
-          <p class="vl-social__trust-num">{{ section.settings[num_key] }}</p>
-          <p class="vl-social__trust-label">{{ section.settings[label_key] }}</p>
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
-  </div>
+
 
   {%- if section.settings.heading != blank -%}
     <h2 class="vl-social__heading">{{ section.settings.heading }}</h2>

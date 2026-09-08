@@ -1,0 +1,8 @@
+{%- assign length = product.metafields.custom.length.value -%}
+{%- assign extension = product.metafields.custom.extension_length.value -%}
+{%- if length != blank or extension != blank -%}
+  <dl class="velonna-length">
+    {% if length != blank %}<dt>Length</dt><dd>{{ length | escape }}</dd>{% endif %}
+    {% if extension != blank %}<dt>Adjustable extension</dt><dd>{{ extension | escape }}</dd>{% endif %}
+  </dl>
+{%- endif -%}

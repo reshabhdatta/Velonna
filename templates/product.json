@@ -265,8 +265,8 @@
   },
   "order": [
     "main",
+    "related-products",
     "collapsible-content",
-    "1775289206917a55b5",
-    "related-products"
+    "1775289206917a55b5"
   ]
 }

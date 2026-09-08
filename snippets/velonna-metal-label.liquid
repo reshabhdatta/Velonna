@@ -1,0 +1,10 @@
+{%- liquid
+  assign metal = ''
+  for option in product.options_with_values
+    assign option_name = option.name | downcase
+    if option_name == 'metal' or option_name == 'purity'
+      assign metal = product.selected_or_first_available_variant.options[forloop.index0] | downcase
+    endif
+  endfor
+-%}
+{%- if metal contains 'gold' or metal contains '9k' or metal contains '14k' or metal contains '18k' -%}Hallmarked Gold{%- else -%}925 Sterling Silver{%- endif -%}

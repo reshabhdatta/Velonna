@@ -187,6 +187,8 @@ if (!customElements.get('product-info')) {
           };
 
           updateSourceFromDestination('price');
+          updateSourceFromDestination('MetalTrust');
+          updateSourceFromDestination('MetalInfo');
           updateSourceFromDestination('Sku', ({ classList }) => classList.contains('hidden'));
           updateSourceFromDestination('Inventory', ({ innerText }) => innerText === '');
           updateSourceFromDestination('Volume');

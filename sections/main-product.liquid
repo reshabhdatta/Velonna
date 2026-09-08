@@ -222,7 +222,10 @@
                       {{- 'icon-caret.svg' | inline_asset_content -}}
                     </summary>
                     <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
-                      {{ block.settings.content }}
+                      {% if block.settings.heading == 'Product information' %}
+                        <div id="MetalInfo-{{ section.id }}"><p>{% render 'velonna-metal-label', product: product %}. Finished by hand and presented in Velonna signature packaging.</p></div>
+                        {% render 'velonna-length', product: product %}
+                      {% else %}{{ block.settings.content }}{% endif %}
                       {{ block.settings.page.content }}
                     </div>
                   </details>
@@ -673,7 +676,7 @@
                   {%- endif -%}
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
-                {% render 'icon-with-text', block: block %}
+                <div id="MetalTrust-{{ section.id }}">{% render 'icon-with-text', block: block %}</div>
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">

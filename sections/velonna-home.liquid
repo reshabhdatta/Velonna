@@ -627,6 +627,7 @@
   }
 </style>
 
+{{ 'velonna-refinements.css' | asset_url | stylesheet_tag }}
 <div class="vl">
 
   {%- comment -%} ── HERO ── {%- endcomment -%}
@@ -650,6 +651,10 @@
       <h1 class="vl-hero-title">
         {{ section.settings.hero_title | newline_to_br }}
       </h1>
+      <p class="vl-hero-sub">{{ section.settings.hero_sub | escape }}</p>
+      <a class="vl-hero-cta" href="{{ section.settings.hero_cta_url | default: '/collections/all' }}">{{ section.settings.hero_cta_label | escape }}</a>
+      <a class="vl-hero-offer" href="/discount/VELONNA15?redirect=/collections/silver">15% off silver orders above ₹2,999 · Use VELONNA15</a>
+      <a class="vl-scroll-cue" href="#vl-collections">Scroll to discover <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
@@ -668,8 +673,8 @@
   </div>
 
   {%- comment -%} ── COLLECTION TILES (3D card stack) ── {%- endcomment -%}
-  <div class="vl-tiles">
-  <div class="vl-tiles-stage" tabindex="0" role="region" aria-label="Collections carousel">
+  <div class="vl-tiles" id="vl-collections">
+  <div class="vl-tiles-stage" tabindex="0" role="region" aria-label="Collections">
 
     <a class="vl-tile" href="/collections/silver">
       {%- if section.settings.tile1_image != blank -%}
@@ -779,7 +784,7 @@
     .vl-fan-card.is-ph .vl-fan-cta { color:rgba(26,22,18,.42); }
     @media (max-width:760px){ .vl-fan { flex-direction:column; gap:1.1rem; padding:1.5rem 3vw 2.5rem; } .vl-fan-card { width:min(82vw,340px); transform:none !important; z-index:auto !important; box-shadow:0 12px 40px rgba(20,17,14,.2); } }
   </style>
-  <section class="vl-types vl-catsec" data-vl-slider>
+  <section class="vl-types vl-catsec" data-vl-grid>
     <div class="vl-types-head">
       <p class="vl-types-eyebrow">925 Sterling Silver</p>
       <h2 class="vl-types-title">Shop Silver by Type</h2>
@@ -803,7 +808,7 @@
     <div class="vl-dots"></div>
   </section>
 
-  <section class="vl-types vl-catsec" style="padding-top:1.5rem;" data-vl-slider>
+  <section class="vl-types vl-catsec" style="padding-top:1.5rem;" data-vl-grid>
     <div class="vl-types-head">
       <p class="vl-types-eyebrow">Lab Grown Diamonds · IGI Certified</p>
       <h2 class="vl-types-title">Shop Diamonds by Type</h2>
@@ -833,7 +838,7 @@
       <h2 class="vl-types-title">Shop by Style</h2>
     </div>
     <div class="vl-tiles">
-    <div class="vl-tiles-stage" tabindex="0" role="region" aria-label="Shop by style carousel">
+    <div class="vl-tiles-stage" tabindex="0" role="region" aria-label="Shop by style">
       <a class="vl-tile" href="/collections/shop-for-her">
         <img class="vl-tile-img" src="{{ 'velonna-shop-her.jpg' | asset_url }}" alt="Shop for Her" loading="lazy" />
         <div class="vl-tile-overlay"></div>
@@ -870,7 +875,7 @@
     </div>
   </section>
 
-  <section class="vl-types vl-catsec" style="padding-top:1.5rem;" data-vl-slider>
+  <section class="vl-types vl-catsec" style="padding-top:1.5rem;" data-vl-grid>
     <div class="vl-types-head">
       <p class="vl-types-eyebrow">Handpicked · Speciality</p>
       <h2 class="vl-types-title">Beyond the Everyday</h2>
@@ -945,6 +950,14 @@
     </div>
   </section>
   {%- endif -%}
+
+  {% render 'velonna-guarantee' %}
+
+  <section class="vl-anniversary">
+    <p class="vl-types-eyebrow">1924 — 2026 · 102 years of Velonna</p>
+    <h2 class="vl-types-title">Explore our 102nd anniversary edition</h2>
+    <a class="vl-hero-cta" href="{{ section.settings.anniversary_url | default: '/collections/new-arrivals' }}">Explore the jewellery</a>
+  </section>
 
   {%- comment -%} ── SHOP BY CATEGORY ── {%- endcomment -%}
   <section class="vl-cats">
@@ -1146,74 +1159,6 @@
     card.style.transitionDelay = (i * 0.08) + 's';
   });
 
-  // Card stack: fan layout, swipe/drag, dots, gentle auto-advance
-  [].slice.call(document.querySelectorAll('.vl-tiles-stage')).forEach(function (stage) {
-    var wrap = stage.closest('.vl-tiles') || document;
-    var cards = [].slice.call(stage.querySelectorAll('.vl-tile'));
-    var dots = [].slice.call(wrap.querySelectorAll('.vl-tiles-dot'));
-    var len = cards.length;
-    if (len < 2) return;
-    var active = 1; // start on the middle card
-    var dragMoved = false;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function offsetOf(i) {
-      var raw = i - active;
-      var alt = raw > 0 ? raw - len : raw + len;
-      return Math.abs(alt) < Math.abs(raw) ? alt : raw;
-    }
-    function render() {
-      cards.forEach(function (c, i) {
-        var o = offsetOf(i), a = Math.abs(o);
-        c.style.setProperty('--off', o);
-        c.style.setProperty('--abs', a);
-        c.style.setProperty('--lift', o === 0 ? '20px' : '0px');
-        c.style.setProperty('--sc', o === 0 ? '1.03' : '0.92');
-        c.classList.toggle('is-active', o === 0);
-        c.setAttribute('aria-hidden', o === 0 ? 'false' : 'true');
-      });
-      dots.forEach(function (d, i) { d.classList.toggle('is-on', i === active); });
-    }
-    function go(i) { active = ((i % len) + len) % len; render(); }
-
-    cards.forEach(function (c, i) {
-      c.addEventListener('click', function (e) {
-        if (dragMoved) { e.preventDefault(); return; }
-        if (offsetOf(i) !== 0) { e.preventDefault(); go(i); } // side card: focus it
-        // active card: link navigates normally
-      });
-    });
-    dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
-
-    var startX = null;
-    stage.addEventListener('pointerdown', function (e) { startX = e.clientX; dragMoved = false; });
-    stage.addEventListener('pointermove', function (e) {
-      if (startX !== null && Math.abs(e.clientX - startX) > 12) dragMoved = true;
-    });
-    stage.addEventListener('pointerup', function (e) {
-      if (startX === null) return;
-      var dx = e.clientX - startX;
-      if (dx > 48) { go(active - 1); } else if (dx < -48) { go(active + 1); }
-      startX = null;
-      setTimeout(function () { dragMoved = false; }, 60);
-    });
-    stage.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') go(active - 1);
-      if (e.key === 'ArrowRight') go(active + 1);
-    });
-
-    var hovering = false;
-    stage.addEventListener('mouseenter', function () { hovering = true; });
-    stage.addEventListener('mouseleave', function () { hovering = false; });
-    if (!reduce) {
-      setInterval(function () {
-        if (!hovering && document.visibilityState === 'visible') go(active + 1);
-      }, 4500);
-    }
-    render();
-  });
-
-  // Tile video: hover to play on desktop, play-while-in-view on touch devices
   document.querySelectorAll('.vl-tile-video').forEach(function (tv) {
     tv.playbackRate = 0.75; // slow it down
     var tile = tv.closest('.vl-tile') || tv;
@@ -1268,6 +1213,7 @@
     { "type": "text",         "id": "hero_sub",      "label": "Subtitle", "default": "Silver and lab-grown stones. International couture aesthetics at prices that make sense." },
     { "type": "text",         "id": "hero_cta_label","label": "CTA label", "default": "Explore the collections" },
     { "type": "url",          "id": "hero_cta_url",  "label": "CTA URL" },
+    { "type": "url", "id": "anniversary_url", "label": "Anniversary collection URL" },
 
     { "type": "header", "content": "Collection Tiles" },
     { "type": "image_picker", "id": "tile1_image", "label": "Tile 1 — Silver image" },
