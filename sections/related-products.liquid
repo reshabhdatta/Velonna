@@ -27,7 +27,18 @@
     data-section-id="{{ section.id }}"
     data-product-id="{{ product.id }}"
   >
-    {% if recommendations.performed and recommendations.products_count > 0 %}
+    {% liquid
+      assign suggested_products = recommendations.products
+      if recommendations.products_count == 0 or recommendations.performed == false
+        if product.tags contains 'Lab Grown Diamonds'
+          assign suggested_products = collections['lab-grown'].products
+        else
+          assign suggested_products = collections['silver'].products
+        endif
+      endif
+      assign shown = 0
+    %}
+    {% if suggested_products.size > 0 %}
       <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
         {{ section.settings.heading }}
       </h2>
@@ -36,7 +47,10 @@
         role="list"
       >
         {% assign skip_card_product_styles = false %}
-        {% for recommendation in recommendations.products %}
+        {% for recommendation in suggested_products %}
+          {% if recommendation.id == product.id %}{% continue %}{% endif %}
+          {% if shown >= section.settings.products_to_show %}{% break %}{% endif %}
+          {% assign shown = shown | plus: 1 %}
           <li class="grid__item">
             {% render 'card-product',
               card_product: recommendation,

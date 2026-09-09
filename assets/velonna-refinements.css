@@ -41,3 +41,8 @@
  .vl .vl-hero {min-height:85svh;padding-top:120px}
 }
 @media(prefers-reduced-motion:reduce){.vl * {scroll-behavior:auto!important;animation:none!important}}
+
+/* Theme editor custom CSS previously hid these overlays. */
+.vl .vl-hero .vl-hero-overlay,.vl .vl-tile .vl-tile-overlay {display:block!important;pointer-events:none;z-index:1}
+.vl .vl-hero .vl-hero-content {z-index:2}
+.vl .vl-tile .vl-tile-label {z-index:2}
