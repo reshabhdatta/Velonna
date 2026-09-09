@@ -647,12 +647,10 @@
     {%- endif -%}
     <div class="vl-hero-overlay"></div>
     <div class="vl-hero-content">
-      <p class="vl-hero-eyebrow">{{ section.settings.hero_eyebrow }}</p>
       <h1 class="vl-hero-title">
         {{ section.settings.hero_title | newline_to_br }}
       </h1>
       <div class="vl-hero-actions">
-        <p class="vl-hero-sub">{{ section.settings.hero_sub | escape }}</p>
         <a class="vl-hero-cta" href="{{ section.settings.hero_cta_url | default: '/collections/all' }}">{{ section.settings.hero_cta_label | escape }}</a>
       </div>
       <a class="vl-scroll-cue" href="#vl-collections">Scroll to discover <span aria-hidden="true">↓</span></a>
@@ -689,9 +687,8 @@
       {%- endif -%}
       <div class="vl-tile-overlay"></div>
       <div class="vl-tile-label">
-        <p class="vl-tile-eyebrow">Explore the collection</p>
         <p class="vl-tile-name">Silver</p>
-        <span class="vl-tile-discover">Discover</span>
+
       </div>
     </a>
 
@@ -707,9 +704,8 @@
       {%- endif -%}
       <div class="vl-tile-overlay"></div>
       <div class="vl-tile-label">
-        <p class="vl-tile-eyebrow">Explore the collection</p>
         <p class="vl-tile-name">Lab Grown<br>Diamonds</p>
-        <span class="vl-tile-discover">Discover</span>
+
       </div>
     </a>
 
@@ -723,9 +719,8 @@
       {%- endif -%}
       <div class="vl-tile-overlay"></div>
       <div class="vl-tile-label">
-        <p class="vl-tile-eyebrow">The full atelier</p>
         <p class="vl-tile-name">All<br>Collections</p>
-        <span class="vl-tile-discover">Discover</span>
+
       </div>
     </a>
 
@@ -787,7 +782,6 @@
   </style>
   <section class="vl-types vl-catsec" data-vl-grid>
     <div class="vl-types-head">
-      <p class="vl-types-eyebrow">925 Sterling Silver</p>
       <h2 class="vl-types-title">Shop Silver by Type</h2>
     </div>
     <div class="vl-slider-viewport">
@@ -799,7 +793,7 @@
           {%- assign lbl = s_labels[forloop.index0] -%}
           <a class="vl-slide" href="/collections/{{ h }}">
             <img src="{{ s_imgs[forloop.index0] | asset_url }}" alt="Silver {{ lbl }}" loading="lazy" onerror="this.closest('.vl-slide').classList.add('vl-slide--ph');this.remove()">
-            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
+            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span></div>
           </a>
         {%- endfor -%}
       </div>
@@ -811,7 +805,6 @@
 
   <section class="vl-types vl-catsec" style="padding-top:1.5rem;" data-vl-grid>
     <div class="vl-types-head">
-      <p class="vl-types-eyebrow">Lab Grown Diamonds · IGI Certified</p>
       <h2 class="vl-types-title">Shop Diamonds by Type</h2>
     </div>
     <div class="vl-slider-viewport">
@@ -823,7 +816,7 @@
           {%- assign lbl = d_labels[forloop.index0] -%}
           <a class="vl-slide" href="/collections/{{ h }}">
             <img src="{{ d_imgs[forloop.index0] | asset_url }}" alt="Lab Grown Diamond {{ lbl }}" loading="lazy" onerror="this.closest('.vl-slide').classList.add('vl-slide--ph');this.remove()">
-            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
+            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span></div>
           </a>
         {%- endfor -%}
       </div>
@@ -835,7 +828,6 @@
 
   <section class="vl-types vl-catsec" style="padding-bottom:.5rem;">
     <div class="vl-types-head">
-      <p class="vl-types-eyebrow">Find Your Match</p>
       <h2 class="vl-types-title">Shop by Style</h2>
     </div>
     <div class="vl-tiles">
@@ -844,27 +836,24 @@
         <img class="vl-tile-img" src="{{ 'velonna-shop-her.jpg' | asset_url }}" alt="Shop for Her" loading="lazy" />
         <div class="vl-tile-overlay"></div>
         <div class="vl-tile-label">
-          <p class="vl-tile-eyebrow">Curated for her</p>
           <p class="vl-tile-name">Shop for Her</p>
-          <span class="vl-tile-discover">Discover</span>
+
         </div>
       </a>
       <a class="vl-tile" href="/collections/all">
         <img class="vl-tile-img" src="{{ 'velonna-all-collections.jpg' | asset_url }}" alt="Unisex" loading="lazy" />
         <div class="vl-tile-overlay"></div>
         <div class="vl-tile-label">
-          <p class="vl-tile-eyebrow">For everyone</p>
           <p class="vl-tile-name">Unisex</p>
-          <span class="vl-tile-discover">Discover</span>
+
         </div>
       </a>
       <a class="vl-tile" href="/collections/shop-for-him">
         <img class="vl-tile-img" src="{{ 'velonna-shop-him.jpg' | asset_url }}" alt="Shop for Him" loading="lazy" />
         <div class="vl-tile-overlay"></div>
         <div class="vl-tile-label">
-          <p class="vl-tile-eyebrow">Curated for him</p>
           <p class="vl-tile-name">Shop for Him</p>
-          <span class="vl-tile-discover">Discover</span>
+
         </div>
       </a>
     </div>
@@ -878,7 +867,6 @@
 
   <section class="vl-types vl-catsec" style="padding-top:1.5rem;" data-vl-grid>
     <div class="vl-types-head">
-      <p class="vl-types-eyebrow">Handpicked · Speciality</p>
       <h2 class="vl-types-title">Beyond the Everyday</h2>
     </div>
     <div class="vl-slider-viewport">
@@ -890,7 +878,7 @@
           {%- assign lbl = n_labels[forloop.index0] -%}
           <a class="vl-slide" href="/collections/{{ h }}">
             <img src="{{ n_imgs[forloop.index0] | asset_url }}" alt="{{ lbl }}" loading="lazy" onerror="this.closest('.vl-slide').classList.add('vl-slide--ph');this.remove()">
-            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span><span class="vl-slide-cta">Shop {{ lbl }} &rarr;</span></div>
+            <div class="vl-slide-cap"><span class="vl-slide-kind">{{ lbl }}</span></div>
           </a>
         {%- endfor -%}
       </div>
@@ -941,7 +929,6 @@
             {%- endif -%}
           </div>
           <div class="vl-product-info">
-            <p class="vl-product-collection">{{ product.type }}</p>
             <p class="vl-product-name">{{ product.title }}</p>
             <p class="vl-product-price">{{ product.price | money }}</p>
           </div>
@@ -955,7 +942,6 @@
   {% render 'velonna-guarantee' %}
 
   <section class="vl-anniversary">
-    <p class="vl-types-eyebrow">1924 — 2026 · 102 years of Velonna</p>
     <h2 class="vl-types-title">Explore our 102nd anniversary edition</h2>
     <a class="vl-hero-cta" href="{{ section.settings.anniversary_url | default: '/collections/new-arrivals' }}">Explore the jewellery</a>
   </section>
@@ -963,7 +949,6 @@
   {%- comment -%} ── SHOP BY CATEGORY ── {%- endcomment -%}
   <section class="vl-cats">
     <div class="vl-cats-head">
-      <p class="vl-cats-eyebrow">Discover</p>
       <h2 class="vl-cats-title">Other Categories to Explore</h2>
     </div>
     <div class="vl-cats-grid">
@@ -1022,9 +1007,7 @@
       {%- endif -%}
     </div>
     <div class="vl-editorial-txt">
-      <p class="vl-ed-eyebrow">{{ section.settings.ed1_eyebrow }}</p>
       <h2 class="vl-ed-title">{{ section.settings.ed1_title | newline_to_br }}</h2>
-      <p class="vl-ed-body">{{ section.settings.ed1_body }}</p>
       <a class="vl-ed-link" href="{{ section.settings.ed1_url | default: '/collections/silver' }}">{{ section.settings.ed1_cta }}</a>
     </div>
   </section>
@@ -1041,9 +1024,7 @@
       {%- endif -%}
     </div>
     <div class="vl-editorial-txt">
-      <p class="vl-ed-eyebrow">{{ section.settings.ed2_eyebrow }}</p>
       <h2 class="vl-ed-title">{{ section.settings.ed2_title | newline_to_br }}</h2>
-      <p class="vl-ed-body">{{ section.settings.ed2_body }}</p>
       <a class="vl-ed-link" href="{{ section.settings.ed2_url | default: '/collections/lab-grown' }}">{{ section.settings.ed2_cta }}</a>
     </div>
   </section>
@@ -1075,7 +1056,6 @@
             {%- endif -%}
           </div>
           <div class="vl-product-info">
-            <p class="vl-product-collection">{{ product.collections.first.title }}</p>
             <p class="vl-product-name">{{ product.title }}</p>
             <p class="vl-product-price">{{ product.price | money }}</p>
           </div>
@@ -1099,15 +1079,10 @@
       <div class="vl-enquire-vis-ov"></div>
       <div class="vl-enquire-vis-caption">
         <strong>The Velonna Atelier</strong>
-        <p>Contemporary luxury,<br>accessible price points.</p>
       </div>
     </div>
     <div class="vl-enquire-form">
-      <p class="vl-enquire-eyebrow">Velonna</p>
       <h2 class="vl-enquire-title">Enquire About<br><em>a Piece</em></h2>
-      <p class="vl-enquire-sub">
-        A question about a piece, a custom order, or anything else? Message us on WhatsApp — we reply within 24 hours.
-      </p>
       <a class="vl-enquire-wa" href="https://wa.me/919796513766?text=Hi%20Velonna%2C%20I%20have%20a%20question%20about%20a%20piece." target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.29-.14-1.7-.84-1.96-.93-.26-.1-.45-.14-.64.14-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.29-.14-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.6-2-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.63.6.68.22 1.31.19 1.8.12.55-.08 1.7-.7 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>
         Chat on WhatsApp
