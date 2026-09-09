@@ -7,4 +7,6 @@
     endif
   endfor
 -%}
-{%- if metal contains 'gold' or metal contains '9k' or metal contains '14k' or metal contains '18k' -%}Hallmarked Gold{%- else -%}925 Sterling Silver{%- endif -%}
+{%- if metal contains 'gold' or metal contains '9k' or metal contains '14k' or metal contains '18k' -%}
+  {%- if show_logo -%}<img src="{{ 'velonna-bis-hallmark.svg' | asset_url }}" alt="Bureau of Indian Standards" width="54" height="38" loading="lazy" style="display:block;width:54px;height:38px;object-fit:contain;margin:0 auto 8px">{%- endif -%}
+  Hallmarked Gold{%- else -%}925 Sterling Silver{%- endif -%}

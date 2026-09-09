@@ -59,7 +59,7 @@
       {%- endif -%}
       <span class="h4 inline-richtext">
         {%- if block.settings.heading_1 contains '925' -%}
-          {% render 'velonna-metal-label', product: product %}
+          {% render 'velonna-metal-label', product: product, show_logo: true %}
         {%- else -%}{{- block.settings.heading_1 -}}{%- endif -%}
       </span>
     </li>
