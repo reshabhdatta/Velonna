@@ -78,3 +78,26 @@
 .vl .vl-anniversary .vl-hero-cta {background:#302338;border-color:#302338;color:#FAF7F2;border-radius:10px}
 .vl .vl-enquire-wa {background:#302338;color:#FAF7F2;border-radius:10px}
 .vl a:focus-visible {outline-color:#302338}
+
+/* A quiet, balanced assurance panel with a shared emblem baseline. */
+.vl .vl-assurance {background:#FAF7F2;color:#302338;margin:36px 4vw;padding:64px 3vw 60px;border:1px solid rgba(201,181,141,.42);border-radius:18px}
+.vl .vl-assurance .vl-types-title {font-size:clamp(30px,3.4vw,48px);font-weight:400;line-height:1.2;letter-spacing:-.02em}
+.vl .vl-assurance .vl-guarantee-grid {grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:44px}
+.vl .vl-assurance-item {display:flex;flex-direction:column;align-items:center;padding:8px 18px;min-width:0;text-align:center}
+.vl .vl-assurance-item + .vl-assurance-item {border-left:1px solid rgba(201,181,141,.3)}
+.vl .vl-assurance-emblem {height:100px;width:100px;display:flex;align-items:center;justify-content:center;color:#A88B57;margin-bottom:22px}
+.vl .vl-assurance-emblem svg {width:100px;height:100px}
+.vl .vl-assurance-emblem img {width:96px;height:71px;object-fit:contain}
+.vl .vl-assurance-item h3 {font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:clamp(19px,2vw,27px);line-height:1.35;color:#302338;margin:0}
+.vl .vl-assurance-link:hover h3 {text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.vl .vl-assurance-link h3 span {font-family:Arial,sans-serif;font-size:16px}
+@media(max-width:749px){
+ .vl .vl-assurance {margin:24px 14px;padding:36px 12px;border-radius:14px}
+ .vl .vl-assurance .vl-guarantee-grid {grid-template-columns:repeat(2,minmax(0,1fr));margin-top:28px;row-gap:30px}
+ .vl .vl-assurance-item {padding:4px 8px}
+ .vl .vl-assurance-item:nth-child(3) {border-left:0}
+ .vl .vl-assurance-emblem {width:76px;height:76px;margin-bottom:16px}
+ .vl .vl-assurance-emblem svg {width:76px;height:76px}
+ .vl .vl-assurance-emblem img {width:76px;height:54px}
+ .vl .vl-assurance-item h3 {font-size:20px}
+}
