@@ -10,8 +10,8 @@
 #vl-collections {scroll-margin-top:90px}
 .vl .vl-tiles {padding:32px 4vw}
 .vl .vl-tiles-stage {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;height:auto;min-height:0;perspective:none}
-.vl .vl-tile {position:relative;top:auto;left:auto;width:100%;height:auto;aspect-ratio:4/5;transform:none;filter:none;border-radius:10px;box-shadow:0 10px 25px #1a16121a;transition:box-shadow .2s}
-.vl .vl-tile:hover {transform:none;box-shadow:0 14px 32px #1a161230}
+.vl .vl-tile {position:relative;top:auto;left:auto;width:100%;height:auto;aspect-ratio:4/5;transform:none;filter:none;border-radius:10px;box-shadow:0 10px 25px #3023381a;transition:box-shadow .2s}
+.vl .vl-tile:hover {transform:none;box-shadow:0 14px 32px #30233830}
 .vl .vl-tile-overlay {background:linear-gradient(0deg,rgba(10,8,6,.96),rgba(10,8,6,.72) 25%,rgba(10,8,6,.1) 65%,transparent)}
 .vl .vl-tile-label {z-index:2;padding:28px 22px;color:#fff}
 .vl .vl-tile-name {font-size:clamp(23px,2.6vw,38px);color:#fff;text-shadow:0 2px 6px #000}
@@ -26,7 +26,7 @@
 .vl [data-vl-grid] .vl-slide-kind {font-size:clamp(18px,1.7vw,25px);line-height:1.15}
 .vl [data-vl-grid] .vl-slide-cta {font-size:9px;letter-spacing:.1em;color:#f5dba9}
 .vl [data-vl-grid] .vl-arrow,.vl [data-vl-grid] .vl-dots {display:none}
-.vl .vl-guarantee,.vl .vl-anniversary {padding:48px 6vw;text-align:center;background:#f0ece4;margin:28px 0}
+.vl .vl-guarantee,.vl .vl-anniversary {padding:48px 6vw;text-align:center;background:#EDE6F3;margin:28px 0}
 .vl .vl-guarantee-grid {display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:28px;line-height:1.6}
 .vl .vl-guarantee-grid strong {font-family:Georgia,serif;font-size:26px}
 .vl .vl-guarantee-grid p,.vl .vl-guarantee-grid a {font-size:13px}
@@ -66,3 +66,15 @@
  .vl .vl-hero-actions .vl-hero-sub {font-size:13px}
  .vl .vl-hero-title {font-size:clamp(40px,10vw,62px)}
 }
+
+/* Lavender Atelier palette. */
+.vl {--vl-bg:#FAF7F2;--vl-bg-alt:#EDE6F3;--vl-ink:#302338;--vl-gold:#C9B58D;--vl-mid:#695D70;--vl-faint:#76677C;--vl-rule:rgba(48,35,56,.14)}
+.vl .vl-guarantee {background:#EDE6F3;color:#302338}
+.vl .vl-anniversary {background:#C7B7DE;color:#302338}
+.vl .vl-editorial.dark {background:#302338;color:#FAF7F2}
+.vl .vl-hero-title {color:#FAF7F2}
+.vl .vl-hero-actions .vl-hero-cta {background:#C7B7DE;border-color:#C7B7DE;color:#302338}
+.vl .vl-hero-actions .vl-hero-cta:hover {background:#FAF7F2;border-color:#FAF7F2}
+.vl .vl-anniversary .vl-hero-cta {background:#302338;border-color:#302338;color:#FAF7F2;border-radius:10px}
+.vl .vl-enquire-wa {background:#302338;color:#FAF7F2;border-radius:10px}
+.vl a:focus-visible {outline-color:#302338}

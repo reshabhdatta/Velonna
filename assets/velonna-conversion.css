@@ -1,12 +1,12 @@
 /* Velonna conversion styles: buy buttons, sticky ATC, shipping bar, trust badges */
 :root {
-  --velonna-accent: #e06a7a;
-  --velonna-accent-dark: #c9515f;
+  --velonna-accent: #302338;
+  --velonna-accent-dark: #51405E;
 }
 
 /* ---- Product page buy buttons (JURI-style black) ---- */
 .product-form__submit.button {
-  background: #141414;
+  background: #302338;
   color: #fff;
   border: none;
   border-radius: 0;
@@ -25,8 +25,8 @@
 }
 .shopify-payment-button__button--unbranded {
   background: transparent !important;
-  color: #141414 !important;
-  border: 1px solid #141414 !important;
+  color: #302338 !important;
+  border: 1px solid #302338 !important;
   border-radius: 0 !important;
   font-weight: 500 !important;
   letter-spacing: 0.18em !important;
@@ -138,7 +138,7 @@
   font-weight: 700;
 }
 .velonna-sticky-atc__btn {
-  background: #141414;
+  background: #302338;
   color: #fff;
   border: none;
   border-radius: 0;
@@ -194,12 +194,12 @@
   filter: none !important;
 }
 .header-wrapper .header__icon {
-  color: #1a1612 !important;
+  color: #302338 !important;
 }
 .header-wrapper .header__menu-item,
 .header-wrapper .header__active-menu-item,
 .header-wrapper .list-menu__item {
-  color: #1a1612 !important;
+  color: #302338 !important;
 }
 /* Left cluster: hamburger + search */
 .header__left {

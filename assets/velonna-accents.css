@@ -2,9 +2,9 @@
    Velonna — Gold Accents (site-wide)
    Accents only: gold fills / hovers / selected states / focus.
    Primary dark buttons (Add to Cart, Buy It Now) are left untouched.
-   Brand gold: #c8a96e  ·  Ink: #1a1612
+   Brand gold: #C9B58D  ·  Ink: #302338
    ============================================================ */
-:root { --vlg: #c8a96e; --vlg-ink: #1a1612; }
+:root { --vlg: #C9B58D; --vlg-ink: #302338; }
 
 /* --- Selected variant / size pill → solid gold --- */
 .product-form__input--pill input[type="radio"]:checked + label {
