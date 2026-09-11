@@ -1,3 +1,6 @@
+/* Keep homepage card and caption layers below the header drawers. */
+.vl {isolation:isolate}
+
 /* Visible navigation and readable editorial cards. */
 .vl .vl-hero {height:auto;min-height:90svh;padding-top:150px}
 .vl .vl-hero-content {padding-bottom:40px}
@@ -10,7 +13,7 @@
 #vl-collections {scroll-margin-top:90px}
 .vl .vl-tiles {padding:32px 4vw}
 .vl .vl-tiles-stage {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;height:auto;min-height:0;perspective:none}
-.vl .vl-tile {position:relative;top:auto;left:auto;width:100%;height:auto;aspect-ratio:4/5;transform:none;filter:none;border-radius:10px;box-shadow:0 10px 25px #3023381a;transition:box-shadow .2s}
+.vl .vl-tile {position:relative;z-index:0;top:auto;left:auto;width:100%;height:auto;aspect-ratio:4/5;transform:none;filter:none;border-radius:10px;box-shadow:0 10px 25px #3023381a;transition:box-shadow .2s}
 .vl .vl-tile:hover {transform:none;box-shadow:0 14px 32px #30233830}
 .vl .vl-tile-overlay {background:linear-gradient(0deg,rgba(10,8,6,.96),rgba(10,8,6,.72) 25%,rgba(10,8,6,.1) 65%,transparent)}
 .vl .vl-tile-label {z-index:2;padding:28px 22px;color:#fff}
