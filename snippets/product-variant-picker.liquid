@@ -14,8 +14,20 @@
     data-section="{{ section.id }}"
     {{ block.shopify_attributes }}
   >
+    {%- assign selected_metal = '' -%}
+    {%- for item in product.options_with_values -%}
+      {%- assign item_name = item.name | downcase -%}
+      {%- if item_name == 'metal' -%}{%- assign selected_metal = item.selected_value | downcase -%}{%- endif -%}
+    {%- endfor -%}
     {%- for option in product.options_with_values -%}
       {%- liquid
+        assign option_name = option.name | downcase
+        assign hide_colour = false
+        if option_name == 'colour' or option_name == 'color'
+          if selected_metal contains 'silver'
+            assign hide_colour = true
+          endif
+        endif
         assign swatch_count = option.values | map: 'swatch' | compact | size
         assign picker_type = block.settings.picker_type
 
@@ -28,7 +40,7 @@
         endif
       -%}
       {%- if picker_type == 'swatch' -%}
-        <fieldset class="js product-form__input product-form__input--swatch">
+        <fieldset class="js product-form__input product-form__input--swatch" data-metal-option="{{ option_name }}" {% if hide_colour %}style="display:none"{% endif %}>
           <legend class="form__label">
             {{ option.name }}:
             <span data-selected-value>
@@ -43,7 +55,7 @@
           %}
         </fieldset>
       {%- elsif picker_type == 'button' -%}
-        <fieldset class="js product-form__input product-form__input--pill">
+        <fieldset class="js product-form__input product-form__input--pill" data-metal-option="{{ option_name }}" {% if hide_colour %}style="display:none"{% endif %}>
           <legend class="form__label">{{ option.name }}</legend>
           {% render 'product-variant-options',
             product: product,
@@ -53,7 +65,7 @@
           %}
         </fieldset>
       {%- else -%}
-        <div class="product-form__input product-form__input--dropdown">
+        <div class="product-form__input product-form__input--dropdown" data-metal-option="{{ option_name }}" {% if hide_colour %}style="display:none"{% endif %}>
           <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
             {{ option.name }}
           </label>

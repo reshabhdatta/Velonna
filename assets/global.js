@@ -1069,6 +1069,7 @@ class VariantSelects extends HTMLElement {
     this.addEventListener('change', (event) => {
       const target = this.getInputForEventTarget(event.target);
       this.updateSelectionMetadata(event);
+      this.syncSilverColour();
 
       publish(PUB_SUB_EVENTS.optionValueSelectionChange, {
         data: {
@@ -1078,6 +1079,32 @@ class VariantSelects extends HTMLElement {
         },
       });
     });
+    const correctedColour = this.syncSilverColour();
+    if (correctedColour) queueMicrotask(() => {
+      if (this.isConnected) correctedColour.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  }
+
+  syncSilverColour() {
+    const metalGroup = this.querySelector('[data-metal-option="metal"]');
+    const colourGroup = this.querySelector('[data-metal-option="colour"], [data-metal-option="color"]');
+    if (!metalGroup || !colourGroup) return;
+    const metal = metalGroup.querySelector('input:checked, select');
+    const isSilver = /silver/i.test(metal?.value || '');
+    colourGroup.style.display = isSilver ? 'none' : '';
+    if (!isSilver) return;
+    const white = Array.from(colourGroup.querySelectorAll('input[type="radio"], option')).find(
+      (input) => /^(white|silver|white gold)$/i.test(input.value)
+    );
+    if (!white || white.checked || white.selected) return;
+    if (white.tagName === 'OPTION') {
+      white.selected = true;
+      this.updateSelectionMetadata({ target: white.parentElement });
+      return white.parentElement;
+    }
+    white.checked = true;
+    this.updateSelectionMetadata({ target: white });
+    return white;
   }
 
   updateSelectionMetadata({ target }) {
