@@ -193,6 +193,9 @@
                           role="list"
                         >
                           {%- for value in sorted_values -%}
+                            {%- if filter.param_name == 'filter.p.m.custom.gender' and value.value == 'Unisex' -%}
+                              {%- continue -%}
+                            {%- endif -%}
                             {% liquid
                               assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
                               assign is_disabled = false
@@ -561,6 +564,9 @@
                               endif
                             -%}
                             {%- for value in sorted_values -%}
+                            {%- if filter.param_name == 'filter.p.m.custom.gender' and value.value == 'Unisex' -%}
+                              {%- continue -%}
+                            {%- endif -%}
                               {% liquid
                                 assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-mobile-' | append: forloop.index
                                 assign is_disabled = false
