@@ -104,3 +104,15 @@
  .vl .vl-assurance-emblem img {width:76px;height:54px}
  .vl .vl-assurance-item h3 {font-size:20px}
 }
+
+/* Paired editorial portraits: woman left, man right. */
+.vl .vl-portraits .vl-tiles-stage {grid-template-columns:repeat(2,minmax(0,1fr));max-width:1200px;margin-inline:auto;gap:24px}
+.vl .vl-portraits .vl-tile {aspect-ratio:4/5;border-radius:16px}
+.vl .vl-portraits .vl-tile-overlay {background:linear-gradient(0deg,rgba(48,35,56,.78),rgba(48,35,56,.18) 22%,transparent 45%)}
+.vl .vl-portraits .vl-tile-img {object-position:center center}
+@media(max-width:749px) {
+ .vl .vl-portraits .vl-tiles-stage {gap:12px}
+ .vl .vl-portraits .vl-tile {border-radius:12px}
+ .vl .vl-portraits .vl-tile-label {padding:16px 10px}
+ .vl .vl-portraits .vl-tile-name {font-size:clamp(18px,4.6vw,30px)}
+}
