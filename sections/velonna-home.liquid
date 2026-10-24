@@ -898,6 +898,40 @@
   })();
   </script>
 
+  <style>
+.vl-solitaire-products{background:linear-gradient(135deg,#f7f2fa 0%,#eee5f4 55%,#f8f4fa 100%);padding-top:4rem;padding-bottom:4rem;border-top:none}.vl-solitaire-products .vl-product-card{background:rgba(255,255,255,.82);border-radius:12px;overflow:hidden}.vl-solitaire-products .vl-product-img-wrap{background:#eee5f4}.vl-solitaire-products .vl-products-header{gap:1.5rem}.vl-solitaire-products .vl-product-grid{gap:16px}@media(max-width:749px){.vl-solitaire-products .vl-products-header{align-items:flex-start;flex-direction:column;gap:1rem}.vl-solitaire-products .vl-products-title{max-width:20ch}}
+</style>
+{%- comment -%} ── SOLITAIRE DIAMOND RINGS ── {%- endcomment -%}
+  {%- assign solitaire_collection = collections['solitaire-rings'] -%}
+  {%- if solitaire_collection != blank and solitaire_collection.products.size > 0 -%}
+  <section class="vl-products vl-solitaire-products" id="shop-solitaire-rings" aria-labelledby="solitaire-rings-heading">
+    <div class="vl-products-header">
+      <h2 class="vl-products-title" id="solitaire-rings-heading">Shop <em>Solitaire</em> Diamond Rings</h2>
+      <a class="vl-products-viewall" href="/collections/solitaire-rings">View all</a>
+    </div>
+    <div class="vl-product-grid">
+      {%- for product in solitaire_collection.products limit: 12 -%}
+      <div class="vl-product-card">
+        <a href="{{ product.url }}">
+          <div class="vl-product-img-wrap">
+            {%- if product.featured_image -%}
+              <img class="vl-product-img" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" />
+            {%- else -%}
+              <div class="vl-product-placeholder" style="height:100%;"><span>{{ product.title }}</span></div>
+            {%- endif -%}
+          </div>
+          <div class="vl-product-info">
+            <p class="vl-product-name">{{ product.title }}</p>
+            <p class="vl-product-price">{% if product.price_varies %}From {% endif %}{{ product.price | money }}</p>
+          </div>
+        </a>
+      </div>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  
   {%- comment -%} ── MOST LOVED (best sellers — auto-updates by sales) ── {%- endcomment -%}
   {%- assign bs = collections['best-sellers'] -%}
   {%- if bs != blank and bs.products.size > 0 -%}
