@@ -625,6 +625,12 @@
     .vl-product-grid { grid-template-columns: 1fr 1fr; gap: 1px; }
     .vl-hero-content { padding: 0 5vw 6vh; }
   }
+
+  .vl .vl-editorial.dark.rev .vl-editorial-txt { background: #302338; }
+  .vl .vl-editorial.dark.rev .vl-ed-title,
+  .vl .vl-editorial.dark.rev .vl-ed-title em { color: #fffaf4 !important; }
+  .vl .vl-editorial.dark.rev .vl-ed-body { color: #f2eaf3 !important; }
+  .vl .vl-editorial.dark.rev .vl-ed-eyebrow { color: #e3cea3 !important; }
 </style>
 
 {{ 'velonna-refinements.css' | asset_url | stylesheet_tag }}
@@ -1042,7 +1048,9 @@
       {%- endif -%}
     </div>
     <div class="vl-editorial-txt">
+      <p class="vl-ed-eyebrow">{{ section.settings.ed2_eyebrow | escape }}</p>
       <h2 class="vl-ed-title">{{ section.settings.ed2_title | newline_to_br }}</h2>
+      <p class="vl-ed-body">{{ section.settings.ed2_body | escape }}</p>
       <a class="vl-ed-link" href="{{ section.settings.ed2_url | default: '/collections/lab-grown' }}">{{ section.settings.ed2_cta }}</a>
     </div>
   </section>
