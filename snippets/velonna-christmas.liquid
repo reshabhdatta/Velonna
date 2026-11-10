@@ -1,0 +1,27 @@
+{% comment %} Quiet seasonal artwork contained in the empty outer gutters. {% endcomment %}
+<style>
+  :root {
+    --vl-christmas-art: url("{{ 'velonna-christmas-watercolor.png' | asset_url }}");
+  }
+  #MainContent,
+  .vl .vl-types,
+  .vl .vl-portraits,
+  .vl .vl-products,
+  .vl .vl-cats {
+    background-image:
+      linear-gradient(rgba(250,247,242,.56), rgba(250,247,242,.56)),
+      var(--vl-christmas-art), var(--vl-christmas-art);
+    background-repeat: no-repeat;
+    background-position: center, left center, right center;
+    background-size: 100% 100%, min(4vw, 78px) auto, min(4vw, 78px) auto;
+  }
+  @media (max-width: 749px) {
+    #MainContent,
+    .vl .vl-types,
+    .vl .vl-portraits,
+    .vl .vl-products,
+    .vl .vl-cats {
+      background-size: 100% 100%, 14px auto, 14px auto;
+    }
+  }
+</style>
