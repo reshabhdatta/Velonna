@@ -1,0 +1,12 @@
+{%- case collection.handle -%}
+{%- when 'lab-grown' -%}Lab-Grown Diamond Jewellery
+{%- when 'lgd-ladies-ring' -%}Women’s Lab-Grown Diamond Rings
+{%- when 'lgd-gents-ring' -%}Men’s Lab-Grown Diamond Rings
+{%- when 'lgd-pendant' -%}Lab-Grown Diamond Pendants
+{%- when 'lgd-earrings' -%}Lab-Grown Diamond Earrings
+{%- when 'lgd-ladies-bracelet' -%}Women’s Lab-Grown Diamond Bracelets
+{%- when 'lgd-gents-bracelet' -%}Men’s Lab-Grown Diamond Bracelets
+{%- when 'solitaire-rings' -%}Lab-Grown Diamond Solitaire Rings
+{%- when 'silver' -%}Sterling Silver Jewellery
+{%- else -%}{{ collection.title | escape }}
+{%- endcase -%}

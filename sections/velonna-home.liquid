@@ -625,6 +625,12 @@
     .vl-product-grid { grid-template-columns: 1fr 1fr; gap: 1px; }
     .vl-hero-content { padding: 0 5vw 6vh; }
   }
+
+  .vl .vl-editorial.dark.rev .vl-editorial-txt { background: #302338; }
+  .vl .vl-editorial.dark.rev .vl-ed-title,
+  .vl .vl-editorial.dark.rev .vl-ed-title em { color: #fffaf4 !important; }
+  .vl .vl-editorial.dark.rev .vl-ed-body { color: #f2eaf3 !important; }
+  .vl .vl-editorial.dark.rev .vl-ed-eyebrow { color: #e3cea3 !important; }
 </style>
 
 {{ 'velonna-refinements.css' | asset_url | stylesheet_tag }}
@@ -647,6 +653,7 @@
     {%- endif -%}
     <div class="vl-hero-overlay"></div>
     <div class="vl-hero-content">
+      <p class="vl-hero-year" style="color:#fff6df;font:500 clamp(18px,2.2vw,32px)/1.2 Georgia,serif;letter-spacing:.18em;margin:0 0 .65em;text-shadow:0 1px 5px #302338">1924</p>
       <h1 class="vl-hero-title">
         {{ section.settings.hero_title | newline_to_br }}
       </h1>
@@ -659,7 +666,7 @@
   {%- comment -%} ── MARQUEE ── {%- endcomment -%}
   <div class="vl-band" aria-hidden="true">
     <div class="vl-band-track">
-      {%- assign band_items = "Sterling silver · Lab-grown stones · Contemporary luxury · Occasion wear · IGI certified · Lab grown diamonds · Metro-first · Est. 1924" | split: " · " -%}
+      {%- assign band_items = "IGI-Certified Lab-Grown Diamonds · BIS-Hallmarked Gold · Since 1924 · 15-Day Returns on Eligible Items · Fast, Insured Shipping" | split: " · " -%}
       {%- for n in (1..2) -%}
       <div class="vl-band-group">
         {%- for item in band_items -%}
@@ -1042,7 +1049,9 @@
       {%- endif -%}
     </div>
     <div class="vl-editorial-txt">
+      <p class="vl-ed-eyebrow">{{ section.settings.ed2_eyebrow | escape }}</p>
       <h2 class="vl-ed-title">{{ section.settings.ed2_title | newline_to_br }}</h2>
+      <p class="vl-ed-body">{{ section.settings.ed2_body | escape }}</p>
       <a class="vl-ed-link" href="{{ section.settings.ed2_url | default: '/collections/lab-grown' }}">{{ section.settings.ed2_cta }}</a>
     </div>
   </section>
