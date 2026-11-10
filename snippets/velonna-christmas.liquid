@@ -1,27 +1,48 @@
-{% comment %} Quiet seasonal artwork contained in the empty outer gutters. {% endcomment %}
+{% comment %} Two mirrored seasonal compositions frame homepage headings. {% endcomment %}
 <style>
-  :root {
-    --vl-christmas-art: url("{{ 'velonna-christmas-watercolor.png' | asset_url }}");
+  .vl .vl-seasonal-heading {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding: 36px 240px;
+    margin: 0 -4vw 36px;
   }
-  #MainContent,
-  .vl .vl-types,
-  .vl .vl-portraits,
-  .vl .vl-products,
-  .vl .vl-cats {
-    background-image:
-      linear-gradient(rgba(250,247,242,.56), rgba(250,247,242,.56)),
-      var(--vl-christmas-art), var(--vl-christmas-art);
-    background-repeat: no-repeat;
-    background-position: center, left center, right center;
-    background-size: 100% 100%, min(4vw, 78px) auto, min(4vw, 78px) auto;
+  .vl .vl-seasonal-heading::before,
+  .vl .vl-seasonal-heading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 220px;
+    height: 290px;
+    background: url("{{ 'velonna-christmas-watercolor.png' | asset_url }}") center / contain no-repeat;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: .88;
+  }
+  .vl .vl-seasonal-heading::before {left: 0;}
+  .vl .vl-seasonal-heading::after {right: 0; transform: translateY(-50%) scaleX(-1);}
+  .vl .vl-seasonal-heading--reindeer::before,
+  .vl .vl-seasonal-heading--reindeer::after {
+    background-image: url("{{ 'velonna-christmas-reindeer.png' | asset_url }}");
+    width: 240px;
+    height: 270px;
   }
   @media (max-width: 749px) {
-    #MainContent,
-    .vl .vl-types,
-    .vl .vl-portraits,
-    .vl .vl-products,
-    .vl .vl-cats {
-      background-size: 100% 100%, 14px auto, 14px auto;
+    .vl .vl-seasonal-heading {
+      min-height: 180px;
+      padding: 24px 82px;
+      margin: 0 -4vw 24px;
     }
+    .vl .vl-seasonal-heading::before,
+    .vl .vl-seasonal-heading::after,
+    .vl .vl-seasonal-heading--reindeer::before,
+    .vl .vl-seasonal-heading--reindeer::after {
+      width: 80px;
+      height: 155px;
+    }
+    .vl .vl-seasonal-heading .vl-types-title {font-size: clamp(23px, 5vw, 32px);}
   }
 </style>
